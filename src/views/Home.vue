@@ -1,9 +1,17 @@
 <template>
   <div class="home">
-    
+    <div class="Rightside">
    <LoginRightside/>
+    <div class="leftside">
     <LoginForm />
     <SignUp />
+    </div>
+  </div>
+  <div class="footer">
+                    <div id="bcont">
+                        Develop by: Prashant Dhoju, Shishir Kumar Gurung and Sudesh Gurung
+                    </div>
+                </div>
   </div>
 </template>
 
@@ -12,18 +20,45 @@
 import LoginRightside from '../components/LoginRightside'
 import LoginForm from '../components/LoginForm'
 import SignUp from '../components/SignUp'
+
 export default {
   name: 'home',
   components: {
-    LoginForm,
+    
     LoginRightside,
-    SignUp
+    LoginForm,
+    SignUp,
+   
   }
 }
 </script>
 
 <style scoped>
-  *{
-    color: blue;
-  }
+
+.Rightside{
+   background-color: rgb(56, 0, 0);
+    width: 100%;
+  height: 96%;
+  position: absolute;
+   
+}
+.leftside{
+  position: absolute;
+    background-color: white;
+    width: 50%;
+    height: 100%;
+    right: 0%;
+}
+.footer{
+    position: absolute;
+     bottom: 0px;
+    background: lightgray;
+    height: 3%;
+   
+    width: 100%;
+}
+#bcont{
+    font-weight: bold;
+    padding-left: 25%;
+}
 </style>
