@@ -2,9 +2,6 @@
      
                 <div class="down">
                         <div id="downside">
-                            
-                           
-                               
                                     <p style="font-size: 30px">Want to share your views <br>
                                     to the world?<br><br>
                                     </p>
@@ -15,11 +12,7 @@
                                     <a href=""><button type="submit" id="submit1" name="submit" ><router-link id="routsubmit" to="/signup">Sign Up</router-link></button></a><br><br>                                      
                             
                         </div>
-                   
-                               
                 </div>
-       
-   
 </template>
 
 <script>
@@ -30,7 +23,10 @@ export default {
 }
 </script>
 
-<style>
+ <style scoped>
+
+
+
 .down{
     position: absolute;
     bottom: 10%;

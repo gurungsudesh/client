@@ -1,6 +1,27 @@
 <template>
-    <div> 
-        <div id="menu">
+    <div id="menu">
+        <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #5bd658">
+  <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+    <ul class="navbar-nav mr-auto mt-2 mt-lg-0"  >
+      <li class="nav-item active">
+      <a class="nav-link" href="#">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Notifications</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Messages</a>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-success" type="submit">Search</button>
+      
+    </form>
+    <router-link style="text-decoration:none; color:white; padding:5px;" to="/">Log Out</router-link>
+  </div>
+</nav> 
+        <!--<div id="menu">
                 <a href="home.html">Home</a>
                 <a href="notification.html">Notifications</a>
                 <a href="">Messages</a>
@@ -10,8 +31,8 @@
                 <input type="search" value="Search ">
                 <input type="submit" value="Search">
                 <img src="bullet.jpg" id="otherprofileicon" >
-                <button> <router-link to="/">Log Out</router-link></button>
-            </div>
+                
+            </div>-->
        
     </div>
 </template>
@@ -21,33 +42,22 @@ export default {
     name: "NavBar"
 }
 </script>
-
-<style>
-#menu{
-    position: absolute;
-    top:0px;
-    left: 0px;
-    padding-left: 20px;
-    padding-right: 20px;
-    padding-bottom: 10px;
-    padding-top: 20px;
-}
-#menu a{
+<style scoped>
+a{  
+    font-size: 17px;
    font-family: Arial, Helvetica, sans-serif;
-    background-color: lightgrey;
-    font-size: 20px;
-    color: rgb(56, 0, 0);
-    text-decoration: none;
-    padding-left: 30px;
-    padding-right: 30px;
-    padding-bottom: 5px;
-    padding-top: 5px;
-    border-radius:20px;
-    margin:10px;
+    margin-left: 10px;
+    border-radius: 10px;
 }
-#menu a:hover{
-    background-color: gray;
+ a:hover{
+    background-color: rgb(30, 146, 30);
 }
+
+</style>
+
+<!--<style>
+
+ 
 .home-search{
     position: absolute;
     top:0px;
@@ -65,15 +75,7 @@ export default {
   
   
 }
-input[type="search"]{
-    background-color: white;
-    width: 200px;
-    margin: 10px;
-    border: 1px solid black;
-    border-radius:20px;
-    padding: 5px;
-    outline:none;
-}
+
 input[type="submit"] {
     background-color: lightgray;
     font-size: 15px;
@@ -93,3 +95,4 @@ input[type="submit"]:hover{
 background-color: gray;
 }
 </style>
+-->

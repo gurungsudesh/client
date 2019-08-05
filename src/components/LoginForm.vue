@@ -6,7 +6,7 @@
                             
                     <input type="text"  name="Email" size="25" placeholder="Email Address">
                     <input type="text"  name="password" size="25" placeholder="Password">
-                    <!--<input type="submit" name="submit" value="Sign Up!">-->
+                    
                     <button type="submit" ><router-link id="login_text" to="/about">Login</router-link></button>
               </div>
                
@@ -29,13 +29,14 @@ export default {
 <style scoped>
 
  #Signin{
+     position: absolute;
     padding-top: 50px;
-    padding-left: 50px;
+    right:2%;
 }
 input[type="text"]{
     background-color: white;
     
-    margin-right: 40px;
+    margin-right: 20px;
     border: 1px solid black;
     padding: 5px;
     outline:none;
@@ -44,7 +45,7 @@ input[type="text"]{
 
 
 button[type="submit"] {
-    background-color: rgb(56, 0, 0);
+    background-color: red;
     font-size: 15px;
     font-weight: bold;
     padding: 5px;
@@ -54,7 +55,7 @@ button[type="submit"] {
     
     border: none;
     
-    margin-left: 10px;
+   
 }
 #login_text{
 color:white;

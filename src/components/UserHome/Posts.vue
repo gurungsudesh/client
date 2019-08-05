@@ -1,5 +1,5 @@
 <template>
-    <div> 
+    <div id = "pok"> 
        <div class="newsfeed" v-for="(item,index) in data1 " :key="index">
               <div class="followerinfo" >                                    
                 <table id="tables3">
@@ -36,7 +36,7 @@
           </div>
     </div>
 </template>
-
+ <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script>
 export default {
     name: "Posts"

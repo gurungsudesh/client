@@ -44,7 +44,7 @@ export default {
   position: absolute;
   height: 100%;
   width: 100%;
-  background-color: rgb(209, 209, 209);
+  background-color: white;
 }
   .leftbody{
     position: absolute;
@@ -53,14 +53,7 @@ export default {
     width: 20%;
 }
 .home-header{
-    background-color: rgb(56, 0, 0);
-    position: absolute;
-    top: 0%;
-    height: 10%;
-    width: 100%;
-    padding-left: auto;
-    padding-right: auto;
-    border-bottom: 2px solid white;
+  
 }
 .middlebody{
     position: absolute;

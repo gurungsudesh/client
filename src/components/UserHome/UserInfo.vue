@@ -35,9 +35,8 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .profileinfo{
-    margin-top: 5%;
     width: 100%;
     height: 30%;
     color: white;
@@ -57,7 +56,7 @@ export default {
     
 }
 .profilename{
-    background-color: rgb(56, 0, 0);
+    background-color: rgb(49, 173, 49);
     width: 100%;
     height: 40%;
     border-radius: 20px;
