@@ -20,9 +20,9 @@
 
 <script>
 // @ is an alias to /src
-import LoginRightside from '../components/LoginRightside'
-import LoginForm from '../components/LoginForm'
-import SignUp from '../components/SignUp'
+import LoginRightside from '../components/Login/LoginRightside'
+import LoginForm from '../components/Login/LoginForm'
+import SignUp from '../components/Login/SignUp'
 
 export default {
   name: 'home',

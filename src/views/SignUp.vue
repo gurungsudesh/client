@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import RegisterForm from '../components/RegisterForm'
+import RegisterForm from '../components/Register/RegisterForm'
 export default {
     name: "signup",
     components: {
