@@ -15,7 +15,8 @@
                   <input type="password" class="form-control" v-model="confpass" id="inputPassword3" placeholder="Confirm Password">
              </li>
              <li> 
-                 <p style="color:green ; font-weight:none; font-size: 15px;" class="err"> {{error}}</p>
+                 <!--  Yo chai error aaune registration aauda -->
+                 <p style="color:red ; font-weight:none; font-size: 15px;" class="err" v-if="error"> {{error}}</p>
              </li>
            <li class="list-group-item"> 
                <button type="submit" class="btn btn-success" ><!--<router-link to="/about">Sign Up</router-link>--> Sign Up</button> 
