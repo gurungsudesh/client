@@ -4,10 +4,10 @@
         
 <div id="Signin">
     
-        <input type="text"  v-model="username" size="25" placeholder="Username">
-        <input type="text" v-model="password" name="password" size="25" placeholder="Password">
+        <input type="text"  v-model="username" id="inputEmail3" placeholder="Username">
+        <input type="password"  v-model="password" id="inputPassword3" placeholder="Password">
         <!--<input type="submit" name="submit" value="Sign Up!">-->
-        <button type="submit" v-on:cick="login" ><router-link id="login_text" to="/about">Login</router-link></button>
+        <button type="submit" class="btn btn-success" v-on:cick="login" ><router-link id="login_text" to="/about">Login</router-link></button>
         <p class="error" v-if="error">{{error}}</p>
                        
 </div>
@@ -71,21 +71,18 @@ export default {
  #Signin{
      position: absolute;
     padding-top: 50px;
-    right:2%;
+    right: 20px;  
 }
-input[type="text"]{
-    background-color: white;
+input[type=text], input[type=password]{
     
-    margin-right: 20px;
     border: 1px solid black;
-    padding: 5px;
-    outline:none;
-    border-radius: 10px;
+border-radius: 10px;
+margin: 10px;
+right: 0%;
 }
-
 
 button[type="submit"] {
-    background-color: red;
+    
     font-size: 15px;
     font-weight: bold;
     padding: 5px;

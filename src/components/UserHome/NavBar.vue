@@ -1,24 +1,33 @@
 <template>
     <div id="menu">
-        <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #5bd658">
-  <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
-    <ul class="navbar-nav mr-auto mt-2 mt-lg-0"  >
-      <li class="nav-item active">
-      <a class="nav-link" href="#">Home</a>
+      
+        <nav class="navbar navbar-expand-lg navbar-light" style="font-weight:bold; background-color: white">
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+            
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0"  >
+            <li class="nav-item ">
+            <a class="nav-link" href="#"><i class="fas fa-home"></i>.Home</a>
+            </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#"><i class="far fa-bell"></i>.Notifications</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Notifications</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Messages</a>
+        <a class="nav-link" href="#"><i class="far fa-envelope"></i>.Messages</a>
       </li>
     </ul>
     <form class="form-inline my-2 my-lg-0">
       <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
       <button class="btn btn-success" type="submit">Search</button>
-      
     </form>
-    <router-link style="text-decoration:none; color:white; padding:5px;" to="/">Log Out</router-link>
+  <div id="dpdn" class="btn-group">
+  <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+  </button>
+  <div  class="dropdown-menu dropdown-menu-right">
+    <router-link class="dropdown-item" to="/" >Profile</router-link>
+    <router-link class="dropdown-item" to="/" >Settings</router-link>
+    <router-link class="dropdown-item" to="/" >Log Out</router-link>
+</div>
+  </div>
   </div>
 </nav> 
         <!--<div id="menu">
@@ -43,14 +52,25 @@ export default {
 }
 </script>
 <style scoped>
+#dpdn{
+  margin-left: 10px;
+}
+ #dpdn a{
+   font-size: 14px;
+    margin-left: 0px;
+    
+}
+#dpdn a:active{
+  background-color: green;
+    
+}
 a{  
     font-size: 17px;
    font-family: Arial, Helvetica, sans-serif;
     margin-left: 10px;
     border-radius: 10px;
-}
- a:hover{
-    background-color: rgb(30, 146, 30);
+    color:black;
+    text-decoration:none;
 }
 
 </style>

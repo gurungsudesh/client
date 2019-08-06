@@ -2,14 +2,13 @@
      
                 <div class="down">
                         <div id="downside">
-                                    <p style="font-size: 30px">Want to share your views <br>
-                                    to the world?<br><br>
-                                    </p>
-                               
-                                    <p style="font-size: 20px">Join iPost Now.
-                                </p><br>
-                            
-                                    <a href=""><button type="submit" id="submit1" name="submit" ><router-link id="routsubmit" to="/signup">Sign Up</router-link></button></a><br><br>                                      
+                                    <h1>Want to share<br>
+                                     your views</h1>
+                                    <h2>to the world?</h2>   
+                                    <h5>Join iPost Now.</h5>
+                         
+                            <br>
+                                    <a href=""><button type="submit" class="btn btn-success" id="submit1" name="submit" ><router-link id="routsubmit" to="/signup">Sign Up</router-link></button></a><br><br>                                      
                             
                         </div>
                 </div>
@@ -30,15 +29,14 @@ export default {
 .down{
     position: absolute;
     bottom: 10%;
-    right:40%;
+    
 }
 #downside{
-    color: rgb(56, 0, 0);
-    font-size: 10px;
+    color: rgb(31, 73, 31);
+    text-align: left;
     padding-left: 50px;
 }
 button[type="submit"] {
-    background-color: rgb(56, 0, 0);
     
     padding: 5px;
     padding-right: 10px;

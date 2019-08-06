@@ -43,7 +43,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .newsfeed{
     margin-top: 10px;
    
@@ -51,7 +51,7 @@ export default {
     color: black;
     background-color: white;
     border-radius: 20px;
-    border-bottom: 4px solid gray;
+    
    
 }
 .followerinfo{

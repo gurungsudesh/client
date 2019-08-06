@@ -1,23 +1,29 @@
 <template>
-    <div> 
-        <div class="newsfeed">
-                    
-                            <div class="writepost" >
-                                <div id="writepost1">
+    <div>             
+         <div class="writepost" >
+         <div id="writepost1">
                                 
-                                <form action="" id="form1" >
-                                       <img src="bullet.jpg" id="profileicon">
-                                    <input type="text" v-model="postdata"  >
-                                    <img src="bullet.jpg" id="Imageinserticon" >
-                                    <button type ="button" @click="addItem(postdata)" >Post</button>
-                                   
+              <form action="" id="form1" >
 
-                                  </form>
+                  <div class="form-row">
+                    <div class="form-group col-md-1.5">
+                         <img src="bullet.jpg" id="profileicon">   
+                    </div>
+                    <div class="form-group col-md-9">          
+                  <div class="form-group shadow-textarea">
+                     <textarea class="form-control z-depth-1" id="exampleFormControlTextarea6" rows="2" v-model="postdata" placeholder="Write something here..."></textarea>
+                    </div>
+                 </div>
+              <div class="form-group col-md-1">
+                <button style="margin-top:10px" class="btn btn-success" @click="addItem(postdata)" >Post</button>
+                 </div>
+                 </div>
+            </form>
                                 
                                 
-                            </div>
-                        </div>
-        </div>
+      </div>
+     </div>
+        
     </div>
 </template>
 
@@ -27,38 +33,25 @@ export default {
 }
 </script>
 
-<style>
-.newsfeed{
-    margin-top: 2%;
-   
+<style scoped>
+
+.writepost{
+    margin: 10px;
     width: 100%;
-   
    
     
-    box-shadow: 3px 3px 3px grey;
-   
-}
-.writepost{
-    background-color: rgb(56, 0, 0);
-    width: 100%;
-    height: 12%;
-    border-radius: 15px;
     
 }
 #writepost1{
     padding: 4px;
 }
-#form1 input[type=text]{
-width: 70%;
-padding: 10px;
-margin: 0%;
-}
+
 #Imageinserticon{
    margin-right: 10px;
     margin-left: 10px;
-    vertical-align:middle;
+    vertical-align:bottom;
     padding-bottom: 5px;
-    border: 2px solid darkgrey;
+    border: 2px solid rgb(146, 209, 150);
    
 }
 #profileicon{
@@ -68,7 +61,7 @@ margin: 0%;
     height: 50px;
     margin-right: 10px;
     vertical-align:middle;
-    border: 3px solid darkgrey;
+    border: 5px solid rgb(146, 209, 150);
    
    
 }

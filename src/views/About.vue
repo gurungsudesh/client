@@ -44,32 +44,38 @@ export default {
   position: absolute;
   height: 100%;
   width: 100%;
-  background-color: white;
+  background-image: linear-gradient(to bottom, rgb(177, 255, 181), rgb(255, 255, 255));
 }
   .leftbody{
     position: absolute;
-    left: 3%;
-    height: 90%;
-    width: 20%;
+    left: 0%;
+    height: 100%;
+    width: 25%;
+    border-right: 2px solid rgb(207, 207, 207);
 }
 .home-header{
-  
+  border-bottom: 2px solid green;
 }
 .middlebody{
     position: absolute;
-    left: 25%;
-    
-    height: 90%;
+    left: 25%; 
+    height: 100%;
     width: 50%;
+    border-right: 2px solid rgb(204, 204, 204);
 }
 .rightbody{
     position: absolute;
-    left: 78%;
-    
-    height: 90%;
-    width: 20%;
+    left: 75%;
+    height: 100%;
+    width: 22%;
 }
 .homebody{
-  margin-top: 5%;
+  margin-top: 3%;
+  background-color: white;
+  height:80%;
+  width:90%;
+  position: absolute;
+  left: 5%;
+  border-radius: 20px;
 }
 </style>

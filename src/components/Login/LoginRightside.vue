@@ -16,12 +16,11 @@ export default {
 <style>
 
 #content{
-    color: lightgray;
+    color: white;
     position: absolute;
     top:40%;
     left: 5%;
-    font-size: 15px;
+    font-size: 20px;
     font-weight: bold;
-    
 }
 </style>
