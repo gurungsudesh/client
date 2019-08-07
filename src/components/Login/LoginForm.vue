@@ -34,22 +34,22 @@ export default {
     methods: {
         async login(){
            // const {title, completed} = newTodo;
-            axios.post('http://localhost:5000/login', {username,password})
+            axios.post('http://localhost:5000/users/login', {username,password})
                 .then(res => 
                     function(data) {
-                        console.log(data);
+                        
                         if (data.success) {
-                            var storage = window.localStorage;
-                            var token = data.token;
-                            storage.setItem('token', token)
-                            storage.setItem('username', username)
-                            this.$router.push('About')
+                            // var storage = window.localStorage;
+                            // var token = data.token;
+                            // storage.setItem('token', token)
+                            // storage.setItem('username', username)
+                            this.$router.push('/about')
                             //window.location.href = "http://localhost:3000/auth/home";
                             // $.get("http://localhost:5000/auth/home");
                             // Login successful 
                         } else {
                             // Login Failed
-                            errorMessage = $("#errorMessage").text(data.message)
+                            this.error = data.msg;
                         }
                         
                     }

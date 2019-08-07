@@ -48,12 +48,13 @@ export default {
         }
     },
     methods: {
-        onSubmit(username,email,password){
-
+        onSubmit(e){
+            e.preventDefault();
+            
             // client side validation
 
 
-            axios.post('http://localhost:5000/register', {username,email,password})
+            axios.post('http://localhost:5000/register', { username, email, password})
                 .then(response => function (data) {
                         if (data.status) {
                             this.err = data.status;
