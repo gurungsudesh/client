@@ -8,7 +8,7 @@
                                     <h5>Join iPost Now.</h5>
                          
                             <br>
-                                    <a href=""><button type="submit" class="btn btn-success" id="submit1" name="submit" ><router-link id="routsubmit" to="/signup">Sign Up</router-link></button></a><br><br>                                      
+                                    <button class="btn btn-success" id="submit1"  ><router-link id="routsubmit" to="/signup">Sign Up</router-link></button><br><br>                                      
                             
                         </div>
                 </div>

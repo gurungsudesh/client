@@ -44,14 +44,14 @@ export default {
   position: absolute;
   height: 100%;
   width: 100%;
-  background-image: linear-gradient(to bottom, rgb(177, 255, 181), rgb(255, 255, 255));
+  background-image: linear-gradient(to bottom,  rgb(255, 255, 255),rgb(228, 255, 230));
 }
   .leftbody{
     position: absolute;
     left: 0%;
     height: 100%;
     width: 25%;
-    border-right: 2px solid rgb(207, 207, 207);
+    
 }
 .home-header{
   border-bottom: 2px solid green;
@@ -61,7 +61,9 @@ export default {
     left: 25%; 
     height: 100%;
     width: 50%;
-    border-right: 2px solid rgb(204, 204, 204);
+    border-right: 1px solid rgb(204, 204, 204);
+    border-left: 1px solid rgb(204, 204, 204);
+    border-top: 1px solid rgb(204, 204, 204);
 }
 .rightbody{
     position: absolute;
@@ -72,10 +74,10 @@ export default {
 .homebody{
   margin-top: 3%;
   background-color: white;
-  height:80%;
-  width:90%;
+  height:85%;
+  width:95%;
   position: absolute;
-  left: 5%;
+  left: 2%;
   border-radius: 20px;
 }
 </style>

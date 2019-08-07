@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="container">
         <div class="formmain">
         <form>
             <ul class="list-group list-group-flush">
@@ -39,8 +39,10 @@ export default {
 <style scoped>
 .formmain{
     position: relative;
-   
-    width: 100%;
+    margin-bottom: 5%;
+    transform: scale(0.9, 0.9);
+    
+ 
 }
 a{
     text-decoration: none;

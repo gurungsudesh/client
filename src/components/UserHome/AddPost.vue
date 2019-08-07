@@ -1,5 +1,5 @@
 <template>
-    <div>             
+    <div class="container">             
          <div class="writepost" >
          <div id="writepost1">
                                 
@@ -11,7 +11,7 @@
                     </div>
                     <div class="form-group col-md-9">          
                   <div class="form-group shadow-textarea">
-                     <textarea class="form-control z-depth-1" id="exampleFormControlTextarea6" rows="2" v-model="postdata" placeholder="Write something here..."></textarea>
+                     <textarea class="form-control z-depth-1" style="font-size:15px" id="exampleFormControlTextarea6" rows="3" v-model="postdata" placeholder="Write something here..."></textarea>
                     </div>
                  </div>
               <div class="form-group col-md-1">
@@ -34,9 +34,11 @@ export default {
 </script>
 
 <style scoped>
-
+.container{
+    border-bottom: 10px solid lightgrey;
+}
 .writepost{
-    margin: 10px;
+    margin-top: 10px;
     width: 100%;
    
     
