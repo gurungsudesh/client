@@ -54,7 +54,7 @@ export default {
 
 
             axios.post('http://localhost:5000/register', {username,email,password})
-                .then(res => function (data) {
+                .then(response => function (data) {
                         if (data.status) {
                             this.err = data.status;
                         } else {

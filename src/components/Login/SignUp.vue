@@ -8,7 +8,7 @@
                                     <h5>Join iPost Now.</h5>
                          
                             <br>
-                                    <button class="btn btn-success" id="submit1"><router-link id="routsubmit" to="/signup">Sign Up</router-link></button><br><br>                                      
+                                    <button @click="gotoRegistration"  class="btn btn-success" id="submit1">Sign Up</button><br><br>                                      
                             
                         </div>
                 </div>
@@ -17,7 +17,15 @@
 <script>
 
 export default {
-    name: "SignUp"
+    name: "SignUp",
+    methods: {
+        gotoRegistration(e){
+            e.preventDefault();
+
+            //yo command le chai signUp component ma puraucha using Router
+            this.$router.push("/signup");
+        }   
+    }
    
 }
 </script>
