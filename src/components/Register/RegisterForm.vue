@@ -3,21 +3,37 @@
         <div class="formmain">
         <form @submit="onSubmit">
             <ul class="list-group list-group-flush">
-              <li class="list-group-item"> 
-            <input type="text" class="form-control" v-model="username" id="inputEmail3" placeholder="Username"></li>
-              <li class="list-group-item">
+                <li class="list-group-item"> 
+                <input type="text" class="form-control" v-model="username" id="inputEmail3" placeholder="Username">
+                </li>
+                <span style="color:red" v-if='msg.username'>{{msg.username}}</span>
+
+              
+                  <li class="list-group-item">
                    <input type="email" class="form-control" v-model="email" id="inputEmail3" placeholder="Email">
-              </li>
-             <li class="list-group-item">
-                  <input type="password" class="form-control" v-model="password" id="inputPassword3" placeholder="Password">
+                 </li>
+                 <span style="color:red" v-if='msg.email'>{{msg.email}}</span>
+              
+
+             
+                 <li class="list-group-item">
+                  <input type="password" class="form-control" v-model="password" id="inputPassword3" placeholder="Password" >
              </li>
-             <li class="list-group-item">
+             <span style="color:red" v-if='msg.password'>{{msg.password}}</span>
+             
+
+             
+                 <li class="list-group-item">
                   <input type="password" class="form-control" v-model="confpass" id="inputPassword3" placeholder="Confirm Password">
              </li>
+             <span style="color:red" v-if='msg.confpass'>{{msg.confpass}}</span>
+            
+
              <li> 
                  <!--  Yo chai error aaune registration aauda -->
                  <p style="color:red ; font-weight:none; font-size: 15px;" class="err" v-if="error"> {{error}}</p>
              </li>
+
            <li class="list-group-item"> 
                <button type="submit" class="btn btn-success" ><!--<router-link to="/about">Sign Up</router-link>--> Sign Up</button> 
            </li>
@@ -27,10 +43,8 @@
             </ul>
 
        
-       
          </form>
         </div>
-    
     </div>
 </template>
 
@@ -38,22 +52,76 @@
 import axios from 'axios'
 export default {
     name: "RegisterForm",
+
     data(){
         return{
             username: '',
             email: '',
             password: '',
             confpass: '',
-            error: ''
+            error: '',
+            msg: []
+        }
+    },
+    watch:{
+        username(value){
+            this.username = value,
+            this.check_username(value)
+        },
+        email(value){
+            this.email = value,
+            this.check_email(value);
+        },
+        password(value){
+            this.password = value,
+            this.checkPassword(value);
+        },
+        confpass(value){
+            this.confpass = value,
+            this.checkConfirmPassword(value);
         }
     },
     methods: {
-        onSubmit(username,email,password){
+        check_username(value){
+            if(value.length<6){
+                this.msg['username'] = 'Username must be atleast contain 6 characters'
+            }
+            else{
+                this.msg['username'] = ''
+            }
+        },cd 
+        check_email(value){
+            if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(value))
+                {
+                      this.msg['email'] = '';
+                }
+                else{
+                    this.msg['email'] = 'Please type correct email'
+                }
+        },
+        checkPassword(value){
+            if(value.length<6){
+                this.msg['password'] = 'Password must contain atleast  6 characters'
+            }else{
+                this.msg['password'] = ''
+            }
+        },
+        checkConfirmPassword(value){
+            if(value == this.password){
+                this.msg['confpass'] = ''
+            }else{
+                this.msg['confpass'] = 'Password and confirm password do not match'
+            }
+        },
+        onSubmit(username,email,password,confpass){
+            if(this.username =='' || this.email =='' || this.password =='' || this.confpass ==''){
+                alert('please fill all the fields')
+            }
 
             // client side validation
+            this.err = username;
 
-
-            axios.post('http://localhost:5000/register', {username,email,password})
+            axios.post('http://localhost:5000/users/register', {username,email,password})
                 .then(response => function (data) {
                         if (data.status) {
                             this.err = data.status;
