@@ -1,5 +1,6 @@
 <template>
     <div>
+<<<<<<< HEAD
         <div class="container">
             <div class="m_leftside" >
                     <div class="m_topl">
@@ -23,13 +24,25 @@
                     
                     </div>
             </div>
+=======
+        <UserInfo/>
+        <Search/>
+        <Posts/>
+>>>>>>> bfc4b172794f4bc257080a2d52a0bf74ccd699f2
     </div>
 </template>
 
 <script>
-
+import Posts from "../components/Moderator/Posts"
+import Search from '../components/Moderator/Search'
+import UserInfo from '../components/Moderator/UserInfo'
 export default {
-    name: "Moderator"
+    name: "Moderator",
+    components: {
+        UserInfo,
+        Search,
+        Posts
+    }
 }
 </script>
 
