@@ -1,0 +1,15 @@
+<template>
+    <div>
+        
+    </div>
+</template>
+
+<script>
+export default {
+    name: "Moderator"
+}
+</script>
+
+<style>
+
+</style>
