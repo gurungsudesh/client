@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
 import signup from './views/SignUp.vue';
+import Moderator from "./views/Moderator.vue";
 
 Vue.use(Router)
 
@@ -24,6 +25,11 @@ export default new Router({
             path: '/signup',
             name: 'signup',
             component: signup
+        }, {
+            path: '/moderator',
+            name: 'Moderator',
+            component: Moderator
+
         }
     ]
 })
