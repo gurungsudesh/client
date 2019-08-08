@@ -4,27 +4,27 @@
         <form @submit="onSubmit">
             <ul class="list-group list-group-flush">
                 <li class="list-group-item"> 
-                <input type="text" class="form-control" v-model="username" id="inputEmail3" placeholder="Username">
+                <input type="text" class="form-control" v-model="username" id="inputEmail3" placeholder="Username" required>
                 </li>
                 <span style="color:red" v-if='msg.username'>{{msg.username}}</span>
 
               
                   <li class="list-group-item">
-                   <input type="email" class="form-control" v-model="email" id="inputEmail3" placeholder="Email">
+                   <input type="email" class="form-control" v-model="email" id="inputEmail3" placeholder="Email" required>
                  </li>
                  <span style="color:red" v-if='msg.email'>{{msg.email}}</span>
               
 
              
                  <li class="list-group-item">
-                  <input type="password" class="form-control" v-model="password" id="inputPassword3" placeholder="Password" >
+                  <input type="password" class="form-control" v-model="password" id="inputPassword3" placeholder="Password" required>
              </li>
              <span style="color:red" v-if='msg.password'>{{msg.password}}</span>
              
 
              
                  <li class="list-group-item">
-                  <input type="password" class="form-control" v-model="confpass" id="inputPassword3" placeholder="Confirm Password">
+                  <input type="password" class="form-control" v-model="confpass" id="inputPassword3" placeholder="Confirm Password" required>
              </li>
              <span style="color:red" v-if='msg.confpass'>{{msg.confpass}}</span>
             
@@ -60,7 +60,8 @@ export default {
             password: '',
             confpass: '',
             error: '',
-            msg: []
+            msg: [],
+            errmsg: []
         }
     },
     watch:{
@@ -89,7 +90,7 @@ export default {
             else{
                 this.msg['username'] = ''
             }
-        },cd 
+        },
         check_email(value){
             if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(value))
                 {
@@ -113,26 +114,28 @@ export default {
                 this.msg['confpass'] = 'Password and confirm password do not match'
             }
         },
-        onSubmit(username,email,password,confpass){
-            if(this.username =='' || this.email =='' || this.password =='' || this.confpass ==''){
-                alert('please fill all the fields')
-            }
+        // onSubmit(username,email,password){
+        //     if(this.username =='' || this.email =='' || this.password =='' || this.confpass ==''){
+        //         if(this.username ==''){
+        //             this.errmsg['username'] = 'Username field is required'
+        //         }
+        //     }
+        // },
+        onSubmit(e){
+            e.preventDefault();
 
-            // client side validation
-            this.err = username;
-
-            axios.post('http://localhost:5000/users/register', {username,email,password})
-                .then(response => function (data) {
-                        if (data.status) {
-                            this.err = data.status;
+            axios.post('http://localhost:5000/users/register', { username: this.username, email: this.email, password: this.password})
+                .then(res => {
+                    
+                        if (res.data.success) {
+                            this.error = res.data.msg;
                         } else {
                             // Login Failed
-                            this.err = data.status;
+                            this.error = res.data.msg;
                         }
-                        
                     }
                 )
-                .catch(err => this.error =err.message);
+                .catch(err => this.error = err);
         }
     }
 }
