@@ -3,13 +3,13 @@
        
         
 <div id="Signin">
-    
-        <input type="text"  v-model="username" id="inputEmail3" placeholder="Username">
-        <input type="password"  v-model="password" id="inputPassword3" placeholder="Password">
+    <form @submit="login">
+        <input type="text"  v-model="username" id="username" placeholder="Username">
+        <input type="password"  v-model="password" id="password" placeholder="Password">
         <!--<input type="submit" name="submit" value="Sign Up!">-->
-        <button type="submit" class="btn btn-success" v-on:cick="login" ><router-link id="login_text" to="/about">Login</router-link></button>
+        <button type="submit" class="btn btn-success">Login</button>
         <p class="error" v-if="error">{{error}}</p>
-                       
+    </form>             
 </div>
                
         
@@ -22,6 +22,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
     name: "LoginForm",
     data(){
@@ -32,13 +33,11 @@ export default {
         }
     },
     methods: {
-        async login(){
-           // const {title, completed} = newTodo;
-            axios.post('http://localhost:5000/users/login', {username,password})
-                .then(res => 
-                    function(data) {
-                        
-                        if (data.success) {
+        login(){
+            axios.post('http://localhost:5000/users/login', { username: this.username,password: this.password})
+                .then(res => {
+                        //alert(`Username: ${this.username}, Password: ${this.password}`)
+                        if (res.data.success) {
                             // var storage = window.localStorage;
                             // var token = data.token;
                             // storage.setItem('token', token)
@@ -49,13 +48,15 @@ export default {
                             // Login successful 
                         } else {
                             // Login Failed
-                            this.error = data.msg;
+                            this.error = res.data.msg;
                         }
                         
-                    }
+                    
+                }
+                   
                 
                 )
-                .catch(er => console.log(err));
+                .catch(err => this.err = err);
      }
     }
 

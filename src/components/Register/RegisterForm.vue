@@ -54,18 +54,18 @@ export default {
             // client side validation
 
 
-            axios.post('http://localhost:5000/register', { username, email, password})
-                .then(response => function (data) {
-                        if (data.status) {
-                            this.err = data.status;
+            axios.post('http://localhost:5000/users/register', { username: this.username, email: this.email, password: this.password})
+                .then(res => {
+                    
+                        if (res.data.success) {
+                            this.error = res.data.msg;
                         } else {
                             // Login Failed
-                            this.err = data.status;
+                            this.error = res.data.msg;
                         }
-                        
                     }
                 )
-                .catch(err => this.error =err.message);
+                .catch(err => this.error =err);
         }
     }
 }
