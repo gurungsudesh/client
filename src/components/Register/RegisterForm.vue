@@ -1,8 +1,9 @@
 <template>
-    <div class="container">
+    <div>
         <div class="formmain">
         <form @submit="onSubmit">
-            <ul class="list-group list-group-flush">
+            <div class="container">
+            <ul  class="list-group list-group-flush">
               <li class="list-group-item"> 
             <input type="text" class="form-control" v-model="username" id="inputEmail3" placeholder="Username"></li>
               <li class="list-group-item">
@@ -25,6 +26,7 @@
                  <router-link style="color:green ; font-weight:none; font-size: 15px;" to="/">You have an account?</router-link>
            </li>
             </ul>
+            </div>
 
        
        
