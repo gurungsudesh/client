@@ -25,7 +25,7 @@
   <div  class="dropdown-menu dropdown-menu-right">
     <router-link class="dropdown-item" to="/" >Profile</router-link>
     <router-link class="dropdown-item" to="/" >Settings</router-link>
-    <router-link class="dropdown-item" to="/" >Log Out</router-link>
+    <router-link class="dropdown-item" to="/" v-on:click="logout">Log Out</router-link>
 </div>
   </div>
   </div>
@@ -48,7 +48,12 @@
 
 <script>
 export default {
-    name: "NavBar"
+    name: "NavBar",
+    methods:{
+      logout(){
+        localStorage.removeItem('usertoken')
+      }
+    }
 }
 </script>
 <style scoped>

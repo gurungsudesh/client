@@ -11,6 +11,21 @@
    </div>
      <div class="middlebody">
     <AddPost />
+    <!--Trying -->
+    <div>
+       <table class="table col-md-6 mx-auto">
+                <tbody>
+                    <tr>
+                        <td>First Name</td>
+                        <td>{{username}}</td>
+                    </tr>
+                    <tr>
+                        <td>Email</td>
+                        <td>{{email}}</td>
+                    </tr>
+                </tbody>
+            </table>
+    </div>
     <Posts/>
      </div>
       <div class="rightbody">
@@ -22,12 +37,23 @@
 </template>
 <script>
 import UserInfo from '../components/UserHome/UserInfo';
+import jwtDecode from 'jwt-decode'
 import NavBar from '../components/UserHome/NavBar';
 import HotTopics from '../components/UserHome/HotTopics'
 import AddPost from '../components/UserHome/AddPost';
 import Posts from '../components/UserHome/Posts';
 import FollowRecom from '../components/UserHome/FollowRecom';
+
+
 export default {
+  data(){
+    const token = localStorage.usertoken
+    const decoded = jwtDecode(token)
+    return{
+      username : decoded.username,
+      email : decoded.email
+    }
+  },
   components: {
     UserInfo,
     NavBar,

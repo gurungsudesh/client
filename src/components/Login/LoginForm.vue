@@ -42,6 +42,9 @@ export default {
                             // var token = data.token;
                             // storage.setItem('token', token)
                             // storage.setItem('username', username)
+                            localStorage.setItem('usertoken', res.data)
+                            this.username = ''
+                            this.password = ''
                             this.$router.push('/about')
                             //window.location.href = "http://localhost:3000/auth/home";
                             // $.get("http://localhost:5000/auth/home");
@@ -52,17 +55,12 @@ export default {
                         }
                         
                     
-                }
-                   
                 
-                )
+                })
                 .catch(err => this.err = err);
-     }
-    }
-
-
-
-  
+                
+        }
+    },
 }
 
 </script>
