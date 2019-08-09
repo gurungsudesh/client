@@ -4,10 +4,12 @@
         
 <div id="Signin">
     <form @submit="login">
-        <input type="text"  v-model="username" id="username" placeholder="Username">
-        <input type="password"  v-model="password" id="password" placeholder="Password">
+        <ul style="font-size:13px">
+        <li><input type="text"  v-model="username" id="username" placeholder="Username"></li>
+        <li><input type="password"  v-model="password" id="password" placeholder="Password"></li>
         <!--<input type="submit" name="submit" value="Sign Up!">-->
-        <button type="submit" class="btn btn-success">Login</button>
+        <li><button type="submit" class="btn btn-success">Login</button></li>
+        </ul>
         <p class="error" v-if="error">{{error}}</p>
     </form>             
 </div>
@@ -72,14 +74,19 @@ export default {
  #Signin{
      position: absolute;
     padding-top: 50px;
-    right: 20px;  
+    left: 0px;  
 }
 input[type=text], input[type=password]{
-    
-    border: 1px solid black;
-border-radius: 10px;
-margin: 10px;
-right: 0%;
+    width: 40%;
+  padding: 8px 20px;
+  margin: 0px 8px;
+  display: inline-block;
+  border: 1px solid lightgray;
+  border-radius: 20px;
+  box-sizing: border-box;
+}
+li{
+    display: inline;
 }
 
 button[type="submit"] {
@@ -89,7 +96,7 @@ button[type="submit"] {
     padding: 5px;
     padding-right: 10px;
     padding-left: 10px;
-    border-radius: 10px;
+    border-radius: 20px;
     
     border: none;
     
@@ -98,5 +105,8 @@ button[type="submit"] {
 #login_text{
 color:white;
 text-decoration:none;
+}
+input:focus{
+    outline: none;
 }
 </style>
