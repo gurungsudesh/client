@@ -40,10 +40,10 @@ export default {
                 .then(res => {
                         //alert(`Username: ${this.username}, Password: ${this.password}`)
                         if (res.data.success) {
-                            // var storage = window.localStorage;
-                            // var token = data.token;
-                            // storage.setItem('token', token)
-                            // storage.setItem('username', username)
+                            var storage = window.localStorage;
+                            var token = res.data.token;
+                            storage.setItem('token', token)
+                            //storage.setItem('username', username)
                             this.$router.push('/about')
                             //window.location.href = "http://localhost:3000/auth/home";
                             // $.get("http://localhost:5000/auth/home");
@@ -71,7 +71,7 @@ export default {
 
 <style scoped>
 
- #Signin{
+#Signin{
      position: absolute;
     padding-top: 50px;
     left: 0px;  

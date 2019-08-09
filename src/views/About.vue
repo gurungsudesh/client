@@ -5,7 +5,7 @@
     <NavBar/>
    </div>
    <div class="homebody">
-            <div class="leftbody">
+      <div class="leftbody">
     <UserInfo/>
    <HotTopics />
    </div>
@@ -27,6 +27,7 @@ import HotTopics from '../components/UserHome/HotTopics'
 import AddPost from '../components/UserHome/AddPost';
 import Posts from '../components/UserHome/Posts';
 import FollowRecom from '../components/UserHome/FollowRecom';
+
 export default {
   components: {
     UserInfo,
