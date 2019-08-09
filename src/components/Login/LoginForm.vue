@@ -74,12 +74,13 @@ export default {
 #Signin{
      position: absolute;
     padding-top: 50px;
-    left: 0px;  
+    right:20px;  
 }
 input[type=text], input[type=password]{
     width: 40%;
   padding: 8px 20px;
-  margin: 0px 8px;
+  margin-right: 5px;
+  
   display: inline-block;
   border: 1px solid lightgray;
   border-radius: 20px;
@@ -90,12 +91,11 @@ li{
 }
 
 button[type="submit"] {
-    
-    font-size: 15px;
+    position: absolute;
+    font-size: 16px;
     font-weight: bold;
-    padding: 5px;
-    padding-right: 10px;
-    padding-left: 10px;
+    width: 15%;
+    
     border-radius: 20px;
     
     border: none;
