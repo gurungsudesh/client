@@ -9,8 +9,8 @@
                                             <h3>Username gurung</h3>
                                             <div id="m_lcontent">
                                             <i class="fas fa-user-check"></i>
-                                            Verified                                                
-                                               
+                                            Verified  <br>                                              
+                                               <br>
                                             <button id="btn" class="btn btn-success"  >Edit Profile</button>
                                         </div>
                                     </div>
@@ -47,5 +47,16 @@ export default {
 #m_lcontent{
    color: rgb(14, 92, 14);
     text-align: center;
+}
+#btn{
+    background-color: white;
+     color: green;
+     font-weight: 700; 
+     border-radius: 20px;
+     width:150px;
+}
+#btn:active{
+    background-color: green;
+    color: white;
 }
 </style>

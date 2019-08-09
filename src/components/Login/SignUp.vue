@@ -53,6 +53,7 @@ button[type="submit"] {
     color:white;
     border: none;
     margin-left: 10px;
+    font-weight: bold;
 }
 #routsubmit{
      color:white;
