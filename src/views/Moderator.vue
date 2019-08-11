@@ -1,10 +1,5 @@
 <template>
     <div>
-<<<<<<< HEAD
-        <UserInfo/>
-        <Search/>
-        <Posts/>
-=======
         <div class="mainbody">
             <div class="container">
                 <div class="m_leftside" >
@@ -16,7 +11,6 @@
                 </div>
             </div>
         </div>
->>>>>>> 8383ad07bf2153f76d57121b68373ab5ef3bb4b2
     </div>
 </template>
 

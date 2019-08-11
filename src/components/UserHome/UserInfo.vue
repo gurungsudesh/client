@@ -5,7 +5,7 @@
                     
                     <div class="profilename">
                         <div id="profilename1">
-                        <img src="bullet.jpg" id="profileicon" >Hi. {{name}}
+                        <img src="bullet.jpg" id="profileicon" >{{name}}
                     </div>
                     </div>              
                     </div>

@@ -3,7 +3,7 @@
          <div class="writepost" >
          <div id="writepost1">
                                 
-              <form action="" id="form1" >
+            <form @submit="addPost" id="form1" >
 
                   <div class="form-row">
                     <div class="form-group col-md-1.5">
@@ -15,7 +15,7 @@
                     </div>
                  </div>
               <div class="form-group col-md-1">
-                <button style="margin-top:10px" class="btn btn-success" @click="addItem(postdata)" >Post</button>
+                <button type="submit" style="margin-top:10px" class="btn btn-success"  >Post</button>
                  </div>
                  </div>
             </form>
@@ -28,8 +28,30 @@
 </template>
 
 <script>
+import jwtDecode from 'jwt-decode'
+import axios from 'axios'
 export default {
-    name: "AddPost"
+    name: "AddPost",
+    data(){
+        const token = localStorage.usertoken
+        const decode = jwtDecode(token)
+        return{
+            postdata: '',
+            name : decode.name
+        }
+    },
+    methods: {
+        addPost(){
+            axios.post('http://localhost:5000/users/post',{post: this.postdata,username: this.name})
+                
+                .then(res=>{
+                    if(res.data.msg){
+                        alert('Posted')
+                    }
+                })
+                .catch(err => alert(err));
+        }
+    }
 }
 </script>
 
