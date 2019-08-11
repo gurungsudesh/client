@@ -57,6 +57,16 @@ export default {
                             // Login Failed
                             this.error = res.data.msg;
                         }
+                        if(res.data.moderator){
+
+                            localStorage.setItem('moderatorToken', res.data.token)
+                            this.username = '',
+                            this.password = '',
+                            this.$router.push('/moderator')
+                        }
+                        else{
+                            this.error = res.data.msg;
+                        }
 
                 
             })

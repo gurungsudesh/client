@@ -5,8 +5,9 @@
                             <div class="row">
                                     <div  class="col-md-auto">
                                       <img src="bullet.jpg" >
-                                            
-                                            <h3>Username gurung</h3>
+                                            <br/>
+                                            <h3>{{Username}}</h3>
+
                                             <div id="m_lcontent">
                                             <i class="fas fa-user-check"></i>
                                             Verified  <br>                                              
@@ -23,8 +24,16 @@
 </template>
 
 <script>
+import jwtDecode from 'jwt-decode'
 export default {
-    name:"UserInfo"
+    name:"UserInfo",
+    data(){
+        const token = localStorage.usertoken
+        const decode = jwtDecode(token)
+        return{
+            Username : decode.name
+        }
+    }
 }
 </script>
 
