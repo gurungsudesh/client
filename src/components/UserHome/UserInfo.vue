@@ -5,7 +5,7 @@
                     
                     <div class="profilename">
                         <div id="profilename1">
-                        <img src="bullet.jpg" id="profileicon" >Hi. Someone
+                        <img src="bullet.jpg" id="profileicon" >Hi. {{name}}
                     </div>
                     </div>              
                     </div>
@@ -13,8 +13,16 @@
 </template>
 
 <script>
+import jwtDecode from 'jwt-decode'
 export default {
-    name : "UserInfo"
+    name : "UserInfo",
+    data(){
+        const token = localStorage.usertoken
+        const decode = jwtDecode(token)
+        return{
+            name : decode.name
+        }
+    }
 }
 </script>
 

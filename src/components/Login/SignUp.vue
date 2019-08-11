@@ -36,13 +36,14 @@ export default {
 
 .down{
     position: absolute;
+    left:20%;
     bottom: 10%;
     
 }
 #downside{
     color: rgb(31, 73, 31);
     text-align: left;
-    padding-left: 50px;
+    
 }
 button[type="submit"] {
     

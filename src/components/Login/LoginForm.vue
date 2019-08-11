@@ -5,8 +5,8 @@
 <div id="Signin">
     <form @submit="login">
         <ul style="font-size:13px">
-        <li><input type="text"  v-model="username" id="username" placeholder="Username"></li>
-        <li><input type="password"  v-model="password" id="password" placeholder="Password"></li>
+        <li><input type="text"  v-model="username" id="username" placeholder="Username" required></li>
+        <li><input type="password"  v-model="password" id="password" placeholder="Password" required></li>
         <!--<input type="submit" name="submit" value="Sign Up!">-->
         <li><button type="submit" class="btn btn-success">Login</button></li>
         </ul>
@@ -37,17 +37,19 @@ export default {
     methods: {
         login(){
             axios.post('http://localhost:5000/users/login', { username: this.username,password: this.password})
-                .then(res => {
+            .then(res => {
                         //alert(`Username: ${this.username}, Password: ${this.password}`)
                         if (res.data.success) {
                             // var storage = window.localStorage;
-                            // var token = data.token;
-                            // storage.setItem('token', token)
-                            // storage.setItem('username', username)
-                            localStorage.setItem('usertoken', res.data)
-                            this.username = ''
-                            this.password = ''
+                            // var token = res.data.token;
+                            // storage.setItem('usertoken', token)
+                            
+                            localStorage.setItem('usertoken', res.data.token)
+                            this.username = '',
+                            this.password = '',
                             this.$router.push('/about')
+                            //storage.setItem('username', username)
+                           
                             //window.location.href = "http://localhost:3000/auth/home";
                             // $.get("http://localhost:5000/auth/home");
                             // Login successful 
@@ -55,11 +57,10 @@ export default {
                             // Login Failed
                             this.error = res.data.msg;
                         }
-                        
-                    
+
                 
-                })
-                .catch(err => this.err = err);
+            })
+            .catch(err => this.err = err);
                 
         }
     },
@@ -69,15 +70,16 @@ export default {
 
 <style scoped>
 
- #Signin{
+#Signin{
      position: absolute;
     padding-top: 50px;
-    left: 0px;  
+    right:20px;  
 }
 input[type=text], input[type=password]{
     width: 40%;
   padding: 8px 20px;
-  margin: 0px 8px;
+  margin-right: 5px;
+  
   display: inline-block;
   border: 1px solid lightgray;
   border-radius: 20px;
@@ -88,12 +90,11 @@ li{
 }
 
 button[type="submit"] {
-    
-    font-size: 15px;
+    position: absolute;
+    font-size: 16px;
     font-weight: bold;
-    padding: 5px;
-    padding-right: 10px;
-    padding-left: 10px;
+    width: 15%;
+    
     border-radius: 20px;
     
     border: none;
