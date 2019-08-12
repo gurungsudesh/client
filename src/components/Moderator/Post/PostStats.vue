@@ -37,9 +37,78 @@
 </template>
 
 <script>
+var date= new Date();
+                var data={
+                  username:'Prashant Dhoju',
+                  commenting:'',
+                  cart:[],
+                  postdata:'',
+                  commentshow:false,
+                  data1 : [{
+                    "id":0 ,
+                    "name":"Prashant Dhoju",
+                    "post":"I am grateful to all the people for showing their love and care towards me. I am pretty sure your blessing, wishes,love and support will remain through out the year and this will help me to get the best version of me ",
+                    "date": "2015-12-2",
+                    
+                    "comments" : [
+                      { "id":0 ,
+                        "name":"Prashant Dhoju",
+                        "comment_content":"I am grateful to all the people for showing their love and care towards me. I am pretty sure your blessing, wishes,love and support will remain through out the year and this will help me to get the best version of me ",
+                        "date": "2015-12-5"},
+                        ],
+                        "liked":false
+                },
+                {   "id":1 ,
+                    "name":"Shishir Gurung ",
+                    "post":"I am grateful to all the people for showing their love and care towards me. I am pretty sure your blessing, wishes,love and support will remain through out the year and this will help me to get the best version of me ",
+                    "date": "2015-12-2",
+                    "comments":[
+                    { "id":0 ,
+                        "name":"Prashant Dhoju",
+                        "comment_content":"I am grateful to all the people for showing their love and care towards me. I am pretty sure your blessing, wishes,love and support will remain through out the year and this will help me to get the best version of me ",
+                        "date": "2015-12-5"}
+                    ],
+                    "liked":false
+                },
+                {    "id":2 ,
+                    "name":"Bibek Gurung",
+                    "post":"I am grateful to all the people for showing their love and care towards me. I am pretty sure your blessing, wishes,love and support will remain through out the year and this will help me to get the best version of me ",
+                    "date": "2015-12-2",
+                    "comments":[],
+                    "liked":false
+                }]
+                
+                }
 export default {
  name:"PostStats"
 }
+/*
+ var date= new Date();
+                var data={
+                  username:'Prashant Dhoju',
+                  commenting:'',
+                  cart:[],
+                  postdata:'',
+                  commentshow:false,
+                  
+                  data1 : [{}]
+
+methods:{
+                  addItem:function(product){
+                    this.data1.push({ id:this.data1.length, name:this.username, post: product , date: date, comments:[], liked:false})
+                   // alert("Posting Successful");
+                  },
+                  addComment:function(commenting,index){
+                    
+                    var ins = this.data1[index];
+                    ins.comments.push({name:this.username, comment_content:commenting,date: date})
+                  },
+                  addLiked:function(liking,index){
+                    var lik = this.data1[index];
+                    lik.liked=!lik.liked;
+                  }
+                  
+                }*/
 </script>
 
 <style scoped>

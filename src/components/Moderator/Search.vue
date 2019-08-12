@@ -1,24 +1,31 @@
 <template>
     <div>
-         <div class="m_mainright">
-                    <div class="m_topr">
-                        
-
-                            <nav class="navbar navbar-expand-lg navbar-light" style="font-weight:bold; background-color: white">
-                                    <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
-                                    
-                                    
-                            <form id="searchbtn" class="form-inline my-2 my-lg-0">
-                              <input class="form-control mr-sm-2" type="search"  placeholder="Search" aria-label="Search">
-                              <button class="btn btn-success" type="submit">Search</button>
-                            </form>
-                          
+        <div class="container" id="topsearch">
+                      
+                      <nav style="font-weight:bold; background-color: green">
+                            <div >
+                                <form id="searchbtn" class="form-inline ">
+                                <input class="form-control mr-sm-2" type="search"  placeholder="Search" aria-label="Search">
+                                <button class="btn btn-success" type="submit">Search</button>
+                                <div id="dpdn" class="btn-group">
+                                    <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    </button>
+                                    <div  class="dropdown-menu dropdown-menu-right">
+                                        <router-link class="dropdown-item" to="/" >Profile</router-link>
+                                        <router-link class="dropdown-item" to="/" >Settings</router-link>
+                                        <router-link class="dropdown-item" to="/" v-on:click="logout">Log Out</router-link>
+                                    </div>
+                                    </div>
+                                </form>
+                            
                           </div>
                         </nav> 
-                          
-                    </div>
-            </div>
+        </div>   
+         
     </div>
+                       
+    
+    
 </template>
 
 <script>
@@ -27,22 +34,19 @@ export default {
 }
 </script>
  <style scoped>
-.m_topr{
- 
-    margin-top:2%;
-    display: block;
-  
+ #topsearch{
+     position: absolute;
+     text-align: right;
+     
+      }
+      #searchbtn{
+          position: absolute;
+          right: 10px;
+          margin-top: 2%;
+      }
 
-    margin-left: 65%;
-    
-} 
-#searchbtn{
-    display: inline-block;
-    
-}
-.m_mainright{
-    border-bottom:1px solid lightgrey;
-}
+
+
 
 #btnstats{
     background-color: white;
@@ -50,6 +54,18 @@ export default {
      font-weight: 700; 
      border-radius: 20px;
      width:150px;
+}
+#dpdn{
+    margin-left: 10px;
+}
+ #dpdn a{
+   font-size: 14px;
+    margin-left: 0px;
+    
+}
+#dpdn a:active{
+  background-color: green;
+    
 }
 </style>
 

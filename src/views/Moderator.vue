@@ -1,14 +1,17 @@
 <template>
     <div>
         <div class="mainbody">
-            <div class="container">
                 <div class="m_leftside" >
                     <UserInfo/>
                 </div>
                 <div class="m_rightside">
+                   <div class="topright" style="border-bottom: 1px solid lightgrey">
                     <Search/>
+                   </div>
+                   <div class="bottomright">
                     <Posts/>
-                </div>
+                   </div>
+                
             </div>
         </div>
     </div>
@@ -45,5 +48,17 @@ export default {
         height: 100%;
         border-right: 1px solid lightgrey;
     
+}
+.topright{
+    position: absolute;
+    top:0%;
+    height:11%;
+    width: 100%;
+}
+.bottomright{
+    position: absolute;
+    top:20%;
+    height: 80%;
+    width: 100%;
 }
 </style>
