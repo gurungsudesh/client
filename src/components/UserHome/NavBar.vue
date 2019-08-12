@@ -23,7 +23,7 @@
   <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
   </button>
   <div  class="dropdown-menu dropdown-menu-right">
-    <router-link class="dropdown-item" to="/" >Profile</router-link>
+    <router-link class="dropdown-item" to="/profile" >Profile</router-link>
     <router-link class="dropdown-item" to="/" >Settings</router-link>
     <router-link class="dropdown-item" to="/" v-on:click="logout">Log Out</router-link>
 </div>
