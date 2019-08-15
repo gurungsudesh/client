@@ -31,7 +31,7 @@ export default {
       margin: 20px;
       border-radius: 20px;
       width: 80%;
-    background-color: rgb(236, 248, 236);
+    background-color: rgb(199, 255, 199);
        
       
     
@@ -40,7 +40,7 @@ export default {
     border-radius: 10px;
   }
   li{
-    background-color: rgb(236, 248, 236);
+    background-color: rgb(199, 255, 199);
     border-radius: 10px;
   }
   #hotcontent{

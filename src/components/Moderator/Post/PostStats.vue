@@ -80,7 +80,23 @@ var date= new Date();
                 
                 }
 export default {
- name:"PostStats"
+ name:"PostStats",
+ methods:{
+                  addItem:function(product){
+                    this.data1.push({ id:this.data1.length, name:this.username, post: product , date: date, comments:[], liked:false})
+                   // alert("Posting Successful");
+                  },
+                  addComment:function(commenting,index){
+                    
+                    var ins = this.data1[index];
+                    ins.comments.push({name:this.username, comment_content:commenting,date: date})
+                  },
+                  addLiked:function(liking,index){
+                    var lik = this.data1[index];
+                    lik.liked=!lik.liked;
+                  }
+                  
+                }
 }
 /*
  var date= new Date();

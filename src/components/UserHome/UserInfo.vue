@@ -5,7 +5,7 @@
                     
                     <div class="profilename">
                         <div id="profilename1">
-                        <img src="bullet.jpg" id="profileicon" >
+                        <img src="../../../images/ProfilePic.jpg" id="profileicon" >
                         <router-link to="/profile">{{name}}</router-link>
                     </div>
                     </div>              

@@ -7,7 +7,7 @@
 
                   <div class="form-row">
                     <div class="form-group col-md-1.5">
-                         <img src="bullet.jpg" id="profileicon">   
+                         <img src="../../../images/ProfilePic.jpg" id="profileicon">   
                     </div>
                     <div class="form-group col-md-9">          
                   <div class="form-group shadow-textarea">

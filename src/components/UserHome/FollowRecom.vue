@@ -5,9 +5,9 @@
                         <div id="followtext1">
                            <ul class="list-group list-group-flush">
                   <li class="list-group-item"> <h4><b>Who To Follow</b></h4> </li>
-                  <li class="list-group-item"><img src="bullet.jpg" id="otherprofileicon" >ABC Gurung<button class="btn btn-success">Follow</button></li>
-                 <li class="list-group-item"><img src="bullet.jpg" id="otherprofileicon" >ABC Gurung<button class="btn btn-success">Follow</button></li>
-                 <li class="list-group-item"><img src="bullet.jpg" id="otherprofileicon" >ABC Gurung<button class="btn btn-success">Follow</button></li>
+                  <li class="list-group-item"><img src="../../../images/ProfilePic.jpg" id="otherprofileicon" >ABC Gurung<button class="btn btn-success">Follow</button></li>
+                 <li class="list-group-item"><img src="../../../images/ProfilePic.jpg" id="otherprofileicon" >ABC Gurung<button class="btn btn-success">Follow</button></li>
+                 <li class="list-group-item"><img src="../../../images/ProfilePic.jpg" id="otherprofileicon" >ABC Gurung<button class="btn btn-success">Follow</button></li>
                  
                  
             </ul>
@@ -31,8 +31,8 @@ export default {
 .followtext{
       margin: 20px;
       border-radius: 20px;
-      width: 100%;
-    background-color: rgb(236, 248, 236);
+      width: 80%;
+    background-color: rgb(199, 255, 199);
        
       
     
@@ -41,12 +41,13 @@ export default {
     border-radius: 10px;
   }
   li{
-    background-color: rgb(236, 248, 236);
+    background-color: rgb(199, 255, 199);
     border-radius: 10px;
     text-align: center;
+    
   }
   button{
-    position: relative;
+   margin-top:1%;
    
 
   }
