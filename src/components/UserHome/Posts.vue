@@ -38,8 +38,30 @@
 </template>
  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script>
+import axios from 'axios';
 export default {
-    name: "Posts"
+    name: "Posts",
+    data(){
+      return{
+        data1:[
+        ],
+        error: ''
+
+      }
+    },
+    created(){
+      
+        axois.get("http://localhost:5000/users/post")
+        alert("post request pathayo")
+        .then(res=>{
+          if(res.data.msg){
+            this.data1 = res.data.docs;
+            alert(this.data1)
+          }
+        })
+        .catch(err =>alert(err));  
+    },
+    
 }
 </script>
 

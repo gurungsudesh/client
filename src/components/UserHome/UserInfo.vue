@@ -6,7 +6,7 @@
                     <div class="profilename">
                         <div id="profilename1">
                         <img src="../../../images/ProfilePic.jpg" id="profileicon" >
-                        <router-link to="/profile">{{name}}</router-link>
+                        <router-link to="/profile" id="uname">{{name}}</router-link>
                     </div>
                     </div>              
                     </div>
@@ -28,7 +28,14 @@ export default {
 </script>
 
 <style scoped>
-
+#uname{
+    text-decoration: none;
+    font-family: Arial, Helvetica, sans-serif;
+  
+    font-size: 25px;
+    font-weight: 600;
+    color: rgb(8, 66, 13);
+}
 
 #profilename1{
     font-family: Arial, Helvetica, sans-serif;
@@ -37,6 +44,7 @@ export default {
     font-size: 25px;
     font-weight: 600;
     color: rgb(8, 66, 13);
+    
     
     
     

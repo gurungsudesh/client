@@ -6,13 +6,13 @@
             
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0"  >
             <li class="nav-item ">
-            <a class="nav-link" href="#"><i class="fas fa-home"></i><label>Home</label></a>
+            <router-link  class="nav-link" to="/about"><i class="fas fa-home"></i><label>Home</label></router-link>
             </li>
       <li class="nav-item">
-        <a class="nav-link" href="#"><i class="far fa-bell"></i><label>Notifications</label></a>
+        <router-link class="nav-link" to="#"><i class="far fa-bell"></i><label>Notifications</label></router-link>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#"><i class="far fa-envelope"></i><label>Messages</label></a>
+        <router-link class="nav-link" to="#"><i class="far fa-envelope"></i><label>Messages</label></router-link>
       </li>
     </ul> 
     <form class="form-inline my-2 my-lg-0">

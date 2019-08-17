@@ -28,7 +28,7 @@ import jwtDecode from 'jwt-decode'
 export default {
     name:"UserInfo",
     data(){
-        const token = localStorage.usertoken
+        const token = localStorage.moderatorToken
         const decode = jwtDecode(token)
         return{
             Username : decode.name

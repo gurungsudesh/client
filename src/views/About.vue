@@ -28,7 +28,8 @@
      <div class="middlebody">
     <AddPost />
     <!--Trying -->
-    <div>
+    <!-- 
+      <div>
        <table class="table col-md-6 mx-auto">
                 <tbody>
                     <tr>
@@ -42,6 +43,7 @@
                 </tbody>
             </table>
     </div>
+    -->
     <Posts/>
      </div>
       <div class="rightbody">
