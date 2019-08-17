@@ -1,14 +1,16 @@
 <template>
     <div>
         <div class="container">
+            
             <div class="toppost">
                 <table id="posttable">
-                        <tr>
+                        <tr><p> apple</p>
                         <td rowspan="2"><img src="bullet.jpg"  id="posticon"></td>     
-                        <td style="font-size: 15px; color:forestgreen; font-weight:bold" >{{item.name}}</td>
+                        <td style="font-size: 15px; color:forestgreen; font-weight:bold" >{{post.name}}</td>
                     </tr>
                     <tr>
-                        <td style="color: grey">{{item.date}}</td>
+                        
+                        <td style="color: grey">{{post.date}}</td>
                     </tr>
                 </table>
             </div>
@@ -16,7 +18,7 @@
         <div class="container">
             <div class="postarea">       
                 <div class="postcontent">
-                    <b style="font-size: 13px"> {{ item.post }}</b>
+                    <b style="font-size: 13px"> {{ post.content }}</b>
                 </div>
             </div>
         </div>
@@ -25,7 +27,10 @@
 
 <script>
 export default {
-    name: "PostContent"
+    name: "PostContent",
+    porps: ['post']
+    
+    
 }
 </script>
 
