@@ -25,7 +25,7 @@
   <div  class="dropdown-menu dropdown-menu-right">
     <router-link class="dropdown-item" to="/profile" >Profile</router-link>
     <router-link class="dropdown-item" to="/" >Settings</router-link>
-    <router-link class="dropdown-item" to="/" v-on:click="logout">Log Out</router-link>
+    <button v-on:click="logout" ><router-link class="dropdown-item" to="/" >Log Out</router-link></button>
 </div>
   </div>
   </div>
