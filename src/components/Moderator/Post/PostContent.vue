@@ -5,7 +5,7 @@
             <div class="toppost">
                 <table id="posttable">
                         <tr><p> apple</p>
-                        <td rowspan="2"><img src="bullet.jpg"  id="posticon"></td>     
+                        <td rowspan="2"><img src="../../../images/ProfilePic.jpg"  id="posticon"></td>     
                         <td style="font-size: 15px; color:forestgreen; font-weight:bold" >{{post.name}}</td>
                     </tr>
                     <tr>

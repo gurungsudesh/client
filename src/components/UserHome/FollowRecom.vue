@@ -3,19 +3,11 @@
         
                     <div class="followtext">
                         <div id="followtext1">
-<<<<<<< HEAD
                            <h4><b>Who To Follow</b></h4> 
                            <ul class="list-group list-group-flush" v-for="(item,index) in users " :key="index">
                   
                             <li class="list-group-item"><img src="../../../images/ProfilePic.jpg" id="otherprofileicon" >{{item.name}}<button class="btn btn-success">Follow</button></li>
               
-=======
-                           <ul class="list-group list-group-flush">
-                  <li class="list-group-item"> <h4><b>Who To Follow</b></h4> </li>
-                  <li class="list-group-item"><img src="../../../images/ProfilePic.jpg" id="otherprofileicon" >ABC Gurung<br><button class="btn btn-success">Follow</button></li>
-                 <li class="list-group-item"><img src="../../../images/ProfilePic.jpg" id="otherprofileicon" >ABC Gurung<br><button class="btn btn-success">Follow</button></li>
-                 <li class="list-group-item"><img src="../../../images/ProfilePic.jpg" id="otherprofileicon" >ABC Gurung<br><button class="btn btn-success">Follow</button></li>
->>>>>>> cc88a186ed55716fc099b077d418475506029127
                  
                  
                           </ul>
