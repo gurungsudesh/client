@@ -5,9 +5,9 @@
                         <div id="followtext1">
                            <ul class="list-group list-group-flush">
                   <li class="list-group-item"> <h4><b>Who To Follow</b></h4> </li>
-                  <li class="list-group-item"><img src="../../../images/ProfilePic.jpg" id="otherprofileicon" >ABC Gurung<button class="btn btn-success">Follow</button></li>
-                 <li class="list-group-item"><img src="../../../images/ProfilePic.jpg" id="otherprofileicon" >ABC Gurung<button class="btn btn-success">Follow</button></li>
-                 <li class="list-group-item"><img src="../../../images/ProfilePic.jpg" id="otherprofileicon" >ABC Gurung<button class="btn btn-success">Follow</button></li>
+                  <li class="list-group-item"><img src="../../../images/ProfilePic.jpg" id="otherprofileicon" >ABC Gurung<br><button class="btn btn-success">Follow</button></li>
+                 <li class="list-group-item"><img src="../../../images/ProfilePic.jpg" id="otherprofileicon" >ABC Gurung<br><button class="btn btn-success">Follow</button></li>
+                 <li class="list-group-item"><img src="../../../images/ProfilePic.jpg" id="otherprofileicon" >ABC Gurung<br><button class="btn btn-success">Follow</button></li>
                  
                  
             </ul>
