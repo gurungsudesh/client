@@ -22,18 +22,25 @@
 </template>
 
 <script>
+import jwtDecode from 'jwt-decode'
 import axios from 'axios';
 export default {
     name: "FollowRecom",
     data(){
+      const token = localStorage.usertoken
+      const decode = jwtDecode(token)
       return{
-        users: []
+        users: [],
+        name: decode.name
       }
     },
     created(){
       axios.get("http://localhost:5000/users/recommendation")
+      
         .then(res =>{
-          this.users = res.data.docs;
+          const array = res.data.docs;
+          this.users = array.filter(user => user.name !== this.name)
+
         })
         .catch(err=> alert(err))
     }

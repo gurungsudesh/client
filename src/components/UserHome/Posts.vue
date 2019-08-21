@@ -16,7 +16,7 @@
                             </tr>
                             <tr>
                                 
-                                <td style="color: grey">{{item.date}}</td>
+                                <td style="color: grey">{{item.date.getDate()}}</td>
                             </tr>
                         </table>
                     </div>
@@ -100,7 +100,7 @@ export default {
         
         .then(res=>{
           if(res.data.msg){
-            alert("post request pathayo")
+            //alert("post request pathayo")
             this.posts = res.data.docs;
             
           }
