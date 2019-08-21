@@ -16,7 +16,7 @@
                             </tr>
                             <tr>
                                 
-                                <td style="color: grey">{{item.date.getDate()}}</td>
+                                <td style="color: grey">{{item.date}}</td>
                             </tr>
                         </table>
                     </div>
@@ -33,8 +33,8 @@
                 <table id="statstable">
                     <tr>
                         <td>
-                            <button id="btnstats" class="btn btn-success" @click="addLiked(item.liked,data1.indexOf(item))" v-if="(item.liked)" style="background-color: green;color: white;"><i class="fas fa-thumbs-up"></i></button>
-                            <button id="btnstats" class="btn btn-success" @click="addLiked(item.liked,data1.indexOf(item))" v-else style="background-color: white;color: green;"><i class="fas fa-thumbs-up"></i></button>                                                                     
+                            <button id="btnstats" class="btn btn-success" @click="addLiked(item.like,posts.indexOf(item))" v-if="(item.like)" style="background-color: green;color: white;"><i class="fas fa-thumbs-up"></i></button>
+                            <button id="btnstats" class="btn btn-success" @click="addLiked(item.like,posts.indexOf(item))" v-else style="background-color: white;color: green;"><i class="fas fa-thumbs-up"></i></button>                                                                     
                         </td>
                         <td>
                             <button id="btnstats"   class="btn btn-success" @click="(item.commentshow=!item.commentshow)" v-bind:value="item.commentshow" v-if="(item.commentshow)" style="background-color: green; color: white"><i  class="fas fa-comment-dots"></i></button>
@@ -80,9 +80,9 @@ export default {
                     var ins = this.data1[index];
                     ins.comments.push({name:this.username, comment_content:commenting,date: date})
                   },
-                  addLiked:function(liking,index){
-                    var lik = this.data1[index];
-                    lik.liked=!lik.liked;
+                  addLiked(likedPost,index){
+                    var lik = this.posts[index];
+                    lik.likedPost=!lik.likedPost;
                   }
                   
                 },

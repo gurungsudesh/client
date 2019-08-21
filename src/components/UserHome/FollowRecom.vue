@@ -6,7 +6,7 @@
                            <h4><b>Who To Follow</b></h4> 
                            <ul class="list-group list-group-flush" v-for="(item,index) in users " :key="index">
                   
-                            <li class="list-group-item"><img src="../../../images/ProfilePic.jpg" id="otherprofileicon" >{{item.name}}<button class="btn btn-success">Follow</button></li>
+                            <li class="list-group-item"><img src="../../../images/ProfilePic.jpg" id="otherprofileicon" >{{item.name}}<form @submit="follow(name,id, item.name, item._id )"><button  type="submit" class="btn btn-success">Follow</button></form></li>
               
                  
                  
@@ -31,7 +31,8 @@ export default {
       const decode = jwtDecode(token)
       return{
         users: [],
-        name: decode.name
+        name: decode.name,
+        id: decode._id
       }
     },
     created(){
@@ -43,7 +44,30 @@ export default {
 
         })
         .catch(err=> alert(err))
+    },
+    methods: {
+      follow(name, userID, followName, followId){ 
+        //alert("user ko : "+ name + " , " + userID +", follow garna lako: "+followName + ", "+followId)
+       //if(){//
+          axios.post("http://localhost:5000/users/follow", {name, userID, followName, followId})
+          .then(res =>{
+            if(res.data.docs.friend){
+              alert("Followed")
+
+
+            }
+          })
+          .catch(err=> alert(err));
+       //}
+       //else{
+         //axios.post("http://localhost:5000/users/follow")
+           //yaha chai unfollow garne mechanism banaune
+         
+      }
     }
+
+    
+    
 }
 </script>
 
