@@ -57,11 +57,11 @@
                         Followers
                         <div class="followtext">
                         <div id="followtext1">
-                           <h4><b>Who To Follow</b></h4> 
+                           
                            <ul class="list-group list-group-flush" v-for="(item,index) in users " :key="index">
                   
                             <li class="list-group-item"><img src="../../../../images/ProfilePic.jpg" id="otherprofileicon" >{{item.name}}
-                                <button  type="submit" class="btn btn-success">Follow</button>
+                            
                             </li>
               
                  
@@ -90,6 +90,7 @@ export default {
         const decode = jwtDecode(token)
         return{
             posts :[],
+            users: [],
             name : decode.name
         
         }
@@ -109,11 +110,20 @@ export default {
         .catch(err =>alert(err)); 
         
         //followers ko lagi
-        axios.get("http://localhost:5000/users/profile/followers")
+        axios.get(`http://localhost:5000/users/follow/${this.name}`)
+        alert(this.name)
         .then(res =>{
-          this.users = res.data.docs;
+            const data = res.data.docs;
+            this.users = data.username;
         })
         .catch(err=> alert(err))
+
+
+        //following ko lagi 
+        // axios.get("http://localhost:5000/users/")
+        //     .then(res =>{
+        //         this.
+        //     })
     },
     methods:{
                   

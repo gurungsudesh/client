@@ -70,26 +70,10 @@
 import axios from 'axios';
 export default {
     name: "Posts",
-    methods:{
-                  addItem:function(product){
-                    this.data1.push({ id:this.data1.length, name:this.username, post: product , date: date, comments:[], liked:false})
-                   // alert("Posting Successful");
-                  },
-                  addComment:function(commenting,index){
-                    
-                    var ins = this.data1[index];
-                    ins.comments.push({name:this.username, comment_content:commenting,date: date})
-                  },
-                  addLiked(likedPost,index){
-                    var lik = this.posts[index];
-                    lik.likedPost=!lik.likedPost;
-                  }
-                  
-                },
+    methods:{},
     data(){
       return{
-        posts:[
-        ],
+        posts:[],
         error: ''
 
       }
