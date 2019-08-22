@@ -162,6 +162,16 @@ export default {
     border-top: 1px solid rgb(204, 204, 204);
     overflow: auto;
 }
+.middlebody::-webkit-scrollbar {
+    width: 10px;
+}
+.middlebody::-webkit-scrollbar-thumb:hover {
+  background: green; 
+}
+.middlebody::-webkit-scrollbar-thumb {
+  background: rgb(59, 163, 59); 
+  border-radius: 10px;
+}
 .rightbody{
     position: absolute;
     left: 75%;

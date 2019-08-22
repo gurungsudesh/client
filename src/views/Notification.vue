@@ -14,7 +14,7 @@
 import NavBar from '../components/UserHome/NavBar'
 import Noticontent from '../components/UserHome/Notification/Noticontent'
 export default {
-    name:'notifi',
+    name:'notification',
     components: {NavBar,Noticontent}
 }
 </script>

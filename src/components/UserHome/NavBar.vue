@@ -18,8 +18,7 @@
               <li class="list-group-item">Notification 2</li>
               <li class="list-group-item">Notification 2</li>
               <li class="list-group-item">Notification 2</li>
-            </ul>
-                        
+            </ul>            
         </div>
             
       </li>
@@ -115,10 +114,7 @@ a{
   border-radius: 20px;
   text-align:center;
 }
-.dpdownbody li{
-  
 
-}
 
 @media only screen and (max-width: 900px) {
   nav li:nth-child(1) label {
