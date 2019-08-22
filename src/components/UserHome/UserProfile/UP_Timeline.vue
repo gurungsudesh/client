@@ -14,7 +14,7 @@
             </ul>
                     <div class="tab-content" id="myTabContent">
                     <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                        Timeline
+                        
 
                             <div id ="postmain" class="container">
                                 
@@ -54,14 +54,14 @@
 
                     </div>
                     <div class="tab-pane fade" id="follower" role="tabpanel" aria-labelledby="follower-tab">
-                        Followers
+                        
                       
                         <div class="followtext">
                         <div id="followtext1">
                            
                            <ul class="list-group list-group-flush" v-for="(item,index) in followers" :key="index">
                   
-                            <li class="list-group-item"><img src="../../../../images/ProfilePic.jpg" id="otherprofileicon" >{{item.name}}
+                            <li class="list-group-item"><img src="../../../../images/ProfilePic.jpg" id="otherprofileicon" >{{item.followedBy}}
                             
                             </li>
               
@@ -74,7 +74,22 @@
 
                     </div>
                     <div class="tab-pane fade" id="following" role="tabpanel" aria-labelledby="following-tab">
-                        following
+                        
+                        <div class="followtext">
+                            <div id="followtext1">
+                            
+                                <ul class="list-group list-group-flush" v-for="(item,index) in following" :key="index">
+                        
+                                    <li class="list-group-item"><img src="../../../../images/ProfilePic.jpg" id="otherprofileicon" >{{item.username}}
+                                    
+                                    </li>
+                    
+                        
+                        
+                                </ul>
+
+                            </div>
+                        </div>
                     </div>
                 </div>
                 
@@ -98,40 +113,37 @@ export default {
         }
     },
     created(){
-        //const uname = this.name;
+        const uname = this.name;
         
-        axios.get(`http://localhost:5000/users/profile/post/${this.name}`)
+        axios.get(`http://localhost:5000/users/profile/post/${uname}`)
         
         .then(res=>{
           if(res.data.msg){
-            alert("post request pathayo")
-           
+
             this.posts = res.data.docs;
-            
           }
         })
         .catch(err =>alert(err)); 
         
         //followers ko lagi
-        axios.get(`http://localhost:5000/users/follow/${this.name}`)
-        
+        axios.get(`http://localhost:5000/users/follower/${uname}`)
         .then(res =>{
-            const data = res.data.docs;
-            alert(data.followedBy)
-            this.followers = data.followedBy;
+            if(res.data.msg){
+                this.followers = res.data.docs;
+            }
         })
         .catch(err=> alert(err))
 
 
         //following ko lagi 
-        // axios.get("http://localhost:5000/users/")
-        //     .then(res =>{
-        //         this.
-        //     })
+        axios.get(`http://localhost:5000/users/follow/${uname}`)
+            .then(res =>{
+                if(res.data.msg){
+                this.following = res.data.docs;
+            }
+            })
     },
-    methods:{
-                  
-    }
+   
 }
 </script>
 <style scoped>
