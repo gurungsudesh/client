@@ -141,13 +141,13 @@ export default {
   position: absolute;
   height: 100%;
   width: 100%;
-  background-image: linear-gradient(to bottom,  rgb(255, 255, 255),rgb(228, 255, 230));
-}
+  }
   .leftbody{
     position: absolute;
     left: 0%;
     height: 100%;
     width: 25%;
+    border-right: 2px solid green;
     
 }
 .home-header{
@@ -158,9 +158,9 @@ export default {
     left: 25%; 
     height: 100%;
     width: 50%;
-    border-right: 1px solid rgb(204, 204, 204);
-    border-left: 1px solid rgb(204, 204, 204);
+    
     border-top: 1px solid rgb(204, 204, 204);
+    overflow: auto;
 }
 .rightbody{
     position: absolute;
@@ -184,7 +184,7 @@ export default {
 #mobrightid{
   display: none;
 }
-@media only screen and (max-width: 800px) {
+@media only screen and (max-width: 1000px) {
     .leftbody{
       display: none;
     }
@@ -222,18 +222,22 @@ export default {
     #leftslider{
       position: absolute;
       left: 0%;
-      height: 100%;
+      top:45%;
+      height: 10%;
       width: 100%;
-      background-color: rgb(44, 160, 44);
+      
       margin-left: 0px;
        
      
     }
     #leftsliderarrow{
       position: absolute;
-      top:40%;
-      font-size: 4vw;
+      background-color: rgb(44, 160, 44);
+      font-size: 3vw;
+      padding-top:30px;
+      padding-bottom: 30px;
       padding-left: 10%;
+      padding-right: 10%;
       color: white;
     }
     #mobrightid{
@@ -258,18 +262,21 @@ export default {
       
       position: absolute;
       right: 0%;
-      height: 100%;
+      top:45%;
+      height: 10%;
       width: 100%;
-      background-color: rgb(44, 160, 44);
-      margin-right: 0px;
+      
        
      
     }
     #rightsliderarrow{
       transform: rotate(180deg);
       position: absolute;
-      top:40%;
-      font-size: 4vw;
+      background-color: rgb(44, 160, 44);
+      font-size: 3vw;
+      padding-top:30px;
+      padding-bottom: 30px;
+      padding-left: 10%;
       padding-right: 10%;
       color: white;
     }

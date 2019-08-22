@@ -1,18 +1,18 @@
 <template>
     <div> 
-       <div id ="postmain" class="container">
+       <div id ="postmain" >
            
             <div class="postfeed" v-for="(item,index) in posts " :key="index">
                
                 
                 <!-- Yo chai post ko content-->
-                <div class="container">
+                
                     
                     <div class="toppost">
                         <table id="posttable">
                                 <tr>
                                 <td rowspan="2"><img src="../../../images/ProfilePic.jpg"  id="posticon"></td>     
-                                <td style="font-size: 15px; color:forestgreen; font-weight:bold" >{{item.name}}</td>
+                                <td style="font-size: 20px; color:forestgreen; font-weight:bold" >{{item.name}}</td>
                             </tr>
                             <tr>
                                 
@@ -20,15 +20,15 @@
                             </tr>
                         </table>
                     </div>
-                </div>
-                <div class="container">
+                
+                
                     <div class="postarea">       
                         <div class="postcontent">
-                            <b style="font-size: 13px">{{item.content}}</b>
+                            <b style="font-size: 15px">{{item.content}}</b>
                         </div>
                     </div>
-                </div>
-                <div class="container">
+                
+               
             <div class="changestat">
                 <table id="statstable">
                     <tr>
@@ -63,7 +63,7 @@
         </div>
     </div>
        </div>
-    </div>
+   
 </template>
  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script>
@@ -175,18 +175,17 @@ export default {
      
      width:40%;
      margin-left: 20px;
-     margin-bottom: 20px;   
+    
  }
  .postfeed{
-    padding-top: 10px;
     margin-top:20px;
 
    
     width: 100%;
     color: black;
     background-color: white;
-    border-radius: 20px;
-    border-bottom: 4px solid gray;
+    
+    border-bottom: 4px solid lightgray;
    
 }
 #posticon{  
@@ -199,6 +198,7 @@ export default {
   
 }
 .postcontent{
+    margin-left: 80px;
     margin-top:10px;
     margin-bottom: 10px;
     word-wrap: break-word;
@@ -211,11 +211,11 @@ export default {
     
 }
 .postarea{
-    border-bottom: 2px solid grey;  
+    border-bottom: 1px solid grey;
+    padding-left: 10px;
+    padding-right: 10px;
 }
-.toppost{
-    border-bottom: 2px solid grey;
-}
+
 #btnstats{
     
      font-weight: 700; 
@@ -225,6 +225,7 @@ export default {
 .changestat{
     padding-top:10px;
    padding-bottom:10px;
+   margin-left: 40px;
 }
 #statstable td{
     padding-left:50px;
@@ -237,10 +238,6 @@ export default {
      width:80px;
      
 }
-#postmain{
-  background-color:rgb(214, 240, 214);
-  padding-top:5px;
-  padding-bottom: 5px;
-}
+
   
 </style>
