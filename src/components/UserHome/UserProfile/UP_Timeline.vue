@@ -55,10 +55,11 @@
                     </div>
                     <div class="tab-pane fade" id="follower" role="tabpanel" aria-labelledby="follower-tab">
                         Followers
+                      
                         <div class="followtext">
                         <div id="followtext1">
                            
-                           <ul class="list-group list-group-flush" v-for="(item,index) in users " :key="index">
+                           <ul class="list-group list-group-flush" v-for="(item,index) in followers" :key="index">
                   
                             <li class="list-group-item"><img src="../../../../images/ProfilePic.jpg" id="otherprofileicon" >{{item.name}}
                             
@@ -90,15 +91,17 @@ export default {
         const decode = jwtDecode(token)
         return{
             posts :[],
-            users: [],
+            followers: [],
+            following: [],
             name : decode.name
         
         }
     },
     created(){
-        const uname = this.name;
-        axios.get(`http://localhost:5000/users/profile/post/${uname}`)
-        // alert("name: "+ uname)
+        //const uname = this.name;
+        
+        axios.get(`http://localhost:5000/users/profile/post/${this.name}`)
+        
         .then(res=>{
           if(res.data.msg){
             alert("post request pathayo")
@@ -111,10 +114,11 @@ export default {
         
         //followers ko lagi
         axios.get(`http://localhost:5000/users/follow/${this.name}`)
-        alert(this.name)
+        
         .then(res =>{
             const data = res.data.docs;
-            this.users = data.username;
+            alert(data.followedBy)
+            this.followers = data.followedBy;
         })
         .catch(err=> alert(err))
 
