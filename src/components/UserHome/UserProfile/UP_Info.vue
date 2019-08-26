@@ -13,7 +13,7 @@
                             99 following<br>
                             
                         </p>
-                        <button id="btn" class="btn btn-success" >Follow</button>
+                        <button id="btn" class="btn btn-success" >Edit Profile</button>
                 </div>
             </div> 
         </div>
@@ -48,5 +48,9 @@ img{
     border-radius: 50%;
     border: 10px solid rgb(158, 221, 158);
 
+}
+#btn:active{
+    background-color: green;
+    color: white;
 }
 </style>

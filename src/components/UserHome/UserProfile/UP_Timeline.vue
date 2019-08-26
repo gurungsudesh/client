@@ -16,18 +16,18 @@
                     <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                         
 
-                            <div id ="postmain" class="container">
+                            <div id ="postmain">
                                 
                                     <div class="postfeed" v-for="(item,index) in posts " :key="index">
                                     
                                         
                                         <!-- Yo chai post ko content-->
-                                        <div class="container">
+                                       
                                             
                                             <div class="toppost">
-                                                <table id="posttable">
+                                                <table id="posttable" >
                                                         <tr>
-                                                        <td rowspan="2"><img src="../../../../images/ProfilePic.jpg"  id="posticon"></td>     
+                                                        <td rowspan="2" style="width:40px"><img src="../../../../images/ProfilePic.jpg"  id="posticon"></td>     
                                                         <td style="font-size: 15px; color:forestgreen; font-weight:bold" >{{item.name}}</td>
                                                     </tr>
                                                     <tr>
@@ -36,23 +36,47 @@
                                                     </tr>
                                                 </table>
                                             </div>
-                                        </div>
-                                         <div class="container">
-                    <div class="postarea">       
-                        <div class="postcontent">
-                            <b style="font-size: 13px">{{item.content}}</b>
-                        </div>
-                    </div>
-                </div>
-
+                                       
+                                        
+                                            <div class="postarea">       
+                                                <div class="postcontent">
+                                                    <b style="font-size: 13px">{{item.content}}</b>
+                                                </div>
+                                            </div>
+                                            <div class="changestat">
+                                                <table id="statstable">
+                                                    <tr>
+                                                        <td>
+                                                            <button id="btnstats" class="btn btn-success" @click="addLiked(item.like,posts.indexOf(item))" v-if="(item.like)" style="background-color: green;color: white;"><i class="fas fa-thumbs-up"></i></button>
+                                                            <button id="btnstats" class="btn btn-success" @click="addLiked(item.like,posts.indexOf(item))" v-else style="background-color: white;color: green;"><i class="fas fa-thumbs-up"></i></button>                                                                     
+                                                        </td>
+                                                        <td>
+                                                            <button id="btnstats"   class="btn btn-success" @click="(item.commentshow=!item.commentshow)" v-bind:value="item.commentshow" v-if="(item.commentshow)" style="background-color: green; color: white"><i  class="fas fa-comment-dots"></i></button>
+                                                            <button id="btnstats" class="btn btn-success" @click="(item.commentshow=!item.commentshow)" v-bind:value="item.commentshow" v-else style="background-color: white; color: green"><i class="fas fa-comment-dots"></i></button>                                              
+                                                        </td>                                                          
+                                                    </tr>
+                                                </table>
+                                                <div  v-if ="(item.commentshow)">
+                                                    <input type="text" style="width: 80%"  v-model="item.commenting"><button id="btn" class="btn btn-success" @click="addComment(item.commenting,data1.indexOf(item))" >Comment </button>
+                                                    <div style="max-height:30%; overflow-y:scroll;">
+                                                        <div v-for = "(comment,index) in item.comments " :key="index">
+                                                            <table>
+                                                                <tr>
+                                                                    <td width=10px><img src="bullet.jpg" align="left" id="otherprofileicon"></td>
+                                                                    <td>
+                                                                        <div class="postcontent" >
+                                                                            {{comment.comment_content}} 
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                            
-                        
-                        
-
-
-                    </div>
+                            </div>
                     <div class="tab-pane fade" id="follower" role="tabpanel" aria-labelledby="follower-tab">
                         
                       
@@ -105,6 +129,7 @@ export default {
         const token = localStorage.usertoken
         const decode = jwtDecode(token)
         return{
+            
             posts :[],
             followers: [],
             following: [],
@@ -154,16 +179,7 @@ export default {
     font-weight: bold;
 }
 
-.newsfeed{
-    margin-top: 10px;
-   
-    width: 100%;
-    color: black;
-    background-color: white;
-    border-radius: 20px;
-    
-   
-}
+
 .followerinfo{
     background-color: white;
     width: 100%;
@@ -217,18 +233,17 @@ export default {
      
      width:40%;
      margin-left: 20px;
-     margin-bottom: 20px;   
+    
  }
  .postfeed{
-    padding-top: 10px;
-    margin-top:20px;
-
+    margin-top:3px;
+    padding-top:5px;
    
     width: 100%;
     color: black;
     background-color: white;
-    border-radius: 20px;
-    border-bottom: 4px solid gray;
+    
+   
    
 }
 #posticon{  
@@ -241,23 +256,25 @@ export default {
   
 }
 .postcontent{
+    margin-left: 80px;
     margin-top:10px;
     margin-bottom: 10px;
     word-wrap: break-word;
     text-align: left;
     font-size: 12px;
     color:black;
-    background-color: rgb(152, 255, 152);
+    background-color: rgb(157, 255, 173);
     padding: 10px;
     border-radius: 20px;
     
 }
 .postarea{
-    border-bottom: 2px solid grey;  
+    border-bottom: 1px solid grey;
+    padding-left: 10px;
+    padding-right: 10px;
+    width:75%;
 }
-.toppost{
-    border-bottom: 2px solid grey;
-}
+
 #btnstats{
     
      font-weight: 700; 
@@ -267,6 +284,7 @@ export default {
 .changestat{
     padding-top:10px;
    padding-bottom:10px;
+   margin-left: 40px;
 }
 #statstable td{
     padding-left:50px;
@@ -280,9 +298,8 @@ export default {
      
 }
 #postmain{
-  background-color:rgb(214, 240, 214);
-  padding-top:5px;
-  padding-bottom: 5px;
+    background-color: lightgray;
+    padding: 1px;
 }
   
 </style>

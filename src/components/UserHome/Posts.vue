@@ -189,7 +189,7 @@ export default {
     text-align: left;
     font-size: 12px;
     color:black;
-    background-color: rgb(152, 255, 152);
+    background-color: rgb(197, 255, 197);
     padding: 10px;
     border-radius: 20px;
     
@@ -224,7 +224,8 @@ export default {
 }
 #postmain{
     padding-top:1px;
-}
+    padding-bottom: 4px;
+    }
 
   
 </style>

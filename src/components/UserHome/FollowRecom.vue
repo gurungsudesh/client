@@ -6,7 +6,8 @@
                            <h4><b>Who To Follow</b></h4> 
                            <ul class="list-group list-group-flush" v-for="(item,index) in users " :key="index">
                   
-                            <li class="list-group-item"><img src="../../../images/ProfilePic.jpg" id="otherprofileicon" >{{item.name}}<form @submit="follow(name,id, item.name, item._id )"><button  type="submit" class="btn btn-success">Follow</button></form></li>
+                            <li class="list-group-item" style="padding-left:20%; text-align:left;"><img src="../../../images/ProfilePic.jpg" id="otherprofileicon" >{{item.name}}<br>
+                            <form @submit="follow(name,id, item.name, item._id )"><button  type="submit" class="btn btn-success">Follow</button></form></li>
               
                  
                  

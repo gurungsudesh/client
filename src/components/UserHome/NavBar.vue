@@ -18,7 +18,10 @@
               <li >Notification 2</li>
               <li >Notification 2</li>
               <li >Notification 2</li>
-            </ul>            
+            </ul>
+            <div class="seemore">
+              <router-link  class="nav-link" to="/notification"><b style="color:green"> See More</b></router-link>
+            </div>            
         </div>
             
       </li>
@@ -110,6 +113,7 @@ a{
   border: 1px solid green;
   opacity: 0;
   border-radius: 20px;
+  
   text-align:center;
 }
 .dpdownbody ul{
@@ -131,6 +135,20 @@ a{
   top: +10px;
 
   
+}
+
+.seemore{ 
+  position: absolute;
+  width: 99.9%;
+  bottom: 0%;
+  padding: 5px;
+  border-top: 1px solid green;
+}
+.seemore:hover{
+  background-color: rgb(206, 255, 209); 
+  cursor: pointer;
+  border-radius: 0px 0px 20px 20px;
+
 }
 
 @media only screen and (max-width: 900px) {

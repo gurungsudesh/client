@@ -10,28 +10,47 @@
                 <div id="noti_noti1">
                         <table  id="tables3">
                                 <tr>
-                                  <td width=20px><img src="bullet.jpg" align="left" id="otherprofileicon"></td>
-                                  <td style="text-align: left">Someone has just posted</td> 
+                                  <td rowspan="2" style="padding-left:10px; width:40px; height:50px;" ><img src="../../../../images/ProfilePic.jpg" align="left" id="otherprofileicon"></td>
+                                  <td style="width:100%; font-size: 15px; " > Someone has just Posted</td> 
                                 </tr>
                                 <tr>
-                                  <td width=20px><img src="bullet.jpg" align="left" id="otherprofileicon"></td>
-                                  <td style="text-align: left">Someone has just posted</td> 
+                                  <td style="color:grey; font-size: 12px;">Time</td>
+                                </tr>
+                        </table>
+                        <table  id="tables3">
+                                <tr>
+                                  <td rowspan="2" style="padding-left:10px; width:40px; height:50px;" ><img src="../../../../images/ProfilePic.jpg" align="left" id="otherprofileicon"></td>
+                                  <td style="width:100%; font-size: 15px; " > Someone has just Posted</td> 
                                 </tr>
                                 <tr>
-                                  <td width=20px><img src="bullet.jpg" align="left" id="otherprofileicon"></td>
-                                  <td style="text-align: left">Someone has just posted</td> 
+                                  <td style="color:grey; font-size: 12px;">Time</td>
+                                </tr>
+                        </table>
+                        <table  id="tables3">
+                                <tr>
+                                  <td rowspan="2" style="padding-left:10px; width:40px; height:50px;" ><img src="../../../../images/ProfilePic.jpg" align="left" id="otherprofileicon"></td>
+                                  <td style="width:100%; font-size: 15px; " > Someone has just Posted</td> 
                                 </tr>
                                 <tr>
-                                  <td width=20px><img src="bullet.jpg" align="left" id="otherprofileicon"></td>
-                                  <td style="text-align: left">Someone has just posted</td> 
+                                  <td style="color:grey; font-size: 12px;">Time</td>
+                                </tr>
+                        </table>
+                        <table  id="tables3">
+                                <tr>
+                                  <td rowspan="2" style="padding-left:10px; width:40px; height:50px;" ><img src="../../../../images/ProfilePic.jpg" align="left" id="otherprofileicon"></td>
+                                  <td style="width:100%; font-size: 15px; " > Someone has just Posted</td> 
                                 </tr>
                                 <tr>
-                                  <td width=20px><img src="bullet.jpg" align="left" id="otherprofileicon"></td>
-                                  <td style="text-align: left">Someone has just posted</td> 
+                                  <td style="color:grey; font-size: 12px;">Time</td>
+                                </tr>
+                        </table>
+                        <table  id="tables3">
+                                <tr>
+                                  <td rowspan="2" style="padding-left:10px; width:40px; height:50px;" ><img src="../../../../images/ProfilePic.jpg" align="left" id="otherprofileicon"></td>
+                                  <td style="width:100%; font-size: 15px; " > Someone has just Posted</td> 
                                 </tr>
                                 <tr>
-                                  <td width=20px><img src="bullet.jpg" align="left" id="otherprofileicon"></td>
-                                  <td style="text-align: left">Someone has just posted</td> 
+                                  <td style="color:grey; font-size: 12px;">Time</td>
                                 </tr>
                         </table>
                
@@ -51,29 +70,42 @@ export default {
 
 <style scoped>
 .noti_body{
-     margin-top: 2%;
      background-color: white;
+    width:70% ; 
+    padding: 10px; 
     position: absolute;
-    left: 10%;
+    left:10%;
+    margin-top:2%;
+    border: 1px solid green;
     
-    
-    height: 80%;
-    width: 80%;
-    border-radius: 20px;
-    border-bottom: 5px solid gray;
  }
  .noti_title
  {
-    border-bottom: 2px solid black;
+    border-bottom: 1px solid black;
  } 
  #noti_title1{
-     margin-left: 5%;
-     margin-top: 3%;
-     margin-bottom: 1%;
+     margin-left: 2%;
+     margin-bottom: 10px;
      text-align: left;
-     font-size: 20px;
+     font-size: 25px;
      font-weight: bold;
-     color: rgb(56, 0, 0);
+     color: green ;
  }
-
+#otherprofileicon{
+    
+    border-radius: 50%;
+   width: 40px;
+   height: 40px;
+   margin-right: 10px;
+   
+   vertical-align:middle  ;
+   border: 3px solid rgb(146, 209, 150);
+ 
+}
+#tables3{
+  margin-top:5px;
+   background-color: rgb(235, 235, 235);
+  
+}
+  
 </style>

@@ -7,7 +7,9 @@
    <div class="homebody">
       <div class="leftbody">
         <UserInfo/>
-        <HotTopics />
+        <div class="hotposition">
+          <HotTopics/>
+        </div>
       </div>
       <div ref="mobleftid" id="mobleftid" class="mobleftbody">
             <div  ref="mtlsidenav"  id="mtlsidenav" class="mobleftcontent">
@@ -151,8 +153,7 @@ export default {
     left: 25%; 
     background-color: white;
     width: 50%;
-    
-      
+    border-bottom: 1px solid green;  
     border-right: 1px solid green;
      border-left: 1px solid green;
 }
@@ -187,6 +188,9 @@ export default {
 }
 #mobrightid{
   display: none;
+}
+.hotposition{
+  margin-top:20%;
 }
 @media only screen and (max-width: 1000px) {
     .leftbody{
