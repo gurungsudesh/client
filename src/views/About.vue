@@ -30,9 +30,7 @@
      <div class="middlebody">
        
         <AddPost />
-       <div class="postclass">
-         <Posts/>
-       </div>
+       
     
      </div>
       <div class="rightbody">
@@ -60,7 +58,7 @@ import UserInfo from '../components/UserHome/UserInfo';
 import NavBar from '../components/UserHome/NavBar';
 import HotTopics from '../components/UserHome/HotTopics'
 import AddPost from '../components/UserHome/AddPost';
-import Posts from '../components/UserHome/Posts';
+
 import FollowRecom from '../components/UserHome/FollowRecom';
 import jwtDecode from 'jwt-decode';
 
@@ -84,7 +82,7 @@ export default {
     NavBar,
     HotTopics,
     AddPost,
-    Posts,
+   
     FollowRecom
   },
   methods:{
