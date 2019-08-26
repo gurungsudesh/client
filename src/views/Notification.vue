@@ -1,10 +1,12 @@
 <template>
     <div>
-        <div class="top">
-            <NavBar/>
-        </div>
         <div class="mainbody">
-            <Noticontent/>
+            <div class="home-header">
+                <NavBar/>
+            </div>
+            <div class="homebody">
+                <Noticontent/>
+            </div>
         </div>
     </div>
 

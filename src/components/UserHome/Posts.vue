@@ -162,14 +162,14 @@ export default {
     
  }
  .postfeed{
-    margin-top:20px;
-
+    margin-top:3px;
+    padding-top:5px;
    
     width: 100%;
     color: black;
     background-color: white;
     
-    border-bottom: 4px solid lightgray;
+   
    
 }
 #posticon{  
@@ -221,6 +221,9 @@ export default {
      border-radius: 20px;
      width:80px;
      
+}
+#postmain{
+    padding-top:1px;
 }
 
   

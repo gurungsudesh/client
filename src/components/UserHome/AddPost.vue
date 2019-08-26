@@ -57,7 +57,6 @@ export default {
     margin-top: 10px;
     padding-left: 20px;
     width: 100%;
-    border-bottom: 10px solid lightgrey;
     
     
 }

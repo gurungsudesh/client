@@ -28,10 +28,11 @@ export default {
 <style scoped>
 
   .hottopic{
+    border: 1px solid lightgrey;
       margin: 20px;
-      border-radius: 20px;
+    
       width: 80%;
-    background-color: rgb(199, 255, 199);
+    background-color: rgb(245, 253, 236);
        
       
     
@@ -40,7 +41,7 @@ export default {
     border-radius: 10px;
   }
   li{
-    background-color: rgb(199, 255, 199);
+    background-color: rgb(245, 253, 236);
     border-radius: 10px;
   }
   #hotcontent{

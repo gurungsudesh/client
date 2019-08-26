@@ -10,14 +10,14 @@
             </li>
       <li class="nav-item" >
         <div  @click="showNotification">
-        <router-link class="nav-link" to="#" ><i class="far fa-bell"></i><label>Notifications</label></router-link>
+        <router-link class="nav-link" to="#" ><i class="far fa-bell"></i><span class="badge">1</span><label style="margin-left:15px;">Notifications</label></router-link>
         </div>
         <div class="dpdownbody" id="notificationid" ref="notificationid">
-            <h1 style="text-align:center; color:green;"><i class="fas fa-bell"></i></h1>
-            <ul class="list-group">
-              <li class="list-group-item">Notification 2</li>
-              <li class="list-group-item">Notification 2</li>
-              <li class="list-group-item">Notification 2</li>
+            <h1 style="text-align:center; color:green; border-bottom: 1px solid grey; padding-bottom:30px;"><i class="fas fa-bell"></i></h1>
+            <ul>
+              <li >Notification 2</li>
+              <li >Notification 2</li>
+              <li >Notification 2</li>
             </ul>            
         </div>
             
@@ -28,7 +28,7 @@
     </ul> 
     <form class="form-inline my-2 my-lg-0">
       <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button id="sbtn" class="btn btn-success" type="submit"><i class="fas fa-search" ></i><label>Search</label></button>
+      <button id="sbtn" class="btn btn-success" type="submit"><i class="fas fa-search" ></i></button>
     </form>
   <div id="dpdn" class="btn-group">
   <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -86,9 +86,7 @@ export default {
   background-color: green;
     
 }
-#sbtn{
-  display: inline-flex;
-}
+
 label{
   padding-left: 10px;
 }
@@ -109,12 +107,31 @@ a{
   height:0px;
   width:400px;
   background-color: white;
-  border: 2px solid green;
+  border: 1px solid green;
   opacity: 0;
   border-radius: 20px;
   text-align:center;
 }
+.dpdownbody ul{
+  list-style: none;
+  margin: 0%;
+  padding: 0%;
+}
+.dpdownbody li{
+  border-bottom: 1px solid grey;
+  padding: 10px;
+}
+.badge {
+ 
+  padding: 4px 8px;
+  border-radius: 50%;
+  background: red;
+  color: white;
+  position: absolute;
+  top: +10px;
 
+  
+}
 
 @media only screen and (max-width: 900px) {
   nav li:nth-child(1) label {

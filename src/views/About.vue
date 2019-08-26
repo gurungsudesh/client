@@ -26,25 +26,12 @@
                         
       </div>
      <div class="middlebody">
-    <AddPost />
-    <!--Trying -->
-    <!-- 
-      <div>
-       <table class="table col-md-6 mx-auto">
-                <tbody>
-                    <tr>
-                        <td>Name</td>
-                        <td>{{name}}</td>
-                    </tr>
-                    <tr>
-                        <td>Email</td>
-                        <td>{{email}}</td>
-                    </tr>
-                </tbody>
-            </table>
-    </div>
-    -->
-    <Posts/>
+       
+        <AddPost />
+       <div class="postclass">
+         <Posts/>
+       </div>
+    
      </div>
       <div class="rightbody">
       <FollowRecom/>
@@ -147,20 +134,27 @@ export default {
     left: 0%;
     height: 100%;
     width: 25%;
-    border-right: 2px solid green;
+    
     
 }
 .home-header{
-  border-bottom: 2px solid green;
+  border-bottom: 1px solid green;
+}
+.postclass{
+  background-color: lightgray;
+  
+    padding-left: 3px;
+    padding-right: 3px;
 }
 .middlebody{
     position: absolute;
     left: 25%; 
-    height: 100%;
+    background-color: white;
     width: 50%;
     
-    border-top: 1px solid rgb(204, 204, 204);
-    overflow: auto;
+      
+    border-right: 1px solid green;
+     border-left: 1px solid green;
 }
 .middlebody::-webkit-scrollbar {
     width: 10px;

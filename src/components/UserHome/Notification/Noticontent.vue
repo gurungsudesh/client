@@ -9,30 +9,31 @@
             <div class="noti_noti">
                 <div id="noti_noti1">
                         <table  id="tables3">
-                                <tr >
+                                <tr>
                                   <td width=20px><img src="bullet.jpg" align="left" id="otherprofileicon"></td>
                                   <td style="text-align: left">Someone has just posted</td> 
                                 </tr>
-                                <tr >
+                                <tr>
                                   <td width=20px><img src="bullet.jpg" align="left" id="otherprofileicon"></td>
                                   <td style="text-align: left">Someone has just posted</td> 
                                 </tr>
-                                <tr >
+                                <tr>
                                   <td width=20px><img src="bullet.jpg" align="left" id="otherprofileicon"></td>
                                   <td style="text-align: left">Someone has just posted</td> 
                                 </tr>
-                                <tr >
+                                <tr>
                                   <td width=20px><img src="bullet.jpg" align="left" id="otherprofileicon"></td>
                                   <td style="text-align: left">Someone has just posted</td> 
                                 </tr>
-                                <tr >
+                                <tr>
                                   <td width=20px><img src="bullet.jpg" align="left" id="otherprofileicon"></td>
                                   <td style="text-align: left">Someone has just posted</td> 
                                 </tr>
-                                <tr >
+                                <tr>
                                   <td width=20px><img src="bullet.jpg" align="left" id="otherprofileicon"></td>
                                   <td style="text-align: left">Someone has just posted</td> 
                                 </tr>
+                        </table>
                
             </div>
 
