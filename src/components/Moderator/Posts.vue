@@ -72,7 +72,6 @@ export default {
         axios.get("http://localhost:5000/moderator/post")
             .then(res=>{
                 if(res.data.msg){
-                    alert("aayo post")
                     this.posts = res.data.docs;
                 }
             })
@@ -80,23 +79,24 @@ export default {
     },
     methods: {
         deletePost(ID){
-            axios.delete(`http://localhost:5000/users/post/${ID}`)
+            axios.delete(`http://localhost:5000/moderator/post/${ID}`)
                 .then(res =>{
                     if(res.data.deleted){
+                        //deleted
                         alert("deleted")
                         
-                    }
-                
-                })
-                .catch(err => alert(err));
+                }
+            })
+
+            .catch(err => alert(err));
+
             axios.get("http://localhost:5000/moderator/post")
             .then(res=>{
                 if(res.data.msg){
-                    alert("aayo post")
                     this.posts = res.data.docs;
                 }
             })
-            .catch(err => alert(err))
+            .catch(err => alert(err));
 
             
         }

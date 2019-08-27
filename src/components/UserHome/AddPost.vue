@@ -1,6 +1,6 @@
 <template>
                 
-         <div class="writepost" >
+    <div class="writepost" >
          <div id="writepost1">
                                 
             <form @submit="addPost" id="form1" >
@@ -12,11 +12,12 @@
                  
             </form>
          </div>
+    
          
 
 
             <!-- yaha chai get posts aaune thau -->
-            <div> 
+            
        <div id ="postmain" >
            
             <div class="postfeed" v-for="(item,index) in posts " :key="index">
@@ -77,12 +78,13 @@
                     </div>
                 </div>
             </div>
-        </div>
+    </div>
+    </div>
     </div>
                                 
                                 
-      </div>
-     </div>
+      
+     
         
     
 </template>
@@ -123,26 +125,24 @@ export default {
                 
                 .then(res=>{
                     if(res.data.msg){
-                        alert('Posted')
-                        this.posts += res.data.docs;
-                    }
-                })
-                .catch(err => alert(err));
-
-            this.postdata= " ";
-
-            axios.get("http://localhost:5000/users/post")
-        
-                .then(res=>{
-                    if(res.data.msg){
-                        //alert("post request pathayo")
-                        this.posts = res.data.docs;
+                        alert("Posted")
                         
                     }
                 })
-                .catch(err =>alert(err));  
+                .catch(err => alert(err));
+            this.postdata= " ";
 
-
+            //gettin all the post including the new one
+            axios.get("http://localhost:5000/users/post")
+        
+            .then(res=>{
+                if(res.data.msg){
+                    
+                    this.posts = res.data.docs;
+                    
+                }
+            })
+            .catch(err =>alert(err));  
         }
     }
     
