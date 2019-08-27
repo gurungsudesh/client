@@ -127,22 +127,22 @@ export default {
                     if(res.data.msg){
                         alert("Posted")
                         
+                    //gettin all the post including the new one
+                        axios.get("http://localhost:5000/users/post")
+                    
+                            .then(res=>{
+                                if(res.data.msg){
+                                    
+                                    this.posts = res.data.docs;
+                                    
+                                }
+                            })
+                            .catch(err =>alert(err));  
                     }
                 })
                 .catch(err => alert(err));
             this.postdata= " ";
 
-            //gettin all the post including the new one
-            axios.get("http://localhost:5000/users/post")
-        
-            .then(res=>{
-                if(res.data.msg){
-                    
-                    this.posts = res.data.docs;
-                    
-                }
-            })
-            .catch(err =>alert(err));  
         }
     }
     

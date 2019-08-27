@@ -84,19 +84,20 @@ export default {
                     if(res.data.deleted){
                         //deleted
                         alert("deleted")
-                        
-                }
-            })
+                        axios.get("http://localhost:5000/moderator/post")
+                            .then(res=>{
+                                if(res.data.msg){
+                                    this.posts = res.data.docs;
+                                }
+                            })
+                            .catch(err => alert(err));
+                                        
+                    }
+                })
 
-            .catch(err => alert(err));
+                .catch(err => alert(err));
 
-            axios.get("http://localhost:5000/moderator/post")
-            .then(res=>{
-                if(res.data.msg){
-                    this.posts = res.data.docs;
-                }
-            })
-            .catch(err => alert(err));
+            
 
             
         }
