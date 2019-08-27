@@ -28,10 +28,7 @@
                         
       </div>
      <div class="middlebody">
-       
         <AddPost />
-       
-    
      </div>
       <div class="rightbody">
       <FollowRecom/>
@@ -149,7 +146,7 @@ export default {
 .middlebody{
     position: absolute;
     left: 25%; 
-    background-color: white;
+    background-color: lightgray;
     width: 50%;
     border-bottom: 1px solid green;  
     border-right: 1px solid green;

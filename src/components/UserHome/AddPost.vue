@@ -1,4 +1,5 @@
 <template>
+<div>
                 
     <div class="writepost" >
          <div id="writepost1">
@@ -12,7 +13,7 @@
                  
             </form>
          </div>
-    
+    </div>
          
 
 
@@ -78,9 +79,9 @@
                     </div>
                 </div>
             </div>
+        </div>
     </div>
-    </div>
-    </div>
+</div>
                                 
                                 
       
@@ -152,10 +153,10 @@ export default {
 <style scoped>
 
 .writepost{
-    margin-top: 10px;
+    padding-top: 10px;
     padding-left: 20px;
     width: 100%;
-    
+    background-color: white;
     
 }
 #writepost1{
@@ -174,23 +175,9 @@ export default {
    
    
 }
-
-@media only screen and (max-width: 1200px) {
-    textarea{
-        width: 70%;
-    }
-}  
-
-.newsfeed{
-    margin-top: 10px;
+ 
    
-    width: 100%;
-    color: black;
-    background-color: white;
-    border-radius: 20px;
-    
-   
-}
+
 .followerinfo{
     background-color: white;
     width: 100%;
@@ -308,9 +295,15 @@ export default {
      
 }
 #postmain{
-    padding-top:1px;
-    padding-bottom: 4px;
+    padding:3px; 
     }
+@media only screen and (max-width: 1200px) {
+    textarea{
+        width: 70%;
+    }
+}  
+
+
 
     
 </style>
