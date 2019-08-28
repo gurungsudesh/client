@@ -30,12 +30,12 @@
                     <div class="toppost">
                         <table id="posttable">
                                 <tr>
-                                <td rowspan="2"><img src="../../../images/ProfilePic.jpg"  id="posticon"></td>     
+                                <td rowspan="2" style="width:80px"><img src="../../../images/ProfilePic.jpg"  id="posticon"></td>     
                                 <td style="font-size: 20px; color:forestgreen; font-weight:bold" >{{item.name}}</td>
                             </tr>
                             <tr>
                                 
-                                <td style="color: grey">{{item.date}}</td>
+                                <td style="color: grey">{{`${dateformat(item.date)}`}}</td>
                             </tr>
                         </table>
                     </div>
@@ -92,10 +92,14 @@
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script>
 
+
 import jwtDecode from 'jwt-decode'
 import axios from 'axios'
+import moment from 'moment'
+
 
 export default {
+    
     name: "AddPost",
     data(){
         const token = localStorage.usertoken
@@ -104,7 +108,8 @@ export default {
             postdata: '',
             name : decode.name,
             posts:[],
-            error: ''
+            error: '',
+            formatedate:''
         }
     },
     created(){
@@ -121,6 +126,11 @@ export default {
         .catch(err =>alert(err));  
     },
     methods: {
+        dateformat(value){
+            if (value) {
+                return moment(String(value)).format('hh:mm MM/DD/YYYY')
+            }
+        },
         addPost(){
             axios.post('http://localhost:5000/users/post',{post: this.postdata,username: this.name})
                 
@@ -240,6 +250,7 @@ export default {
     width: 100%;
     color: black;
     background-color: white;
+    border: 1px solid lightgray;
     
    
    

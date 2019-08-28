@@ -146,7 +146,7 @@ export default {
 .middlebody{
     position: absolute;
     left: 25%; 
-    background-color: lightgray;
+    background-color: rgb(235, 235, 235);
     width: 50%;
     border-bottom: 1px solid green;  
     border-right: 1px solid green;
