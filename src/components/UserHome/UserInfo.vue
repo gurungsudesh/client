@@ -31,7 +31,7 @@ export default {
 #uname{
     text-decoration: none;
     font-family: Arial, Helvetica, sans-serif;
-  
+    margin-left: 10px;
     font-size: 25px;
     font-weight: 600;
     color: rgb(8, 66, 13);
@@ -40,8 +40,8 @@ export default {
 #profilename1{
     font-family: Arial, Helvetica, sans-serif;
     margin-top:20px;
-   margin-left: 15px;
-    font-size: 25px;
+   margin-left:30px;
+    font-size: 35px;
     font-weight: 600;
     color: rgb(8, 66, 13);
     
@@ -52,11 +52,10 @@ export default {
 #profileicon{
     
      border-radius: 50%;
-    width: 50px;
-    height: 50px;
-    margin-right: 10px;
+    width: 60px;
+    height: 60px;
     vertical-align:middle;
-    border: 5px solid rgb(146, 209, 150);
+    border: 5px solid rgb(176, 224, 179);
    
    
 }

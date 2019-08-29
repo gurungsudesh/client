@@ -1,4 +1,5 @@
 <template>
+<div>
                 
     <div class="writepost" >
          <div id="writepost1">
@@ -12,7 +13,7 @@
                  
             </form>
          </div>
-    
+    </div>
          
 
 
@@ -29,12 +30,12 @@
                     <div class="toppost">
                         <table id="posttable">
                                 <tr>
-                                <td rowspan="2"><img src="../../../images/ProfilePic.jpg"  id="posticon"></td>     
-                                <td style="font-size: 20px; color:forestgreen; font-weight:bold" >{{item.name}}</td>
+                                <td rowspan="2" style="width:80px"><img src="../../../images/ProfilePic.jpg"  id="posticon"></td>     
+                                <td style="font-size: 20px; color:forestgreen; font-weight:bold" >{{item._id}} ={{item.name}}</td>
                             </tr>
                             <tr>
                                 
-                                <td style="color: grey">{{item.date}}</td>
+                                <td style="color: grey">{{`${dateformat(item.date)}`}}</td>
                             </tr>
                         </table>
                     </div>
@@ -46,41 +47,51 @@
                         </div>
                     </div>
                 
-               
+            <!-- Like and comment section  -->
             <div class="changestat">
                 <table id="statstable">
                     <tr>
+                       
                         <td>
-                            <button id="btnstats" class="btn btn-success" @click="addLiked(item.like,posts.indexOf(item))" v-if="(item.like)" style="background-color: green;color: white;"><i class="fas fa-thumbs-up"></i></button>
-                            <button id="btnstats" class="btn btn-success" @click="addLiked(item.like,posts.indexOf(item))" v-else style="background-color: white;color: green;"><i class="fas fa-thumbs-up"></i></button>                                                                     
-                        </td>
-                        <td>
-                            <button id="btnstats"   class="btn btn-success" @click="(item.commentshow=!item.commentshow)" v-bind:value="item.commentshow" v-if="(item.commentshow)" style="background-color: green; color: white"><i  class="fas fa-comment-dots"></i></button>
-                            <button id="btnstats" class="btn btn-success" @click="(item.commentshow=!item.commentshow)" v-bind:value="item.commentshow" v-else style="background-color: white; color: green"><i class="fas fa-comment-dots"></i></button>                                              
-                        </td>                                                          
+                            <button id="btnstats"   class="btn btn-success" @click="getComment(item._id)" style="background-color: green; color: white"><i  class="fas fa-comment-dots"></i></button>
+                                                                        
+                        </td>                                                         
                     </tr>
                 </table>
-                <div  v-if ="(item.commentshow)">
-                    <input type="text" style="width: 80%"  v-model="item.commenting"><button id="btn" class="btn btn-success" @click="addComment(item.commenting,data1.indexOf(item))" >Comment </button>
+                <!--comment section  -->
+                <div>
+                    
+                    
                     <div style="max-height:30%; overflow-y:scroll;">
-                        <div v-for = "(comment,index) in item.comments " :key="index">
+                        <div v-for="(comment,commentSequence) in comments" :key="comentSequence">
                             <table>
                                 <tr>
                                     <td width=10px><img src="bullet.jpg" align="left" id="otherprofileicon"></td>
                                     <td>
                                         <div class="postcontent" >
-                                            {{comment.comment_content}} 
+                                            {{comment.name}}
+                                            <hr/>
+                                            {{comment.comment}} 
+                                             <hr/>
+                                            {{comment.date}}
+                                            
+                                            
+
                                         </div>
                                     </td>
                                 </tr>
                             </table>
+                            
                         </div>
+                        <form @submit=" addComment(item.name,item._id, commentContent)">
+                            <input type="text" style="width: 80%"  v-model="commentContent"><button id="btn" type="submit" class="btn btn-success"  >Comment </button> 
+                        </form>
                     </div>
                 </div>
             </div>
+        </div>
     </div>
-    </div>
-    </div>
+</div>
                                 
                                 
       
@@ -91,10 +102,14 @@
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script>
 
+
 import jwtDecode from 'jwt-decode'
 import axios from 'axios'
+import moment from 'moment'
+
 
 export default {
+    
     name: "AddPost",
     data(){
         const token = localStorage.usertoken
@@ -103,7 +118,10 @@ export default {
             postdata: '',
             name : decode.name,
             posts:[],
-            error: ''
+            error: '',
+            formatedate:'',
+            commentContent: '',
+            comments: []
         }
     },
     created(){
@@ -120,6 +138,33 @@ export default {
         .catch(err =>alert(err));  
     },
     methods: {
+        getComment(postKoId){
+            const pId = postKoId;
+            alert(pId)
+             axios.get(`http://localhost:5000/users/post/comment/${pId}`)
+                .then(res=>{
+                    if(res.data.msg){
+                        
+                        this.comments = res.data.docs;
+                    }
+                    
+                })
+                .catch(err=> alert(err))
+        },
+        addComment(uname, postID, data){
+            axios.post(`http://localhost:5000/users/post/comment/${postID}`),{name: uname, content: data}
+                .then(res=>{
+
+                    this.commentContent = " "
+                })
+                .catch(err=> alert(err))
+
+        },
+        dateformat(value){
+            if (value) {
+                return moment(String(value)).format('hh:mm MM/DD/YYYY')
+            }
+        },
         addPost(){
             axios.post('http://localhost:5000/users/post',{post: this.postdata,username: this.name})
                 
@@ -152,10 +197,10 @@ export default {
 <style scoped>
 
 .writepost{
-    margin-top: 10px;
+    padding-top: 10px;
     padding-left: 20px;
     width: 100%;
-    
+    background-color: white;
     
 }
 #writepost1{
@@ -174,23 +219,9 @@ export default {
    
    
 }
-
-@media only screen and (max-width: 1200px) {
-    textarea{
-        width: 70%;
-    }
-}  
-
-.newsfeed{
-    margin-top: 10px;
+ 
    
-    width: 100%;
-    color: black;
-    background-color: white;
-    border-radius: 20px;
-    
-   
-}
+
 .followerinfo{
     background-color: white;
     width: 100%;
@@ -253,6 +284,7 @@ export default {
     width: 100%;
     color: black;
     background-color: white;
+    border: 1px solid lightgray;
     
    
    
@@ -308,9 +340,15 @@ export default {
      
 }
 #postmain{
-    padding-top:1px;
-    padding-bottom: 4px;
+    padding:3px; 
     }
+@media only screen and (max-width: 1200px) {
+    textarea{
+        width: 70%;
+    }
+}  
+
+
 
     
 </style>

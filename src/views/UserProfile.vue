@@ -42,14 +42,14 @@ export default {
   position: absolute;
   height: 100%;
   width: 100%;
-  background-image: linear-gradient(to bottom,  rgb(255, 255, 255),rgb(228, 255, 230));
+  
 }
 .UPmainbody{
       position: absolute;
     left: 0%;
     margin-top:0%;
     width: 100%;
-    height: 90%;
+    height: 91%;
     background-color: greenyellow;
 }
 

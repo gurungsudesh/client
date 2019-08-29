@@ -241,12 +241,13 @@ export default {
     
  }
  .postfeed{
-    margin-top:3px;
-    padding-top:5px;
-   
+    
+    padding-top:6px;
+    border: 1px solid lightgray;
     width: 100%;
     color: black;
     background-color: white;
+    
     
    
    
@@ -271,13 +272,14 @@ export default {
     background-color: rgb(157, 255, 173);
     padding: 10px;
     border-radius: 20px;
+    width: 70%;
     
 }
 .postarea{
     border-bottom: 1px solid grey;
     padding-left: 10px;
     padding-right: 10px;
-    width:75%;
+    width:100%;
 }
 
 #btnstats{
@@ -303,8 +305,11 @@ export default {
      
 }
 #postmain{
-    background-color: lightgray;
-    padding: 1px;
+    background-color: rgb(233, 233, 233);
+    padding-left:2px;
+    padding-right:2px; 
+    padding-bottom:4px;
+    
 }
   
 </style>

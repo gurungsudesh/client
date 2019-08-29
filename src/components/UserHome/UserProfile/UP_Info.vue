@@ -21,7 +21,7 @@
     </div>
 </template>
 <script>
-import axois from 'axios';
+import axios from 'axios';
 import jwtDecode from 'jwt-decode'
 export default {
     name: "UPInfo",
