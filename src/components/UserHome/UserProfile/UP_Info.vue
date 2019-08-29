@@ -9,6 +9,7 @@
                     <h3>{{name}}</h3>
                         <p class="text-left" style="color: gray; font-size: 12px" >Made at janaury 2016 
                             <br>
+                            <!-- Yaha 99 bhako thau ma chai aauna paryo -->
                             99 followers<br>
                             99 following<br>
                             
@@ -20,6 +21,7 @@
     </div>
 </template>
 <script>
+import axios from 'axios';
 import jwtDecode from 'jwt-decode'
 export default {
     name: "UPInfo",
@@ -28,8 +30,17 @@ export default {
         const token = localStorage.usertoken
         const decode = jwtDecode(token)
         return{
-            name : decode.name
+            name : decode.name,
+            followers: '',
+            following: ''
         }
+    },
+    created(){
+
+        // yaha chai followers ra follow haru aaune gar hai 
+
+       // axios.get(`http://localhost:5000/${this.name}`)
+
     }
 }
 </script>

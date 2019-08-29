@@ -85,7 +85,7 @@
                            
                            <ul class="list-group list-group-flush" v-for="(item,index) in followers" :key="index">
                   
-                            <li class="list-group-item"><img src="../../../../images/ProfilePic.jpg" id="otherprofileicon" >{{item.followedBy}}
+                            <li class="list-group-item"><img src="../../../../images/ProfilePic.jpg" id="otherprofileicon" ><router-link to="#" >{{item.followedBy}}</router-link>
                             
                             </li>
               
@@ -104,7 +104,7 @@
                             
                                 <ul class="list-group list-group-flush" v-for="(item,index) in following" :key="index">
                         
-                                    <li class="list-group-item" ><img src="../../../../images/ProfilePic.jpg" id="otherprofileicon" ><a @click="gotoProfile()" href="#">{{item.username}}</a> 
+                                    <li class="list-group-item" ><img src="../../../../images/ProfilePic.jpg" id="otherprofileicon" ><a  @click="gotoProfile()" href="#">{{item.username}}</a> 
                                     
                                     </li>
                     
