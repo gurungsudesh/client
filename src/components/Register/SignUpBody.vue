@@ -19,8 +19,10 @@
                 <div id="leftcontent">
                 <i class="fa fa-hand-point-down" style="font-size:60px;"></i>
                 <br>
-                <h2>Sign Up</h2>    
-                <RegisterForm/>
+                <h2>Sign Up</h2>
+                <div class="regsform">    
+                    <RegisterForm/>
+                </div>
                 </div>
             </div>
         </div>
@@ -51,7 +53,7 @@ export default {
     position: absolute;
     width: 70%;
     height:80%;
-    
+    z-index: 2;
     border-radius: 20px;
     box-shadow: 5px 10px 5px rgb(131, 143, 131) ;  
 }
@@ -79,5 +81,10 @@ export default {
     color: rgb(115, 206, 115);
     text-align: center;
     margin-top: 10%;
+}
+.regsform{
+    position: absolute;
+    width: 100%;
+    height: auto;
 }
 </style>

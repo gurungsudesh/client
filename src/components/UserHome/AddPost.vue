@@ -35,7 +35,7 @@
                             </tr>
                             <tr>
                                 
-                                <td style="color: grey">{{`${dateformat(item.date)}`}}</td>
+                                <td style="font-size:12px; color: grey;">Posted at {{`${dateformat(item.date)}`}}</td>
                             </tr>
                         </table>
                     </div>
@@ -128,7 +128,7 @@ export default {
     methods: {
         dateformat(value){
             if (value) {
-                return moment(String(value)).format('hh:mm MM/DD/YYYY')
+                return moment(String(value)).format('hh:mm MM/DD')
             }
         },
         addPost(){

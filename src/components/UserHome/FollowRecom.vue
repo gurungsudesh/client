@@ -4,15 +4,14 @@
                     <div class="followtext">
                         <div id="followtext1">
                            <h4><b>Who To Follow</b></h4> 
-                           <ul class="list-group list-group-flush" v-for="(item,index) in users " :key="index">
+                           <ul class="list-group list-group-flush" v-for="(item,index) in users.slice(0, maxshowfollow) " :key="index">
                   
                             <li class="list-group-item" style="padding-left:20%; text-align:left;"><img src="../../../images/ProfilePic.jpg" id="otherprofileicon" >{{item.name}}<br>
-                            <form @submit="follow(name,id, item.name, item._id )"><button  type="submit" class="btn btn-success">Follow</button></form></li>
-              
-                 
-                 
-                          </ul>
-
+                            <form @submit="follow(name,id, item.name, item._id )"><button type="submit" class="btn btn-success">Follow</button></form></li>
+                            </ul>
+                            <div @click="showmore()" class="showmore">
+                            Show more
+                            </div>
                     </div>
                 </div>
         
@@ -31,6 +30,7 @@ export default {
       const token = localStorage.usertoken
       const decode = jwtDecode(token)
       return{
+        maxshowfollow: 3,
         users: [],
         name: decode.name,
         id: decode._id
@@ -47,6 +47,10 @@ export default {
         .catch(err=> alert(err))
     },
     methods: {
+      showmore(){
+        this.maxshowfollow =this.maxshowfollow + 4 ;
+        console.log(this.maxshowfollow);
+      },
       follow(name, userID, followName, followId){ 
         //alert("user ko : "+ name + " , " + userID +", follow garna lako: "+followName + ", "+followId)
        //if(){//
@@ -91,11 +95,7 @@ export default {
     text-align: center;
     
   }
-  button{
-   margin-top:1%;
-   
-
-  }
+  
   #followtext1{
       font-family: Arial, Helvetica, sans-serif;
     text-align: center;
@@ -120,6 +120,19 @@ export default {
 button{
   border-radius: 20px;
   width:70%;
+  margin-top:5px;
+}
+.showmore{
+  margin-top: 10px;
+  padding: 5px;
+  color: green;
+  font-size: 18px;
+  font-weight: 600;
+  
+  padding-right: 50px;
+}
+.showmore:hover{
+  cursor: pointer;  
 }
 
 </style>
