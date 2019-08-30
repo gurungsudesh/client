@@ -44,7 +44,7 @@
         
             </form>
         </div>
-        <div class="secondmain">
+       <!-- <div class="secondmain">
             <form @submit="onSubmit" autocomplete="off">
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item" > 
@@ -55,14 +55,14 @@
                     </li>
                     <li class="list-group-item">
                         Write something about you
-                    <input type="textarea" class="form-control"  placeholder="Confirm Password" required>
+                    <textarea class="form-control" style="font-size:15px; width:100%; vertical-align:middle; margin_left:20px;"  rows="4" ></textarea>
                     </li> 
                  <li class="list-group-item" > 
                 <button type="submit" class="btn btn-success" >Sign Up</button> 
                 </li>
                 </ul>
             </form>
-        </div>
+        </div>-->
     </div>
 </template>
 
@@ -170,13 +170,14 @@ export default {
 }
 .secondmain{
     background-color: white;
-    position: absolute;
+    position: fixed;
     top: 0%;
-    right:0%;
-    width: 100%;
+    right: 0%;
+    width: 0%;
+    
     margin-bottom: 5%;
     transform: scale(0.9, 0.9);
-    
+    height:100%;   
  
 }
 a{

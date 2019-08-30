@@ -68,7 +68,7 @@ export default {
           {
             vm.$refs.notificationid.style.visibility = 'visible'
           vm.$refs.notificationid.style.opacity = '1';
-          vm.$refs.notificationid.style.height = '500px';
+          vm.$refs.notificationid.style.height = 'auto';
           }
         
         
@@ -138,7 +138,7 @@ a{
 }
 
 .seemore{ 
-  position: absolute;
+  position: relative;
   width: 99.9%;
   bottom: 0%;
   padding: 5px;

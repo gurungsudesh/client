@@ -1,124 +1,68 @@
 <template>
     <div>
-        <div  id ="tabs">
-            <ul class="nav nav-tabs justify-content-center"  id="myTab" role="tablist">
-                    <li class="nav-item">
-                        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Timeline</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" id="follower-tab" data-toggle="tab" href="#follower" role="tab" aria-controls="follower" aria-selected="false">Followers</a>
-                    </li>
-                    <li class="nav-item">
-                    <a class="nav-link" id="following-tab" data-toggle="tab" href="#following" role="tab" aria-controls="following" aria-selected="false">Following</a>
-                    </li>
-            </ul>
-                    <div class="tab-content" id="myTabContent">
-                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                        
-
-                            <div id ="postmain">
-                                
-                                    <div class="postfeed" v-for="(item,index) in posts " :key="index">
-                                    
-                                        
-                                        <!-- Yo chai post ko content-->
-                                       
-                                            
-                                            <div class="toppost">
-                                                <table id="posttable" >
-                                                        <tr>
-                                                        <td rowspan="2" style="width:40px"><img src="../../../../images/ProfilePic.jpg"  id="posticon"></td>     
-                                                        <td style="font-size: 15px; color:forestgreen; font-weight:bold" >{{item.name}}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        
-                                                        <td style="color: grey">{{item.date}}</td>
-                                                    </tr>
-                                                </table>
-                                            </div>
-                                       
-                                        
-                                            <div class="postarea">       
-                                                <div class="postcontent">
-                                                    <b style="font-size: 13px">{{item.content}}</b>
-                                                </div>
-                                            </div>
-                                            <div class="changestat">
-                                                <table id="statstable">
-                                                    <tr>
-                                                        <td>
-                                                            <button id="btnstats" class="btn btn-success" @click="addLiked(item.like,posts.indexOf(item))" v-if="(item.like)" style="background-color: green;color: white;"><i class="fas fa-thumbs-up"></i></button>
-                                                            <button id="btnstats" class="btn btn-success" @click="addLiked(item.like,posts.indexOf(item))" v-else style="background-color: white;color: green;"><i class="fas fa-thumbs-up"></i></button>                                                                     
-                                                        </td>
-                                                        <td>
-                                                            <button id="btnstats"   class="btn btn-success" @click="(item.commentshow=!item.commentshow)" v-bind:value="item.commentshow" v-if="(item.commentshow)" style="background-color: green; color: white"><i  class="fas fa-comment-dots"></i></button>
-                                                            <button id="btnstats" class="btn btn-success" @click="(item.commentshow=!item.commentshow)" v-bind:value="item.commentshow" v-else style="background-color: white; color: green"><i class="fas fa-comment-dots"></i></button>                                              
-                                                        </td>                                                          
-                                                    </tr>
-                                                </table>
-                                                <div  v-if ="(item.commentshow)">
-                                                    <input type="text" style="width: 80%"  v-model="item.commenting"><button id="btn" class="btn btn-success" @click="addComment(item.commenting,data1.indexOf(item))" >Comment </button>
-                                                    <div style="max-height:30%; overflow-y:scroll;">
-                                                        <div v-for = "(comment,index) in item.comments " :key="index">
-                                                            <table>
-                                                                <tr>
-                                                                    <td width=10px><img src="bullet.jpg" align="left" id="otherprofileicon"></td>
-                                                                    <td>
-                                                                        <div class="postcontent" >
-                                                                            {{comment.comment_content}} 
-                                                                        </div>
-                                                                    </td>
-                                                                </tr>
-                                                            </table>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                            </div>
-                    <div class="tab-pane fade" id="follower" role="tabpanel" aria-labelledby="follower-tab">
-                        
-                      
-                        <div class="followtext">
-                        <div id="followtext1">
-                           
-                           <ul class="list-group list-group-flush" v-for="(item,index) in followers" :key="index">
-                  
-                            <li class="list-group-item"><img src="../../../../images/ProfilePic.jpg" id="otherprofileicon" >{{item.followedBy}}
-                            
-                            </li>
-              
-                 
-                 
-                          </ul>
-
-                    </div>
-                </div>
-
-                    </div>
-                    <div class="tab-pane fade" id="following" role="tabpanel" aria-labelledby="following-tab">
-                        
-                        <div class="followtext">
-                            <div id="followtext1">
-                            
-                                <ul class="list-group list-group-flush" v-for="(item,index) in following" :key="index">
-                        
-                                    <li class="list-group-item" ><img src="../../../../images/ProfilePic.jpg" id="otherprofileicon" ><a @click="gotoProfile()" href="#">{{item.username}}</a> 
-                                    
-                                    </li>
+        <div id ="postmain">
+            
+                <div class="postfeed" v-for="(item,index) in posts " :key="index">
+                
+                    
+                    <!-- Yo chai post ko content-->
                     
                         
-                        
-                                </ul>
-
+                        <div class="toppost">
+                            <table id="posttable" >
+                                    <tr>
+                                    <td rowspan="2" style="width:40px"><img src="../../../../images/ProfilePic.jpg"  id="posticon"></td>     
+                                    <td style="font-size: 15px; color:forestgreen; font-weight:bold" >{{item.name}}</td>
+                                </tr>
+                                <tr>
+                                    
+                                    <td style="color: grey">{{item.date}}</td>
+                                </tr>
+                            </table>
+                        </div>
+                    
+                    
+                        <div class="postarea">       
+                            <div class="postcontent">
+                                <b style="font-size: 13px">{{item.content}}</b>
+                            </div>
+                        </div>
+                        <div class="changestat">
+                            <table id="statstable">
+                                <tr>
+                                    <td>
+                                        <button id="btnstats" class="btn btn-success" @click="addLiked(item.like,posts.indexOf(item))" v-if="(item.like)" style="background-color: green;color: white;"><i class="fas fa-thumbs-up"></i></button>
+                                        <button id="btnstats" class="btn btn-success" @click="addLiked(item.like,posts.indexOf(item))" v-else style="background-color: white;color: green;"><i class="fas fa-thumbs-up"></i></button>                                                                     
+                                    </td>
+                                    <td>
+                                        <button id="btnstats"   class="btn btn-success" @click="(item.commentshow=!item.commentshow)" v-bind:value="item.commentshow" v-if="(item.commentshow)" style="background-color: green; color: white"><i  class="fas fa-comment-dots"></i></button>
+                                        <button id="btnstats" class="btn btn-success" @click="(item.commentshow=!item.commentshow)" v-bind:value="item.commentshow" v-else style="background-color: white; color: green"><i class="fas fa-comment-dots"></i></button>                                              
+                                    </td>                                                          
+                                </tr>
+                            </table>
+                            <div  v-if ="(item.commentshow)">
+                                <input type="text" style="width: 80%"  v-model="item.commenting"><button id="btn" class="btn btn-success" @click="addComment(item.commenting,data1.indexOf(item))" >Comment </button>
+                                <div style="max-height:30%; overflow-y:scroll;">
+                                    <div v-for = "(comment,index) in item.comments " :key="index">
+                                        <table>
+                                            <tr>
+                                                <td width=10px><img src="bullet.jpg" align="left" id="otherprofileicon"></td>
+                                                <td>
+                                                    <div class="postcontent" >
+                                                        {{comment.comment_content}} 
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                
         </div>
-    </div>
+    
+        
 </template>
 <script>
 import axios from 'axios';
