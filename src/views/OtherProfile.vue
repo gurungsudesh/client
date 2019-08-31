@@ -7,14 +7,14 @@
             <div class="UPmainbody">  
                 <div class="UPleft">
                     <div class="UPltop">
-                        <UPInfo/>
+                        <OPInfo :msg="name"/>
                     </div>
                     <div class="UPlbottom">
-                        <UPBio/>
+                        <OPBio :msg="name"/>
                     </div>
                 </div>
                 <div class="UPright">
-                    <UPTimeline/>
+                    <OPTimeline :msg="name"/>
                 </div>
             </div>
         </div>
@@ -28,11 +28,20 @@ import OPTimeline from  '../components/UserHome/OtherProfile/OP_Timeline';
 export default {
     name: "otherprofile",
     components: {
-    UPBio,
+    OPBio,
     NavBar,
-    UPInfo,
-    UPTimeline
+    OPInfo,
+    OPTimeline
+  },
+  data(){
+      return{
+          name: ''
+      }
+  },
+  created(){
+      this.name = this.$route.params.name;
   }
+  
 }
 
 </script>
@@ -45,7 +54,7 @@ export default {
   
 }
 .UPmainbody{
-      position: absolute;
+    position: absolute;
     left: 0%;
     margin-top:0%;
     width: 100%;

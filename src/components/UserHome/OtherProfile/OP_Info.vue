@@ -6,7 +6,7 @@
                     <img src="../../../../images/ProfilePic.jpg" >
                 </div>
                 <div class="col-md-auto">
-                    <h3>{{name}}</h3>
+                    <h3>{{msg}}</h3>
                         <p class="text-left" style="color: gray; font-size: 12px" >Made at janaury 2016 
                             <br>
                             99 followers<br>
@@ -20,17 +20,10 @@
     </div>
 </template>
 <script>
-import jwtDecode from 'jwt-decode'
+
 export default {
     name: "OPInfo",
-     data(){
-         
-        const token = localStorage.usertoken
-        const decode = jwtDecode(token)
-        return{
-            name : decode.name
-        }
-    }
+    props: ['msg']
 }
 </script>
 <style scoped>

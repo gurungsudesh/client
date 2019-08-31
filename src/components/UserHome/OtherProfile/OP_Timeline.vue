@@ -66,18 +66,16 @@
 </template>
 <script>
 import axios from 'axios';
-import jwtDecode from 'jwt-decode'
 export default {
     name: "OPTimeline",
+    props: ['msg'],
     data(){
-        const token = localStorage.usertoken
-        const decode = jwtDecode(token)
         return{
             
             posts :[],
             followers: [],
             following: [],
-            name : decode.name
+            name: this.msg
         
         }
     },

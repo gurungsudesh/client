@@ -1,5 +1,6 @@
 <template>
     <div>
+        
         <div  id ="tabs">
             <ul class="nav nav-tabs justify-content-center"  id="myTab" role="tablist">
                     <li class="nav-item">
@@ -85,7 +86,7 @@
                            
                            <ul class="list-group list-group-flush" v-for="(item,index) in followers" :key="index">
                   
-                            <li class="list-group-item"><img src="../../../../images/ProfilePic.jpg" id="otherprofileicon" ><router-link to="#" >{{item.followedBy}}</router-link>
+                            <li class="list-group-item"><img src="../../../../images/ProfilePic.jpg" id="otherprofileicon" ><router-link :to="{name: 'otherprofile',params:{name: item.followedBy}}" >{{item.followedBy}}</router-link>
                             
                             </li>
               
@@ -104,7 +105,7 @@
                             
                                 <ul class="list-group list-group-flush" v-for="(item,index) in following" :key="index">
                         
-                                    <li class="list-group-item" ><img src="../../../../images/ProfilePic.jpg" id="otherprofileicon" ><a  @click="gotoProfile()" href="#">{{item.username}}</a> 
+                                    <li class="list-group-item" ><img src="../../../../images/ProfilePic.jpg" id="otherprofileicon" ><router-link :to="{ name: 'otherprofile',params:{name: item.username}}" >{{item.username}}</router-link>
                                     
                                     </li>
                     
@@ -125,11 +126,11 @@ import axios from 'axios';
 import jwtDecode from 'jwt-decode'
 export default {
     name: "UPTimeline",
+
     data(){
         const token = localStorage.usertoken
         const decode = jwtDecode(token)
         return{
-            
             posts :[],
             followers: [],
             following: [],
@@ -165,13 +166,10 @@ export default {
             .then(res =>{
                 if(res.data.msg){
                 this.following = res.data.docs;
-            }
+                }
             })
-    },
-    methods: {
-        gotoProfile(){
-            alert("Click garyo");
-        }
+            .catch(err=> alert(err));
+            
     }
    
 }

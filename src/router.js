@@ -5,6 +5,7 @@ import signup from './views/SignUp.vue';
 import Moderator from "./views/Moderator.vue";
 import UserProfile from "./views/UserProfile.vue"
 import Notification from './views/Notification.vue';
+import otherprofile from './views/OtherProfile.vue'
 
 Vue.use(Router)
 
@@ -41,6 +42,10 @@ export default new Router({
             path: '/notification',
             name: 'Notification',
             component: Notification
+        }, {
+            path: '/profile/:name',
+            name: 'otherprofile',
+            component: otherprofile
         }
     ]
 })
