@@ -53,7 +53,8 @@
                     <tr>
                        
                         <td>
-                            <button id="commentstats" ref="commentstats" class="btn btn-success"><i  class="fas fa-thumbs-up"></i></button>
+                            {{`${count(item._id)}`}} likes<button id="likestats" ref="likestats" style="background-color:green; color:white;" class="btn btn-success" v-if="(likeswitch(item._id))"><i  class="fas fa-thumbs-up"></i></button>
+                            <button id="likestats" ref="likestats" class="btn btn-success"  v-else ><i  class="fas fa-thumbs-up"></i></button>
                             <button id="commentstats" ref="commentstats" style="margin-left:50px;" class="btn btn-success" @click="getComment(item._id); item.commentdisplay = !item.commentdisplay"><i  class="fas fa-comment-dots"></i></button>
                                                                         
                         </td>                                                         
@@ -119,7 +120,10 @@ export default {
             commentContent: '',
             comments: [],
             commentdisplay: false,
-            likes: []
+            likes: [],
+            likeclone:[],
+            likecount:[]
+            
         }
     },
     created(){
@@ -144,6 +148,22 @@ export default {
         .catch(err =>alert(err));  
     },
     methods: {
+        likeswitch(postkoId){
+             var likecount=this.likes.filter(function(post) {return post.postId == postkoId;});
+             for(var i=0;i<likecount.length;i++)
+             {  
+                 
+                 if(likecount[i].LikedBy==this.name)
+                 {
+                     return true;
+                 }
+             }
+             return false;
+        },
+       count(postkoId){
+            var likecount=this.likes.filter(function(post) {return post.postId == postkoId;});
+            return likecount.length;
+       },
         getComment(postKoId){
             const pId = postKoId;   
              axios.get(`http://localhost:5000/users/post/comment/${pId}`)
@@ -155,6 +175,7 @@ export default {
                     
                 })
                 .catch(err=> alert(err))
+                
             
         },
         addComment(uname, postID, data){
@@ -345,6 +366,13 @@ export default {
 }
 
 #commentstats{
+    
+     font-weight: 700; 
+     width:150px;
+     background-color: white; 
+     color: green;
+}
+#likestats{
     
      font-weight: 700; 
      width:150px;
