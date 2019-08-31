@@ -115,7 +115,8 @@ export default {
             formatedate:'',
             commentContent: '',
             comments: [],
-            commentdisplay: false
+            commentdisplay: false,
+            likes: []
         }
     },
     created(){
@@ -126,6 +127,13 @@ export default {
           if(res.data.msg){
             //alert("post request pathayo")
             this.posts = res.data.docs;
+            //likes taneko
+            axios.get("http://localhost:5000/users/post/likes")
+                .then(res=>{
+                    if(res.data.msg){
+                        this.likes = docs;
+                    }
+                })
             
           }
         })
