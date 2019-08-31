@@ -84,7 +84,7 @@
                             
                         </div>
                         <form @submit=" addComment(item.name,item._id, commentContent)">
-                            <input type="text" style="width: 80%"  v-model="commentContent"><button id="btn" type="submit" class="btn btn-success"  >Comment </button> 
+                            <input type="text" style="width: 80%"  v-model="item.commentContent"><button id="btn" type="submit" class="btn btn-success"  >Comment </button> 
                         </form>
                     </div>
                 </div>
