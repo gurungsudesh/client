@@ -31,7 +31,7 @@
                         <table id="posttable">
                                 <tr>
                                 <td rowspan="2" style="width:80px"><img src="../../../images/ProfilePic.jpg"  id="posticon"></td>     
-                                <td style="font-size: 20px; color:forestgreen; font-weight:bold" >{{item._id}} ={{item.name}}</td>
+                                <td style="font-size: 20px; color:forestgreen; font-weight:bold" >{{item.name}}</td>
                             </tr>
                             <tr>
                                 
@@ -60,9 +60,11 @@
                 </table>
                 <!--comment section  -->
                 <div >
-                    <form @submit=" addComment(item.name,item._id, item.commentContent)" style="margin:10px;" v-if="(item.commentdisplay)">
-                            <input type="text" style="width: 80%; padding:5px; border:1px solid grey; border-radius:10px;"  v-model="item.commentContent"><button id="btn" type="submit" >Comment </button> 
-                        </form>
+                    <form @submit=" addComment(item.name,item._id, item.commentContent); item.commentContent='' ; " style="margin:10px;" v-if="(item.commentdisplay)">
+                        <input type="text" style="width: 80%; padding:5px; border:1px solid grey; border-radius:10px;"  v-model="item.commentContent">
+                        <button id="btn" type="submit" >Comment </button> 
+                    </form>
+                        
                         <div v-for="(comment,commentSequence) in comments" :key="commentSequence" >
                             <table v-if="(comment.postId == item._id && item.commentdisplay== true )" id="tables3"  >
                                 <tr>
@@ -78,13 +80,6 @@
                             </table>
                             
                         </div>
-<<<<<<< HEAD
-                        <form @submit=" addComment(item.name,item._id, commentContent)">
-                            <input type="text" style="width: 80%"  v-model="item.commentContent"><button id="btn" type="submit" class="btn btn-success"  >Comment </button> 
-                        </form>
-                    </div>
-=======
->>>>>>> f31e9c29031b45c5a19278b01df257ab12b7883d
                 </div>
             </div>
         </div>
@@ -152,10 +147,24 @@ export default {
         },
         addComment(uname, postID, data){
             
-            axios.post(`http://localhost:5000/users/post/comment/${postID}`),{name: uname, content: data}
+            axios.post(`http://localhost:5000/users/post/comment/${postID}`,{name: uname, content: data})
+            
                 .then(res=>{
-
-                    this.commentContent = " "
+                    if(res.data.msg){
+                        alert("posted")
+                        const pId = postID;   
+                        axios.get(`http://localhost:5000/users/post/comment/${pId}`)
+                            .then(res=>{
+                                if(res.data.msg){
+                                    
+                                    this.comments = res.data.docs;
+                                }
+                                
+                            })
+                            .catch(err=> alert(err))
+                        
+                        //commentContent = " ";
+                    }
                 })
                 .catch(err=> alert(err))
             
