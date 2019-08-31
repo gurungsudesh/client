@@ -60,10 +60,7 @@
                 </table>
                 <!--comment section  -->
                 <div >
-                    <form @submit=" addComment(item.name,item._id, item.commentContent); item.commentContent='' ; " style="margin:10px;" v-if="(item.commentdisplay)">
-                        <input type="text" style="width: 80%; padding:5px; border:1px solid grey; border-radius:10px;"  v-model="item.commentContent">
-                        <button id="btn" type="submit" >Comment </button> 
-                    </form>
+                    
                         
                         <div v-for="(comment,commentSequence) in comments" :key="commentSequence" >
                             <table v-if="(comment.postId == item._id && item.commentdisplay== true )" id="tables3"  >
@@ -80,7 +77,12 @@
                             </table>
                             
                         </div>
+                        <form @submit=" addComment(item.name,item._id, item.commentContent); item.commentContent='' ; " style="margin:10px;" v-if="(item.commentdisplay)">
+                        <input type="text" style="width: 80%; padding:5px; border:1px solid grey; border-radius:10px;"  v-model="item.commentContent">
+                        <button id="btn" type="submit" >Comment </button> 
+                    </form>
                 </div>
+                
             </div>
         </div>
     </div>
@@ -131,9 +133,10 @@ export default {
             axios.get("http://localhost:5000/users/post/likes")
                 .then(res=>{
                     if(res.data.msg){
-                        this.likes = docs;
+                        this.likes = res.data.docs;
                     }
                 })
+                .catch(err => alert(err));
             
           }
         })
