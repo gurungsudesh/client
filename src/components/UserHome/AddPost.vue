@@ -6,7 +6,7 @@
                                 
             <form @submit="addPost" id="form1" >
                     
-                         <img src="../../../images/ProfilePic.jpg" id="profileicon">   
+                        <img src="../../../images/ProfilePic.jpg" id="profileicon">   
                         <textarea style="font-size:15px; width:75%; vertical-align:middle; margin:10px;"  rows="3" v-model="postdata" placeholder="Write something here..."></textarea>
                         <button type="submit" style="margin-top:10px; width:50px" id="btn"> Post</button>
                  
@@ -57,9 +57,14 @@
                             <button id="likestats" ref="likestats" class="btn btn-success"  v-else ><i  class="fas fa-thumbs-up"></i></button>
                             <button id="commentstats" ref="commentstats" style="margin-left:50px;" class="btn btn-success" @click="getComment(item._id); item.commentdisplay = !item.commentdisplay"><i  class="fas fa-comment-dots"></i></button>
                                                                         
-                        </td>                                                         
+                        </td>    
+                        <td>
+                            
+                            <div @click="getComment(item._id);  item.commentdisplay = !item.commentdisplay"> Comments</div>
+                        </td>                                                      
                     </tr>
                 </table>
+                <hr/>
                 <!--comment section  -->
                 <div >
                     
@@ -121,9 +126,8 @@ export default {
             comments: [],
             commentdisplay: false,
             likes: [],
-            likeclone:[],
-            likecount:[]
-            
+            num: ' ',
+            allComment: []
         }
     },
     created(){
@@ -142,10 +146,19 @@ export default {
                     }
                 })
                 .catch(err => alert(err));
+
+            //getting all the comments
+            axios.get("http://localhost:5000/users/post/comment")
+                .then(res=>{
+                    if(res.data.msg){
+                        this.allComment = res.data.docs;
+                    }
+                })
             
           }
         })
         .catch(err =>alert(err));  
+
     },
     methods: {
         likeswitch(postkoId){
@@ -171,6 +184,7 @@ export default {
                     if(res.data.msg){
                         
                         this.comments = res.data.docs;
+                        this.num = this.comments.length;
                     }
                     
                 })
@@ -236,6 +250,9 @@ export default {
                 .catch(err => alert(err));
             this.postdata= " ";
 
+        },
+        appa(){
+            alert("Like ma click garyo")
         }
     }
     

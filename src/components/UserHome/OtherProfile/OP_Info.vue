@@ -7,23 +7,52 @@
                 </div>
                 <div class="col-md-auto">
                     <h3>{{msg}}</h3>
-                        <p class="text-left" style="color: gray; font-size: 12px" >Made at janaury 2016 
+                        <p class="text-left" style="color: gray; font-size: 12px" >Made at [ janaury 2016 ] yaha date aaunu paryo
                             <br>
-                            99 followers<br>
-                            99 following<br>
+                            {{followersNum}} followers<br>
+                            {{followingNum}} following<br>
                             
                         </p>
-                        <button id="btn" class="btn btn-success" >Edit Profile</button>
+                        <button id="btn" class="btn btn-success" >Follow</button>
                 </div>
             </div> 
         </div>
     </div>
 </template>
 <script>
-
+import axios from 'axios'
 export default {
     name: "OPInfo",
-    props: ['msg']
+    props: ['msg'],
+    data(){
+        return{
+            name: this.msg,
+            followersNum: '',
+            followingNum: '',
+            date: ''
+        }
+    },
+    created(){
+        //followers ko lagi 
+       axios.get(`http://localhost:5000/users/follower/${this.name}`)
+        .then(res =>{
+            if(res.data.msg){
+                const followers = res.data.docs;
+                this.followersNum = followers.length;
+            }
+            
+        })
+        .catch(err=> alert(err));
+        //following ko lagi 
+        axios.get(`http://localhost:5000/users/follow/${this.name}`)
+            .then(res =>{
+                if(res.data.msg){
+                    const following = res.data.docs;
+                    this.followingNum = following.length;
+                }
+            })
+            .catch(err=> alert(err));
+    }
 }
 </script>
 <style scoped>
