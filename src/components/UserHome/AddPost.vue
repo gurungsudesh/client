@@ -53,20 +53,19 @@
                     <tr>
                        
                         <td>
-                            {{`${count(item._id)}`}} likes<button id="likestats" ref="likestats" style="background-color:green; color:white;" class="btn btn-success" v-if="(likeswitch(item._id))"><i  class="fas fa-thumbs-up"></i></button>
+                            <button id="likestats" ref="likestats" style="background-color:green; color:white;" class="btn btn-success" v-if="(likeswitch(item._id))"><i  class="fas fa-thumbs-up"></i></button>
                             <button id="likestats" ref="likestats" class="btn btn-success"  v-else ><i  class="fas fa-thumbs-up"></i></button>
-                            <button id="commentstats" ref="commentstats" style="margin-left:50px;" class="btn btn-success" @click="getComment(item._id); item.commentdisplay = !item.commentdisplay"><i  class="fas fa-comment-dots"></i></button>
-                                                                        
+                            <button v-if="(item.commentdisplay)" id="commentstats" ref="commentstats" style="margin-left:50px; background-color:green; color:white;" class="btn btn-success" @click="getComment(item._id); item.commentdisplay = !item.commentdisplay"><i  class="fas fa-comment-dots"></i></button>
+                            <button v-else id="commentstats" ref="commentstats" style="margin-left:50px;" class="btn btn-success" @click="getComment(item._id); item.commentdisplay = !item.commentdisplay"><i  class="fas fa-comment-dots"></i></button>
+                            <span class="statscount">{{`${count(item._id)}`}} <span style="font-size:12px">likes</span></span>
+                            <span class="statscount" @click="getComment(item._id);  item.commentdisplay = !item.commentdisplay">{{`${countcmd(item._id)}`}} <span style="font-size:12px">Comments</span></span>                                            
                         </td>    
-                        <td>
-                            
-                            <div @click="getComment(item._id);  item.commentdisplay = !item.commentdisplay"> Comments</div>
-                        </td>                                                      
+                                                                              
                     </tr>
                 </table>
-                <hr/>
+                
                 <!--comment section  -->
-                <div >
+                <div style="border-top:1px solid lightgray;">
                     
                         
                         <div v-for="(comment,commentSequence) in comments" :key="commentSequence" >
@@ -177,6 +176,10 @@ export default {
             var likecount=this.likes.filter(function(post) {return post.postId == postkoId;});
             return likecount.length;
        },
+       countcmd(postkoId){
+            var commentcount=this.allComment.filter(function(post) {return post.postId == postkoId;});
+            return commentcount.length;
+       },
         getComment(postKoId){
             const pId = postKoId;   
              axios.get(`http://localhost:5000/users/post/comment/${pId}`)
@@ -266,6 +269,7 @@ export default {
     padding-left: 20px;
     width: 100%;
     background-color: white;
+    border-bottom: 1px solid green;
     
 }
 #writepost1{
@@ -377,7 +381,7 @@ export default {
     
 }
 .postarea{
-    border-bottom: 1px solid grey;
+    border-bottom: 1px solid lightgrey;
     padding-left: 10px;
     padding-right: 10px;
 }
@@ -396,21 +400,24 @@ export default {
      background-color: white; 
      color: green;
 }
-#commentstats:active{
-    background-color: green;
-    color: white;
-}
+
 .changestat{
     padding-top:10px;
    padding-bottom:10px;
-   margin-left: 10px;
+  
+}
+#statstable{
+     margin-left: 10px;
+     margin-bottom: 10px;
 }
 #statstable td{
     padding-left:50px;
 }
 
 #postmain{
-    padding:3px; 
+    padding-left:3px;
+    padding-right:3px; 
+    padding-bottom: 4px;
     }
 #btn{
     width: 90px;
@@ -427,6 +434,15 @@ export default {
     background-color: white;
     color: green;
     border: 1px solid green;
+}
+.statscount{
+    margin-left: 20px;
+    color: gray;
+    font-size: 15px;
+}
+.statscount:hover{
+    color: rgb(75, 75, 75);
+    cursor: pointer;
 }
 @media only screen and (max-width: 1200px) {
     textarea{
