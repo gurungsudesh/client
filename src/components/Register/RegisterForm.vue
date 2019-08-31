@@ -33,7 +33,7 @@
                
 
                  <li class="list-group-item" > 
-                <button type="submit" class="btn btn-success" ><!--<router-link to="/about">Sign Up</router-link>--> Sign Up</button> 
+                <button type="submit" class="btn btn-success">Sign Up</button> 
                 </li>
                 <li class="list-group-item"> 
                     <router-link style="color:green ; font-weight:none; font-size: 12px;" to="/">You have an account?</router-link>
@@ -44,6 +44,25 @@
         
             </form>
         </div>
+       <!-- <div class="secondmain">
+            <form @submit="onSubmit" autocomplete="off">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item" > 
+                    <input type="text" class="form-control"  placeholder="First Name" required>
+                    </li>
+                    <li class="list-group-item">
+                    <input type="text" class="form-control"  placeholder="Last Name" required>
+                    </li>
+                    <li class="list-group-item">
+                        Write something about you
+                    <textarea class="form-control" style="font-size:15px; width:100%; vertical-align:middle; margin_left:20px;"  rows="4" ></textarea>
+                    </li> 
+                 <li class="list-group-item" > 
+                <button type="submit" class="btn btn-success" >Sign Up</button> 
+                </li>
+                </ul>
+            </form>
+        </div>-->
     </div>
 </template>
 
@@ -143,9 +162,22 @@ export default {
 <style scoped>
 .formmain{
     position: relative;
+    top: 0%;
     margin-bottom: 5%;
     transform: scale(0.9, 0.9);
     
+ 
+}
+.secondmain{
+    background-color: white;
+    position: fixed;
+    top: 0%;
+    right: 0%;
+    width: 0%;
+    
+    margin-bottom: 5%;
+    transform: scale(0.9, 0.9);
+    height:100%;   
  
 }
 a{

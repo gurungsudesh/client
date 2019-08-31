@@ -8,7 +8,7 @@
                     
                          <img src="../../../images/ProfilePic.jpg" id="profileicon">   
                         <textarea style="font-size:15px; width:75%; vertical-align:middle; margin:10px;"  rows="3" v-model="postdata" placeholder="Write something here..."></textarea>
-                        <button type="submit" style="margin-top:10px" class="btn btn-success"> + </button>
+                        <button type="submit" style="margin-top:10px; width:50px" id="btn"> Post</button>
                  
                  
             </form>
@@ -35,7 +35,7 @@
                             </tr>
                             <tr>
                                 
-                                <td style="color: grey">{{`${dateformat(item.date)}`}}</td>
+                                <td style="font-size:12px; color: grey;">Posted at {{`${dateformat(item.date)}`}}</td>
                             </tr>
                         </table>
                     </div>
@@ -53,40 +53,38 @@
                     <tr>
                        
                         <td>
-                            <button id="btnstats"   class="btn btn-success" @click="getComment(item._id)" style="background-color: green; color: white"><i  class="fas fa-comment-dots"></i></button>
+                            <button id="commentstats" ref="commentstats" class="btn btn-success" @click="getComment(item._id); item.commentdisplay = !item.commentdisplay"><i  class="fas fa-comment-dots"></i></button>
                                                                         
                         </td>                                                         
                     </tr>
                 </table>
                 <!--comment section  -->
-                <div>
-                    
-                    
-                    <div style="max-height:30%; overflow-y:scroll;">
-                        <div v-for="(comment,commentSequence) in comments" :key="comentSequence">
-                            <table>
+                <div >
+                    <form @submit=" addComment(item.name,item._id, item.commentContent)" style="margin:10px;" v-if="(item.commentdisplay)">
+                            <input type="text" style="width: 80%; padding:5px; border:1px solid grey; border-radius:10px;"  v-model="item.commentContent"><button id="btn" type="submit" >Comment </button> 
+                        </form>
+                        <div v-for="(comment,commentSequence) in comments" :key="commentSequence" >
+                            <table v-if="(comment.postId == item._id && item.commentdisplay== true )" id="tables3"  >
                                 <tr>
-                                    <td width=10px><img src="bullet.jpg" align="left" id="otherprofileicon"></td>
+                                    <td width=1px><img src="../../../images/ProfilePic.jpg" align="left" id="otherprofileicon"></td>
                                     <td>
-                                        <div class="postcontent" >
-                                            {{comment.name}}
-                                            <hr/>
-                                            {{comment.comment}} 
-                                             <hr/>
-                                            {{comment.date}}
-                                            
-                                            
-
-                                        </div>
+                                        <span class="postcontent" >
+                                            <b style="color:darkgreen; font-size:15px;">{{comment.name}}</b>
+                                            {{comment.comment}}
+                                        </span>
+                                        <span style="color:grey; font-size:10px; margin-left:10px;">{{`${commentdateformat(comment.date)}`}}</span>
                                     </td>
                                 </tr>
                             </table>
                             
                         </div>
+<<<<<<< HEAD
                         <form @submit=" addComment(item.name,item._id, commentContent)">
                             <input type="text" style="width: 80%"  v-model="item.commentContent"><button id="btn" type="submit" class="btn btn-success"  >Comment </button> 
                         </form>
                     </div>
+=======
+>>>>>>> f31e9c29031b45c5a19278b01df257ab12b7883d
                 </div>
             </div>
         </div>
@@ -121,7 +119,8 @@ export default {
             error: '',
             formatedate:'',
             commentContent: '',
-            comments: []
+            comments: [],
+            commentdisplay: false
         }
     },
     created(){
@@ -139,8 +138,7 @@ export default {
     },
     methods: {
         getComment(postKoId){
-            const pId = postKoId;
-            alert(pId)
+            const pId = postKoId;   
              axios.get(`http://localhost:5000/users/post/comment/${pId}`)
                 .then(res=>{
                     if(res.data.msg){
@@ -150,19 +148,27 @@ export default {
                     
                 })
                 .catch(err=> alert(err))
+            
         },
         addComment(uname, postID, data){
+            
             axios.post(`http://localhost:5000/users/post/comment/${postID}`),{name: uname, content: data}
                 .then(res=>{
 
                     this.commentContent = " "
                 })
                 .catch(err=> alert(err))
+            
 
         },
         dateformat(value){
             if (value) {
-                return moment(String(value)).format('hh:mm MM/DD/YYYY')
+                return moment(String(value)).format('hh:mm MM/DD')
+            }
+        },
+        commentdateformat(value){
+            if (value) {
+                return moment(String(value)).format('hh:mm')
             }
         },
         addPost(){
@@ -230,7 +236,7 @@ export default {
     
 }
 #tables3{
-    
+    margin-top: 5px;
     width: 100%;
     color: black;
     border-collapse: collapse;
@@ -299,14 +305,14 @@ export default {
   
 }
 .postcontent{
-    margin-left: 80px;
+    
     margin-top:10px;
     margin-bottom: 10px;
     word-wrap: break-word;
     text-align: left;
     font-size: 12px;
     color:black;
-    background-color: rgb(197, 255, 197);
+    background-color: rgb(218, 255, 218);
     padding: 10px;
     border-radius: 20px;
     
@@ -317,31 +323,45 @@ export default {
     padding-right: 10px;
 }
 
-#btnstats{
+#commentstats{
     
      font-weight: 700; 
-     
      width:150px;
+     background-color: white; 
+     color: green;
+}
+#commentstats:active{
+    background-color: green;
+    color: white;
 }
 .changestat{
     padding-top:10px;
    padding-bottom:10px;
-   margin-left: 40px;
+   margin-left: 10px;
 }
 #statstable td{
     padding-left:50px;
 }
-#btn{
-    background-color: white;
-     color: green;
-     font-weight: 700; 
-     border-radius: 20px;
-     width:80px;
-     
-}
+
 #postmain{
     padding:3px; 
     }
+#btn{
+    width: 90px;
+    border-radius:10px;
+    color: white;
+    background-color:green;
+    padding: 5px;
+    border: none;
+    margin-left: 5px;
+    border: 1px solid green;
+}
+#btn:active{
+    font-weight: 700;
+    background-color: white;
+    color: green;
+    border: 1px solid green;
+}
 @media only screen and (max-width: 1200px) {
     textarea{
         width: 70%;
