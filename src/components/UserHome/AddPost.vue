@@ -53,7 +53,8 @@
                     <tr>
                        
                         <td>
-                            <button id="commentstats" ref="commentstats" class="btn btn-success" @click="getComment(item._id); item.commentdisplay = !item.commentdisplay"><i  class="fas fa-comment-dots"></i></button>
+                            <button id="commentstats" ref="commentstats" class="btn btn-success"><i  class="fas fa-thumbs-up"></i></button>
+                            <button id="commentstats" ref="commentstats" style="margin-left:50px;" class="btn btn-success" @click="getComment(item._id); item.commentdisplay = !item.commentdisplay"><i  class="fas fa-comment-dots"></i></button>
                                                                         
                         </td>                                                         
                     </tr>
