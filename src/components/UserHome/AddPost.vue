@@ -53,8 +53,8 @@
                     <tr>
                        
                         <td>
-                            <button id="likestats" ref="likestats" style="background-color:green; color:white;" class="btn btn-success" v-if="(likeswitch(item._id))"><i  class="fas fa-thumbs-up"></i></button>
-                            <button id="likestats" ref="likestats" class="btn btn-success"  v-else ><i  class="fas fa-thumbs-up"></i></button>
+                            <button id="likestats" ref="likestats" style="background-color:green; color:white;" class="btn btn-success" v-if="(likeswitch(item._id))" @click="clicklike(item._id)"><i  class="fas fa-thumbs-up"></i></button>
+                            <button id="likestats" ref="likestats" class="btn btn-success"  v-else @click="clicklike(item._id)" ><i  class="fas fa-thumbs-up"></i></button>
                             <button v-if="(item.commentdisplay)" id="commentstats" ref="commentstats" style="margin-left:50px; background-color:green; color:white;" class="btn btn-success" @click="getComment(item._id); item.commentdisplay = !item.commentdisplay"><i  class="fas fa-comment-dots"></i></button>
                             <button v-else id="commentstats" ref="commentstats" style="margin-left:50px;" class="btn btn-success" @click="getComment(item._id); item.commentdisplay = !item.commentdisplay"><i  class="fas fa-comment-dots"></i></button>
                             <span class="statscount">{{`${count(item._id)}`}} <span style="font-size:12px">likes</span></span>
@@ -160,6 +160,10 @@ export default {
 
     },
     methods: {
+        clicklike(postkoId){
+            alert('liked the post');
+        
+        },
         likeswitch(postkoId){
              var likecount=this.likes.filter(function(post) {return post.postId == postkoId;});
              for(var i=0;i<likecount.length;i++)
