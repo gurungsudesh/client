@@ -84,7 +84,7 @@
                             </table>
                             
                         </div>
-                        <form @submit=" addComment(name,item._id, item.commentContent); item.commentContent='' ; " style="margin:10px;" v-if="(item.commentdisplay)">
+                        <form @submit=" addComment(name,item._id, item.commentContent,item.name); item.commentContent='' ; " style="margin:10px;" v-if="(item.commentdisplay)">
                         <input type="text" style="width: 80%; padding:5px; border:1px solid grey; border-radius:10px;"  v-model="item.commentContent">
                         <button id="btn" type="submit" >Comment </button> 
                     </form>
@@ -127,7 +127,8 @@ export default {
             commentdisplay: false,
             likes: [],
             num: ' ',
-            allComment: []
+            allComment: [],
+            notification: ''
         }
     },
     created(){
@@ -154,6 +155,8 @@ export default {
                         this.allComment = res.data.docs;
                     }
                 })
+                .catch(err => alert(err));
+
             
           }
         })
@@ -207,23 +210,32 @@ export default {
                 
             
         },
-        addComment(uname, postID, data){
-            
+        addComment(uname, postID, data, postOwner){
+            this.notification = "2";
             axios.post(`http://localhost:5000/users/post/comment/${postID}`,{name: uname, content: data})
             
                 .then(res=>{
                     if(res.data.msg){
                         alert("posted")
-                        const pId = postID;   
-                        axios.get(`http://localhost:5000/users/post/comment/${pId}`)
+                        //sending notification
+                        axios.post(`http://localhost:5000/users/notifications/${postID}`,{name: uname, notify: this.notification, pOwner: postOwner})
                             .then(res=>{
-                                if(res.data.msg){
-                                    
-                                    this.comments = res.data.docs;
+                                alert("Notification sent")
+                                if(res.data.success){
+                                    const pId = postID;   
+                                    axios.get(`http://localhost:5000/users/post/comment/${pId}`)
+                                        .then(res=>{
+                                            if(res.data.msg){
+                                                
+                                                this.comments = res.data.docs;
+                                            }
+                                            
+                                        })
+                                        .catch(err=> alert(err));
                                 }
-                                
                             })
-                            .catch(err=> alert(err))
+                            .catch( err=>alert(err));
+                        
                         
                         //commentContent = " ";
                     }

@@ -50,13 +50,32 @@
 </template>
 
 <script>
+import jwtDecode from 'jwt-decode'
+import axios from 'axios'
 export default {
     name: "NavBar",
+    data(){
+      const token = localStorage.usertoken
+      const decode = jwtDecode(token)
+      return{
+        name: decode.name,
+        notifications: []
+      }
+    },
     methods:{
+
       logout(){
         localStorage.removeItem('usertoken')
       },
       showNotification(){
+         //get notifications
+        axios.get(`http://localhost:5000/users/notifications/${this.name}`)
+          .then(res=>{
+            if(res.data.success){
+              this.notifications = res.data.docs;
+            }
+          })
+          .catch(err => alert(err));
         var vm = this;
         if(vm.$refs.notificationid.style.visibility == 'visible'){
           vm.$refs.notificationid.style.visibility = 'hidden';
