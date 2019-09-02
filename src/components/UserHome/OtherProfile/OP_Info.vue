@@ -13,7 +13,7 @@
                             {{followingNum}} following<br>
                             
                         </p>
-                        <button id="btn" class="btn btn-success" >Follow</button>
+                        <button id="btn" class="btn btn-success" @click="follow(status,userName,name)">{{status}}</button>
                 </div>
             </div> 
         </div>
@@ -21,12 +21,17 @@
 </template>
 <script>
 import axios from 'axios'
+import jwtDecode from 'jwt-decode'
 export default {
     name: "OPInfo",
-    props: ['msg'],
+    props: ['msg','cond'],
     data(){
+        const token = localStorage.usertoken
+        const decode = jwtDecode(token)
         return{
+            userName: decode.name,
             name: this.msg,
+            status: this.cond,
             followersNum: '',
             followingNum: '',
             date: ''
@@ -52,6 +57,16 @@ export default {
                 }
             })
             .catch(err=> alert(err));
+    },
+    methods: {
+        // follow(status,userName,name){
+        //     if(status === 'Follow'){
+        //         //add to the follow database 
+        //     }
+        //     else{
+        //         //remove from the follow database 
+        //     }
+        // }
     }
 }
 </script>

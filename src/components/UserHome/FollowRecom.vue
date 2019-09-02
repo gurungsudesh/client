@@ -37,32 +37,37 @@ export default {
       }
     },
     created(){
-      axios.get("http://localhost:5000/users/recommendation")
+      axios.get(`http://localhost:5000/users/followrecommendation/${this.name}`)
       
         .then(res =>{
-          const array = res.data.docs;
+          const array = res.data.users;
           this.users = array.filter(user => user.name !== this.name)
-
         })
         .catch(err=> alert(err))
     },
     methods: {
       showmore(){
         this.maxshowfollow =this.maxshowfollow + 4 ;
-        console.log(this.maxshowfollow);
+        //console.log(this.maxshowfollow);
       },
       follow(name, userID, followName, followId){ 
         //alert("user ko : "+ name + " , " + userID +", follow garna lako: "+followName + ", "+followId)
        //if(){//
           axios.post("http://localhost:5000/users/follow", {name, userID, followName, followId})
-          .then(res =>{
-            if(res.data.docs.friend){
-              alert("Followed")
-
-
-            }
-          })
-          .catch(err=> alert(err));
+            .then(res =>{
+              if(res.data.docs.friend){
+                alert("Followed")
+                // followed garpepachi hatnu paryo ni recommended bata 
+                axios.get(`http://localhost:5000/users/followrecommendation/${this.name}`)
+      
+                    .then(res =>{
+                      const array = res.data.users;
+                      this.users = array.filter(user => user.name !== this.name)
+                    })
+                    .catch(err=> alert(err))
+              }
+            })
+            .catch(err=> alert(err));
        //}
        //else{
          //axios.post("http://localhost:5000/users/follow")

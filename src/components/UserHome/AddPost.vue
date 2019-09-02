@@ -161,8 +161,15 @@ export default {
 
     },
     methods: {
+        //this doesnot work 
         clicklike(postkoId){
-            alert('liked the post');
+            axois.post(`http://localhost:5000/users/post/likes/${postkoId}`,{name: this.name})
+                .then(res=>{
+                    if(res.data.msg){
+                        this.likes = res.data.docs;
+                    }
+                })
+                .catch(err=> alert(err));
         
         },
         likeswitch(postkoId){
@@ -258,9 +265,6 @@ export default {
                 .catch(err => alert(err));
             this.postdata= " ";
 
-        },
-        appa(){
-            alert("Like ma click garyo")
         }
     }
     

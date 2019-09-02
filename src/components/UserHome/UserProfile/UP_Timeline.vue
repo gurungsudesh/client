@@ -86,7 +86,7 @@
                            
                            <ul class="list-group list-group-flush" v-for="(item,index) in followers" :key="index">
                   
-                            <li class="list-group-item"><img src="../../../../images/ProfilePic.jpg" id="otherprofileicon" ><router-link :to="{name: 'otherprofile',params:{name: item.followedBy}}" >{{item.followedBy}}</router-link>
+                            <li class="list-group-item"><img src="../../../../images/ProfilePic.jpg" id="otherprofileicon" ><router-link :to="{name: 'otherprofile',params:{name: item.followedBy, status: 'Follow'}}" >{{item.followedBy}}</router-link>
                             
                             </li>
               
@@ -105,7 +105,7 @@
                             
                                 <ul class="list-group list-group-flush" v-for="(item,index) in following" :key="index">
                         
-                                    <li class="list-group-item" ><img src="../../../../images/ProfilePic.jpg" id="otherprofileicon" ><router-link :to="{ name: 'otherprofile',params:{name: item.username}}" >{{item.username}}</router-link>
+                                    <li class="list-group-item" ><img src="../../../../images/ProfilePic.jpg" id="otherprofileicon" ><router-link :to="{ name: 'otherprofile',params:{name: item.username, status: 'Unfollow'}}" >{{item.username}}</router-link>
                                     
                                     </li>
                     
