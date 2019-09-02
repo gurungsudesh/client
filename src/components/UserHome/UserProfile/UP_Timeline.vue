@@ -90,7 +90,7 @@
                                 <form @submit="follow(name,id, item.name, item._id )">
                                 <img src="../../../../images/ProfilePic.jpg" id="otherprofileicon" >
                                 <router-link :to="{name: 'otherprofile',params:{name: item.followedBy, status: 'Follow'}}" >{{item.followedBy}}</router-link>
-                               <button type="submit" class="btn btn-success" id="followingbtn"><span>Following</span></button>
+                                <button type="submit" class="btn btn-success" id="followbtn">Follow</button>
                                </form>
                             </li>
                             
@@ -114,7 +114,9 @@
                                      <form @submit="follow(name,id, item.name, item._id )">
                                          <img src="../../../../images/ProfilePic.jpg" id="otherprofileicon" >
                                          <router-link :to="{ name: 'otherprofile',params:{name: item.username, status: 'Unfollow'}}" >{{item.username}}</router-link>
-                                         <button type="submit" class="btn btn-success" id="followbtn">Follow</button></form>
+                                         
+                                        <button type="submit" class="btn btn-success" id="followingbtn"><span>Following</span></button>
+                                    </form>
                                     </li>
                     
                         
@@ -324,6 +326,7 @@ export default {
     font-weight: bold;
     border: 2px solid green;
     float: right;
+    width: 100px;
 }
 
 #followingbtn{
