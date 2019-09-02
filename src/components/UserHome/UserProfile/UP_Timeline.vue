@@ -86,9 +86,14 @@
                            
                            <ul class="list-group list-group-flush" v-for="(item,index) in followers" :key="index">
                   
-                            <li class="list-group-item"><img src="../../../../images/ProfilePic.jpg" id="otherprofileicon" ><router-link :to="{name: 'otherprofile',params:{name: item.followedBy, status: 'Follow'}}" >{{item.followedBy}}</router-link>
-                            
+                            <li class="list-group-item">
+                                <form @submit="follow(name,id, item.name, item._id )">
+                                <img src="../../../../images/ProfilePic.jpg" id="otherprofileicon" >
+                                <router-link :to="{name: 'otherprofile',params:{name: item.followedBy, status: 'Follow'}}" >{{item.followedBy}}</router-link>
+                               <button type="submit" class="btn btn-success" id="followingbtn"><span>Following</span></button>
+                               </form>
                             </li>
+                            
               
                  
                  
@@ -105,8 +110,11 @@
                             
                                 <ul class="list-group list-group-flush" v-for="(item,index) in following" :key="index">
                         
-                                    <li class="list-group-item" ><img src="../../../../images/ProfilePic.jpg" id="otherprofileicon" ><router-link :to="{ name: 'otherprofile',params:{name: item.username, status: 'Unfollow'}}" >{{item.username}}</router-link>
-                                    
+                                    <li class="list-group-item" >
+                                     <form @submit="follow(name,id, item.name, item._id )">
+                                         <img src="../../../../images/ProfilePic.jpg" id="otherprofileicon" >
+                                         <router-link :to="{ name: 'otherprofile',params:{name: item.username, status: 'Unfollow'}}" >{{item.username}}</router-link>
+                                         <button type="submit" class="btn btn-success" id="followbtn">Follow</button></form>
                                     </li>
                     
                         
@@ -309,5 +317,40 @@ export default {
     padding-bottom:4px;
     
 }
+#followbtn{
+    background-color: white;
+    color: green;
+    border-radius: 20px;
+    font-weight: bold;
+    border: 2px solid green;
+    float: right;
+}
+
+#followingbtn{
+    background-color: green;
+    color: white;
+    border-radius: 20px;
+    font-weight: bold;
+    border: 2px  solid green;
+    float: right;
+    width: 100px;
+}
+#followingbtn:hover span {display:none}
+#followingbtn:hover:before {
+    content:"Unfollow"
+    }
+#followingbtn:hover{
+    background-color: white;
+    color:green;
+}
+#followingbtn:active{
+    background-color: green;
+    color: white;
+}
+#followbtn:active{
+    background-color: green;
+    color: white;
+}
+
   
 </style>
