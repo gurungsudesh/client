@@ -20,8 +20,50 @@
 </template>
 
 <script>
+import axios from 'axios'
+// import jwtDecode from 'jwt-decode'
 export default {
-    name: "HotTopics"
+    name: "HotTopics",
+    data(){
+      // const token = localStorage.usertoken
+      // const decode = jwtDecode(token)
+      return{
+        name: this.name,
+        total: [],
+        posts: []
+      }
+    },
+    created(){
+
+
+      //This is still construction
+  //----------------------------------------------------------------------
+
+      // All posts liyo
+      axios.get("http://localhost:5000/users/post")
+        .then(res=>{
+          if(res.data.docs){
+            this.posts = res.data.docs;
+            //get likes for post id
+          
+            for(var i=0; i<=this.posts.length; i++){
+              
+              axios.get(`http://localhost:5000/users/post/likes/${this.posts[i]._id}`)
+                .then(res=>{
+                  if(res.data.msg){
+                    this.total[i]= res.data.docs;
+                    
+                    
+                  }
+                })
+                .catch(err => alert(err));
+            }
+          }
+        })
+        .catch(err=> alert(err));
+
+       //----------------------------------------------------------------------
+    }
 }
 </script>
 
