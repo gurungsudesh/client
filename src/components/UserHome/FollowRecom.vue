@@ -33,7 +33,8 @@ export default {
         maxshowfollow: 3,
         users: [],
         name: decode.name,
-        id: decode._id
+        id: decode._id,
+        
       }
     },
     created(){
@@ -51,27 +52,36 @@ export default {
         //console.log(this.maxshowfollow);
       },
       follow(name, userID, followName, followId){ 
-        //alert("user ko : "+ name + " , " + userID +", follow garna lako: "+followName + ", "+followId)
-       //if(){//
+        
           axios.post("http://localhost:5000/users/follow", {name, userID, followName, followId})
             .then(res =>{
               if(res.data.docs.friend){
-                alert("Followed")
-                // followed garpepachi hatnu paryo ni recommended bata 
-                axios.get(`http://localhost:5000/users/followrecommendation/${this.name}`)
-      
-                    .then(res =>{
-                      const array = res.data.users;
-                      this.users = array.filter(user => user.name !== this.name)
-                    })
-                    .catch(err=> alert(err))
+                
+
+                //send follow notification
+                const notificationType = '3';
+                axios.post("http://localhost:5000/users/notifications", {name, followName ,notificationType })
+                  .then(res=>{
+                    if(res.data.success){
+                      alert("Follow notification sent")
+
+                      // followed garpepachi hatnu paryo ni recommended bata 
+                      axios.get(`http://localhost:5000/users/followrecommendation/${this.name}`)
+            
+                          .then(res =>{
+                            const array = res.data.users;
+                            this.users = array.filter(user => user.name !== this.name)
+                          })
+                          .catch(err=> alert(err))
+                    }
+                  })
+                  .catch(err=>alert(err));
+
+                
               }
             })
             .catch(err=> alert(err));
-       //}
-       //else{
-         //axios.post("http://localhost:5000/users/follow")
-           //yaha chai unfollow garne mechanism banaune
+       
          
       }
     }

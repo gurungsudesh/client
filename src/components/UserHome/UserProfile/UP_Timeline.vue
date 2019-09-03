@@ -87,10 +87,11 @@
                            <ul class="list-group list-group-flush" v-for="(item,index) in followers" :key="index">
                   
                             <li class="list-group-item">
-                                <form @submit="follow(name,id, item.name, item._id )">
+                                <form @submit="follow(name,id, item.followedBy, item.followedById )">
                                 <img src="../../../../images/ProfilePic.jpg" id="otherprofileicon" >
                                 <router-link :to="{name: 'otherprofile',params:{name: item.followedBy, status: 'Follow'}}" >{{item.followedBy}}</router-link>
-                                <button type="submit" class="btn btn-success" id="followbtn">Follow</button>
+                                
+                                <button type="submit" class="btn btn-success" id="followbtn">{{value}}</button>
                                </form>
                             </li>
                             
@@ -111,7 +112,7 @@
                                 <ul class="list-group list-group-flush" v-for="(item,index) in following" :key="index">
                         
                                     <li class="list-group-item" >
-                                     <form @submit="follow(name,id, item.name, item._id )">
+                                     <form @submit="unFollow(name,item.username)">
                                          <img src="../../../../images/ProfilePic.jpg" id="otherprofileicon" >
                                          <router-link :to="{ name: 'otherprofile',params:{name: item.username, status: 'Unfollow'}}" >{{item.username}}</router-link>
                                          
@@ -144,7 +145,9 @@ export default {
             posts :[],
             followers: [],
             following: [],
-            name : decode.name
+            name : decode.name,
+            id: decode._id,
+            value: 'Follow'
         
         }
     },
@@ -180,6 +183,83 @@ export default {
             })
             .catch(err=> alert(err));
             
+    },
+    methods: {
+        follow(name,id, followerName, followerId ){
+            alert(followerName)
+            axios.post("http://localhost:5000/users/follow", {name:name, userID: id, followName:followerName, followId:followerId})
+            .then(res =>{
+              if(res.data.docs.friend){
+                
+
+                //send follow notification
+                const notificationType = '3';
+                axios.post("http://localhost:5000/users/notifications", {name, followerName ,notificationType })
+                  .then(res=>{
+                    if(res.data.success){
+                      alert(" Followed and Follow notification sent")
+                      //getting the followers
+                       axios.get(`http://localhost:5000/users/follower/${this.name}`)
+                            .then(res =>{
+                                if(res.data.msg){
+                                    this.followers = res.data.docs;
+                                }
+                                this.value = "Following";
+                            })
+                            .catch(err=> alert(err))
+                        //updating the following 
+                        axios.get(`http://localhost:5000/users/follow/${this.name}`)
+                                    .then(res =>{
+                                        if(res.data.msg){
+                                        this.following = res.data.docs;
+                                        }
+                                    })
+                                    .catch(err=> alert(err));
+                     
+                    }
+                  })
+                  .catch(err=>alert(err));
+
+                
+              }
+            })
+            .catch(err=> alert(err));
+       
+         
+        },
+        unFollow(name,fname){
+            alert(fname)
+            axios.delete("http://localhost:5000/users/follow", {data: { name,theName:fname }})
+    
+                .then(res =>{
+                    if(res.data.msg){
+                        
+
+                        //send follow notification
+                        const notificationType = '4';
+                        axios.post("http://localhost:5000/users/notifications", {name, fname ,notificationType })
+                        .then(res=>{
+                            if(res.data.success){
+                                alert("Unfollow notification sent")
+                                axios.get(`http://localhost:5000/users/follow/${this.name}`)
+                                    .then(res =>{
+                                        if(res.data.msg){
+                                        this.following = res.data.docs;
+                                        }
+                                    })
+                                    .catch(err=> alert(err));
+                            
+                            }
+                        })
+                        .catch(err=>alert(err));
+
+                        
+                    }
+                    })
+                .catch(err=> alert(err));
+        
+
+        }
     }
    
 }

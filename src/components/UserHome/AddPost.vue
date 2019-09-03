@@ -166,7 +166,8 @@ export default {
     methods: {
         //this doesnot work 
         clicklike(postkoId){
-            axois.post(`http://localhost:5000/users/post/likes/${postkoId}`,{name: this.name})
+            
+            axios.post(`http://localhost:5000/users/post/likes/${postkoId}`,{name: this.name})
                 .then(res=>{
                     if(res.data.msg){
                         this.likes = res.data.docs;
