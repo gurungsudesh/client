@@ -29,8 +29,8 @@
         <router-link class="nav-link" to="#"><i class="far fa-envelope"></i><label>Messages</label></router-link>
       </li>
     </ul> 
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+    <form class="form-inline my-2 my-lg-0" @submit= "search">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" v-model="searchContent">
       <button id="sbtn" class="btn btn-success" type="submit"><i class="fas fa-search" ></i></button>
     </form>
   <div id="dpdn" class="btn-group">
@@ -59,11 +59,26 @@ export default {
       const decode = jwtDecode(token)
       return{
         name: decode.name,
-        notifications: []
+        notifications: [],
+        searchContent: '',
+        user: []
       }
     },
     methods:{
-
+      search(){
+        axios.post(`http://localhost:5000/users/find/${this.searchContent}`)
+          .then(res=>{
+            if(res.data.found){
+              //yo user bhanne array ma sabai data haru cha
+              this.user = res.data.docs;
+              
+            }
+            
+            
+          })
+          .catch(err=> alert(err));
+          this.searchContent= ''
+      },
       logout(){
         localStorage.removeItem('usertoken')
       },
