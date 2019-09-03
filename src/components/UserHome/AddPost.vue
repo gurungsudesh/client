@@ -53,7 +53,7 @@
                     <tr>
                        
                         <td>
-                            <button id="likestats" ref="likestats" style="background-color:green; color:white;" class="btn btn-success" v-if="(likeswitch(item._id))" @click="clicklike(item._id)"><i  class="fas fa-thumbs-up"></i></button>
+                            <button id="likestats" ref="likestats" style="background-color:green; color:white;" class="btn btn-success" v-if="(likeswitch(item._id))" @click="unclicklike(item._id)"><i  class="fas fa-thumbs-up"></i></button>
                             <button id="likestats" ref="likestats" class="btn btn-success"  v-else @click="clicklike(item._id)" ><i  class="fas fa-thumbs-up"></i></button>
                             <button v-if="(item.commentdisplay)" id="commentstats" ref="commentstats" style="margin-left:50px; background-color:green; color:white;" class="btn btn-success" @click="getComment(item._id); item.commentdisplay = !item.commentdisplay"><i  class="fas fa-comment-dots"></i></button>
                             <button v-else id="commentstats" ref="commentstats" style="margin-left:50px;" class="btn btn-success" @click="getComment(item._id); item.commentdisplay = !item.commentdisplay"><i  class="fas fa-comment-dots"></i></button>
