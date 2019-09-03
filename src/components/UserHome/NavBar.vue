@@ -13,11 +13,9 @@
         <router-link class="nav-link" to="#" ><i class="far fa-bell"></i><span class="badge">1</span><label style="margin-left:15px;">Notifications</label></router-link>
         </div>
         <div class="dpdownbody" id="notificationid" ref="notificationid">
-            <h1 style="text-align:center; color:green; border-bottom: 1px solid grey; padding-bottom:30px;"><i class="fas fa-bell"></i></h1>
-            <ul>
-              <li >Notification 2</li>
-              <li >Notification 2</li>
-              <li >Notification 2</li>
+            <h1 style="text-align:center;  color:green;  padding-bottom:10px;"><i class="fas fa-bell"></i></h1>
+            <ul style="text-align:left; border-top: 1px solid grey">
+              <div v-for="(item,index) in notifications " :key="index"><li v-if="(checkname(item.sender))"><b style="color:green; font-size:17px;">{{item.sender}}</b> {{`${switching(item.type)}`}}</li></div>
             </ul>
             <div class="seemore">
               <router-link  class="nav-link" to="/notification"><b style="color:green"> See More</b></router-link>
@@ -65,6 +63,30 @@ export default {
       }
     },
     methods:{
+      checkname(value){
+        if(value==this.name){
+          return false;
+        }
+        else{
+          return true;
+        }
+      },
+      switching(value){
+        switch(value){
+         case "1":
+            return("liked your post.");
+
+          case "2":
+             return("commented on your post.");
+            
+          case "3":
+             return("has followed you.");
+            
+            case "4":
+             return("has unfollowed you.");
+            
+        }
+      },
       search(){
         axios.post(`http://localhost:5000/users/find/${this.searchContent}`)
           .then(res=>{
@@ -159,6 +181,10 @@ a{
   border-bottom: 1px solid grey;
   padding: 10px;
 }
+.dpdownbody li:hover{
+  background-color: rgb(230, 230, 230);
+  cursor: pointer;
+}
 .badge {
  
   padding: 4px 8px;
@@ -172,6 +198,7 @@ a{
 }
 
 .seemore{ 
+  margin-top:5px;
   position: relative;
   width: 99.9%;
   bottom: 0%;
