@@ -170,11 +170,37 @@ export default {
             axios.post(`http://localhost:5000/users/post/likes/${postkoId}`,{name: this.name})
                 .then(res=>{
                     if(res.data.msg){
-                        this.likes = res.data.docs;
+                        //likes taneko including new like
+                        axios.get("http://localhost:5000/users/post/likes")
+                            .then(res=>{
+                                if(res.data.msg){
+                                    this.likes = res.data.docs;
+                                }
+                            })
+                            .catch(err => alert(err));
                     }
                 })
                 .catch(err=> alert(err));
         
+        },
+        unclicklike(postkoId){
+            axios.delete(`http://localhost:5000/users/post/likes/${postkoId}`,{data:{ name: this.name }})
+                .then(res=>{
+                    if(res.data.delete){
+                        
+                        //likes taneko including deleted like
+                        axios.get("http://localhost:5000/users/post/likes")
+                            .then(res=>{
+                                if(res.data.msg){
+                                    this.likes = res.data.docs;
+                                }
+                            })
+                            .catch(err => alert(err));
+                        
+                    }
+                })
+                .catch(err => alert(err));
+
         },
         likeswitch(postkoId){
              var likecount=this.likes.filter(function(post) {return post.postId == postkoId;});
