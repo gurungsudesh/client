@@ -63,8 +63,27 @@
 </template>
 
 <script>
+import jwtDecode from 'jwt-decode'
+import axios from 'axios'
 export default {
-    name:'noticontent'
+    name:'noticontent',
+    data(){
+      const token = localStorage.usertoken
+      const decode = jwtDecode(token)
+      return{
+        name: decode.name,
+        notifications: []
+      }
+    },
+    created(){
+      axios.get(`http://localhost:5000/users/notifications/${this.name}`)
+          .then(res=>{
+            if(res.data.success){
+              this.notifications = res.data.docs;
+            }
+          })
+          .catch(err => alert(err));
+    }
 }
 </script>
 
