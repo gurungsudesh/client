@@ -30,7 +30,7 @@
       </li>
     </ul> 
     <form class="form-inline my-2 my-lg-0" @submit= "search">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" v-model="searchContent">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search for the username" aria-label="Search" v-model="searchContent">
       <button id="sbtn" class="btn btn-success" type="submit"><i class="fas fa-search" ></i></button>
     </form>
   <div id="dpdn" class="btn-group">
@@ -69,6 +69,7 @@ export default {
         axios.post(`http://localhost:5000/users/find/${this.searchContent}`)
           .then(res=>{
             if(res.data.found){
+              alert("Payo username")
               //yo user bhanne array ma sabai data haru cha
               this.user = res.data.docs;
               
