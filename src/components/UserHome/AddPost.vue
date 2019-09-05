@@ -354,9 +354,7 @@ export default {
     
     
 }
-#tables3 tr:nth-child(2) {
-    border-bottom: thin solid;
-}
+
 
 
 

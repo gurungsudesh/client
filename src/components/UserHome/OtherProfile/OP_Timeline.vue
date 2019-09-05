@@ -12,11 +12,11 @@
                             <table id="posttable" >
                                     <tr>
                                     <td rowspan="2" style="width:40px"><img src="../../../../images/ProfilePic.jpg"  id="posticon"></td>     
-                                    <td style="font-size: 15px; color:forestgreen; font-weight:bold" >{{item.name}}</td>
+                                    <td style="font-size: 20px; color:forestgreen; font-weight:bold" >{{item.name}}</td>
                                 </tr>
                                 <tr>
                                     
-                                    <td style="color: grey">{{item.date}}</td>
+                                    <td style="font-size:12px; color: grey;">Posted at {{`${dateformat(item.date)}`}}</td>
                                 </tr>
                             </table>
                         </div>
@@ -30,33 +30,45 @@
                         <div class="changestat">
                             <table id="statstable">
                                 <tr>
+                                
                                     <td>
-                                        <button id="btnstats" class="btn btn-success" @click="addLiked(item.like,posts.indexOf(item))" v-if="(item.like)" style="background-color: green;color: white;"><i class="fas fa-thumbs-up"></i></button>
-                                        <button id="btnstats" class="btn btn-success" @click="addLiked(item.like,posts.indexOf(item))" v-else style="background-color: white;color: green;"><i class="fas fa-thumbs-up"></i></button>                                                                     
-                                    </td>
-                                    <td>
-                                        <button id="btnstats"   class="btn btn-success" @click="(item.commentshow=!item.commentshow)" v-bind:value="item.commentshow" v-if="(item.commentshow)" style="background-color: green; color: white"><i  class="fas fa-comment-dots"></i></button>
-                                        <button id="btnstats" class="btn btn-success" @click="(item.commentshow=!item.commentshow)" v-bind:value="item.commentshow" v-else style="background-color: white; color: green"><i class="fas fa-comment-dots"></i></button>                                              
-                                    </td>                                                          
+                                        <button id="likestats" ref="likestats" style="background-color:green; color:white;" class="btn btn-success" v-if="(likeswitch(item._id))" @click="unclicklike(item._id)"><i  class="fas fa-thumbs-up"></i></button>
+                                        <button id="likestats" ref="likestats" class="btn btn-success"  v-else @click="clicklike(item._id)" ><i  class="fas fa-thumbs-up"></i></button>
+                                        <button v-if="(item.commentdisplay)" id="commentstats" ref="commentstats" style="margin-left:50px; background-color:green; color:white;" class="btn btn-success" @click="getComment(item._id); item.commentdisplay = !item.commentdisplay"><i  class="fas fa-comment-dots"></i></button>
+                                        <button v-else id="commentstats" ref="commentstats" style="margin-left:50px;" class="btn btn-success" @click="getComment(item._id); item.commentdisplay = !item.commentdisplay"><i  class="fas fa-comment-dots"></i></button>
+                                        
+                                        <span class="statscount">{{`${count(item._id)}`}} <span style="font-size:12px">likes</span></span>
+                                        <span class="statscount" @click="getComment(item._id);  item.commentdisplay = !item.commentdisplay">{{`${countcmd(item._id)}`}} <span style="font-size:12px">Comments</span></span>                                            
+                                    </td>    
+                                                                                        
                                 </tr>
                             </table>
-                            <div  v-if ="(item.commentshow)">
-                                <input type="text" style="width: 80%"  v-model="item.commenting"><button id="btn" class="btn btn-success" @click="addComment(item.commenting,data1.indexOf(item))" >Comment </button>
-                                <div style="max-height:30%; overflow-y:scroll;">
-                                    <div v-for = "(comment,index) in item.comments " :key="index">
-                                        <table>
+                            
+                            <!--comment section  -->
+                            <div style="border-top:1px solid lightgray;">
+                                
+                                    
+                                    <div v-for="(comment,commentSequence) in comments" :key="commentSequence" >
+                                        <table v-if="(comment.postId == item._id && item.commentdisplay== true )" id="tables3"  >
                                             <tr>
-                                                <td width=10px><img src="bullet.jpg" align="left" id="otherprofileicon"></td>
+                                                <td width=1px><img src="../../../../images/ProfilePic.jpg" align="left" id="otherprofileicon"></td>
                                                 <td>
-                                                    <div class="postcontent" >
-                                                        {{comment.comment_content}} 
-                                                    </div>
+                                                    <span class="postcontent" >
+                                                        <b style="color:darkgreen; font-size:15px;">{{comment.name}}</b>
+                                                        {{comment.comment}}
+                                                    </span>
+                                                    <span style="color:grey; font-size:10px; margin-left:10px;">{{`${commentdateformat(comment.date)}`}}</span>
                                                 </td>
                                             </tr>
                                         </table>
+                                        
                                     </div>
-                                </div>
+                                    <form @submit=" addComment(name,item._id, item.commentContent,item.name); item.commentContent='' ; " style="margin:10px;" v-if="(item.commentdisplay)">
+                                    <input type="text" style="width: 80%; padding:5px; border:1px solid grey; border-radius:10px;"  v-model="item.commentContent">
+                                    <button id="btn" type="submit" >Comment </button> 
+                                </form>
                             </div>
+                            
                         </div>
                     </div>
                 </div>
@@ -66,6 +78,7 @@
 </template>
 <script>
 import axios from 'axios';
+import moment from 'moment';
 export default {
     name: "OPTimeline",
     props: ['msg'],
@@ -75,8 +88,16 @@ export default {
             posts :[],
             followers: [],
             following: [],
-            name: this.msg
-        
+            name: this.msg,
+            //id: decode._id,
+            value: 'Follow',
+            commentContent: '',
+            comments: [],
+            commentdisplay: false,
+            likes: [],
+            num: ' ',
+            allComment: [],
+            notification: ''
         }
     },
     created(){
@@ -87,7 +108,24 @@ export default {
         .then(res=>{
           if(res.data.msg){
 
-            this.posts = res.data.docs;
+            this.posts = res.data.docs;axios.get("http://localhost:5000/users/post/likes")
+                .then(res=>{
+                    if(res.data.msg){
+                        this.likes = res.data.docs;
+                    }
+                })
+                .catch(err => alert(err));
+
+            //getting all the comments
+            axios.get("http://localhost:5000/users/post/comment")
+                .then(res=>{
+                    if(res.data.msg){
+                        this.allComment = res.data.docs;
+                    }
+                })
+                .catch(err => alert(err));
+
+
           }
         })
         .catch(err =>alert(err)); 
@@ -113,10 +151,202 @@ export default {
     methods: {
         gotoProfile(){
             alert("Click garyo");
-        }
+        },
+         follow(name,id, followerName, followerId ){
+            alert(followerName)
+            axios.post("http://localhost:5000/users/follow", {name:name, userID: id, followName:followerName, followId:followerId})
+            .then(res =>{
+              if(res.data.docs.friend){
+                
+
+                //send follow notification
+                const notificationType = '3';
+                axios.post("http://localhost:5000/users/notifications", {name, followerName ,notificationType })
+                  .then(res=>{
+                    if(res.data.success){
+                      alert(" Followed and Follow notification sent")
+                      //getting the followers
+                       axios.get(`http://localhost:5000/users/follower/${this.name}`)
+                            .then(res =>{
+                                if(res.data.msg){
+                                    this.followers = res.data.docs;
+                                }
+                                this.value = "Following";
+                            })
+                            .catch(err=> alert(err))
+                        //updating the following 
+                        axios.get(`http://localhost:5000/users/follow/${this.name}`)
+                                    .then(res =>{
+                                        if(res.data.msg){
+                                        this.following = res.data.docs;
+                                        }
+                                    })
+                                    .catch(err=> alert(err));
+                     
+                    }
+                  })
+                  .catch(err=>alert(err));
+
+                
+              }
+            })
+            .catch(err=> alert(err));
+       
+         
+        },
+        unFollow(name,fname){
+            alert(fname)
+            axios.delete("http://localhost:5000/users/follow", {data: { name,theName:fname }})
+    
+                .then(res =>{
+                    if(res.data.msg){
+                        
+
+                        //send follow notification
+                        const notificationType = '4';
+                        axios.post("http://localhost:5000/users/notifications", {name, fname ,notificationType })
+                        .then(res=>{
+                            if(res.data.success){
+                                alert("Unfollow notification sent")
+                                axios.get(`http://localhost:5000/users/follow/${this.name}`)
+                                    .then(res =>{
+                                        if(res.data.msg){
+                                        this.following = res.data.docs;
+                                        }
+                                    })
+                                    .catch(err=> alert(err));
+                            
+                            }
+                        })
+                        .catch(err=>alert(err));
+
+                        
+                    }
+                    })
+                .catch(err=> alert(err));
+        
+
+        },
+        clicklike(postkoId){
+            
+            axios.post(`http://localhost:5000/users/post/likes/${postkoId}`,{name: this.name})
+                .then(res=>{
+                    if(res.data.msg){
+                        //likes taneko including new like
+                        axios.get("http://localhost:5000/users/post/likes")
+                            .then(res=>{
+                                if(res.data.msg){
+                                    this.likes = res.data.docs;
+                                }
+                            })
+                            .catch(err => alert(err));
+                    }
+                })
+                .catch(err=> alert(err));
+        
+        },
+        unclicklike(postkoId){
+            axios.delete(`http://localhost:5000/users/post/likes/${postkoId}`,{data:{ name: this.name }})
+                .then(res=>{
+                    if(res.data.delete){
+                        
+                        //likes taneko including deleted like
+                        axios.get("http://localhost:5000/users/post/likes")
+                            .then(res=>{
+                                if(res.data.msg){
+                                    this.likes = res.data.docs;
+                                }
+                            })
+                            .catch(err => alert(err));
+                        
+                    }
+                })
+                .catch(err => alert(err));
+
+        },
+        likeswitch(postkoId){
+             var likecount=this.likes.filter(function(post) {return post.postId == postkoId;});
+             for(var i=0;i<likecount.length;i++)
+             {  
+                 
+                 if(likecount[i].LikedBy==this.name)
+                 {
+                     return true;
+                 }
+             }
+             return false;
+        },
+       count(postkoId){
+            var likecount=this.likes.filter(function(post) {return post.postId == postkoId;});
+            return likecount.length;
+       },
+       countcmd(postkoId){
+            var commentcount=this.allComment.filter(function(post) {return post.postId == postkoId;});
+            return commentcount.length;
+       },
+        getComment(postKoId){
+            const pId = postKoId;   
+             axios.get(`http://localhost:5000/users/post/comment/${pId}`)
+                .then(res=>{
+                    if(res.data.msg){
+                        
+                        this.comments = res.data.docs;
+                        this.num = this.comments.length;
+                    }
+                    
+                })
+                .catch(err=> alert(err))
+                
+            
+        },
+        addComment(uname, postID, data, postOwner){
+            this.notification = "2";
+            axios.post(`http://localhost:5000/users/post/comment/${postID}`,{name: uname, content: data})
+            
+                .then(res=>{
+                    if(res.data.msg){
+                        alert("posted")
+                        //sending notification
+                        axios.post(`http://localhost:5000/users/notifications/${postID}`,{name: uname, notify: this.notification, pOwner: postOwner})
+                            .then(res=>{
+                                alert("Notification sent")
+                                if(res.data.success){
+                                    const pId = postID;   
+                                    axios.get(`http://localhost:5000/users/post/comment/${pId}`)
+                                        .then(res=>{
+                                            if(res.data.msg){
+                                                
+                                                this.comments = res.data.docs;
+                                            }
+                                            
+                                        })
+                                        .catch(err=> alert(err));
+                                }
+                            })
+                            .catch( err=>alert(err));
+                        
+                        
+                        //commentContent = " ";
+                    }
+                })
+                .catch(err=> alert(err))
+            
+
+        },
+        dateformat(value){
+            if (value) {
+                return moment(String(value)).format('hh:mm MM/DD')
+            }
+        },
+        commentdateformat(value){
+            if (value) {
+                return moment(String(value)).format('hh:mm')
+            }
+   
     }
    
-}
+
+}}
 </script>
 <style scoped>
     #tabs a{
@@ -183,16 +413,13 @@ export default {
     
  }
  .postfeed{
-    
-    padding-top:6px;
-    border: 1px solid lightgray;
+    margin-top:3px;
+    padding-top:5px;
+   
     width: 100%;
     color: black;
     background-color: white;
-    
-    
-   
-   
+    border: 1px solid lightgray;
 }
 #posticon{  
     border-radius: 50%;
@@ -204,17 +431,16 @@ export default {
   
 }
 .postcontent{
-    margin-left: 80px;
+    
     margin-top:10px;
     margin-bottom: 10px;
     word-wrap: break-word;
     text-align: left;
     font-size: 12px;
     color:black;
-    background-color: rgb(157, 255, 173);
+    background-color: rgb(218, 255, 218);
     padding: 10px;
     border-radius: 20px;
-    width: 70%;
     
 }
 .postarea{
@@ -224,34 +450,66 @@ export default {
     width:100%;
 }
 
-#btnstats{
+#commentstats{
     
      font-weight: 700; 
-     
      width:150px;
+     background-color: white; 
+     color: green;
+}
+#likestats{
+    
+     font-weight: 700; 
+     width:150px;
+     background-color: white; 
+     color: green;
 }
 .changestat{
     padding-top:10px;
    padding-bottom:10px;
-   margin-left: 40px;
+   
+}
+#statstable{
+     margin-left: 10px;
+     margin-bottom: 10px;
 }
 #statstable td{
     padding-left:50px;
 }
-#btn{
-    background-color: white;
-     color: green;
-     font-weight: 700; 
-     border-radius: 20px;
-     width:80px;
-     
-}
+
 #postmain{
-    background-color: rgb(233, 233, 233);
-    padding-left:2px;
-    padding-right:2px; 
-    padding-bottom:4px;
-    
+    padding-left:3px;
+    padding-right:3px; 
+    padding-bottom: 4px;
+    padding-top: 1px;
+    background-color: lightgray;
+    }
+
+
+#btn{
+    width: 90px;
+    border-radius:10px;
+    color: white;
+    background-color:green;
+    padding: 5px;
+    border: none;
+    margin-left: 5px;
+    border: 1px solid green;
+}
+#btn:active{
+    font-weight: 700;
+    background-color: white;
+    color: green;
+    border: 1px solid green;
+}
+.statscount{
+    margin-left: 20px;
+    color: gray;
+    font-size: 15px;
+}
+.statscount:hover{
+    color: rgb(75, 75, 75);
+    cursor: pointer;
 }
   
 </style>
