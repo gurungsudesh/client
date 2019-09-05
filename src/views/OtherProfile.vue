@@ -7,7 +7,7 @@
             <div class="UPmainbody">  
                 <div class="UPleft">
                     <div class="UPltop">
-                        <OPInfo :msg="name" :cond ="status"/>
+                        <OPInfo :msg="name" :msgid ="id"/>
                     </div>
                     <div class="UPlbottom">
                         <OPBio :msg="name" />
@@ -36,12 +36,12 @@ export default {
   data(){
       return{
           name: '',
-          status: '',
+          id:'',
       }
   },
   created(){
       this.name = this.$route.params.name;
-      this.status = this.$route.params.status;
+        this.id=this.$route.params.id;
   }
   
 }

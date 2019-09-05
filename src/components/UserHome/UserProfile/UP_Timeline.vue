@@ -100,12 +100,13 @@
                            <ul class="list-group list-group-flush" v-for="(item,index) in followers" :key="index">
                   
                             <li class="list-group-item">
-                                <form @submit="follow(name,id, item.followedBy, item.followedById )">
+                               
                                 <img src="../../../../images/ProfilePic.jpg" id="otherprofileicon" >
-                                <router-link :to="{name: 'otherprofile',params:{name: item.followedBy, status: 'Follow'}}" >{{item.followedBy}}</router-link>
+                                <router-link :to="{name: 'otherprofile',params:{name: item.followedBy}}" >{{item.followedBy}}</router-link>
                                 
-                                <button type="submit" class="btn btn-success" id="followbtn">{{value}}</button>
-                               </form>
+                                <button @click="follow(name,id, item.followedBy, item.followedById )" class="btn btn-success" id="followbtn" v-if="(utafollow(item.followedBy))">Follow</button>
+                                <button @click ="unFollow(name,item.followedBy)" class="btn btn-success" id="followingbtn" v-else><span>Following</span></button>
+                               
                             </li>
                             
               
@@ -125,12 +126,12 @@
                                 <ul class="list-group list-group-flush" v-for="(item,index) in following" :key="index">
                         
                                     <li class="list-group-item" >
-                                     <form @submit="unFollow(name,item.username)">
+                                     
                                          <img src="../../../../images/ProfilePic.jpg" id="otherprofileicon" >
-                                         <router-link :to="{ name: 'otherprofile',params:{name: item.username, status: 'Unfollow'}}" >{{item.username}}</router-link>
+                                         <router-link :to="{ name: 'otherprofile',params:{name: item.username, id: item._id}}" >{{item.username}}</router-link>
                                          
-                                        <button type="submit" class="btn btn-success" id="followingbtn"><span>Following</span></button>
-                                    </form>
+                                        <button @click="unFollow(name,item.username)"  class="btn btn-success" id="followingbtn"><span>Following</span></button>
+                                    
                                     </li>
                     
                         
@@ -161,7 +162,6 @@ export default {
             following: [],
             name : decode.name,
             id: decode._id,
-            value: 'Follow',
             commentContent: '',
             comments: [],
             commentdisplay: false,
@@ -223,6 +223,15 @@ export default {
         
     },
     methods: {
+        utafollow(value){
+            for(var i=0; i < this.following.length; i++){
+                if( this.following[i].username == value){
+                return false;
+                }
+            }
+            return true;
+            
+        },
         follow(name,id, followerName, followerId ){
             alert(followerName)
             axios.post("http://localhost:5000/users/follow", {name:name, userID: id, followName:followerName, followId:followerId})

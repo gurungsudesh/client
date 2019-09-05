@@ -90,7 +90,7 @@ export default {
             following: [],
             name: this.msg,
             //id: decode._id,
-            value: 'Follow',
+            
             commentContent: '',
             comments: [],
             commentdisplay: false,

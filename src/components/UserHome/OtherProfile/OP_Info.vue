@@ -9,11 +9,13 @@
                     <h3>{{msg}}</h3>
                         <p class="text-left" style="color: gray; font-size: 12px" >Made at [ janaury 2016 ] yaha date aaunu paryo
                             <br>
-                            {{followersNum}} followers<br>
-                            {{followingNum}} following<br>
+                            {{ufollowersNum}} followers<br>
+                            {{ufollowingNum}} following<br>
                             
                         </p>
-                        <button id="btn" class="btn btn-success" @click="follow(status,userName,name)">{{status}}</button>
+                        <button @click="follow(name,id, uname, unameId )" class="btn btn-success" id="followbtn" v-if="(utafollow(uname))">Follow</button>
+                        <button @click ="unFollow(name,uname)" class="btn btn-success" id="followingbtn" v-else ><span>Following</span></button>
+                          
                 </div>
             </div> 
         </div>
@@ -24,49 +26,151 @@ import axios from 'axios'
 import jwtDecode from 'jwt-decode'
 export default {
     name: "OPInfo",
-    props: ['msg','cond'],
+    props: ['msg','msgid'],
     data(){
         const token = localStorage.usertoken
         const decode = jwtDecode(token)
         return{
-            userName: decode.name,
-            name: this.msg,
-            status: this.cond,
-            followersNum: '',
-            followingNum: '',
+            name: decode.name,
+            id: decode._id,
+            uname: this.msg,
+            unameId:this.msgid,
+           following:[],
+           followers:[],
+           ufollowing:[],
+           ufollowers:[],
+            ufollowersNum: '',
+            ufollowingNum: '',
             date: ''
         }
     },
     created(){
         //followers ko lagi 
-       axios.get(`http://localhost:5000/users/follower/${this.name}`)
+       axios.get(`http://localhost:5000/users/follower/${this.uname}`)
         .then(res =>{
             if(res.data.msg){
-                const followers = res.data.docs;
-                this.followersNum = followers.length;
+                 this.ufollowers = res.data.docs;
+                this.ufollowersNum = this.ufollowers.length;
             }
             
         })
         .catch(err=> alert(err));
         //following ko lagi 
-        axios.get(`http://localhost:5000/users/follow/${this.name}`)
+        axios.get(`http://localhost:5000/users/follow/${this.uname}`)
             .then(res =>{
                 if(res.data.msg){
-                    const following = res.data.docs;
-                    this.followingNum = following.length;
+                     this.ufollowing = res.data.docs;
+                    this.ufollowingNum = this.ufollowing.length;
                 }
             })
             .catch(err=> alert(err));
+            //mero followings
+             axios.get(`http://localhost:5000/users/follow/${this.name}`)
+            .then(res =>{
+                if(res.data.msg){
+                     this.following = res.data.docs;
+                }
+            })
+            .catch(err=> alert(err));
+
+             axios.get(`http://localhost:5000/users/follower/${this.uname}`)
+                .then(res =>{
+                    if(res.data.msg){
+                        this.followers = res.data.docs;
+                    }
+                })
+                .catch(err=> alert(err))
+
+                    
     },
     methods: {
-        // follow(status,userName,name){
-        //     if(status === 'Follow'){
-        //         //add to the follow database 
-        //     }
-        //     else{
-        //         //remove from the follow database 
-        //     }
-        // }
+        utafollow(value){
+            for(var i=0; i < this.following.length; i++){
+                alert(i);
+                alert(this.following[i].username);
+                if( this.following[i].username == value){
+                return false;
+                }
+            }
+            return true;
+            
+        },
+        follow(name,id, followerName, followerId ){
+            alert(followerName)
+            axios.post("http://localhost:5000/users/follow", {name:name, userID: id, followName:followerName, followId:followerId})
+            .then(res =>{
+              if(res.data.docs.friend){
+                
+
+                //send follow notification
+                const notificationType = '3';
+                axios.post("http://localhost:5000/users/notifications", {name, followerName ,notificationType })
+                  .then(res=>{
+                    if(res.data.success){
+                      alert(" Followed and Follow notification sent")
+                      //getting the followers
+                       axios.get(`http://localhost:5000/users/follower/${this.name}`)
+                            .then(res =>{
+                                if(res.data.msg){
+                                    this.followers = res.data.docs;
+                                }
+                                
+                            })
+                            .catch(err=> alert(err))
+                        //updating the following 
+                        axios.get(`http://localhost:5000/users/follow/${this.name}`)
+                                    .then(res =>{
+                                        if(res.data.msg){
+                                        this.following = res.data.docs;
+                                        }
+                                    })
+                                    .catch(err=> alert(err));
+                     
+                    }
+                  })
+                  .catch(err=>alert(err));
+
+                
+              }
+            })
+            .catch(err=> alert(err));
+       
+         
+        },
+        
+        unFollow(name,fname){
+            alert(fname)
+            axios.delete("http://localhost:5000/users/follow", {data: { name,theName:fname }})
+    
+                .then(res =>{
+                    if(res.data.msg){
+                        
+
+                        //send follow notification
+                        const notificationType = '4';
+                        axios.post("http://localhost:5000/users/notifications", {name, fname ,notificationType })
+                        .then(res=>{
+                            if(res.data.success){
+                                alert("Unfollow notification sent")
+                                axios.get(`http://localhost:5000/users/follow/${this.name}`)
+                                    .then(res =>{
+                                        if(res.data.msg){
+                                        this.following = res.data.docs;
+                                        }
+                                    })
+                                    .catch(err=> alert(err));
+                            
+                            }
+                        })
+                        .catch(err=>alert(err));
+
+                        
+                    }
+                    })
+                .catch(err=> alert(err));
+        
+
+        }
     }
 }
 </script>
@@ -90,4 +194,40 @@ img{
     background-color: green;
     color: white;
 }
+#followbtn{
+    background-color: white;
+    color: green;
+    border-radius: 20px;
+    font-weight: bold;
+    border: 2px solid green;
+    
+    width: 150px;
+}
+
+#followingbtn{
+    background-color: green;
+    color: white;
+    border-radius: 20px;
+    font-weight: bold;
+    border: 2px  solid green;
+    
+    width: 150px;
+}
+#followingbtn:hover span {display:none}
+#followingbtn:hover:before {
+    content:"Unfollow"
+    }
+#followingbtn:hover{
+    background-color: white;
+    color:green;
+}
+#followingbtn:active{
+    background-color: green;
+    color: white;
+}
+#followbtn:active{
+    background-color: green;
+    color: white;
+}
+
 </style>
