@@ -28,7 +28,7 @@
       </li>
     </ul> 
     <form class="form-inline my-2 my-lg-0" @submit= "search">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" v-model="searchContent">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search for the username" aria-label="Search" v-model="searchContent">
       <button id="sbtn" class="btn btn-success" type="submit"><i class="fas fa-search" ></i></button>
     </form>
   <div id="dpdn" class="btn-group">
@@ -36,7 +36,7 @@
   </button>
   <div  class="dropdown-menu dropdown-menu-right">
     <router-link class="dropdown-item" to="/profile" >Profile</router-link>
-    <router-link class="dropdown-item" to="/" >Settings</router-link>
+    <router-link class="dropdown-item" to="/account" >Settings</router-link>
     <button v-on:click="logout" ><router-link class="dropdown-item" to="/" >Log Out</router-link></button>
 </div>
   </div>
@@ -91,9 +91,17 @@ export default {
         axios.post(`http://localhost:5000/users/find/${this.searchContent}`)
           .then(res=>{
             if(res.data.found){
-              //yo user bhanne array ma sabai data haru cha
-              this.user = res.data.docs;
               
+              if(res.data.docs != ''){
+                  alert('user payo')
+                  //yo user bhanne array ma sabai data haru cha
+                  this.user = res.data.docs;
+              }else{
+                alert('uers chahi payena')
+              }
+              
+            }else{
+              alert("something is wrong")
             }
             
             

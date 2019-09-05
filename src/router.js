@@ -6,6 +6,7 @@ import Moderator from "./views/Moderator.vue";
 import UserProfile from "./views/UserProfile.vue"
 import Notification from './views/Notification.vue';
 import otherprofile from './views/OtherProfile.vue'
+import account from './views/Account.vue';
 
 Vue.use(Router)
 
@@ -46,6 +47,10 @@ export default new Router({
             path: '/profile/:name',
             name: 'otherprofile',
             component: otherprofile
+        }, {
+            path: '/account',
+            name: 'account',
+            component: account
         }
     ]
 })

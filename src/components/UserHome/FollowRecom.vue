@@ -6,7 +6,14 @@
                            <h4><b>Who To Follow</b></h4> 
                            <ul class="list-group list-group-flush" v-for="(item,index) in users.slice(0, maxshowfollow) " :key="index">
                   
-                            <li class="list-group-item" style="padding-left:20%; text-align:left;"><img src="../../../images/ProfilePic.jpg" id="otherprofileicon" >{{item.name}}<br>
+                            <li class="list-group-item" style="padding-left:20%; text-align:left;"><img src="../../../images/ProfilePic.jpg" id="otherprofileicon" >
+                              <!-- yo chai username ma click garyo bhaye jane thau--> 
+                                    <router-link :to="{ name: 'otherprofile' ,params:{name: item.name}}" >{{item.name}} </router-link>
+                                    <!-- yedi username bhayo bhane userprofile ma janu paryo -->
+                                    <!-- <router-link :to="{ name: 'UserProfile'}" >{{item.name}} </router-link> -->
+
+                              
+                            <br>
                             <form @submit="follow(name,id, item.name, item._id )"><button type="submit" class="btn btn-success">Follow</button></form></li>
                             </ul>
                             <div @click="showmore()" class="showmore">

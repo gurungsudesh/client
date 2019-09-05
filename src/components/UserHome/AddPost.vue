@@ -31,7 +31,14 @@
                         <table id="posttable">
                                 <tr>
                                 <td rowspan="2" style="width:80px"><img src="../../../images/ProfilePic.jpg"  id="posticon"></td>     
-                                <td style="font-size: 20px; color:forestgreen; font-weight:bold" >{{item.name}}</td>
+                                <td style="font-size: 20px; color:forestgreen; font-weight:bold" >
+
+                                    <!-- yo chai username ma click garyo bhaye jane thau--> 
+                                    <router-link :to="{ name: 'otherprofile' ,params:{name: item.name}}" >{{item.name}} </router-link>
+                                    <!-- yedi username bhayo bhane userprofile ma janu paryo -->
+                                    <!-- <router-link :to="{ name: 'UserProfile'}" >{{item.name}} </router-link> -->
+
+                                </td>
                             </tr>
                             <tr>
                                 
@@ -133,12 +140,12 @@ export default {
     },
     created(){
       
-        axios.get("http://localhost:5000/users/post")
+        axios.get(`http://localhost:5000/users/postOfN/${this.name}`)
         
         .then(res=>{
           if(res.data.msg){
             //alert("post request pathayo")
-            this.posts = res.data.docs;
+            this.posts = res.data.myPost;
             //likes taneko
             axios.get("http://localhost:5000/users/post/likes")
                 .then(res=>{
@@ -289,12 +296,12 @@ export default {
                         alert("Posted")
                         
                     //gettin all the post including the new one
-                        axios.get("http://localhost:5000/users/post")
+                        axios.get(`http://localhost:5000/users/postOfN/${this.name}`)
                     
                             .then(res=>{
                                 if(res.data.msg){
                                     
-                                    this.posts = res.data.docs;
+                                    this.posts = res.data.myPost;
                                     
                                 }
                             })
