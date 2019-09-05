@@ -46,14 +46,15 @@ export default {
             this.posts = res.data.docs;
             //get likes for post id
           
-            for(var i=0; i<=this.posts.length; i++){
+            for(var i=0; i<this.posts.length; i++){
               
               axios.get(`http://localhost:5000/users/post/likes/${this.posts[i]._id}`)
                 .then(res=>{
-                  if(res.data.msg){
-                    this.total[i]= res.data.docs;
+                  if(res.data.docs != ''){
+                    this.total[i] = res.data.docs;
                     
-                    
+                  }else{
+                    //err
                   }
                 })
                 .catch(err => alert(err));

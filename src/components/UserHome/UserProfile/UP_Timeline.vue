@@ -126,8 +126,8 @@
                         
                                     <li class="list-group-item" >
                                      <form @submit="unFollow(name,item.username)">
-                                         <img src="../../../../images/ProfilePic.jpg" id="otherprofileicon" >
-                                         <router-link :to="{ name: 'otherprofile',params:{name: item.username, status: 'Unfollow'}}" >{{item.username}}</router-link>
+                                        <img src="../../../../images/ProfilePic.jpg" id="otherprofileicon" >
+                                        <router-link :to="{ name: 'otherprofile',params:{name: item.username, status: 'Unfollow'}}" >{{item.username}}</router-link>
                                          
                                         <button type="submit" class="btn btn-success" id="followingbtn"><span>Following</span></button>
                                     </form>

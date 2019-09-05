@@ -31,7 +31,14 @@
                         <table id="posttable">
                                 <tr>
                                 <td rowspan="2" style="width:80px"><img src="../../../images/ProfilePic.jpg"  id="posticon"></td>     
-                                <td style="font-size: 20px; color:forestgreen; font-weight:bold" >{{item.name}}</td>
+                                <td style="font-size: 20px; color:forestgreen; font-weight:bold" >
+
+                                    <!-- yo chai username ma click garyo bhaye jane thau--> 
+                                    <router-link :to="{ name: 'otherprofile' ,params:{name: item.name}}" >{{item.name}} </router-link>
+                                    <!-- yedi username bhayo bhane userprofile ma janu paryo -->
+                                    <!-- <router-link :to="{ name: 'UserProfile'}" >{{item.name}} </router-link> -->
+
+                                </td>
                             </tr>
                             <tr>
                                 
