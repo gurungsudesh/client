@@ -7,7 +7,7 @@
             <form @submit="addPost" id="form1" >
                     
                         <img src="../../../images/ProfilePic.jpg" id="profileicon">   
-                        <textarea style="font-size:15px; width:75%; vertical-align:middle; margin:10px;"  rows="3" v-model="postdata" placeholder="Write something here..."></textarea>
+                        <textarea style="font-size:15px; width:75%; vertical-align:middle; margin:10px;"  rows="3" v-model="postdata" placeholder="Write something here..." required></textarea>
                         <button type="submit" style="margin-top:10px; width:50px" id="btn"> Post</button>
                  
                  
@@ -318,6 +318,9 @@ export default {
 </script>
 
 <style scoped>
+textarea{
+    resize: none
+}
 
 a:hover{
   text-decoration: none;
