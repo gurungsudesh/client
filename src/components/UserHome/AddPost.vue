@@ -184,7 +184,7 @@ export default {
                         
                             .then(res=>{
                                 if(res.data.success){
-                                    alert('Notification sent')
+                                    alert(' Like Notification sent')
                                     //getting all the likes again 
                                     axios.get("http://localhost:5000/users/post/likes")
                                         .then(res=>{
@@ -269,6 +269,7 @@ export default {
             
                 .then(res=>{
                     if(res.data.msg){
+                        
                         alert("posted")
                         //sending notification
                         axios.post(`http://localhost:5000/users/notifications/${postID}`,{name: uname, notify: this.notification, pOwner: postOwner})
@@ -276,6 +277,7 @@ export default {
                                 alert("Notification sent")
                                 if(res.data.success){
                                     const pId = postID;   
+                                    alert(pId)
                                     axios.get(`http://localhost:5000/users/post/comment/${pId}`)
                                         .then(res=>{
                                             if(res.data.msg){

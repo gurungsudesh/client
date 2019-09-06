@@ -14,7 +14,7 @@
                         <tr>
                             <td style="width: 20%;  ">
                                 <div class="option1">
-                                    <span class="title1">Name</span>
+                                    <span class="title1">Full Name</span>
                                     
                                 </div>
                             </td>
@@ -82,7 +82,11 @@
                         <tr>
                             <td></td>
                             <td></td>
+<<<<<<< HEAD
+                            <td style="text-align: right;"><button @click ="confirmBio" class="btn btn-success">Save Changes</button></td>
+=======
                             <td style="text-align: right;"><button  class="btn btn-success">Save Changes</button></td>
+>>>>>>> 1f80ca0845ad257ce569923b2c5211851a3c0b5c
                         </tr>
                       
                     </table>
@@ -151,10 +155,10 @@ export default {
     name: "Accountdata",
     data(){
     return {
-        username:'Prashant Dhoju',
+        username:'',
         commenting:'',
-        changeName:'Prashant Dhoju',
-        changeEmail:'prashantdhoju@gmail.com',
+        changeName:'',
+        changeEmail:'',
         changeUserbio:'ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssadjoaisdjaosidjaoisjdoiasjdooisjd',
         changeAddress:'Ranipauwa',
         shouldDisable1:true,
@@ -165,6 +169,9 @@ export default {
     }
   },
   methods:{
+      confimBio(){
+
+      },
       editable(value){
                     this.$refs.textarea1.style.height=this.$refs.textarea1.scrollHeight+'px';
                     switch(value){
