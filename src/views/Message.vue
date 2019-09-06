@@ -36,12 +36,15 @@ export default {
     position: absolute;
     height: 100%;
     width: 100%;
+    background-color: rgb(215, 255, 215);
 }
 .mainbody{
     position:absolute;
     left: 10%;
     width: 80%;
     height: 91%;
+    border-right: 2px solid green;  
+    border-left: 2px solid green;
 }
 .leftbody{
     position: absolute;
@@ -49,7 +52,6 @@ export default {
     top: 0px;
     height: 100%;
     width:30%;
-    background-color: red;
 }
 .rightbody{
     position: absolute;
@@ -57,8 +59,6 @@ export default {
     top: 0px;
     height: 100%;
     width:70%;
-    background-color: green;
-
 }
     
 </style>

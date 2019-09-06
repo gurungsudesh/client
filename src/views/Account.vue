@@ -34,6 +34,7 @@ export default {
     position:absolute;
     width: 100%;
     height: 91%;
+    
 }
     
 </style>

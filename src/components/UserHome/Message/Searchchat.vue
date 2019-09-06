@@ -32,13 +32,14 @@ export default {
             border-radius: 50%;
             width: 50px;
             height: 50px;
+            margin-right: 10px;
         }
         .topleft{
             position:absolute;
             top: 0px;
             width: 100%;
             height:10%;
-            background-color: aqua;
+            
         }
         #fromsearch{
             position: absolute;
@@ -50,11 +51,13 @@ export default {
             bottom:0px;
             height:90%;
             width:100%;
-            background-color: brown;
+            padding: 5px;
+           
         }
         .messagingpeople{
             width: 100%;
-            background-color: white;
-            margin-top: 20px;
+            background-color: rgb(192, 247, 175);
+            margin-top: 20px;  
+            border-radius: 20px;
         }
 </style>
