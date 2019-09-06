@@ -39,7 +39,8 @@ export default {
 }
 .mainbody{
     position:absolute;
-    width: 100%;
+    left: 10%;
+    width: 80%;
     height: 91%;
 }
 .leftbody{
