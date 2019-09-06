@@ -1,5 +1,6 @@
 <template>
     <div>
+<<<<<<< HEAD
         <div class="fullbody">
             <div class="home-header"> 
                 <NavBar/>
@@ -59,5 +60,16 @@ export default {
     background-color: green;
 
 }
+=======
+        <h2> Message  goes here</h2>
+    </div>
+</template>
+<script>
+export default {
+    name: "message"
+}
+</script>
+<style scoped>
+>>>>>>> 763758b50440e8f3f92e1815124fc5ec90e59771
     
 </style>

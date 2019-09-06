@@ -16,7 +16,7 @@
                             {{followingNum}} following<br>
                             
                         </p>
-                        <button id="btn" class="btn btn-success" >Edit Profile</button>
+                        <button id="btn"  @click='gotoAccount' class="btn btn-success" >Edit Profile</button>
                 </div>
             </div> 
         </div>
@@ -71,6 +71,11 @@ export default {
             })
             .catch(err => alert(err))
 
+    },
+    methods: {
+        gotoAccount(){
+            this.$router.push("/account");
+        }
     }
 }
 </script>
