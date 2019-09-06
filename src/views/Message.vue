@@ -1,6 +1,5 @@
 <template>
     <div>
-<<<<<<< HEAD
         <div class="fullbody">
             <div class="home-header"> 
                 <NavBar/>
@@ -18,12 +17,12 @@
 </template>
 <script>
 import NavBar from '../components/UserHome/NavBar';
-import Searchchat from '../components/UserHome/Message/Searchchat'
-import Readchat from '../components/UserHome/Message/Readchat'
+import Searchchat from '../components/UserHome/Message/Searchchat';
+import Readchat from '../components/UserHome/Message/Readchat';
 export default {
-    name: "account",
+    name: "message",
     components: {
-    Accountdata,
+    NavBar,
     Searchchat,
     Readchat
   },
@@ -60,16 +59,5 @@ export default {
     background-color: green;
 
 }
-=======
-        <h2> Message  goes here</h2>
-    </div>
-</template>
-<script>
-export default {
-    name: "message"
-}
-</script>
-<style scoped>
->>>>>>> 763758b50440e8f3f92e1815124fc5ec90e59771
     
 </style>
