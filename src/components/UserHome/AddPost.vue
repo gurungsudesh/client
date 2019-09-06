@@ -60,8 +60,8 @@
                     <tr>
                        
                         <td>
-                            <button id="likestats" ref="likestats" style="background-color:green; color:white;" class="btn btn-success" v-if="(likeswitch(item._id))" @click="unclicklike(item._id)"><i  class="fas fa-thumbs-up"></i></button>
-                            <button id="likestats" ref="likestats" class="btn btn-success"  v-else @click="clicklike(item._id)" ><i  class="fas fa-thumbs-up"></i></button>
+                            <button id="likestats" ref="likestats" style="background-color:green; color:white;" class="btn btn-success" v-if="(likeswitch(item._id))" @click="unclicklike(item._id,item.name)"><i  class="fas fa-thumbs-up"></i></button>
+                            <button id="likestats" ref="likestats" class="btn btn-success"  v-else @click="clicklike(item._id, item.name)" ><i  class="fas fa-thumbs-up"></i></button>
                             <button v-if="(item.commentdisplay)" id="commentstats" ref="commentstats" style="margin-left:50px; background-color:green; color:white;" class="btn btn-success" @click="getComment(item._id); item.commentdisplay = !item.commentdisplay"><i  class="fas fa-comment-dots"></i></button>
                             <button v-else id="commentstats" ref="commentstats" style="margin-left:50px;" class="btn btn-success" @click="getComment(item._id); item.commentdisplay = !item.commentdisplay"><i  class="fas fa-comment-dots"></i></button>
                             
@@ -172,37 +172,56 @@ export default {
     },
     methods: {
         //this doesnot work 
-        clicklike(postkoId){
+        clicklike(postkoId,postOwner){
             
+            this.notification = "1";
             axios.post(`http://localhost:5000/users/post/likes/${postkoId}`,{name: this.name})
                 .then(res=>{
+                    
                     if(res.data.msg){
-                        //likes taneko including new like
-                        axios.get("http://localhost:5000/users/post/likes")
+                        //sending the liked notification 
+                        axios.post(`http://localhost:5000/users/notifications/${postkoId}`,{name: this.name, notify: this.notification, receiver: postOwner})
+                        
                             .then(res=>{
-                                if(res.data.msg){
-                                    this.likes = res.data.docs;
+                                if(res.data.success){
+                                    alert('Notification sent')
+                                    //getting all the likes again 
+                                    axios.get("http://localhost:5000/users/post/likes")
+                                        .then(res=>{
+                                            if(res.data.msg){
+                                                this.likes = res.data.docs;
+                                            }
+                                        })
+                                        .catch(err => alert(err));
                                 }
                             })
-                            .catch(err => alert(err));
+                            .catch(err => alert(err))
+                        
                     }
                 })
                 .catch(err=> alert(err));
         
         },
-        unclicklike(postkoId){
+        unclicklike(postkoId,postOwner){
+            
             axios.delete(`http://localhost:5000/users/post/likes/${postkoId}`,{data:{ name: this.name }})
                 .then(res=>{
                     if(res.data.delete){
                         
-                        //likes taneko including deleted like
-                        axios.get("http://localhost:5000/users/post/likes")
+                        axios.delete(`http://localhost:5000/users/notifications/${postkoId}`,{data:{name: this.name, notify: this.notification, receiver: postOwner}})
                             .then(res=>{
-                                if(res.data.msg){
-                                    this.likes = res.data.docs;
+                                if(res.data.success){
+                                    //likes taneko including deleted like
+                                    axios.get("http://localhost:5000/users/post/likes")
+                                        .then(res=>{
+                                            if(res.data.msg){
+                                                this.likes = res.data.docs;
+                                            }
+                                        })
+                                     .catch(err => alert(err));
                                 }
                             })
-                            .catch(err => alert(err));
+                            .catch(err=> alert(err));
                         
                     }
                 })

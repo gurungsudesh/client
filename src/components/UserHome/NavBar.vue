@@ -24,7 +24,7 @@
             
       </li>
       <li class="nav-item">
-        <router-link class="nav-link" to="#"><i class="far fa-envelope"></i><label>Messages</label></router-link>
+        <router-link class="nav-link" to="/messages"><i class="far fa-envelope"></i><label>Messages</label></router-link>
       </li>
     </ul> 
     <form class="form-inline my-2 my-lg-0" @submit= "search">

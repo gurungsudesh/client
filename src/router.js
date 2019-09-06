@@ -7,7 +7,7 @@ import UserProfile from "./views/UserProfile.vue"
 import Notification from './views/Notification.vue';
 import otherprofile from './views/OtherProfile.vue'
 import account from './views/Account.vue';
-
+import messages from './views/Message.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -51,6 +51,11 @@ export default new Router({
             path: '/account',
             name: 'account',
             component: account
+        },
+        {
+            path: '/messages',
+            name: 'messages',
+            component: messages
         }
     ]
 })
