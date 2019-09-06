@@ -29,6 +29,23 @@
                             </td>
                         </tr>
                         <tr>
+                            <td style="width: 20%;  ">
+                                <div class="option1">
+                                    <span class="title1">Address</span>
+                                    
+                                </div>
+                            </td>
+                            <td>
+                                <div class="showname">
+                                        <span class="title2">
+                                        <input type="text" ref="inputtext" id="inputtext" :readonly="shouldDisable4" v-model="changeAddress"></span>
+                                </div>
+                            </td>
+                            <td  style="width: 20% ;text-align: center;">
+                                 <a  class="edit" @click="editable('4')" href="#">Edit</a>
+                            </td>
+                        </tr>
+                        <tr>
                              <td>
                                 <div class="option2">
                                     <span class="title1">Email</span>
@@ -65,7 +82,11 @@
                         <tr>
                             <td></td>
                             <td></td>
+<<<<<<< HEAD
                             <td style="text-align: right;"><button @click ="confirmBio" class="btn btn-success">Save Changes</button></td>
+=======
+                            <td style="text-align: right;"><button  class="btn btn-success">Save Changes</button></td>
+>>>>>>> 1f80ca0845ad257ce569923b2c5211851a3c0b5c
                         </tr>
                       
                     </table>
@@ -120,9 +141,11 @@ export default {
         changeName:'',
         changeEmail:'',
         changeUserbio:'ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssadjoaisdjaosidjaoisjdoiasjdooisjd',
+        changeAddress:'Ranipauwa',
         shouldDisable1:true,
         shouldDisable2:true,
         shouldDisable3:true,
+        shouldDisable4:true,
     }
   },
   methods:{
@@ -178,10 +201,26 @@ export default {
                                 this.shouldDisable3=!this.shouldDisable3;
                                 this.$refs.textarea1.style.background='none';
                                 this.$refs.textarea1.style.color='grey';
-                                alert('Changes Saved');
-                            return;
+                                alert('Changes Saved')
                             }
+                            return;
                             
+                        case "4":
+
+                        if(this.shouldDisable4){
+                                this.shouldDisable4=!this.shouldDisable4;
+                                this.$refs.textarea1.style.backgroundColor='white';
+                                this.$refs.textarea1.style.color='black';
+                                
+
+                                
+                            }else{
+                                this.shouldDisable4=!this.shouldDisable4;
+                                this.$refs.textarea1.style.background='none';
+                                this.$refs.textarea1.style.color='grey';
+                                alert('Changes Saved');
+                            }
+                            return;
                     }
                 },
              
@@ -337,7 +376,7 @@ table{
     .edit:hover{
         text-decoration: none;
     }
-    button[type=submit]{
+    button{
         border-radius: 20px;
         font-weight: 600;
         color: green;
