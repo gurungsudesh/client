@@ -8,52 +8,17 @@
             </div>
             <div class="noti_noti">
                 <div id="noti_noti1">
-                        <table  id="tables3">
+                  <div v-for="(item,index) in notifications " :key="index">
+                        <table  id="tables3"  v-if="(checkname(item.sender))" >
                                 <tr>
                                   <td rowspan="2" style="padding-left:10px; width:40px; height:50px;" ><img src="../../../../images/ProfilePic.jpg" align="left" id="otherprofileicon"></td>
-                                  <td style="width:100%; font-size: 15px; " > Someone has just Posted</td> 
+                                  <td style="width:100%; font-size: 15px; " ><b>{{item.sender}}</b> {{`${switching(item.type)}`}}</td> 
                                 </tr>
                                 <tr>
-                                  <td style="color:grey; font-size: 12px;">Time</td>
+                                  <td style="color:grey; font-size: 12px;">{{item.date}}</td>
                                 </tr>
                         </table>
-                        <table  id="tables3">
-                                <tr>
-                                  <td rowspan="2" style="padding-left:10px; width:40px; height:50px;" ><img src="../../../../images/ProfilePic.jpg" align="left" id="otherprofileicon"></td>
-                                  <td style="width:100%; font-size: 15px; " > Someone has just Posted</td> 
-                                </tr>
-                                <tr>
-                                  <td style="color:grey; font-size: 12px;">Time</td>
-                                </tr>
-                        </table>
-                        <table  id="tables3">
-                                <tr>
-                                  <td rowspan="2" style="padding-left:10px; width:40px; height:50px;" ><img src="../../../../images/ProfilePic.jpg" align="left" id="otherprofileicon"></td>
-                                  <td style="width:100%; font-size: 15px; " > Someone has just Posted</td> 
-                                </tr>
-                                <tr>
-                                  <td style="color:grey; font-size: 12px;">Time</td>
-                                </tr>
-                        </table>
-                        <table  id="tables3">
-                                <tr>
-                                  <td rowspan="2" style="padding-left:10px; width:40px; height:50px;" ><img src="../../../../images/ProfilePic.jpg" align="left" id="otherprofileicon"></td>
-                                  <td style="width:100%; font-size: 15px; " > Someone has just Posted</td> 
-                                </tr>
-                                <tr>
-                                  <td style="color:grey; font-size: 12px;">Time</td>
-                                </tr>
-                        </table>
-                        <table  id="tables3">
-                                <tr>
-                                  <td rowspan="2" style="padding-left:10px; width:40px; height:50px;" ><img src="../../../../images/ProfilePic.jpg" align="left" id="otherprofileicon"></td>
-                                  <td style="width:100%; font-size: 15px; " > Someone has just Posted</td> 
-                                </tr>
-                                <tr>
-                                  <td style="color:grey; font-size: 12px;">Time</td>
-                                </tr>
-                        </table>
-               
+                  </div>
             </div>
 
             </div>
@@ -83,6 +48,32 @@ export default {
             }
           })
           .catch(err => alert(err));
+    },
+    methods:{
+      checkname(value){
+        if(value==this.name){
+          return false;
+        }
+        else{
+          return true;
+        }
+      },
+      switching(value){
+        switch(value){
+         case "1":
+            return("liked your post.");
+
+          case "2":
+             return("commented on your post.");
+            
+          case "3":
+             return("has followed you.");
+            
+            case "4":
+             return("has unfollowed you.");
+            
+        }
+      }
     }
 }
 </script>

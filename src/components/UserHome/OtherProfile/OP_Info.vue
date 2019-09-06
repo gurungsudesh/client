@@ -86,8 +86,7 @@ export default {
     methods: {
         utafollow(value){
             for(var i=0; i < this.following.length; i++){
-                alert(i);
-                alert(this.following[i].username);
+                
                 if( this.following[i].username == value){
                 return false;
                 }

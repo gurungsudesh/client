@@ -8,13 +8,13 @@
                   
                             <li class="list-group-item" style="padding-left:20%; text-align:left;"><img src="../../../images/ProfilePic.jpg" id="otherprofileicon" >
                               <!-- yo chai username ma click garyo bhaye jane thau--> 
-                                    <router-link :to="{ name: 'otherprofile' ,params:{name: item.name}}" >{{item.name}} </router-link>
+                                    <router-link :to="{ name: 'otherprofile' ,params:{name: item.name}}" style="font-size: 15px; color:forestgreen; font-weight:bold" >{{item.name}} </router-link>
                                     <!-- yedi username bhayo bhane userprofile ma janu paryo -->
                                     <!-- <router-link :to="{ name: 'UserProfile'}" >{{item.name}} </router-link> -->
 
                               
                             <br>
-                            <form @submit="follow(name,id, item.name, item._id )"><button type="submit" class="btn btn-success">Follow</button></form></li>
+                            <form @submit="follow(name,id, item.name, item._id )"><button type="submit" class="btn btn-success" id="followbtn">Follow</button></form></li>
                             </ul>
                             <div @click="showmore()" class="showmore">
                             Show more
@@ -99,6 +99,18 @@ export default {
 </script>
 
 <style scoped>
+a:hover{
+  text-decoration: none;
+}
+#followbtn{
+   
+   
+    border-radius: 20px;
+    font-weight: bold;
+   
+    
+    width: 150px;
+}
 .followtext{
     border: 1px solid lightgrey;
       margin: 20px;

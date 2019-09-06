@@ -31,12 +31,12 @@
                         <table id="posttable">
                                 <tr>
                                 <td rowspan="2" style="width:80px"><img src="../../../images/ProfilePic.jpg"  id="posticon"></td>     
-                                <td style="font-size: 20px; color:forestgreen; font-weight:bold" >
+                                <td  >
 
                                     <!-- yo chai username ma click garyo bhaye jane thau--> 
-                                    <router-link :to="{ name: 'otherprofile' ,params:{name: item.name}}" >{{item.name}} </router-link>
+                                    <router-link v-if="(item.name!=name)" :to="{ name: 'otherprofile' ,params:{name: item.name}}" style="font-size: 20px; color:forestgreen; font-weight:bold" >{{item.name}} </router-link>
                                     <!-- yedi username bhayo bhane userprofile ma janu paryo -->
-                                    <!-- <router-link :to="{ name: 'UserProfile'}" >{{item.name}} </router-link> -->
+                                    <router-link v-else :to="{ name: 'UserProfile'}"  style="font-size: 20px; color:forestgreen; font-weight:bold">{{item.name}} </router-link> 
 
                                 </td>
                             </tr>
@@ -319,6 +319,9 @@ export default {
 
 <style scoped>
 
+a:hover{
+  text-decoration: none;
+}
 .writepost{
     padding-top: 10px;
     padding-left: 20px;
