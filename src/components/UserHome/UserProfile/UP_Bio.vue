@@ -1,11 +1,30 @@
 <template>
     <div>
-        <h2> UserBio goes here</h2>
+       
         <!-- Yo unserlined part ma chai info hala hai -->
-        <p> Full name: ________</p>
-        <p> Contact : ________</p>
-        <p> Address : ________</p>
-        <p> Bio : ________</p>
+        <div class="userinfo">
+            <table >
+                <tr>
+                    <td style="width:100px;"><b>Name:</b></td>
+                    <td>Prashant Dhoju</td>
+                </tr>
+                <tr>    
+                    <td><b>Address:</b></td>
+                    <td> Prashant Dhoju</td>
+                </tr>
+                <tr>
+                    <td><b>Contact:</b></td>
+                    <td> Prashant Dhoju</td>
+                </tr>
+                <tr>
+                    <td><b>About me:</b></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan="2">sdasdasdasdasdasd sadasdasdasda ssdasdasdasda sdasdasdsd</td>
+                </tr>
+            </table>
+        </div>
 
     </div>
 </template>
@@ -42,6 +61,17 @@ export default {
 
 }
 </script>
-<style scoped>
+<style scoped> 
+.userinfo{
+    padding:20px;
+    color: grey;
+    width: 100%;
     
+    
+}
+td{
+    word-wrap:break-all;    
+    padding: 5px;
+}
+ 
 </style>
