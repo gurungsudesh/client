@@ -6,9 +6,11 @@
             </div>
             <div class="mainbody">
                 <div class="leftbody">
+                    <!--eta chai search ani v-for garera name haru dekhauni-->
                     <Searchchat/>
                 </div>
                 <div class="rightbody">
+                    <!--eta chai sending ra comment dekhauni tyo chai v-for hanni ho-->
                     <Readchat/>
                 </div>
             </div>
@@ -52,6 +54,8 @@ export default {
     top: 0px;
     height: 100%;
     width:30%;
+    background-color: white;
+    border-right: 1px solid green;
 }
 .rightbody{
     position: absolute;

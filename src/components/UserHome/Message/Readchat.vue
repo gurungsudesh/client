@@ -1,26 +1,26 @@
 <template>
     <div>
         <div class="topright">
-                    <table>
+                    <table  style="width:100%">
                         <tr>
-                            <td style="width: 20%">
+                            <td style="width: 10%">
                                     <img src="../../../../images/ProfilePic.jpg">
                             </td>
                             <td style="width: 80%; text-align: left">
-                                    <span style="margin-left: 50px">commment hunxa yaha</span>
+                                    <span class="status" >commment hunxa yaha</span>
                             </td>
-                            <td style="width: 20%">
+                            <td style="width: 10%">
 
                             </td>
                         </tr>
                         <tr>
-                            <td style="width: 20%">
+                            <td>
                                     
                             </td>
                             <td style="width: 80%; text-align: right">
-                                    <span style="margin-left: 50px">commment hunxa yaha</span>
+                                    <span class="status" style="margin-left: 50px">commment hunxa yaha</span>
                             </td>
-                            <td style="width: 20%">
+                            <td style="width: 10%">
                                     <img src="../../../../images/ProfilePic.jpg">
                             </td>
                         </tr>
@@ -30,7 +30,7 @@
                 <div class="bottomright">
                         <form class="form-inline" id="formmessage">
                                 <input class="form-control" type="text" id="sendm" placeholder="message..">
-                                <button id="mbtn" class="btn btn-success" type="submit"><i class="fas fa-search" ></i></button>
+                                <button id="mbtn" class="btn btn-success" type="submit">Send</button>
                         </form>
                 </div>
             
@@ -56,7 +56,7 @@ export default {
         top:0px;
         width: 100%;
         height:90%;
-        background-color: blueviolet;
+        background-color: white;
         overflow:auto;
         padding: 10px;
     }
@@ -71,16 +71,18 @@ export default {
         border-radius: 10px;
     }
     .bottomright{
+        border-top:1px solid green;
         position: absolute;
         top:90%;
         width: 100%;
         height: 10%;
-        background-color: blue;
+        background-color: rgb(119, 218, 119);
     }
     .topright img{
             border-radius: 50%;
             width: 50px;
             height: 50px;
+            border: 5px solid rgb(161, 230, 161);
         }
     #mbtn{
         margin-left:10px;
@@ -95,4 +97,14 @@ export default {
         margin: 10px;
         
     }
+    .status{
+        background-color: lightgreen;
+        padding: 10px;
+        border-radius: 10px ;
+    }
+    td{
+        padding: 5px;
+    }
+    
+    
 </style>

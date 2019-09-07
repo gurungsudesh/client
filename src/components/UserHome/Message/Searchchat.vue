@@ -2,7 +2,7 @@
     <div>
         <div class="topleft">
             <form class="form-inline" id="fromsearch">
-                    <input class="form-control" style="width: 300px" type="search" placeholder="Search" aria-label="Search">
+                    <input class="form-control" style="width: 250px" type="search" placeholder="Search" aria-label="Search">
                     <button id="sbtn" class="btn btn-success" type="submit"><i class="fas fa-search" ></i></button>
             </form>
         </div>
@@ -39,6 +39,7 @@ export default {
             top: 0px;
             width: 100%;
             height:10%;
+            border-bottom: 1px solid green;
             
         }
         #fromsearch{
@@ -58,6 +59,7 @@ export default {
             width: 100%;
             background-color: rgb(192, 247, 175);
             margin-top: 20px;  
-            border-radius: 20px;
+            border-radius: 10px;
+            padding: 5px;
         }
 </style>
