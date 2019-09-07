@@ -38,7 +38,7 @@
                             <td>
                                 <div class="showname">
                                         <span class="title2">
-                                        <input type="text" ref="inputtext" id="inputtext" :readonly="shouldDisable4" v-model="changeAddress"></span>
+                                        <input type="text" ref="inputtext3" id="inputtext3" :readonly="shouldDisable4" v-model="changeAddress"></span>
                                 </div>
                             </td>
                             <td  style="width: 20% ;text-align: center;">
@@ -48,7 +48,7 @@
                         <tr>
                              <td>
                                 <div class="option2">
-                                    <span class="title1">Email</span>
+                                    <span class="title1">Contact Info</span>
                                 </div>
                             </td>
                             <td>
@@ -117,9 +117,28 @@
                         </div>
                  </div>
                 </li>
-                <li>
+                <li ref="deactivateli" id="deactivateli">
                  <div class="deactivate">
-                     <h5><i class="fas fa-cog" style="margin-right: 10px;"></i>Deactivate Account</h5>
+                        <h5 @click="showdeactivate()" ><i class="fas fa-cog" style="margin-right: 10px;"></i>Deactivate Account</h5>   
+                        <div class="deactivateaccount" ref="deactivateid" id="deactivateid">
+                            <form>
+                                <table style="border-top:1px solid black;">
+                                    <tr>
+                                        <td colspan="2"><span style="color:grey">{{description}}</span>
+                                        </td>
+                                    </tr>
+                                <tr>
+                                    <td style="width: 20% ; font-weight: 600" >Confirm Your Password:</td>
+                                    <td > <input type="text" class="form-control"></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td style="text-align: right;"><button class="btn btn-success">Deactivate</button></td>
+                                </tr>
+                            </table>
+                        </form>
+                        </div>
+                 
                  </div>
                 </li>
                 </ul>
@@ -142,6 +161,7 @@ export default {
         shouldDisable2:true,
         shouldDisable3:true,
         shouldDisable4:true,
+        description:'Deactivating your account will disable your profile and remove your name from most things you have shared . Some information may still be visible to others, such as your name in their followers list and messages you sent. If you still want to continue confirm your password.',
     }
   },
   methods:{
@@ -157,11 +177,13 @@ export default {
                                 this.$refs.inputtext.style.backgroundColor='white';
                                 this.$refs.inputtext.style.color='black';
                                 this.$refs.inputtext.style.padding='8px';
+                                this.$refs.inputtext.style.border='1px solid darkgray';
                             }else{
                                 this.shouldDisable1=!this.shouldDisable1;
                                 this.$refs.inputtext.style.background='none';
                                 this.$refs.inputtext.style.color='grey';
                                 this.$refs.inputtext.style.padding='5px';
+                                this.$refs.inputtext.style.border='none';
                                 alert('Changes Saved');
                                 
                             }
@@ -173,12 +195,14 @@ export default {
                                 this.$refs.inputtext1.style.backgroundColor='white';
                                 this.$refs.inputtext1.style.color='black';
                                 this.$refs.inputtext1.style.padding='8px';
+                                this.$refs.inputtext1.style.border='1px solid darkgray';
                                 
                             }else{
                                 this.shouldDisable2=!this.shouldDisable2;
                                 this.$refs.inputtext1.style.background='none';
                                 this.$refs.inputtext1.style.color='grey';
                                 this.$refs.inputtext1.style.padding='5px';
+                                this.$refs.inputtext1.style.border='none';
                                 
                                 alert('Changes Saved');
                             }
@@ -190,6 +214,7 @@ export default {
                                 this.shouldDisable3=!this.shouldDisable3;
                                 this.$refs.textarea1.style.backgroundColor='white';
                                 this.$refs.textarea1.style.color='black';
+                                this.$refs.textarea1.style.border='1px solid darkgray';
                                 
 
                                 
@@ -197,6 +222,8 @@ export default {
                                 this.shouldDisable3=!this.shouldDisable3;
                                 this.$refs.textarea1.style.background='none';
                                 this.$refs.textarea1.style.color='grey';
+                                this.$refs.textarea1.style.border='none';
+                                
                                 alert('Changes Saved')
                             }
                             return;
@@ -205,15 +232,19 @@ export default {
 
                         if(this.shouldDisable4){
                                 this.shouldDisable4=!this.shouldDisable4;
-                                this.$refs.textarea1.style.backgroundColor='white';
-                                this.$refs.textarea1.style.color='black';
+                                this.$refs.inputtext3.style.backgroundColor='white';
+                                this.$refs.inputtext3.style.color='black';
+                                this.$refs.inputtext3.style.border='1px solid darkgray';
+                                this.$refs.inputtex3.style.padding='8px';
                                 
 
                                 
                             }else{
                                 this.shouldDisable4=!this.shouldDisable4;
-                                this.$refs.textarea1.style.background='none';
-                                this.$refs.textarea1.style.color='grey';
+                                this.$refs.inputtext3.style.background='none';
+                                this.$refs.inputtext3.style.color='grey';
+                                this.$refs.inputtext3.style.border='none';
+                                this.$refs.inputtext3.style.padding='5px';
                                 alert('Changes Saved');
                             }
                             return;
@@ -243,6 +274,17 @@ export default {
                     vm.$refs.passwordli.style.backgroundColor = 'rgb(223, 255, 225)';
                   }
               },
+              showdeactivate:function(){
+                  var vm = this;
+                  if(vm.$refs.deactivateid.style.display == 'block'){
+                   vm.$refs.deactivateid.style.display = 'none'
+                    vm.$refs.deactivateli.style.backgroundColor = 'white';
+                  }
+                  else{
+                     vm.$refs.deactivateid.style.display = 'block';
+                    vm.$refs.deactivateli.style.backgroundColor = 'rgb(223, 255, 225)';
+                  }
+              },
               textareaResize:function() {
                   this.$refs.textarea1.style.height=this.$refs.textarea1.scrollHeight+'px';
                 }
@@ -261,6 +303,7 @@ table{
         height: 100%;
         background-color: rgb(203, 255, 207);
         
+        
     }
     .mainbody{
         border-left: 1px solid green;
@@ -271,6 +314,15 @@ table{
         width: 80%;
         height: 100%;
         background-color: white;
+        overflow: auto;
+    }
+    .mainbody::-webkit-scrollbar {
+        width: 0px;  
+        background: transparent; 
+}
+
+    .mainbody::-webkit-scrollbar-thumb {
+    background: #FF0000;
     }
     table td{
         padding: 5px;
@@ -300,7 +352,8 @@ table{
         padding-bottom: 8px;
         padding-left: 8px;
         padding-right: 8px;
-        border-radius: 20px;
+        border-radius: 10px;
+        overflow: hidden;
     }
     #generalid td{
         border-bottom: 1px solid rgb(162, 194, 165);
@@ -319,6 +372,19 @@ table{
         padding: 5px;
         font-size: 13px;
     }
+    #deactivateid{
+        display: none;
+        margin-left: 20px;
+        
+    }
+    #deactivateid input[type="text"]{
+        width: 400px;
+        border-radius: 20px;
+        border: 1px solid gray;
+        outline: none;
+        padding: 5px;
+        font-size: 13px;
+    }
     #generalid{
 
         display: none;
@@ -327,7 +393,7 @@ table{
         
     }
     
-    #inputtext,  #inputtext1 {
+    #inputtext,  #inputtext1, #inputtext3{
         color: gray;
         width: 400px;
         outline: none;
@@ -363,6 +429,7 @@ table{
         padding: 0;
         border-top:1px solid gray;
         border-bottom:1px solid gray;
+        
     }
     .edit{
         color: green;
