@@ -82,11 +82,7 @@
                         <tr>
                             <td></td>
                             <td></td>
-<<<<<<< HEAD
-                            <td style="text-align: right;"><button @click ="confirmBio" class="btn btn-success">Save Changes</button></td>
-=======
                             <td style="text-align: right;"><button  class="btn btn-success">Save Changes</button></td>
->>>>>>> 1f80ca0845ad257ce569923b2c5211851a3c0b5c
                         </tr>
                       
                     </table>
