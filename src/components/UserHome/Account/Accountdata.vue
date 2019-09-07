@@ -54,7 +54,7 @@
                             <td>
                                 <div class="showemail">
                                         <span class="title2">
-                                        <input type="text" ref="inputtext1" id="inputtext1" :readonly="shouldDisable2" v-model="changeEmail">
+                                        <input type="text" ref="inputtext1" id="inputtext1" :readonly="shouldDisable2" v-model="changeContact">
                                         </span>
                                 </div>
                             </td>
@@ -82,7 +82,7 @@
                         <tr>
                             <td></td>
                             <td></td>
-                            <td style="text-align: right;"><button  class="btn btn-success">Save Changes</button></td>
+                            <td style="text-align: right;"><button @click="confirmBio(changeName,changeContact,changeUserbio,changeAddress)" class="btn btn-success">Save Changes</button></td>
                         </tr>
                       
                     </table>
@@ -96,21 +96,21 @@
                         <table style="border-top:1px solid black;">
                          <tr>
                             <td style="width: 20% ; font-weight: 600" >Previous Password:</td>
-                            <td > <input type="text" class="form-control"></td>
+                            <td > <input type="password" class="form-control" v-model="prevPass"></td>
 
                         </tr>
                         <tr>
                             <td style="font-weight: 600">New Password:</td>
-                            <td><input type="text" class="form-control"></td>
+                            <td><input type="password" class="form-control" v-model="NewPass"></td>
                         </tr>
                          <tr>
                             <td style="font-weight: 600">Confirm Password:</td>
-                            <td><input type="text" class="form-control"></td>
+                            <td><input type="password" class="form-control" v-model="confirmPass"></td>
                          </tr>
                          <tr>
                              <td></td>
                              
-                             <td style="text-align: right;"><button type="submit" class="btn btn-success">Save Changes</button></td>
+                             <td style="text-align: right;"><button @click="changePassword(prevPass,NewPass,confirmPass)" class="btn btn-success"> Change Password</button></td>
                          </tr>
                     </table>
                 </form>
@@ -124,16 +124,16 @@
                             <form>
                                 <table style="border-top:1px solid black;">
                                     <tr>
-                                        <td colspan="2"><span style="color:grey">{{description}}</span>
+                                        <td colspan="2"><span style="color:grey">Deactivating your account will disable your profile and remove your name from most things you have shared . Some information may still be visible to others, such as your name in their followers list and messages you sent. If you still want to continue confirm your password.</span>
                                         </td>
                                     </tr>
                                 <tr>
                                     <td style="width: 20% ; font-weight: 600" >Confirm Your Password:</td>
-                                    <td > <input type="text" class="form-control"></td>
+                                    <td > <input type="password" class="form-control" v-model="password"></td>
                                 </tr>
                                 <tr>
                                     <td></td>
-                                    <td style="text-align: right;"><button class="btn btn-success">Deactivate</button></td>
+                                    <td style="text-align: right;"><button @click="deactivate(password)" class="btn btn-success">Deactivate</button></td>
                                 </tr>
                             </table>
                         </form>
@@ -147,26 +147,100 @@
     </div>
 </template>
 <script>
+import axios from 'axios';
+import jwtDecode from 'jwt-decode'
 export default {
     name: "Accountdata",
     data(){
+        const token = localStorage.usertoken
+        const decode = jwtDecode(token)
     return {
-        username:'',
+        username:decode.name,
         commenting:'',
         changeName:'',
-        changeEmail:'',
-        changeUserbio:'ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssadjoaisdjaosidjaoisjdoiasjdooisjd',
-        changeAddress:'Ranipauwa',
+        changeContact:'',
+        changeUserbio:'',
+        changeAddress:'',
         shouldDisable1:true,
         shouldDisable2:true,
         shouldDisable3:true,
         shouldDisable4:true,
-        description:'Deactivating your account will disable your profile and remove your name from most things you have shared . Some information may still be visible to others, such as your name in their followers list and messages you sent. If you still want to continue confirm your password.',
+        prevPass:'',
+        newPass: '',
+        confirmPass: '',
+        password: '',
+        userData: []
+        
     }
   },
+  created(){
+      //getting the user bio from the database
+      axios.get(`http://localhost:5000/users/info/${this.username}`)
+        .then(res =>{
+            if(res.data.success){
+                
+                this.userData = res.data.docs;
+                /*
+                dhoju yaha user data ma chai yo component created hune bitikai k k 
+                database ma cha user ko aaucah ani timile cahi 
+                suru ma yo account page suru hune bitikai db ma bhako inf dekhau hai 
+                 
+                 */
+                
+            }
+        })
+        .catch(err=> alert(err));
+        
+  },
   methods:{
-      confimBio(){
+      confirmBio(Name,Contact,Userbio,Address){
+        axios.put(`http://localhost:5000/users/info/${this.username}`,{fullname: Name, contact: Contact, bio: Userbio, add: Address})
+            .then(res=> {
+                if(res.data.success){
+                    alert("Changes saved to the database");
+                    //yo bhayo bhane pheri get garne sabai data
+                }
+            })
+            .catch(err=> alert(err));
+      },
+      changePassword(prevPass,NewPass,confirmPass){
+          if(confirmPass !== NewPass){  
+              //yo validation CCr le garcha ramrari 
+            alert(" duita Password Milena or the password are incorrect ")
 
+          }
+          else{
+              axios.put(`http://localhost:5000/users/changepassword/${this.username}`,{password: prevPass , newPassowrd: NewPass})
+                .then(res=> {
+                    if(res.data.success){
+                        this.prevPass = ''
+                        this.newPass = ''
+                        this.confirmPass = ''
+                        alert("Password is now changed, please logout and login again");
+                        //token faleko 
+                        localStorage.removeItem('usertoken')
+                        this.$router.push("/");
+                        
+                        
+                        
+                    }
+                })
+                .catch(err=> alert(err));
+          }
+          
+      },
+      deactivate(password) {
+        //deactivate garesi remove all the information of the user
+        axios.post(`http://localhost:5000/users/deactivate/${this.username}`,{ pass:password })
+            .then(res=>{
+                if(res.data.success){
+                    alert("Your account have been deleted permanently from the iPost")
+                    localStorage.removeItem('usertoken')
+                    this.$router.push("/");
+
+                }
+            })
+            .catch(err=> alert(err));
       },
       editable(value){
                     this.$refs.textarea1.style.height=this.$refs.textarea1.scrollHeight+'px';
