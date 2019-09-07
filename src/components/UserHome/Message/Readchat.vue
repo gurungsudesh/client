@@ -79,7 +79,7 @@ export default {
           this.data1.push({ id:this.data1.length, sender:this.name, receiver:'blalala' , message:value})
           this.omessage='';
       }
-      }
+    }
     
 }
 </script>
