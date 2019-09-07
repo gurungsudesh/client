@@ -1,29 +1,32 @@
 <template>
     <div>
+        <!-- tyo conversation ma click garyo vane get garcha message-->
         <div class="topright">
-                    <table  style="width:100%">
-                        <tr>
+                    <table v-for="(item,index) in data1 " :key="index"   style="width:100%">
+                    
+                        <tr v-if="(whosend(item.sender))">
                             <td style="width: 10%">
                                     <img src="../../../../images/ProfilePic.jpg">
                             </td>
                             <td style="width: 80%; text-align: left">
-                                    <span class="status" >commment hunxa yaha</span>
+                                    <span class="status" >{{item.message}}</span>
                             </td>
                             <td style="width: 10%">
 
                             </td>
                         </tr>
-                        <tr>
+                        <tr v-else>
                             <td>
                                     
                             </td>
                             <td style="width: 80%; text-align: right">
-                                    <span class="status" style="margin-left: 50px">commment hunxa yaha</span>
+                                    <span class="status" style="margin-left: 50px">{{item.message}}</span>
                             </td>
                             <td style="width: 10%">
                                     <img src="../../../../images/ProfilePic.jpg">
                             </td>
                         </tr>
+                    
                     </table>
                     
                 </div>
@@ -41,11 +44,36 @@ export default {
     name: "Readchat",
     data(){
     return {
-       
+        name:'Pokemon',
+       data1 : [{
+                    "id":0 ,
+                    "sender":"Prashant Dhoju",
+                    "receiver":"Pokemon",
+                    "message":"asdasdasaPokemon",
+                    
+                },
+                {   "id":1 ,
+                    "sender":"Pokemon",
+                    "receiver":"Prashant Dhoju",
+                    "message":"saPokemon"
+                },
+                {    "id":2 ,
+                    "sender":"Prashant Dhoju",
+                    "receiver":"Pokemon",
+                    "message":"saPokemon"
+                }]
         
     }
   },
   methods:{
+      whosend(value){
+          if (value==this.name){
+              return true;
+          }
+          else{
+              return false;
+          }
+      }
       }
     
 }
@@ -105,6 +133,8 @@ export default {
     td{
         padding: 5px;
     }
-    
+    button{
+
+    }
     
 </style>
