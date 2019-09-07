@@ -9,7 +9,7 @@
                                     <img src="../../../../images/ProfilePic.jpg">
                             </td>
                             <td style="width: 80%; text-align: left">
-                                    <span class="status" >{{item.message}}</span>
+                                <div ><label class="status">{{item.message}}</label></div>
                             </td>
                             <td style="width: 10%">
 
@@ -20,7 +20,7 @@
                                     
                             </td>
                             <td style="width: 80%; text-align: right">
-                                    <span class="status" style="margin-left: 50px">{{item.message}}</span>
+                                    <div ><label class="status" style="margin-left:50px;">{{item.message}}</label></div>
                             </td>
                             <td style="width: 10%">
                                     <img src="../../../../images/ProfilePic.jpg">
@@ -32,8 +32,8 @@
                 </div>
                 <div class="bottomright">
                         <form class="form-inline" id="formmessage">
-                                <input class="form-control" type="text" id="sendm" placeholder="message..">
-                                <button id="mbtn" class="btn btn-success" type="submit">Send</button>
+                                <textarea class="form-control"  id="sendm" placeholder="message.." v-model="omessage"></textarea>
+                                <button id="mbtn" class="btn btn-success" @click="sendmessage(omessage)" >Send</button>
                         </form>
                 </div>
             
@@ -44,18 +44,19 @@ export default {
     name: "Readchat",
     data(){
     return {
+        omessage:'',
         name:'Pokemon',
-       data1 : [{
+        data1 : [{
                     "id":0 ,
                     "sender":"Prashant Dhoju",
                     "receiver":"Pokemon",
-                    "message":"asdasdasaPokemon",
+                    "message":"asdasdasaPokemonsssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssadasssssssssssssssssssssssss",
                     
                 },
                 {   "id":1 ,
                     "sender":"Pokemon",
                     "receiver":"Prashant Dhoju",
-                    "message":"saPokemon"
+                    "message":"saPokemosssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssn"
                 },
                 {    "id":2 ,
                     "sender":"Prashant Dhoju",
@@ -68,11 +69,15 @@ export default {
   methods:{
       whosend(value){
           if (value==this.name){
-              return true;
-          }
-          else{
               return false;
           }
+          else{
+              return true;
+          }
+      },
+      sendmessage(value){
+          this.data1.push({ id:this.data1.length, sender:this.name, receiver:'blalala' , message:value})
+          this.omessage='';
       }
       }
     
@@ -83,7 +88,7 @@ export default {
         position: absolute;
         top:0px;
         width: 100%;
-        height:90%;
+        height:88%;
         background-color: white;
         overflow:auto;
         padding: 10px;
@@ -101,9 +106,9 @@ export default {
     .bottomright{
         border-top:1px solid green;
         position: absolute;
-        top:90%;
+        top:88%;
         width: 100%;
-        height: 10%;
+        height: 12%;
         background-color: rgb(119, 218, 119);
     }
     .topright img{
@@ -117,8 +122,6 @@ export default {
         padding: 10px;
     }
     #sendm{
-        border-radius: 30px;
-        padding: 20px;
         width: 90%;
     }
     #formmessage{
@@ -129,12 +132,22 @@ export default {
         background-color: lightgreen;
         padding: 10px;
         border-radius: 10px ;
+        word-wrap:break-word;
+        width: auto;
     }
     td{
         padding: 5px;
+        word-wrap:break-word;
+        word-break: break-all;
     }
     button{
         padding: 5px;
     }
-    
+    textarea{
+        font-size: 15px;
+        resize: none;
+        border-radius: 10px;
+        padding: 5px;
+        overflow: hidden;
+    }
 </style>

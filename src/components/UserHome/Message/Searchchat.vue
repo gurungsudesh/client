@@ -6,10 +6,12 @@
                     <button id="sbtn" class="btn btn-success" type="submit"><i class="fas fa-search" ></i></button>
             </form>
         </div>
-        <div class="bottomleft">
-            <div class="messagingpeople">
-                <img src="../../../../images/ProfilePic.jpg"><span style="font-size: 20px">Prashant Dhoju</span> 
+        <div class="bottomleft" >
+            <div class="messagingpeople" v-for="(item,index) in data1 " :key="index"   style="width:100%">
+                <img src="../../../../images/ProfilePic.jpg"><span style="font-size: 20px"><b>{{item.conversation_with}}</b></span>
+                <!-- yesma click garyo vane getmessage with sender=this.name and receiver=conversation.with an tyo chai side ma dekhaucha--> 
             </div>
+            
         </div>
     </div>
 </template>
@@ -18,6 +20,26 @@ export default {
     name: "Searchchat",
     data(){
     return {
+        data1 : [{
+                    "id":0 ,
+                    "conversation_with":"Prashant Dhoju",
+                    "conversation_by":"Sudesh",
+                    "recentdate":"2015/2/3",
+                    "conversationstartedate":"2015/2/3"
+                },
+                {   "id":1 ,
+                     "conversation_with":"Sudesh Dhoju",
+                    "conversation_by":"Sudesh",
+                    "recentdate":"2015/2/3",
+                    "conversationstartedate":"2015/2/3"
+                },
+                {    "id":2 ,
+                     "conversation_with":"Shishir Dhoju",
+                    "conversation_by":"Pokemon",
+                    "recentdate":"2015/2/3",
+                    "conversationstartedate":"2015/2/3"
+                    
+                }]
         
     }
   },
@@ -58,8 +80,18 @@ export default {
         .messagingpeople{
             width: 100%;
             background-color: rgb(192, 247, 175);
-            margin-top: 20px;  
+            margin-top: 5px;  
             border-radius: 10px;
             padding: 5px;
+            color: rgb(29, 63, 32);
+        }
+        
+        .messagingpeople:hover{
+            background-color: rgb(170, 211, 156);
+            cursor: pointer;
+        }
+        .messagingpeople:active{
+            background-color: rgb(74, 129, 57);
+            cursor: pointer;
         }
 </style>
