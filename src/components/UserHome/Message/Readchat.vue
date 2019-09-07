@@ -134,7 +134,7 @@ export default {
         padding: 5px;
     }
     button{
-
+        padding: 5px;
     }
     
 </style>
