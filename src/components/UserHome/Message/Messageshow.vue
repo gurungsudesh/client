@@ -69,27 +69,7 @@ export default {
     return {
         name: decode.name,
         userData: [],
-        data1 : [{
-                    "id":0 ,
-                    "conversation_with":"Prashant Dhoju",
-                    "conversation_by":"Sudesh",
-                    "recentdate":"2015/2/3",
-                    "conversationstartedate":"2015/2/3"
-                },
-                {   "id":1 ,
-                     "conversation_with":"Sudesh Dhoju",
-                    "conversation_by":"Sudesh",
-                    "recentdate":"2015/2/3",
-                    "conversationstartedate":"2015/2/3"
-                },
-                {    "id":2 ,
-                     "conversation_with":"Shishir Dhoju",
-                    "conversation_by":"Pokemon",
-                    "recentdate":"2015/2/3",
-                    "conversationstartedate":"2015/2/3"
-                    
-                }]
-        
+                
     }
   },
   created(){
