@@ -2,7 +2,7 @@
     <div>
         <!-- tyo conversation ma click garyo vane get garcha message-->
         <div class="topright">
-                    <table v-for="(item,index) in data1 " :key="index"   style="width:100%">
+                    <table v-for="(item,index) in userData " :key="index"   style="width:100%">
                     
                         <tr v-if="(whosend(item.sender))">
                             <td style="width: 10%">
@@ -32,20 +32,28 @@
                 </div>
                 <div class="bottomright">
                         <form class="form-inline" id="formmessage">
-                                <textarea class="form-control"  id="sendm" placeholder="message.." v-model="omessage"></textarea>
-                                <button id="mbtn" class="btn btn-success" @click="sendmessage(omessage)" >Send</button>
+                                <textarea class="form-control"  id="sendm" placeholder="message.." v-model="replyMessage"></textarea>
+                                <button id="mbtn" class="btn btn-success" @click="sendmessage(replyMessage)" >Send</button>
                         </form>
                 </div>
             
     </div>
 </template>
 <script>
+import jwtDecode from 'jwt-decode'
+import axios from 'axios'
 export default {
     name: "Readchat",
+    props: ['value'],
     data(){
+        const token = localStorage.usertoken
+        const decode = jwtDecode(token)
     return {
-        omessage:'',
-        name:'Pokemon',
+        replyMessage:'',
+        name: decode.name,
+        //name:'Pokemon',
+        inConversationWith: this.value,
+        userData: [],
         data1 : [{
                     "id":0 ,
                     "sender":"Prashant Dhoju",
@@ -66,6 +74,15 @@ export default {
         
     }
   },
+  created(){
+      axios.get("http://localhost:5000/users/converstion",{rname: this.name, sname: this.inConversationWith })
+        .then(res=>{
+            if(res.data.msg){
+                this.userData = res.data.docs;
+            }
+        })
+        .catch(err => alert(err));
+  },
   methods:{
       whosend(value){
           if (value==this.name){
@@ -75,9 +92,24 @@ export default {
               return true;
           }
       },
-      sendmessage(value){
-          this.data1.push({ id:this.data1.length, sender:this.name, receiver:'blalala' , message:value})
-          this.omessage='';
+      sendmessage(msg){
+        axios.post(`http://localhost:5000/users/messages/${this.inConversationWith}`,{sname: this.name, content: this.replyMessage})
+            .then(res=>{
+                if(res.data.success){
+                    //getting all the messages
+                    axios.get("http://localhost:5000/users/converstion",{rname: this.name, sname: this.inConversationWith })
+                        .then(res=>{
+                            if(res.data.msg){
+                                this.userData = res.data.docs;
+                            }
+                        })
+                        .catch(err => alert(err));
+                }
+                this.replyMessage = '';
+            })
+            .catch(err=> alert(err));
+        //   this.data1.push({ id:this.data1.length, sender:this.name, receiver:'blalala' , message:value})
+        //   this.omessage='';
       }
     }
     

@@ -7,11 +7,11 @@
             <div class="mainbody">
                 <div class="leftbody">
                     <!--eta chai search ani v-for garera name haru dekhauni-->
-                    <Searchchat/>
+                    <Searchchat v-on:sendData="pushData($event)"/>
                 </div>
                 <div class="rightbody">
                     <!--eta chai sending ra comment dekhauni tyo chai v-for hanni ho-->
-                    <Readchat/>
+                    <Readchat :value="inConversationWith"/>
                 </div>
             </div>
         </div>
@@ -28,6 +28,16 @@ export default {
     Searchchat,
     Readchat
   },
+  data(){
+      return{
+          inConversationWith:'',
+      }
+  },
+  methods:{
+      pushData(data){
+          this.inConversationWith = data;
+      }
+  }
   }
 </script>
 <style scoped>

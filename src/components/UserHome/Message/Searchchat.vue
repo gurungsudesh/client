@@ -7,8 +7,10 @@
             </form>
         </div>
         <div class="bottomleft" >
-            <div class="messagingpeople" v-for="(item,index) in data1 " :key="index"   style="width:100%">
-                <img src="../../../../images/ProfilePic.jpg"><span style="font-size: 20px"><b>{{item.conversation_with}}</b></span>
+            <div  @click="sendData(item.sender)" class="messagingpeople" v-for="(item,index) in userData " :key="index"   style="width:100%">
+                <img src="../../../../images/ProfilePic.jpg"><span style="font-size: 20px"><b>
+                    {{item.sender}}
+                </b></span>
                 <!-- yesma click garyo vane getmessage with sender=this.name and receiver=conversation.with an tyo chai side ma dekhaucha--> 
             </div>
             
@@ -16,10 +18,16 @@
     </div>
 </template>
 <script>
+import axios from 'axios'
+import jwtDecode from 'jwt-decode'
 export default {
     name: "Searchchat",
     data(){
+        const token = localStorage.usertoken
+        const decode = jwtDecode(token)
     return {
+        name: decode.name,
+        userData: [],
         data1 : [{
                     "id":0 ,
                     "conversation_with":"Prashant Dhoju",
@@ -43,9 +51,23 @@ export default {
         
     }
   },
-  methods:{
-      
+  created(){
+      //getting all the messages of the user
+    axios.get(`http://localhost:5000/users/messages/${this.name}`)
+        .then(res=>{
+            if(res.data.msg){
+                this.userData = res.data.docs;
+            }
+        })
+        .catch(err=> alert(err));
+
+
+  },
+  methods: {
+      sendData(sender){
+          this.$emit('sendData',sender)
       }
+  }
     
 }
 </script>
