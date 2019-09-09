@@ -7,7 +7,7 @@
             <form @submit="addPost" id="form1" >
                     
                         <img src="../../../images/ProfilePic.jpg" id="profileicon">   
-                        <textarea style="font-size:15px; width:75%; vertical-align:middle; margin:10px;"  rows="3" v-model="postdata" placeholder="Write something here..." required></textarea>
+                        <textarea style="font-size:15px; width:75%; vertical-align:middle; margin:10px;"  rows="3" v-model="postdata" placeholder="" required></textarea>
                         <button type="submit" style="margin-top:10px; width:50px" id="btn"> Post</button>
                  
                  
@@ -135,11 +135,13 @@ export default {
             likes: [],
             num: ' ',
             allComment: [],
-            notification: ''
+            notification: '',
+            hot:[]
         }
     },
     created(){
-      
+        
+
         axios.get(`http://localhost:5000/users/postOfN/${this.name}`)
         
         .then(res=>{
@@ -168,8 +170,9 @@ export default {
           }
         })
         .catch(err =>alert(err));  
-
+          
     },
+    
     methods: {
         //this doesnot work 
         clicklike(postkoId,postOwner){
@@ -242,7 +245,11 @@ export default {
         },
        count(postkoId){
             var likecount=this.likes.filter(function(post) {return post.postId == postkoId;});
-            return likecount.length;
+            var count= likecount.length;
+            
+            
+            return count;
+
        },
        countcmd(postkoId){
             var commentcount=this.allComment.filter(function(post) {return post.postId == postkoId;});
@@ -332,7 +339,10 @@ export default {
                 .catch(err => alert(err));
             this.postdata= " ";
 
-        }
+        },
+        
+        
+        
     }
     
 }

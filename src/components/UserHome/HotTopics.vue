@@ -4,12 +4,11 @@
            
             <div id="hotcontent">
                <ul class="list-group list-group-flush">
-                  <li class="list-group-item"> <h4><b>Hot topics</b></h4> </li>
-                  <li class="list-group-item">Topics 2</li>
-                 <li class="list-group-item">Topics 3</li>
-                 <li class="list-group-item">Topics 4</li>
-                 <li class="list-group-item">Topics 5</li>
-                  <li class="list-group-item">Topics 6</li>
+                 
+                  <li class="list-group-item"> <h4><b>Hot topics</b></h4></li>
+                <div style="text-align:left; color:green; font-weight:bold">
+                  <li class="list-group-item"  v-for="(item,index) in total.slice(0,3)" :key="index">{{item.content}}<!-- esko satta ma content hunxa--></li>
+                 </div>
             </ul>
                         </div>
                         </div>
@@ -30,12 +29,15 @@ export default {
       return{
         name: this.name,
         total: [],
-        posts: []
+        posts: [],
+        likes:[],
+        hot:[]
       }
     },
     created(){
 
-
+       
+        
       //This is still construction
   //----------------------------------------------------------------------
 
@@ -62,9 +64,40 @@ export default {
           }
         })
         .catch(err=> alert(err));
+        axios.get("http://localhost:5000/users/post/likes")
+                .then(res=>{
+                    if(res.data.msg){
+                        this.likes = res.data.docs;
+                    }
+                })
+                .catch(err => alert(err));
 
        //----------------------------------------------------------------------
-    }
+       
+    },
+    updated(){
+     //this.hotting();  
+     
+    },
+    methods:{
+      hotting(){
+        
+            this.hot=[];
+            var pok=this.posts;
+            var likecount;
+            for (var i = 0; i<pok.length;i++){
+                likecount=this.likes.filter(function(post) {return post.postId == pok[i]._id;});
+                this.hot.push({ id:pok[i]._id,content:pok[i].content,likes:likecount.length});
+                
+            }
+            
+            this.hot.sort(function(a,b){
+                return b.likes - a.likes;
+            });
+            
+        }
+    },
+    
 }
 </script>
 
