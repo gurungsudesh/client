@@ -17,9 +17,10 @@
                 
             </div>
     </div>
+    <!-- -------  -->
     <div class="rightbody">
         <div class="topright">
-                        <table v-for="(item,index) in userData " :key="index"   style="width:100%">
+                        <table v-for="(item,index) in userConversation" :key="index"   style="width:100%">
                         
                             <tr v-if="(whosend(item.sender))">
                                 <td style="width: 10%">
@@ -48,9 +49,9 @@
                         
                     </div>
                     <div class="bottomright">
-                            <form class="form-inline" id="formmessage">
-                                    <textarea class="form-control"  id="sendm" placeholder="message.." v-model="replyMessage"></textarea>
-                                    <button id="mbtn" class="btn btn-success" @click="sendmessage(replyMessage)" >Send</button>
+                            <form @submit="sendMessage()"  class="form-inline" id="formmessage">
+                                    <textarea class="form-control"  id="sendm" placeholder="Send the reply message" v-model="replyMessage"></textarea>
+                                    <button type="submit" id="mbtn" class="btn btn-success" >Send</button>
                             </form>
                     </div>
             </div>
@@ -69,53 +70,56 @@ export default {
     return {
         name: decode.name,
         userData: [],
-        data1 : [{
-                    "id":0 ,
-                    "conversation_with":"Prashant Dhoju",
-                    "conversation_by":"Sudesh",
-                    "recentdate":"2015/2/3",
-                    "conversationstartedate":"2015/2/3"
-                },
-                {   "id":1 ,
-                     "conversation_with":"Sudesh Dhoju",
-                    "conversation_by":"Sudesh",
-                    "recentdate":"2015/2/3",
-                    "conversationstartedate":"2015/2/3"
-                },
-                {    "id":2 ,
-                     "conversation_with":"Shishir Dhoju",
-                    "conversation_by":"Pokemon",
-                    "recentdate":"2015/2/3",
-                    "conversationstartedate":"2015/2/3"
+        userConversation: [],
+        inConversationWith: '',
+        replyMessage: '',
+        // data1 : [{
+        //             "id":0 ,
+        //             "conversation_with":"Prashant Dhoju",
+        //             "conversation_by":"Sudesh",
+        //             "recentdate":"2015/2/3",
+        //             "conversationstartedate":"2015/2/3"
+        //         },
+        //         {   "id":1 ,
+        //              "conversation_with":"Sudesh Dhoju",
+        //             "conversation_by":"Sudesh",
+        //             "recentdate":"2015/2/3",
+        //             "conversationstartedate":"2015/2/3"
+        //         },
+        //         {    "id":2 ,
+        //              "conversation_with":"Shishir Dhoju",
+        //             "conversation_by":"Pokemon",
+        //             "recentdate":"2015/2/3",
+        //             "conversationstartedate":"2015/2/3"
                     
-                }]
+        //         }]
         
     }
   },
   created(){
-      //getting all the messages of the user
-    axios.get(`http://localhost:5000/users/messages/${this.name}`)
+      //malai message pathako sabai users aaunu paryo 
+      axios.get(`http://localhost:5000/users/messages/${this.name}`)
         .then(res=>{
             if(res.data.msg){
                 this.userData = res.data.docs;
             }
         })
         .catch(err=> alert(err));
-        axios.get("http://localhost:5000/users/converstion",{rname: this.name, sname: this.inConversationWith })
-        .then(res=>{
-            if(res.data.msg){
-                this.userData = res.data.docs;
-            }
-        })
-        .catch(err => alert(err));
-
-
   },
   methods: {
-      sendData(sender){
-          this.$emit('sendData',sender)
-      },
-      whosend(value){
+      //tyo click gareko user sanga ko conversation nikane aaba
+        sendData(sender){
+           this.inConversationWith = sender;
+            axios.get("http://localhost:5000/users/conversation", {Rname: this.name, Sname: this.inConversationWith , apple: "apple"})
+                .then(res =>{
+                    if(res.data.msg){
+                        this.userConversation = res.data.docs;
+                    }
+                })
+                .catch(err => alert(err));
+
+        },
+        whosend(value){
           if (value==this.name){
               return false;
           }
@@ -123,15 +127,16 @@ export default {
               return true;
           }
       },
-      /*sendmessage(msg){
-        axios.post(`http://localhost:5000/users/messages/${this.inConversationWith}`,{sname: this.name, content: this.replyMessage})
+      sendMessage(){
+          axios.post(`http://localhost:5000/users/messages/${this.inConversationWith}`,{sname: this.name, content: this.replyMessage})
             .then(res=>{
                 if(res.data.success){
+                    alert("Message sent");
                     //getting all the messages
                     axios.get("http://localhost:5000/users/converstion",{rname: this.name, sname: this.inConversationWith })
                         .then(res=>{
                             if(res.data.msg){
-                                this.userData = res.data.docs;
+                                this.userConversation = res.data.docs;
                             }
                         })
                         .catch(err => alert(err));
@@ -139,9 +144,7 @@ export default {
                 this.replyMessage = '';
             })
             .catch(err=> alert(err));
-        //   this.data1.push({ id:this.data1.length, sender:this.name, receiver:'blalala' , message:value})
-        //   this.omessage='';
-      }*/
+      }
   }
     
 }

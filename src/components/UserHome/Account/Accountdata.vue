@@ -205,7 +205,7 @@ export default {
       },
       changePassword(prevPass,NewPass,confirmPass){
           if(confirmPass !== NewPass){  
-              //yo validation CCr le garcha ramrari 
+              //yo validation CCr and dhoju styling le garcha ramrari 
             alert(" duita Password Milena or the password are incorrect ")
 
           }
