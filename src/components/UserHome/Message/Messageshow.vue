@@ -70,6 +70,7 @@ export default {
     return {
         name: decode.name,
         userData: [],
+<<<<<<< HEAD
         userConversation: [],
         inConversationWith: '',
         replyMessage: '',
@@ -94,6 +95,9 @@ export default {
                     
         //         }]
         
+=======
+                
+>>>>>>> 3e821a9ce0147edd8d3e8a4e610c80db2f98b88d
     }
   },
   created(){

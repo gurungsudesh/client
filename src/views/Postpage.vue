@@ -28,7 +28,7 @@
                         
       </div>-->
      <div class="middlebody">
-        <AddPost />
+        <Singlepost/>
      </div>
       <div class="rightbody">
         <FollowRecom/>
@@ -53,8 +53,8 @@
 <script>
 import UserInfo from '../components/UserHome/UserInfo';
 import NavBar from '../components/UserHome/NavBar';
-import HotTopics from '../components/UserHome/HotTopics'
-import AddPost from '../components/UserHome/AddPost';
+import HotTopics from '../components/UserHome/HotTopics';
+import Singlepost from '../components/UserHome/Singlepost';
 
 import FollowRecom from '../components/UserHome/FollowRecom';
 import jwtDecode from 'jwt-decode';

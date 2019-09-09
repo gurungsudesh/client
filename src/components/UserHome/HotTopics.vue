@@ -5,9 +5,9 @@
             <div id="hotcontent">
                <ul class="list-group list-group-flush">
                  
-                  <li class="list-group-item"> <h4><b>Hot topics</b></h4></li>
+                  <li class="list-group-item"> <h4><b> Hot topics </b></h4></li>
                 <div style="text-align:left; color:green; font-weight:bold">
-                  <li class="list-group-item"  v-for="(item,index) in total.slice(0,3)" :key="index">{{item.content}}<!-- esko satta ma content hunxa--></li>
+                  <li class="list-group-item"  v-for="(item,index) in hot.slice(0,3)" :key="index">{{item.content}}<!-- esko satta ma content hunxa--></li>
                  </div>
             </ul>
                         </div>
@@ -54,7 +54,7 @@ export default {
                 .then(res=>{
                   if(res.data.docs != ''){
                     this.total[i] = res.data.docs;
-                    
+                    this.hotting()
                   }else{
                     //err
                   }
@@ -67,7 +67,7 @@ export default {
         axios.get("http://localhost:5000/users/post/likes")
                 .then(res=>{
                     if(res.data.msg){
-                        this.likes = res.data.docs;
+                        this.likes = res.data.docs;   
                     }
                 })
                 .catch(err => alert(err));

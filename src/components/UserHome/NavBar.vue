@@ -15,7 +15,7 @@
         <div class="dpdownbody" id="notificationid" ref="notificationid">
             <h1 style="text-align:center;  color:green;  padding-bottom:10px;"><i class="fas fa-bell"></i></h1>
             <ul style="text-align:left; border-top: 1px solid grey">
-              <div v-for="(item,index) in notifications.slice(0, 7) " :key="index"><li v-if="(checkname(item.sender))"><b style="color:green; font-size:17px;">{{item.sender}}</b> {{`${switching(item.type)}`}}</li></div>
+              <div v-for="(item,index) in notifications.slice(0, 7) " :key="index" style="padding-right:1px;"><li v-if="(checkname(item.sender))"><b style="color:green; font-size:17px;">{{item.sender}}</b> {{`${switching(item.type)}`}}</li></div>
             </ul>
             <div class="seemore">
               <router-link  class="nav-link" to="/notification"><b style="color:green"> See More</b></router-link>
@@ -27,18 +27,25 @@
         <router-link class="nav-link" to="/messages"><i class="far fa-envelope"></i><label>Messages</label></router-link>
       </li>
     </ul> 
-    <form class="form-inline my-2 my-lg-0" @submit= "search">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search for the username" aria-label="Search" v-model="searchContent">
-      <button id="sbtn" class="btn btn-success" type="submit"><i class="fas fa-search" ></i></button>
+    <form class="form-inline my-2 my-lg-0" >
+      <input class="form-control mr-sm-2" type="search" @input="search" placeholder="Search for the username" aria-label="Search" v-model="searchContent">
+      <button id="sbtn" class="btn btn-success"><i class="fas fa-search" @click="showNotification1(false)"></i></button>
+      <div class="dpdownbody1" id="notificationid1" ref="notificationid1">
+            <span style="font-size:30px; color:green;" >Search result</span>
+            <ul style="text-align:left; border-top: 1px solid grey">
+              <div v-for="(item,index) in user" :key="index"><li ><img src="../../../images/ProfilePic.jpg"  id="posticon"><label>Nothing to show </label> <span style=" font-size:17px; ">{{item.name}}</span> </li></div>
+            </ul>
+                    
+        </div>
     </form>
-  <div id="dpdn" class="btn-group">
-  <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-  </button>
-  <div  class="dropdown-menu dropdown-menu-right">
-    <router-link class="dropdown-item" to="/profile" >Profile</router-link>
-    <router-link class="dropdown-item" to="/account" >Settings</router-link>
-    <button v-on:click="logout" ><router-link class="dropdown-item" to="/" >Log Out</router-link></button>
-</div>
+      <div id="dpdn" class="btn-group">
+        <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        </button>
+      <div  class="dropdown-menu dropdown-menu-right">
+        <router-link class="dropdown-item" to="/profile" >Profile</router-link>
+        <router-link class="dropdown-item" to="/account" >Settings</router-link>
+        <button v-on:click="logout" ><router-link class="dropdown-item" to="/" >Log Out</router-link></button>
+    </div>
   </div>
   </div>
 </nav> 
@@ -70,6 +77,7 @@ export default {
         else{
           return true;
         }
+        
       },
       switching(value){
         switch(value){
@@ -93,21 +101,22 @@ export default {
             if(res.data.found){
               
               if(res.data.docs != ''){
-                  alert('user payo')
                   //yo user bhanne array ma sabai data haru cha
                   this.user = res.data.docs;
+                  this.showNotification1(false);
               }else{
-                alert('uers chahi payena')
+                //alert('uers chahi payena')
+                  this.showNotification1(true);
               }
               
             }else{
-              alert("something is wrong")
+              //alert("something is wrong")
             }
             
             
           })
           .catch(err=> alert(err));
-          this.searchContent= ''
+          
       },
       logout(){
         localStorage.removeItem('usertoken')
@@ -136,6 +145,24 @@ export default {
           }
         
         
+      },
+      showNotification1(value){
+
+        var vm = this;
+        if(value == true){
+          vm.$refs.notificationid1.style.visibility = 'hidden';
+          vm.$refs.notificationid1.style.height = '0px';
+          vm.$refs.notificationid1.style.opacity = '0';
+          
+        }
+          else
+          {
+            vm.$refs.notificationid1.style.visibility = 'visible'
+            vm.$refs.notificationid1.style.opacity = '1';
+            vm.$refs.notificationid1.style.height = 'auto';
+          }
+        
+        
       }
     }
 }
@@ -153,6 +180,15 @@ export default {
   background-color: green;
     
 }
+#posticon{  
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+    vertical-align:middle ;
+    border: 4px solid rgb(157, 255, 173);
+  
+}
 
 label{
   padding-left: 10px;
@@ -167,7 +203,7 @@ a{
     text-decoration:none;
 }
 #notificationid{
-  transition: 0.3s;
+  
   visibility: hidden;
   z-index: 1;
   position: absolute;
@@ -177,8 +213,9 @@ a{
   border: 1px solid green;
   opacity: 0;
   border-radius: 20px;
-  
   text-align:center;
+  transition: 0.2s;
+  
 }
 .dpdownbody ul{
   list-style: none;
@@ -193,6 +230,32 @@ a{
   background-color: rgb(230, 230, 230);
   cursor: pointer;
 }
+
+#notificationid1{
+ padding:10px;
+  visibility: hidden;
+  z-index: 1;
+  position: absolute;
+  top:60px;
+  right: 50px;
+  height:0px;
+  width:300px;
+  background-color: white;
+  border: 1px solid green;
+  opacity: 0;
+  text-align:center;
+  
+}
+.dpdownbody1 ul{
+  list-style: none;
+  margin: 0%;
+  padding: 0%;
+}
+.dpdownbody1 li{
+  border-bottom: 1px solid grey;
+  padding: 10px;
+}
+
 .badge {
  
   padding: 4px 8px;
