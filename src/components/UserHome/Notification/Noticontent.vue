@@ -12,7 +12,14 @@
                         <table  id="tables3"  v-if="(checkname(item.sender))" >
                                 <tr>
                                   <td rowspan="2" style="padding-left:10px; width:40px; height:50px;" ><img src="../../../../images/ProfilePic.jpg" align="left" id="otherprofileicon"></td>
-                                  <td style="width:100%; font-size: 15px; " ><b>{{item.sender}}</b> {{`${switching(item.type)}`}}</td> 
+                                  <td style="width:100%; font-size: 15px; ">
+                                    <div v-if="(checkname(item.sender) && (item.type==3 || item.type==4))">
+                                      <b><!--route profile-->{{item.sender}}</b><!--route post--> {{`${switching(item.type)}`}}
+                                      </div> 
+                                    <div v-if="(checkname(item.sender) && (item.type==1 || item.type==2))">
+                                      <b>{{item.sender}}</b> {{`${switching(item.type)}`}}
+                                      </div> 
+                                    </td>  
                                 </tr>
                                 <tr>
                                   <td style="color:grey; font-size: 12px;">{{item.date}}</td>

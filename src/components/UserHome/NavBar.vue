@@ -15,7 +15,16 @@
         <div class="dpdownbody" id="notificationid" ref="notificationid">
             <h1 style="text-align:center;  color:green;  padding-bottom:10px;"><i class="fas fa-bell"></i></h1>
             <ul style="text-align:left; border-top: 1px solid grey">
-              <div v-for="(item,index) in notifications.slice(0, 7) " :key="index" style="padding-right:1px;"><li v-if="(checkname(item.sender))"><b style="color:green; font-size:17px;">{{item.sender}}</b> {{`${switching(item.type)}`}}</li></div>
+              <div v-for="(item,index) in notifications.slice(0, 7) " :key="index" style="padding-right:1px;">
+                <div v-if="(checkname(item.sender) && (item.type==1 || item.type==2))">
+                  <!--route rakha yaha post-->
+                  <li><b style="color:green; font-size:17px;">{{item.sender}}</b> {{`${switching(item.type)}`}}</li>
+                </div>
+                <div v-if="(checkname(item.sender) && (item.type==3 || item.type==4))">
+                  <!--route rakha yaha follow-->
+                  <li><b style="color:green; font-size:17px;">{{item.sender}}</b> {{`${switching(item.type)}`}}</li>
+                </div>
+              </div>
             </ul>
             <div class="seemore">
               <router-link  class="nav-link" to="/notification"><b style="color:green"> See More</b></router-link>
