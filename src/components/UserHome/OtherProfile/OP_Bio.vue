@@ -1,10 +1,29 @@
 <template>
     <div>
-        <h2> UserBio goes here</h2>
-        <p> Full name: ________</p>
-        <p> Contact : ________</p>
-        <p> Address : ________</p>
-        <p> Bio : ________</p>
+      <div class="userinfo">
+            <table >
+                <tr>
+                    <td style="width:100px;"><b>Name:</b></td>
+                    <td>{{userData[0].fullName}}</td>
+                </tr>
+                <tr>    
+                    <td><b>Address:</b></td>
+                    <td>{{userData[0].address}}</td>
+                </tr>
+                <tr>
+                    <td><b>Contact:</b></td>
+                    <td>{{userData[0].contact}}</td>
+                </tr>
+                <tr>
+                    <td><b>About me:</b></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan="2">{{userData[0].bio}}</td>
+                </tr>
+            </table>
+        </div>
+
 
     </div>
 </template>
@@ -39,5 +58,16 @@ export default {
 }
 </script>
 <style scoped>
+.userinfo{
+    padding:20px;
+    color: grey;
+    width: 100%;
+    
+    
+}
+td{
+    word-wrap:break-all;    
+    padding: 5px;
+}
     
 </style>

@@ -133,5 +133,16 @@ export default {
    color: black;
     
   }
+  #hotkura{
+    margin-top:10px;
+    
+    word-wrap: break-word;
+    text-align: left;
+    font-size: 13px;
+    color:black;
+    background-color: rgb(218, 255, 218);
+    padding: 10px;
+    border-radius: 20px;
+  }
  
 </style>

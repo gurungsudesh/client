@@ -8,7 +8,7 @@
                 <div class="col-md-auto">
                     <h3>{{name}}</h3>
                         <p class="text-left" style="color: gray; font-size: 12px" > 
-                            Made at
+                            Made at {{date}}
                             <br>
                             
                             <!-- Yaha 99 bhako thau ma chai aauna paryo -->

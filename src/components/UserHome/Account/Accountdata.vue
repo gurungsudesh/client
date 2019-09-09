@@ -157,10 +157,6 @@ export default {
     return {
         username:decode.name,
         commenting:'',
-        changeName:'',
-        changeContact:'',
-        changeUserbio:'',
-        changeAddress:'',
         shouldDisable1:true,
         shouldDisable2:true,
         shouldDisable3:true,
@@ -169,7 +165,11 @@ export default {
         newPass: '',
         confirmPass: '',
         password: '',
-        userData: []
+        userData: [],
+        changeName: '',
+        changeContact:'',
+        changeUserbio:'',
+        changeAddress:'',
         
     }
   },
@@ -180,6 +180,10 @@ export default {
             if(res.data.success){
                 
                 this.userData = res.data.docs;
+                this.changeName = this.userData[0].fullName;
+                this.changeContact = this.userData[0].contact;
+                this.changeUserbio = this.userData[0].bio;
+                this.changeAddress = this.userData[0].address;
                 /*
                 dhoju yaha user data ma chai yo component created hune bitikai k k 
                 database ma cha user ko aaucah ani timile cahi 

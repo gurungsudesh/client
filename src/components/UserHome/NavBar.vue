@@ -10,7 +10,7 @@
             </li>
       <li class="nav-item" >
         <div  @click="showNotification">
-        <router-link class="nav-link" to="#" ><i class="far fa-bell"></i><span class="badge">1</span><label style="margin-left:15px;">Notifications</label></router-link>
+        <router-link class="nav-link" to="#" ><i class="far fa-bell"></i><span id="badge1" ref="badge1" class="badge" >{{notifications.length}}</span><label style="margin-left:5px;" >Notifications</label></router-link>
         </div>
         <div class="dpdownbody" id="notificationid" ref="notificationid">
             <h1 style="text-align:center;  color:green;  padding-bottom:10px;"><i class="fas fa-bell"></i></h1>
@@ -29,11 +29,13 @@
     </ul> 
     <form class="form-inline my-2 my-lg-0" >
       <input class="form-control mr-sm-2" type="search" @input="search" placeholder="Search for the username" aria-label="Search" v-model="searchContent">
-      <button id="sbtn" class="btn btn-success"><i class="fas fa-search" @click="showNotification1(false)"></i></button>
+      <button id="sbtn" class="btn btn-success" @click="showNotification1(false)"><i class="fas fa-search" ></i></button>
       <div class="dpdownbody1" id="notificationid1" ref="notificationid1">
             <span style="font-size:30px; color:green;" >Search result</span>
             <ul style="text-align:left; border-top: 1px solid grey">
-              <div v-for="(item,index) in user" :key="index"><li ><img src="../../../images/ProfilePic.jpg"  id="posticon"> <span style=" font-size:17px; "> <router-link :to="{ name: 'otherprofile' ,params:{name: item.name}}">{{item.name}}</router-link></span> </li></div>
+              <label style="margin-top:20px; margin-bottom:20px;" v-if="(user.length==0)" >Nothing to show</label>
+              <div v-for="(item,index) in user" :key="index">
+                <li ><img src="../../../images/ProfilePic.jpg"  id="posticon"> <span style=" font-size:17px; ">{{item.name}}</span> </li></div>
             </ul>
                     
         </div>
@@ -68,6 +70,22 @@ export default {
         searchContent: '',
         user: []
       }
+    },
+    created(){
+      axios.get(`http://localhost:5000/users/notifications/${this.name}`)
+          .then(res=>{
+            if(res.data.success){
+              this.notifications = res.data.docs;
+            }
+          })
+          .catch(err => alert(err));
+    },
+    updated(){
+      var vm=this;
+      if(this.notifications.length==0){
+        vm.$refs.badge1.style.display='none';
+      }
+      
     },
     methods:{
       checkname(value){
@@ -106,6 +124,7 @@ export default {
                   this.showNotification1(false);
               }else{
                 //alert('uers chahi payena')
+                  this.user = [];
                   this.showNotification1(true);
               }
               
@@ -122,6 +141,7 @@ export default {
         localStorage.removeItem('usertoken')
       },
       showNotification(){
+        
          //get notifications
         axios.get(`http://localhost:5000/users/notifications/${this.name}`)
           .then(res=>{
@@ -131,10 +151,13 @@ export default {
           })
           .catch(err => alert(err));
         var vm = this;
+         vm.$refs.badge1.style.display='none';
+         
         if(vm.$refs.notificationid.style.visibility == 'visible'){
           vm.$refs.notificationid.style.visibility = 'hidden';
           vm.$refs.notificationid.style.height = '0px';
           vm.$refs.notificationid.style.opacity = '0';
+         
           
         }
           else
@@ -147,9 +170,9 @@ export default {
         
       },
       showNotification1(value){
-
         var vm = this;
         if(value == true){
+          
           vm.$refs.notificationid1.style.visibility = 'hidden';
           vm.$refs.notificationid1.style.height = '0px';
           vm.$refs.notificationid1.style.opacity = '0';
@@ -157,6 +180,7 @@ export default {
         }
           else
           {
+            
             vm.$refs.notificationid1.style.visibility = 'visible'
             vm.$refs.notificationid1.style.opacity = '1';
             vm.$refs.notificationid1.style.height = 'auto';
@@ -258,12 +282,13 @@ a{
 
 .badge {
  
-  padding: 4px 8px;
+  padding: 1px 4px;
   border-radius: 50%;
   background: red;
   color: white;
   position: absolute;
   top: +10px;
+  
 
   
 }
