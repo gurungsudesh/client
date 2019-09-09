@@ -28,6 +28,11 @@ export default {
     return {
         name: decode.name,
         userData: [],
+        replyMessage:'',
+        name: decode.name,
+        //name:'Pokemon',
+        inConversationWith: this.value,
+        userData: [],
         data1 : [{
                     "id":0 ,
                     "conversation_with":"Prashant Dhoju",

@@ -5,28 +5,28 @@
                 <NavBar/>
             </div>
             <div class="mainbody">
-                <div class="leftbody">
+                <Messageshow/>
                     <!--eta chai search ani v-for garera name haru dekhauni-->
-                    <Searchchat v-on:sendData="pushData($event)"/>
-                </div>
-                <div class="rightbody">
+                    <!--<Searchchat v-on:sendData="pushData($event)"/>-->
+                
+                
                     <!--eta chai sending ra comment dekhauni tyo chai v-for hanni ho-->
-                    <Readchat :value="inConversationWith"/>
-                </div>
+                    <!--<Readchat :value="inConversationWith"/>-->
+                
             </div>
         </div>
     </div>
 </template>
 <script>
 import NavBar from '../components/UserHome/NavBar';
-import Searchchat from '../components/UserHome/Message/Searchchat';
-import Readchat from '../components/UserHome/Message/Readchat';
+
+import Messageshow from '../components/UserHome/Message/Messageshow';
 export default {
     name: "message",
     components: {
     NavBar,
-    Searchchat,
-    Readchat
+    
+    Messageshow
   },
   data(){
       return{
