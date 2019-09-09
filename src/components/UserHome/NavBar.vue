@@ -18,11 +18,12 @@
               <div v-for="(item,index) in notifications.slice(0, 7) " :key="index" style="padding-right:1px;">
                 <div v-if="(checkname(item.sender) && (item.type==1 || item.type==2))">
                   <!--route rakha yaha post-->
-                  <li><b style="color:green; font-size:17px;">{{item.sender}}</b> {{`${switching(item.type)}`}}</li>
+                  
+                  <router-link :to="{name:'postpage', params: {postID: item.postId }}"><li><b style="color:green; font-size:17px;">{{item.sender}}</b> {{`${switching(item.type)}`}}</li></router-link>
                 </div>
                 <div v-if="(checkname(item.sender) && (item.type==3 || item.type==4))">
                   <!--route rakha yaha follow-->
-                  <li><b style="color:green; font-size:17px;">{{item.sender}}</b> {{`${switching(item.type)}`}}</li>
+                  <router-link :to="{name:'otherprofile', params: {name: item.sender }}"><li><b style="color:green; font-size:17px;">{{item.sender}}</b> {{`${switching(item.type)}`}}</li></router-link>
                 </div>
               </div>
             </ul>
@@ -44,7 +45,9 @@
             <ul style="text-align:left; border-top: 1px solid grey">
               <label style="margin-top:20px; margin-bottom:20px;" v-if="(user.length==0)" >Nothing to show</label>
               <div v-for="(item,index) in user" :key="index">
-                <li ><img src="../../../images/ProfilePic.jpg"  id="posticon"> <span style=" font-size:17px; ">{{item.name}}</span> </li></div>
+                <router-link :to="{name:'otherprofile', params: {name: item.name }}"><li ><img src="../../../images/ProfilePic.jpg"  id="posticon"> <span style=" font-size:17px; ">
+                  {{item.name}}</span> </li> </router-link>
+              </div>
             </ul>
                     
         </div>
