@@ -33,7 +33,7 @@
       <div class="dpdownbody1" id="notificationid1" ref="notificationid1">
             <span style="font-size:30px; color:green;" >Search result</span>
             <ul style="text-align:left; border-top: 1px solid grey">
-              <div v-for="(item,index) in user" :key="index"><li ><img src="../../../images/ProfilePic.jpg"  id="posticon"><label>Nothing to show </label> <span style=" font-size:17px; ">{{item.name}}</span> </li></div>
+              <div v-for="(item,index) in user" :key="index"><li ><img src="../../../images/ProfilePic.jpg"  id="posticon"> <span style=" font-size:17px; "> <router-link :to="{ name: 'otherprofile' ,params:{name: item.name}}">{{item.name}}</router-link></span> </li></div>
             </ul>
                     
         </div>

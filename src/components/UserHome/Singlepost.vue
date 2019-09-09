@@ -2,7 +2,7 @@
     <div>
         <div id ="postmain" >
            
-            <div class="postfeed" v-for="(item,index) in posts " :key="index"> 
+            <div class="postfeed" v-for="(item,index) in post " :key="index"> 
                     <div class="toppost">
                         <table id="posttable">
                                 <tr>
@@ -81,14 +81,17 @@
 </template>
 <script>
 import axios from 'axios'
+import moment from 'moment'
+import jwtDecode from 'jwt-decode';
 export default {
     name: "Singlepost",
-    
+    props: ['id'],
     data(){
+        const token = localStorage.usertoken
+        const decode = jwtDecode(token)
         return{
-             postdata: '',
+            postdata: '',
             name : decode.name,
-            posts:[],
             error: '',
             formatedate:'',
             commentContent: '',
@@ -98,11 +101,41 @@ export default {
             num: ' ',
             allComment: [],
             notification: '',
+            postID: this.id,
+            post: []
 
         }
     },
     created(){
+        //getting the clicked post
          
+        axios.get(`http://localhost:5000/users/hotpost/${this.postID}`)
+            .then(res=>{
+                if(res.data.msg){
+                    this.post = res.data.docs;
+                    //getting likes 
+                    axios.get("http://localhost:5000/users/post/likes")
+                        .then(res=>{
+                            if(res.data.msg){
+                                this.likes = res.data.docs;
+                                //getting all the comments
+                                axios.get("http://localhost:5000/users/post/comment")
+                                    .then(res=>{
+                                        if(res.data.msg){
+                                            this.allComment = res.data.docs;
+                                        }
+                                    })
+                                    .catch(err => alert(err));
+                            }
+                        })
+                        .catch(err => alert(err));
+                }
+            })
+            .catch(err=> alert(err));
+        
+
+    
+
     },
     methods:{
         clicklike(postkoId,postOwner){

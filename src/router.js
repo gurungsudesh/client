@@ -8,6 +8,7 @@ import Notification from './views/Notification.vue';
 import otherprofile from './views/OtherProfile.vue'
 import account from './views/Account.vue';
 import messages from './views/Message.vue'
+import postpage from './views/Postpage.vue';
 Vue.use(Router)
 
 export default new Router({
@@ -56,6 +57,11 @@ export default new Router({
             path: '/messages',
             name: 'messages',
             component: messages
+        },
+        {
+            path: '/postpage/:postID',
+            name: 'postpage',
+            component: postpage
         }
     ]
 })

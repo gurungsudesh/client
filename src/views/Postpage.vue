@@ -28,7 +28,8 @@
                         
       </div>-->
      <div class="middlebody">
-        <Singlepost/>
+       
+        <Singlepost :id="pID"/>
      </div>
       <div class="rightbody">
         <FollowRecom/>
@@ -61,7 +62,7 @@ import jwtDecode from 'jwt-decode';
 
 
 export default {
-  
+  name: "postpage",
   data(){
      
     const token = localStorage.usertoken
@@ -71,6 +72,7 @@ export default {
       
       name: decoded.name,
       email: decoded.email,
+      pID:''
      
     }
   },
@@ -78,7 +80,7 @@ export default {
     UserInfo,
     NavBar,
     HotTopics,
-    AddPost,
+    Singlepost,
    
     FollowRecom
   },
@@ -117,6 +119,10 @@ export default {
     }
     
   }*/
+  },
+  created(){
+    this.pID = this.$route.params.postID;
+    
   }
 }
 </script>
