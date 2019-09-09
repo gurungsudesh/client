@@ -80,8 +80,9 @@ export default {
     width: 80%;
     height: 55%;
     margin-left: 10%;
-    background-color:rgb(159, 255, 159);
-    border-radius: 20px;
+    background-color:rgb(228, 253, 228);
+    border: 1px solid rgb(189, 218, 189);
+    border-radius: 10px;
 }
 .UPleft{
     position: absolute;

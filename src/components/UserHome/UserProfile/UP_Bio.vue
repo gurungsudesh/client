@@ -6,22 +6,22 @@
             <table >
                 <tr>
                     <td style="width:100px;"><b>Name:</b></td>
-                    <td>Prashant Dhoju</td>
+                    <td>{{userData[0].fullName}}</td>
                 </tr>
                 <tr>    
                     <td><b>Address:</b></td>
-                    <td> Prashant Dhoju</td>
+                    <td>{{userData[0].address}}</td>
                 </tr>
                 <tr>
                     <td><b>Contact:</b></td>
-                    <td> Prashant Dhoju</td>
+                    <td>{{userData[0].contact}}</td>
                 </tr>
                 <tr>
                     <td><b>About me:</b></td>
                     <td></td>
                 </tr>
                 <tr>
-                    <td colspan="2">sdasdasdasdasdasd sadasdasdasda ssdasdasdasda sdasdasdsd</td>
+                    <td colspan="2">{{userData[0].bio}}</td>
                 </tr>
             </table>
         </div>

@@ -7,7 +7,7 @@
                  
                   <li class="list-group-item"> <h4><b> Hot topics </b></h4></li>
                 <div style="text-align:left; color:green; font-weight:bold">
-                  <li class="list-group-item"  v-for="(item,index) in hot.slice(0,3)" :key="index">{{item.content}}<!-- esko satta ma content hunxa--></li>
+                  <li class="list-group-item" id="hotkura" v-for="(item,index) in hot.slice(0,3)" :key="index">{{item.content}}<!-- esko satta ma content hunxa--></li>
                  </div>
             </ul>
                         </div>
@@ -128,6 +128,17 @@ export default {
   
    color: black;
     
+  }
+  #hotkura{
+    margin-top:10px;
+    
+    word-wrap: break-word;
+    text-align: left;
+    font-size: 13px;
+    color:black;
+    background-color: rgb(218, 255, 218);
+    padding: 10px;
+    border-radius: 20px;
   }
  
 </style>
