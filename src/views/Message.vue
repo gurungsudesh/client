@@ -19,26 +19,15 @@
 </template>
 <script>
 import NavBar from '../components/UserHome/NavBar';
-
 import Messageshow from '../components/UserHome/Message/Messageshow';
 export default {
     name: "message",
     components: {
-    NavBar,
-    
-    Messageshow
-  },
-  data(){
-      return{
-          inConversationWith:'',
-      }
-  },
-  methods:{
-      pushData(data){
-          this.inConversationWith = data;
-      }
+        NavBar,
+        Messageshow
   }
-  }
+  
+}
 </script>
 <style scoped>
 .home-header{
