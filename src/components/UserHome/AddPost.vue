@@ -184,7 +184,7 @@ export default {
                     if(res.data.msg){
                         //sending the liked notification 
                         axios.post(`http://localhost:5000/users/notifications/${postkoId}`,{name: this.name, notify: this.notification, receiver: postOwner})
-                        
+                            
                             .then(res=>{
                                 if(res.data.success){
                                     alert(' Like Notification sent')
