@@ -45,7 +45,7 @@ export default {
        
         
       //This is still construction
-  //----------------------------------------------------------------------
+  //---------------------------------------------------------------------
 
       // All posts liyo
       axios.get("http://localhost:5000/users/post")
