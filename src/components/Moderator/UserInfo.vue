@@ -4,9 +4,9 @@
                     <div class="m_topl">
                             <div class="row">
                                     <div  class="col-md-auto">
-                                      <img src="bullet.jpg" >
+                                      <img src="../../../images/ProfilePic.jpg">
                                             <br/>
-                                            <h3>{{Username}}</h3>
+                                            <h3 style="text-align:center;">{{Username}}</h3>
 
                                             <div id="m_lcontent">
                                             <i class="fas fa-user-check"></i>

@@ -57,8 +57,9 @@ export default {
 }
 .bottomright{
     position: absolute;
-    top:20%;
-    height: 80%;
+    top:11%;
+
     width: 100%;
+    background-color: rgb(235, 235, 235);   
 }
 </style>

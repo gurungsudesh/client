@@ -401,8 +401,6 @@ a:hover{
 }
 
 
-
-
   #tables3 th,#tables3 td {
     padding: 5px;
    
