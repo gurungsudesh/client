@@ -13,11 +13,11 @@
                                 <tr>
                                   <td rowspan="2" style="padding-left:10px; width:40px; height:50px;" ><img src="../../../../images/ProfilePic.jpg" align="left" id="otherprofileicon"></td>
                                   <td style="width:100%; font-size: 15px; ">
-                                    <div v-if="(checkname(item.sender) && (item.type==3 || item.type==4))">
-                                      <b><!--route profile-->{{item.sender}}</b><!--route post--> {{`${switching(item.type)}`}}
-                                      </div> 
                                     <div v-if="(checkname(item.sender) && (item.type==1 || item.type==2))">
-                                      <b>{{item.sender}}</b> {{`${switching(item.type)}`}}
+                                      <router-link :to="{name:'postpage', params: {postID: item.postId }}"><b><!--route profile-->{{item.sender}}</b><!--route post--> {{`${switching(item.type)}`}}</router-link>
+                                      </div> 
+                                    <div v-if="(checkname(item.sender) && (item.type==3 || item.type==4))">
+                                      <router-link :to="{name:'otherprofile', params: {name: item.sender }}"><b>{{item.sender}}</b> {{`${switching(item.type)}`}}</router-link>
                                       </div> 
                                     </td>  
                                 </tr>

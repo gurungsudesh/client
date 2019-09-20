@@ -102,13 +102,14 @@ export default {
             allComment: [],
             notification: '',
             postID: this.id,
-            post: []
+            post: [],
+            temp: ''
 
         }
     },
     created(){
         //getting the clicked post
-         
+        
         axios.get(`http://localhost:5000/users/hotpost/${this.postID}`)
             .then(res=>{
                 if(res.data.msg){

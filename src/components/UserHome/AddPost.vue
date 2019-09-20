@@ -279,12 +279,13 @@ export default {
                         
                         alert("posted")
                         //sending notification
-                        axios.post(`http://localhost:5000/users/notifications/${postID}`,{name: uname, notify: this.notification, pOwner: postOwner})
+                        axios.post(`http://localhost:5000/users/notifications/${postID}`,{name: uname, notify: this.notification, receiver: postOwner})
                             .then(res=>{
-                                alert("Notification sent")
+                                
                                 if(res.data.success){
-                                    const pId = postID;   
-                                    alert(pId)
+                                    const pId = postID;  
+                                    alert("Notification sent") 
+                                    //alert(pId)
                                     axios.get(`http://localhost:5000/users/post/comment/${pId}`)
                                         .then(res=>{
                                             if(res.data.msg){
