@@ -46,6 +46,7 @@ export default {
     height: 91%;
     border-right: 2px solid green;  
     border-left: 2px solid green;
+    border-bottom: 2px solid green;
 }
 .leftbody{
     position: absolute;

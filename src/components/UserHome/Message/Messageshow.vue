@@ -2,10 +2,10 @@
     <div>
         <div class="leftbody">
             <div class="topleft">
-                <form class="form-inline" id="fromsearch">
-                        <input class="form-control" style="width: 250px" type="search" placeholder="Search" aria-label="Search">
-                        <button id="sbtn" class="btn btn-success" type="submit"><i class="fas fa-search" ></i></button>
-                </form>
+                <div class="form-inline" id="fromsearch">
+                        <input class="form-control" id="inputtext" type="text" placeholder="Search" aria-label="Search">
+                        <button id="sbtn"  type="submit"><i class="fas fa-search" ></i></button>
+                </div>
             </div>
             <div class="bottomleft" >
                 <div  @click="sendData(item.sender)" class="messagingpeople" v-for="(item,index) in userData " :key="index"   style="width:100%">
@@ -167,7 +167,8 @@ export default {
         #fromsearch{
             position: absolute;
             margin-top:15px;
-            margin-left: 20px;
+            margin-left: 5%;
+            width: 80%;
         }
         .bottomleft{
             position: absolute;
@@ -219,6 +220,7 @@ export default {
         top:88%;
         width: 100%;
         height: 12%;
+        
         background-color: rgb(119, 218, 119);
     }
     .topright img{
@@ -232,11 +234,11 @@ export default {
         padding: 10px;
     }
     #sendm{
-        width: 90%;
+        width: 80%;
     }
     #formmessage{
         margin: 10px;
-        
+     
     }
     .status{
         background-color: lightgreen;
@@ -252,6 +254,12 @@ export default {
     }
     button{
         padding: 5px;
+    }
+    #sbtn{
+        margin-left:-50px;
+        background:none;
+        border:none;
+        
     }
     textarea{
         font-size: 15px;
@@ -275,5 +283,14 @@ export default {
     top: 0px;
     height: 100%;
     width:70%;
+}
+#inputtext{
+    margin:auto;
+    
+    outline: none;
+    border: 2px solid lightgray;
+    border-radius: 10px;
+    width:100%;
+    padding-right:40px;
 }
 </style>
