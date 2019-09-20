@@ -30,13 +30,14 @@
                 <table id="tableinbox" class="table table-hover">
                     <thead>
                         <tr>
-                        <th style="width:20%" scope="col">First</th>
-                        <th style="width:70%" scope="col">Last</th>
-                        <th style="width:10%" scope="col">Handle</th>
+                        <th style="width:20%" scope="col">Name</th>
+                        <th style="width:70%" scope="col">Content</th>
+                        <th style="width:10%" scope="col">Date</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
+                            <!-- <tr v-for="item in item"> -->
                             <td ><b>Prashant Dhoju</b> </td>
                             <td >sssssssssssssssssssssssss</td>
                             <td ><b>date</b> </td>
@@ -303,6 +304,6 @@ export default {
 }
 #tableinbox td{
     
-    padding: 1px;
+    padding: 10px;
 }
 </style>
