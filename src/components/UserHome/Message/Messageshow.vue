@@ -6,11 +6,11 @@
             </div>
             <div class="bottomleft" >
                 <div  id="fromsearch">
-                        <span style="margin-left:10px ;color:gray; font-size:20px;"><b>To</b></span>  <input class="form-control" id="inputtext" type="text"  aria-label="Search">
+                        <span style="margin-left:10px ;color:gray; font-size:20px;"><b>To</b></span>  <input class="form-control" id="inputtext" type="text" v-model="receivingUser" aria-label="Search">
                 </div>
                 <div id="fromsearch">
-                    <span style="margin-left:10px; color:gray; font-size:20px;"><b>Subject</b></span>
-                    <form @submit="sendMessage()"  id="formmessage">
+                    <span style="margin-left:10px; color:gray; font-size:20px;"><b>Message Content</b></span>
+                    <form @submit="sendMessage(replyMessage)"  id="formmessage">
                             <textarea class="form-control"  id="sendm" rows="17" placeholder="Send the reply message" v-model="replyMessage"></textarea>
                             <button style="float:right;" type="submit" id="mbtn" class="btn btn-success" >Send</button>
                     </form>
@@ -30,17 +30,18 @@
                 <table id="tableinbox" class="table table-hover">
                     <thead>
                         <tr>
-                        <th style="width:20%" scope="col">Name</th>
+                        <th style="width:20%" scope="col">Sent by</th>
                         <th style="width:70%" scope="col">Content</th>
                         <th style="width:10%" scope="col">Date</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <!-- <tr v-for="item in item"> -->
-                            <td ><b>Prashant Dhoju</b> </td>
-                            <td >sssssssssssssssssssssssss</td>
-                            <td ><b>date</b> </td>
+                        <!-- <tr v-for="item in item"> -->
+                        <tr v-for="item in allMessages" :key="item">
+                            
+                            <td ><b>{{item.sender}}</b> </td>
+                            <td >{{item.message}}</td>
+                            <td ><b>{{item.date}}</b> </td>
                         </tr>
                        
                     </tbody>
@@ -63,83 +64,73 @@ export default {
         const decode = jwtDecode(token)
     return {
         name: decode.name,
-        userData: [],
-        userConversation: [],
-        inConversationWith: '',
         replyMessage: '',
-        // data1 : [{
-        //             "id":0 ,
-        //             "conversation_with":"Prashant Dhoju",
-        //             "conversation_by":"Sudesh",
-        //             "recentdate":"2015/2/3",
-        //             "conversationstartedate":"2015/2/3"
-        //         },
-        //         {   "id":1 ,
-        //              "conversation_with":"Sudesh Dhoju",
-        //             "conversation_by":"Sudesh",
-        //             "recentdate":"2015/2/3",
-        //             "conversationstartedate":"2015/2/3"
-        //         },
-        //         {    "id":2 ,
-        //              "conversation_with":"Shishir Dhoju",
-        //             "conversation_by":"Pokemon",
-        //             "recentdate":"2015/2/3",
-        //             "conversationstartedate":"2015/2/3"
-                    
-        //         }]
+        receivingUser: '',
+        allMessages: []
+        // allMessages:[
+        //     {
+        //         sender: "apple",
+        //         message: "message yo hai",
+        //         date: "2019/20/20"
+        //     }
+        // ]
+
         
     }
   },
   created(){
-      //malai message pathako sabai users aaunu paryo 
-      axios.get(`http://localhost:5000/users/messages/${this.name}`)
+      //getting the messages when im  the receiver
+      axios.get(`http://localhost:5000/users/messagereceived/${this.name}`)
         .then(res=>{
-            if(res.data.msg){
-                this.userData = res.data.docs;
+            if(res.data.success){
+                alert('message get gareko')
+                this.allMessages = res.data.docs;
+                // // getting the messages when im the sender
+                // axios.get(`http://localhost:5000/users/messagesent/${this.name}`)
+                // .then(res=>{
+                //     if(res.data.success){
+                //         this.allMessages.push(res.data.docs);
+                //     }
+                // })
+                // .catch(err => alert(err));
             }
         })
         .catch(err=> alert(err));
+   
+    
+
   },
   methods: {
-      //tyo click gareko user sanga ko conversation nikane aaba
-        sendData(sender){
-           this.inConversationWith = sender;
-            axios.get("http://localhost:5000/users/conversation", {Rname: this.name, Sname: this.inConversationWith , apple: "apple"})
-                .then(res =>{
-                    if(res.data.msg){
-                        this.userConversation = res.data.docs;
-                    }
-                })
-                .catch(err => alert(err));
-
-        },
-        whosend(value){
-          if (value==this.name){
-              return false;
-          }
-          else{
-              return true;
-          }
-      },
-      sendMessage(){
-          axios.post(`http://localhost:5000/users/messages/${this.inConversationWith}`,{sname: this.name, content: this.replyMessage})
+    sendMessage(message){
+        axios.post(`http://localhost:5000/users/sendmessage/${this.receivingUser}`, {sname: this.name, content: message})
             .then(res=>{
                 if(res.data.success){
-                    alert("Message sent");
-                    //getting all the messages
-                    axios.get("http://localhost:5000/users/converstion",{rname: this.name, sname: this.inConversationWith })
+                    alert("message sent")
+                    this.receivingUser = '';
+                    this.replyMessage = '';
+                     axios.get(`http://localhost:5000/users/messagesent/${this.name}`)
                         .then(res=>{
-                            if(res.data.msg){
-                                this.userConversation = res.data.docs;
+                            if(res.data.success){
+                                alert('message get gareko')
+                                this.allMessages = res.data.docs;
+                                // axios.get(`http://localhost:5000/users/messagereceived/${this.name}`)
+                                //     .then(res=>{
+                                //         if(res.data.success){
+                                //             this.allMessages.push(res.data.docs);
+                                //         }
+                                //     })
+                                //     .catch(err => alert(err));
                             }
-                        })
-                        .catch(err => alert(err));
+                         })
+                         .catch(err=> alert(err));
+                    
                 }
-                this.replyMessage = '';
             })
             .catch(err=> alert(err));
-      }
+            
+    }
   }
+
     
 }
 </script>
