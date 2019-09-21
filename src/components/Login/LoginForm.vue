@@ -11,7 +11,8 @@
         <li><button type="submit" class="btn btn-success">Login</button></li>
         </ul>
         <p class="error" v-if="error">{{error}}</p>
-    </form>             
+    </form>      
+    <router-link to="/forgotpassword"> forgot password?</router-link>       
 </div>
                
         

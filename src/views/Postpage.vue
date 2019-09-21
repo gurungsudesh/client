@@ -32,21 +32,9 @@
         <Singlepost :id="pID"/>
      </div>
       <div class="rightbody">
-        <!-- <FollowRecom/> -->
+        <FollowRecom/>
       </div>
-      <!--<div ref="mobrightid" id="mobrightid" class="mobrightbody">
-            <div  ref="mtrsidenav"  id="mtrsidenav" class="mobrightcontent">
-            <button style="margin-left:90%" @click="closerightslide">+</button>
-            <FollowRecom/>
-            </div>
-            
-              <div @click="openrightslide" id="rightslider" ref="rightslider" class="rightnav">
-              <div id="rightsliderarrow">
-                <i  class="fas fa-arrow-right"></i>
-              </div>
-            </div>
-                        
-      </div>-->
+      
     </div>
   </div>
  </div>  
@@ -57,7 +45,7 @@ import NavBar from '../components/UserHome/NavBar';
 import HotTopics from '../components/UserHome/HotTopics';
 import Singlepost from '../components/UserHome/Singlepost';
 
-//import FollowRecom from '../components/UserHome/FollowRecom';
+import FollowRecom from '../components/UserHome/FollowRecom';
 import jwtDecode from 'jwt-decode';
 
 
@@ -82,7 +70,7 @@ export default {
     HotTopics,
     Singlepost,
    
-    //FollowRecom
+    FollowRecom
   },
   methods:{
     /*openleftslide(){

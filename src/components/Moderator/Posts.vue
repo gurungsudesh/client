@@ -12,7 +12,9 @@
                         <table id="posttable">
                                 <tr>
                                 <td rowspan="2"  style="width:80px"><img src="../../../images/ProfilePic.jpg" id="posticon"></td>     
-                                <td style="font-size: 20px; color:forestgreen; font-weight:bold" >{{item.name}}</td>
+                                <td style="font-size: 20px; color:forestgreen; font-weight:bold" >
+                                    <router-link :to="{ name: 'otherprofile' ,params:{name: item.name}}"> {{item.name}} </router-link>
+                                </td>
                             </tr>
                             <tr>
                                 
@@ -54,11 +56,12 @@
                                                 <span class="postcontent" >
                                                     <b style="color:darkgreen; font-size:15px;">{{comment.name}}</b>
                                                     {{comment.comment}} 
+                                                    
                                                 </span>
                                                 <span style="color:grey; font-size:10px; margin-left:10px;">{{`${commentdateformat(comment.date)}`}}</span>
                                             </td>
                                             <td>
-                                                <button class="btn btn-success" style="float:right;"><i class="fas fa-trash-alt"></i></button>
+                                                <button @click ="deleteComment(comment._id)" class="btn btn-success" style="float:right;"><i class="fas fa-trash-alt"></i> delete</button>
                                             </td>
                                         </tr>
                                     </table>
@@ -181,6 +184,28 @@ export default {
                 return moment(String(value)).format('hh:mm')
             }
         },
+        //delete comment 
+        deleteComment(id){
+            axios.delete(`http://localhost:5000/users/coomentdelete/${id}`)
+                .then(res=>{
+                    if(res.data.success){
+                        alert('comment deleted')
+                        // get comment 
+                        // axios.get(`http://localhost:5000/users/post/comment/${pId}`)
+                        //     .then(res=>{
+                        //         if(res.data.msg){
+                                    
+                        //             this.comments = res.data.docs;
+                        //             this.num = this.comments.length;
+                        //         }
+                                
+                        //     })
+                        //     .catch(err=> alert(err))
+                        
+                    }
+                })
+                .catch(err => alert(err));
+        }
     }
 }
 </script>
@@ -216,7 +241,7 @@ export default {
     height: 60px;
     margin-right: 10px;
     vertical-align:top  ;
-    border: 7px solid rgb(157, 255, 173);
+    border: 5px solid rgb(136, 223, 150);
   
 }
 .postcontent{

@@ -8,9 +8,8 @@
                 <div class="col-md-auto">
                     <h3>{{name}}</h3>
                         <p class="text-left" style="color: gray; font-size: 12px" > 
-                            Made at {{date}}
+                            Made at s{{date}}
                             <br>
-                            
                             <!-- Yaha 99 bhako thau ma chai aauna paryo -->
                             {{followersNum}} followers<br>
                             {{followingNum}} following<br>

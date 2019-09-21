@@ -31,12 +31,39 @@
                     <!--  Yo chai error aaune registration aauda -->
                     <p style="color:red ; font-weight:none; font-size: 15px; left:10%; bottom:15%; z-index: +1; position: absolute;" class="err" v-if="error"> {{error}}</p>
                
+                    <li class="list-group-item">
+                        <select  class="custom-select" @change="onChange1($event)" v-model="key1" style="color:darkgray; border:none; border-bottom:1px solid lightgray;">
+                        <option  value="" disabled selected >Choose your Security Question</option>
+                            <option  value="What was your favorite place to visit as a child?">What was your favorite place to visit as a child?</option>
+                            <option  value="Who is your favorite actor, musician, or artist?">Who is your favorite actor, musician, or artist?</option>
+                            <option  value="What is the name of your favorite pet?">What is the name of your favorite pet?</option>
+                            <option  value="What is the name of your first school?">What is the name of your first school?</option>
+                            <option  value="What is your favorite color?">What is your favorite color?</option>
+                        </select>
+                    </li>
+                    <li class="list-group-item">
+                        <input type="text" class="form-control"  id="inputPassword3" placeholder="Answer 1" v-model= "ans1" required>
+                    </li>
+
+                    <li class="list-group-item">
+                        <select class="custom-select" @change="onChange2($event)" v-model="key2" style="color:darkgray; border:none; border-bottom:1px solid lightgray;">
+                        <option value="" disabled selected style="color:lightgray">Choose your next Security Question</option>
+                            <option value="What is the name of your favorite childhood friend? ">What is the name of your favorite childhood friend? </option>
+                            <option value="What school did you attend for sixth grade?">What school did you attend for sixth grade?</option>
+                            <option value="What is your youngest brother’s birthday month and year? ">What is your youngest brother’s birthday month and year? </option>
+                            <option value="What street did you live on in third grade?">What street did you live on in third grade?</option>
+                            <option value="What is the first name of the boy or girl that you first kissed?">What is the first name of the boy or girl that you first kissed?</option>
+                        </select>
+                    </li>
+                    <li class="list-group-item">
+                        <input type="text" class="form-control"  id="inputPassword3"  placeholder="Answer 2" v-model= "ans2" required>
+                    </li>    
 
                  <li class="list-group-item" > 
                 <button type="submit" class="btn btn-success">Sign Up</button> 
                 </li>
                 <li class="list-group-item"> 
-                    <router-link style="color:green ; font-weight:none; font-size: 12px;" to="/">You have an account?</router-link>
+                    <router-link style="color:green ; font-weight:none; font-size: 14px;" to="/">You have an account?</router-link>
                 </li>
                 </ul>
                 
@@ -44,25 +71,7 @@
         
             </form>
         </div>
-       <!-- <div class="secondmain">
-            <form @submit="onSubmit" autocomplete="off">
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item" > 
-                    <input type="text" class="form-control"  placeholder="First Name" required>
-                    </li>
-                    <li class="list-group-item">
-                    <input type="text" class="form-control"  placeholder="Last Name" required>
-                    </li>
-                    <li class="list-group-item">
-                        Write something about you
-                    <textarea class="form-control" style="font-size:15px; width:100%; vertical-align:middle; margin_left:20px;"  rows="4" ></textarea>
-                    </li> 
-                 <li class="list-group-item" > 
-                <button type="submit" class="btn btn-success" >Sign Up</button> 
-                </li>
-                </ul>
-            </form>
-        </div>-->
+       
     </div>
 </template>
 
@@ -79,7 +88,14 @@ export default {
             confpass: '',
             error: '',
             msg: [],
-            errmsg: []
+            errmsg: [],
+            key1:'',
+            key2:'',
+            ques1: '',
+            ques2: '',
+            ans1: '',
+            ans2: '',
+
         }
     },
     watch:{
@@ -101,6 +117,17 @@ export default {
         }
     },
     methods: {
+        onChange1(event) {
+            //alert(event.target.value);
+            this.ques1 = event.target.value;
+            alert(this.ques1);
+
+
+        },
+        onChange2(event) {
+            //alert(event.target.value);
+            this.ques2 = event.target.value;
+        },
         check_username(value){
             if(value.length<6){
                 this.msg['username'] = 'Username must be atleast contain 6 characters'
@@ -110,7 +137,7 @@ export default {
             }
         },
         check_email(value){
-            if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(value))
+            if (/^\w+([-]?\w+)*@\w+([-]?\w+)*(\.\w{2,3})+$/.test(value))
                 {
                       this.msg['email'] = '';
                 }
@@ -142,11 +169,12 @@ export default {
         onSubmit(e){
             e.preventDefault();
 
-            axios.post('http://localhost:5000/users/register', { username: this.username, email: this.email, password: this.password})
+            axios.post('http://localhost:5000/users/register', { username: this.username, email: this.email, password: this.password, quesone:this.ques1, ansone: this.ans1, questwo: this.ques2, anstwo: this.ans2})
                 .then(res => {
                     
                         if (res.data.success) {
                             this.error = res.data.msg;
+                            
                         } else {
                             // Login Failed
                             this.error = res.data.msg;
@@ -162,10 +190,10 @@ export default {
 <style scoped>
 .formmain{
     position: relative;
-    top: 0%;
-    margin-bottom: 5%;
-    transform: scale(0.9, 0.9);
-    
+    margin-left: 10%;
+    width: 100%;
+    transform: scale(0.8, 0.8);
+    transform-origin: 0 0;
  
 }
 .secondmain{
@@ -175,8 +203,6 @@ export default {
     right: 0%;
     width: 0%;
     
-    margin-bottom: 5%;
-    transform: scale(0.9, 0.9);
     height:100%;   
  
 }

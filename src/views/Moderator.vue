@@ -13,21 +13,7 @@
                         <Posts/>
                        </div>
                         <div class="secondhalf">
-                           
-                            <div id="followtext1">
-                                <ul class="list-group list-group-flush" v-for="(item,index) in followers" :key="index">
-                        
-                                    <li class="list-group-item">
-                                    
-                                        <img src="../../images/ProfilePic.jpg" id="otherprofileicon" >
-                                        {{item.followedBy}}                                        
-                                        <button  class="btn btn-success" id="followbtn">Delete</button>
-                                        
-                                    
-                                    </li>    
-                                </ul>
-                            </div>
-                
+                            <UsersList/>
                         </div>
                    </div>
                 
@@ -40,12 +26,14 @@
 import Posts from "../components/Moderator/Posts"
 import Search from '../components/Moderator/Search'
 import UserInfo from '../components/Moderator/UserInfo'
+import UsersList from '../components/Moderator/UsersList'
 export default {
     name: "Moderator",
     components: {
         UserInfo,
         Search,
-        Posts
+        Posts,
+        UsersList
     }
 }
 </script>
@@ -97,25 +85,5 @@ export default {
     height: auto;
     border:1px solid black;
     
-}
-#followbtn{
-    background-color: white;
-    color: green;
-    border-radius: 20px;
-    font-weight: bold;
-    border: 2px solid green;
-    float: right;
-    width: 100px;
-}
-
-#otherprofileicon{
-    
-    border-radius: 50%;
-   width: 40px;
-   height: 40px;
-   margin-right: 10px;
-   vertical-align:top  ;
-   border: 3px solid darkgrey;
- 
 }
 </style>
