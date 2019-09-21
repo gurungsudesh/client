@@ -9,7 +9,26 @@
                     <Search/>
                    </div>
                    <div class="bottomright">
-                    <Posts/>
+                       <div class="firsthalf">
+                        <Posts/>
+                       </div>
+                        <div class="secondhalf">
+                           
+                            <div id="followtext1">
+                                <ul class="list-group list-group-flush" v-for="(item,index) in followers" :key="index">
+                        
+                                    <li class="list-group-item">
+                                    
+                                        <img src="../../images/ProfilePic.jpg" id="otherprofileicon" >
+                                        {{item.followedBy}}                                        
+                                        <button  class="btn btn-success" id="followbtn">Delete</button>
+                                        
+                                    
+                                    </li>    
+                                </ul>
+                            </div>
+                
+                        </div>
                    </div>
                 
             </div>
@@ -35,8 +54,8 @@ export default {
     .m_rightside{
     
         position: absolute;
-        left: 25%;
-        width: 75%;
+        left: 20%;
+        width: 80%;
         height: 100%;
         background-color: white;
 }
@@ -44,7 +63,7 @@ export default {
         position: absolute;
         left: 0%;
         background-color: white;    
-        width: 25%;
+        width: 20%;
         height: 100%;
         border-right: 1px solid lightgrey;
     
@@ -61,5 +80,42 @@ export default {
 
     width: 100%;
     background-color: rgb(235, 235, 235);   
+}
+.firsthalf{
+    position:absolute;
+    left: 0px;
+    width:50%;
+    height:auto;
+    border: 1px solid lightgrey;
+    
+    
+}
+.secondhalf{
+    position: absolute;
+    right: 0px;
+    width:50%;
+    height: auto;
+    border:1px solid black;
+    
+}
+#followbtn{
+    background-color: white;
+    color: green;
+    border-radius: 20px;
+    font-weight: bold;
+    border: 2px solid green;
+    float: right;
+    width: 100px;
+}
+
+#otherprofileicon{
+    
+    border-radius: 50%;
+   width: 40px;
+   height: 40px;
+   margin-right: 10px;
+   vertical-align:top  ;
+   border: 3px solid darkgrey;
+ 
 }
 </style>
