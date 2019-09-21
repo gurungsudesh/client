@@ -34,25 +34,29 @@
                     <li class="list-group-item">
                         <select  class="custom-select" @change="onChange1($event)" v-model="key1" style="color:darkgray; border:none; border-bottom:1px solid lightgray;">
                         <option  value="" disabled selected >Choose your Security Question</option>
-                            <option  value="1">Option 1</option>
-                            <option  value="2">Option 2</option>
-                            <option  value="3">Option 3</option>
+                            <option  value="What was your favorite place to visit as a child?">What was your favorite place to visit as a child?</option>
+                            <option  value="Who is your favorite actor, musician, or artist?">Who is your favorite actor, musician, or artist?</option>
+                            <option  value="What is the name of your favorite pet?">What is the name of your favorite pet?</option>
+                            <option  value="What is the name of your first school?">What is the name of your first school?</option>
+                            <option  value="What is your favorite color?">What is your favorite color?</option>
                         </select>
                     </li>
                     <li class="list-group-item">
-                        <input type="text" class="form-control"  id="inputPassword3" placeholder="Answer 1" required>
+                        <input type="text" class="form-control"  id="inputPassword3" placeholder="Answer 1" v-model= "ans1" required>
                     </li>
 
                     <li class="list-group-item">
                         <select class="custom-select" @change="onChange2($event)" v-model="key2" style="color:darkgray; border:none; border-bottom:1px solid lightgray;">
                         <option value="" disabled selected style="color:lightgray">Choose your next Security Question</option>
-                            <option value="1">Option 1</option>
-                            <option value="2">Option 2</option>
-                            <option value="3">Option 3</option>
+                            <option value="What is the name of your favorite childhood friend? ">What is the name of your favorite childhood friend? </option>
+                            <option value="What school did you attend for sixth grade?">What school did you attend for sixth grade?</option>
+                            <option value="What is your youngest brother’s birthday month and year? ">What is your youngest brother’s birthday month and year? </option>
+                            <option value="What street did you live on in third grade?">What street did you live on in third grade?</option>
+                            <option value="What is the first name of the boy or girl that you first kissed?">What is the first name of the boy or girl that you first kissed?</option>
                         </select>
                     </li>
                     <li class="list-group-item">
-                        <input type="text" class="form-control"  id="inputPassword3"  placeholder="Answer 2" required>
+                        <input type="text" class="form-control"  id="inputPassword3"  placeholder="Answer 2" v-model= "ans2" required>
                     </li>    
 
                  <li class="list-group-item" > 
@@ -86,7 +90,12 @@ export default {
             msg: [],
             errmsg: [],
             key1:'',
-            key2:''
+            key2:'',
+            ques1: '',
+            ques2: '',
+            ans1: '',
+            ans2: '',
+
         }
     },
     watch:{
@@ -109,10 +118,15 @@ export default {
     },
     methods: {
         onChange1(event) {
-            alert(event.target.value);
+            //alert(event.target.value);
+            this.ques1 = event.target.value;
+            alert(this.ques1);
+
+
         },
         onChange2(event) {
-            alert(event.target.value);
+            //alert(event.target.value);
+            this.ques2 = event.target.value;
         },
         check_username(value){
             if(value.length<6){
@@ -123,7 +137,7 @@ export default {
             }
         },
         check_email(value){
-            if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(value))
+            if (/^\w+([-]?\w+)*@\w+([-]?\w+)*(\.\w{2,3})+$/.test(value))
                 {
                       this.msg['email'] = '';
                 }
@@ -155,11 +169,12 @@ export default {
         onSubmit(e){
             e.preventDefault();
 
-            axios.post('http://localhost:5000/users/register', { username: this.username, email: this.email, password: this.password})
+            axios.post('http://localhost:5000/users/register', { username: this.username, email: this.email, password: this.password, quesone:this.ques1, ansone: this.ans1, questwo: this.ques2, anstwo: this.ans2})
                 .then(res => {
                     
                         if (res.data.success) {
                             this.error = res.data.msg;
+                            
                         } else {
                             // Login Failed
                             this.error = res.data.msg;
