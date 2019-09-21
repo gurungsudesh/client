@@ -1,14 +1,14 @@
 <template>
     <div>
-        <!-- v-for="(item,index) in allusers" :key="index" -->
+        
         <div id="followtext1">
-            <ul class="list-group list-group-flush" >
+            <ul class="list-group list-group-flush" v-for="(item,index) in allusers" :key="index" >
     
                 <li class="list-group-item">
                 
                     <img src="../../../images/ProfilePic.jpg" id="otherprofileicon" >
-                    <!-- {{item.name}}                                         -->
-                    apple
+                    {{item.name}}                                        
+                    
                     <button  class="btn btn-success" id="followbtn">Delete</button>
                     
                 
