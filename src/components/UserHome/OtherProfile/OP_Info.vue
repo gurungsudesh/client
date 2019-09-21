@@ -7,7 +7,7 @@
                 </div>
                 <div class="col-md-auto">
                     <h3>{{msg}}</h3>
-                        <p class="text-left" style="color: gray; font-size: 12px" >Made at [ janaury 2016 ] yaha date aaunu paryo
+                        <p class="text-left" style="color: gray; font-size: 12px" >
                             <br>
                             {{ufollowersNum}} followers<br>
                             {{ufollowingNum}} following<br>

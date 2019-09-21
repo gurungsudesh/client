@@ -92,25 +92,41 @@
                  <div class="changep" >
                         <h5 @click="showpassword()" ><i class="fas fa-cog" style="margin-right: 10px;"></i>Change Password</h5>   
                         <div class="changepassword" ref="passwordid" id="passwordid">
-                        <form>
+                        <form @submit.prevent="handleSubmit">
                         <table style="border-top:1px solid black;">
                          <tr>
                             <td style="width: 20% ; font-weight: 600" >Previous Password:</td>
-                            <td > <input type="password" class="form-control" v-model="prevPass"></td>
-                            
+                            <td > <input type="password" v-model="prevPass" class="form-control" :class="{'is-invalid': submitted && $v.prevPass.$error}" >
+                                <div v-if="submitted && !$v.prevPass.required" class="invalid-feedback" style="z-index:2">
+                                <span v-if="!$v.prevPass.required">Password is required</span>
+                                <span v-if="!$v.prevPass.minLength">Password must be at least 6 characters</span>
+                            </div>
+                            </td>
                         </tr>
                         <tr>
                             <td style="font-weight: 600">New Password:</td>
-                            <td><input type="password" class="form-control" v-model="newPass"></td>
+                            <td><input type="password" class="form-control" v-model="newPass" :class="{ 'is-invalid': submitted && $v.newPass.$error }">
+                                <div v-if="submitted && !$v.newPass.required" class="invalid-feedback">
+                                <span v-if="!$v.newPass.required">Password is required</span>
+                                <span v-if="!$v.newPass.minLength">Password must be at least 6 characters</span>
+                            </div>
+                            </td>
+                            
                         </tr>
                          <tr>
                             <td style="font-weight: 600">Confirm Password:</td>
-                            <td><input type="password" class="form-control" v-model="confirmPass"></td>
+                            <td><input type="password" class="form-control" v-model="confirmPass" :class="{ 'is-invalid': submitted && $v.confirmPass.$error }" >
+                                <div v-if="submitted && !$v.confirmPass.required" class="invalid-feedback">
+                                    <span v-if="!$v.confirmPass.required">Confirm Password is required</span>
+                                    <span v-else-if="!$v.confirmPass.sameAsPassword">Passwords must match</span>
+                                </div>
+                            </td>
+                            
                          </tr>
                          <tr>
                              <td></td>
                              
-                             <td style="text-align: right;"><button @click="changePassword(prevPass,NewPass,confirmPass)" class="btn btn-success"> Change Password</button></td>
+                             <td style="text-align: right;"><button @click="changePassword(prevPass,newPass)" class="btn btn-success"> Change Password</button></td>
                          </tr>
                     </table>
                 </form>
@@ -149,7 +165,7 @@
 <script>
 import axios from 'axios';
 import jwtDecode from 'jwt-decode'
-
+import { required, minLength, sameAs } from "vuelidate/lib/validators";
 
 export default {
     name: "Accountdata",
@@ -172,11 +188,15 @@ export default {
         changeContact:'',
         changeUserbio:'',
         changeAddress:'',
-        errors: {}
-        
+        submitted: false
     }
     
   },
+  validations:{
+        prevPass: {required},
+        newPass: {required, minLength: minLength(6)},
+        confirmPass: {required, sameAsPassword: sameAs('newPass')}
+    },
   
   created(){
       //getting the user bio from the database
@@ -202,6 +222,15 @@ export default {
         
   },
   methods:{
+      handleSubmit() {
+                this.submitted = true;
+
+                // stop here if form is invalid
+                this.$v.$touch();
+                if (this.$v.$invalid) {
+                    return;
+                }
+        },
       
 
       confirmBio(Name,Contact,Userbio,Address){
@@ -214,13 +243,13 @@ export default {
             })
             .catch(err=> alert(err));
       },
-      changePassword(prevPass,newPass,confirmPass){
-          if(confirmPass !== newPass){  
-              //yo validation CCr and dhoju styling le garcha ramrari 
-            alert(" duita Password Milena or the password are incorrect ")
+      changePassword(prevPass,newPass){
+        //   if(confirmPass !== newPass){  
+        //       //yo validation CCr and dhoju styling le garcha ramrari 
+        //     //alert(" duita Password Milena or the password are incorrect ")
 
-          }
-          else{
+        //   }
+        //   else{
               axios.put(`http://localhost:5000/users/changepassword/${this.username}`,{password: prevPass , newPassword: newPass})
                 .then(res=> {
                     if(res.data.success){
@@ -231,13 +260,10 @@ export default {
                         //token faleko 
                         localStorage.removeItem('usertoken')
                         this.$router.push("/");
-                        
-                        
-                        
                     }
                 })
                 .catch(err=> alert(err));
-          }
+          //}
           
       },
       deactivate(password) {
