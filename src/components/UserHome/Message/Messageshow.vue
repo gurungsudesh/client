@@ -83,20 +83,23 @@ export default {
       axios.get(`http://localhost:5000/users/messagereceived/${this.name}`)
         .then(res=>{
             if(res.data.success){
-                alert('message get gareko')
+                //alert('message get gareko')
                 this.allMessages = res.data.docs;
-                // // getting the messages when im the sender
-                // axios.get(`http://localhost:5000/users/messagesent/${this.name}`)
-                // .then(res=>{
-                //     if(res.data.success){
-                //         this.allMessages.push(res.data.docs);
-                //     }
-                // })
-                // .catch(err => alert(err));
+                // getting the messages when im the sender
+            axios.get(`http://localhost:5000/users/messagesent/${this.name}`)
+                .then(res=>{
+                    if(res.data.success){
+                       this.allMessages = this.allMessages.concat(res.data.docs);
+                       this.allMessages.sort(function(a,b){
+                                return new Date(b.date) - new Date(a.date);
+                            });
+                    }
+                })
+                .catch(err => alert(err));
             }
         })
         .catch(err=> alert(err));
-   
+        
     
 
   },
@@ -108,21 +111,25 @@ export default {
                     alert("message sent")
                     this.receivingUser = '';
                     this.replyMessage = '';
-                     axios.get(`http://localhost:5000/users/messagesent/${this.name}`)
-                        .then(res=>{
-                            if(res.data.success){
-                                alert('message get gareko')
-                                this.allMessages = res.data.docs;
-                                // axios.get(`http://localhost:5000/users/messagereceived/${this.name}`)
-                                //     .then(res=>{
-                                //         if(res.data.success){
-                                //             this.allMessages.push(res.data.docs);
-                                //         }
-                                //     })
-                                //     .catch(err => alert(err));
-                            }
-                         })
-                         .catch(err=> alert(err));
+                      //getting the messages when im  the receiver
+                        axios.get(`http://localhost:5000/users/messagereceived/${this.name}`)
+                            .then(res=>{
+                                if(res.data.success){
+                                    //alert('message get gareko')
+                                    this.allMessages = res.data.docs;
+                                    // getting the messages when im the sender
+                                axios.get(`http://localhost:5000/users/messagesent/${this.name}`)
+                                    .then(res=>{
+                                        if(res.data.success){
+                                        this.allMessages = this.allMessages.concat(res.data.docs);
+                                        }
+
+                                    })
+                                    .catch(err => alert(err));
+                                }
+                            })
+                            .catch(err=> alert(err));
+        
                     
                 }
             })
