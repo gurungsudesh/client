@@ -58,7 +58,7 @@
                                                 <span style="color:grey; font-size:10px; margin-left:10px;">{{`${commentdateformat(comment.date)}`}}</span>
                                             </td>
                                             <td>
-                                                <button class="btn btn-success" style="float:right;"><i class="fas fa-trash-alt"></i></button>
+                                                <button class="btn btn-success" style="float:right;"><i class="fas fa-trash-alt"></i> delete</button>
                                             </td>
                                         </tr>
                                     </table>

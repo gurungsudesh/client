@@ -9,6 +9,7 @@ import otherprofile from './views/OtherProfile.vue'
 import account from './views/Account.vue';
 import messages from './views/Message.vue'
 import postpage from './views/Postpage.vue';
+import forgotpassword from './views/ForgotPassword.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -16,6 +17,10 @@ export default new Router({
             path: '/',
             name: 'home',
             component: Home
+        }, {
+            path: '/forgotpassword',
+            name: 'forgotpassword',
+            component: forgotpassword
         },
         {
             path: '/about',
