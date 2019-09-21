@@ -7,7 +7,7 @@
             </div>
             <div class="middle" >
                  <div class="formmain">
-                    <form @submit="onSubmit1" autocomplete="off">
+                    <form @submit="onSubmit1(username)" autocomplete="off">
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item">
                                 <label style="font-size:18px; font-weight:bold; color:green; padding:5px; ">Enter your username:</label>
@@ -33,12 +33,12 @@
                     <form @submit="onSubmit2" autocomplete="off">
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item">
-                                    <input type="text" ref="inputtext1" id="inputtext1" :readonly="true" v-model="poke1">
+                                    <input type="text" ref="inputtext1" id="inputtext1" :readonly="true" v-model="ques1">
                                     <input type="text" class="form-control"  id="inputPassword3" placeholder="Answer 1" required>
                                 </li>
 
                                 <li class="list-group-item">
-                                     <input type="text" ref="inputtext1" id="inputtext1" :readonly="true" v-model="poke2">
+                                     <input type="text" ref="inputtext1" id="inputtext1" :readonly="true" v-model="ques2">
                                     <input type="text" class="form-control"  id="inputPassword3"  placeholder="Answer 2" required>
                                 </li>
                                 <li class="list-group-item" > 
@@ -80,33 +80,50 @@
     </div>
 </template>
 <script> 
+import axios  from 'axios'
 export default {
     name: "birsiyoPassword",
     data(){
         return{
-            key1:'',
-            key2:'',
-            poke1:'my name is',
-            poke2:'my name is'
+            ques1:'',
+            ques2:'',
+            username:'',
+            ans1: '',
+            ans2: '',
+            newPass: '',
+            confPass: '',
+
         }
     },
     methods: {
-        onChange1(event) {
-            alert(event.target.value);
-        },
-        onChange2(event) {
-            alert(event.target.value);
-        },
-        onSubmit1(){
-             var vm = this;          
         
-            vm.$refs.userid.style.opacity = '0';
-            vm.$refs.userid.style.left = '5%';
-            vm.$refs.middleid.style.visibility= 'visible';
-            vm.$refs.middleid.style.opacity = '100';
+        onSubmit1(uname){
+            //username check in database 
+            //alert("chalena kya ho")
+            axios.post(`http://localhost:5000/users/forgotpassword/${uname}`)
+                .then(res=>{
+                    if(res.data.success){
+                        alert("username found")
+                        //question tane maile
+                        var vm = this;          
+        
+                        vm.$refs.userid.style.opacity = '0';
+                        vm.$refs.userid.style.left = '5%';
+                        vm.$refs.middleid.style.visibility= 'visible';
+                        vm.$refs.middleid.style.opacity = '100';
+                    }
+                    else{
+                        alert("username milena")
+                    }
+                })
+                .catch(err=> alert(err));
+
+            
               
         },
         onSubmit2(){
+            
+            
           var vm = this;
                     
             vm.$refs.middleid.style.opacity = '0';
