@@ -41,6 +41,7 @@ export default {
         deleteUser(username){
             alert(username)
             //further code yaha aaucha 
+            
         }
     }
 }
