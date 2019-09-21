@@ -92,16 +92,16 @@
                  <div class="changep" >
                         <h5 @click="showpassword()" ><i class="fas fa-cog" style="margin-right: 10px;"></i>Change Password</h5>   
                         <div class="changepassword" ref="passwordid" id="passwordid">
-                            <form>
+                        <form>
                         <table style="border-top:1px solid black;">
                          <tr>
                             <td style="width: 20% ; font-weight: 600" >Previous Password:</td>
                             <td > <input type="password" class="form-control" v-model="prevPass"></td>
-
+                            
                         </tr>
                         <tr>
                             <td style="font-weight: 600">New Password:</td>
-                            <td><input type="password" class="form-control" v-model="NewPass"></td>
+                            <td><input type="password" class="form-control" v-model="newPass"></td>
                         </tr>
                          <tr>
                             <td style="font-weight: 600">Confirm Password:</td>
@@ -149,6 +149,8 @@
 <script>
 import axios from 'axios';
 import jwtDecode from 'jwt-decode'
+
+
 export default {
     name: "Accountdata",
     data(){
@@ -170,9 +172,12 @@ export default {
         changeContact:'',
         changeUserbio:'',
         changeAddress:'',
+        errors: {}
         
     }
+    
   },
+  
   created(){
       //getting the user bio from the database
       axios.get(`http://localhost:5000/users/info/${this.username}`)
@@ -197,6 +202,8 @@ export default {
         
   },
   methods:{
+      
+
       confirmBio(Name,Contact,Userbio,Address){
         axios.put(`http://localhost:5000/users/info/${this.username}`,{fullname: Name, contact: Contact, bio: Userbio, add: Address})
             .then(res=> {
@@ -207,14 +214,14 @@ export default {
             })
             .catch(err=> alert(err));
       },
-      changePassword(prevPass,NewPass,confirmPass){
-          if(confirmPass !== NewPass){  
+      changePassword(prevPass,newPass,confirmPass){
+          if(confirmPass !== newPass){  
               //yo validation CCr and dhoju styling le garcha ramrari 
             alert(" duita Password Milena or the password are incorrect ")
 
           }
           else{
-              axios.put(`http://localhost:5000/users/changepassword/${this.username}`,{password: prevPass , newPassowrd: NewPass})
+              axios.put(`http://localhost:5000/users/changepassword/${this.username}`,{password: prevPass , newPassword: newPass})
                 .then(res=> {
                     if(res.data.success){
                         this.prevPass = ''
@@ -235,7 +242,7 @@ export default {
       },
       deactivate(password) {
         //deactivate garesi remove all the information of the user
-        axios.post(`http://localhost:5000/users/deactivate/${this.username}`,{ pass:password })
+        axios.delete(`http://localhost:5000/users/delete/${this.username}`,{data: { pass : password }})
             .then(res=>{
                 if(res.data.success){
                     alert("Your account have been deleted permanently from the iPost")
@@ -366,11 +373,14 @@ export default {
               textareaResize:function() {
                   this.$refs.textarea1.style.height=this.$refs.textarea1.scrollHeight+'px';
                 }
+
+                
               
   }
     
 }
 </script>
+
 <style scoped>
 table{
         width: 100%;
