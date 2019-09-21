@@ -252,7 +252,6 @@ export default {
                                     axios.get(`http://localhost:5000/users/post/comment/${pId}`)
                                         .then(res=>{
                                             if(res.data.msg){
-                                                
                                                 this.comments = res.data.docs;
                                             }
                                             

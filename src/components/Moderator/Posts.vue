@@ -239,7 +239,7 @@ export default {
     height: 60px;
     margin-right: 10px;
     vertical-align:top  ;
-    border: 7px solid rgb(157, 255, 173);
+    border: 5px solid rgb(136, 223, 150);
   
 }
 .postcontent{

@@ -32,7 +32,7 @@
                     <p style="color:red ; font-weight:none; font-size: 15px; left:10%; bottom:15%; z-index: +1; position: absolute;" class="err" v-if="error"> {{error}}</p>
                
                     <li class="list-group-item">
-                        <select  class="custom-select" style="color:darkgray; border:none; border-bottom:1px solid lightgray;">
+                        <select  class="custom-select" @change="onChange1($event)" v-model="key1" style="color:darkgray; border:none; border-bottom:1px solid lightgray;">
                         <option  value="" disabled selected >Choose your Security Question</option>
                             <option  value="1">Option 1</option>
                             <option  value="2">Option 2</option>
@@ -44,7 +44,7 @@
                     </li>
 
                     <li class="list-group-item">
-                        <select class="custom-select" style="color:darkgray; border:none; border-bottom:1px solid lightgray;">
+                        <select class="custom-select" @change="onChange2($event)" v-model="key2" style="color:darkgray; border:none; border-bottom:1px solid lightgray;">
                         <option value="" disabled selected style="color:lightgray">Choose your next Security Question</option>
                             <option value="1">Option 1</option>
                             <option value="2">Option 2</option>
@@ -59,7 +59,7 @@
                 <button type="submit" class="btn btn-success">Sign Up</button> 
                 </li>
                 <li class="list-group-item"> 
-                    <router-link style="color:green ; font-weight:none; font-size: 12px;" to="/">You have an account?</router-link>
+                    <router-link style="color:green ; font-weight:none; font-size: 14px;" to="/">You have an account?</router-link>
                 </li>
                 </ul>
                 
@@ -84,7 +84,9 @@ export default {
             confpass: '',
             error: '',
             msg: [],
-            errmsg: []
+            errmsg: [],
+            key1:'',
+            key2:''
         }
     },
     watch:{
@@ -106,6 +108,12 @@ export default {
         }
     },
     methods: {
+        onChange1(event) {
+            alert(event.target.value);
+        },
+        onChange2(event) {
+            alert(event.target.value);
+        },
         check_username(value){
             if(value.length<6){
                 this.msg['username'] = 'Username must be atleast contain 6 characters'

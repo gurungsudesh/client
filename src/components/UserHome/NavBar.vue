@@ -238,6 +238,7 @@ a{
     color:black;
     text-decoration:none;
 }
+
 #notificationid{
   
   visibility: hidden;
@@ -265,6 +266,11 @@ a{
 .dpdownbody li:hover{
   background-color: rgb(230, 230, 230);
   cursor: pointer;
+}
+.dpdownbody a{
+  position: relative;
+  margin:0px;
+  padding: 0px;
 }
 
 #notificationid1{
