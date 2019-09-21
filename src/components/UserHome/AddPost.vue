@@ -8,7 +8,7 @@
                     
                         <img src="../../../images/ProfilePic.jpg" id="profileicon">   
                         <textarea style="font-size:15px; width:75%; vertical-align:middle; margin:10px;"  rows="3" v-model="postdata" placeholder="Please enter the post" required></textarea>
-                        <button type="submit" style="margin-top:10px; width:50px" id="btn"> Post</button>
+                        <button :disabled ='isDisabled' type="submit" style="margin-top:10px; width:50px" id="btn"> Post</button>
                  
                  
             </form>
@@ -92,7 +92,7 @@
                             
                         </div>
                         <form @submit=" addComment(name,item._id, item.commentContent,item.name); item.commentContent='' ; " style="margin:10px;" v-if="(item.commentdisplay)">
-                        <input type="text" style="width: 80%; padding:5px; border:1px solid grey; border-radius:10px;"  v-model="item.commentContent">
+                        <input type="text" style="width: 80%; padding:5px; border:1px solid grey; border-radius:10px;"  v-model="item.commentContent" required>
                         <button id="btn" type="submit" >Comment </button> 
                     </form>
                 </div>
@@ -139,6 +139,12 @@ export default {
             hot:[]
         }
     },
+    computed:{
+      isDisabled(){
+        return this.postdata === ''
+      }
+  },
+  
     created(){
         
 

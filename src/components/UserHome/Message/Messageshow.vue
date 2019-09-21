@@ -6,13 +6,13 @@
             </div>
             <div class="bottomleft" >
                 <div  id="fromsearch">
-                        <span style="margin-left:10px ;color:gray; font-size:20px;"><b>To</b></span>  <input class="form-control" id="inputtext" type="text" v-model="receivingUser" aria-label="Search">
+                        <span style="margin-left:10px ;color:gray; font-size:20px;"><b>To</b></span>  <input class="form-control" id="inputtext" type="text" v-model="receivingUser" aria-label="Search" >
                 </div>
                 <div id="fromsearch">
                     <span style="margin-left:10px; color:gray; font-size:20px;"><b>Message Content</b></span>
                     <form @submit="sendMessage(replyMessage)"  id="formmessage">
                             <textarea class="form-control"  id="sendm" rows="17" placeholder="Send the reply message" v-model="replyMessage"></textarea>
-                            <button style="float:right;" type="submit" id="mbtn" class="btn btn-success" >Send</button>
+                            <button :disabled='isDisabled' style="float:right;" type="submit" id="mbtn" class="btn btn-success" >Send</button>
                     </form>
                 </div>
                 
@@ -67,16 +67,15 @@ export default {
         replyMessage: '',
         receivingUser: '',
         allMessages: []
-        // allMessages:[
-        //     {
-        //         sender: "apple",
-        //         message: "message yo hai",
-        //         date: "2019/20/20"
-        //     }
-        // ]
-
-        
+                
     }
+  },
+  computed:{
+      isDisabled(){
+        return this.replyMessage === '' || this.receivingUser === ''
+        
+
+      }
   },
   created(){
       //getting the messages when im  the receiver
