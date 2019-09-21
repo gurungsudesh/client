@@ -251,12 +251,11 @@ export default {
   
 }
 #statstable{
-     margin-left: 10px;
      margin-bottom: 10px;
      width: 95%;
 }
 #statstable td{
-    padding-left:50px;
+    padding-left:10px;
 }
 #btn{
     background-color: white;
