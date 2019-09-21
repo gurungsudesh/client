@@ -9,7 +9,7 @@
                     <img src="../../../images/ProfilePic.jpg" id="otherprofileicon" >
                     {{item.name}}                                        
                     
-                    <button  class="btn btn-success" id="followbtn">Delete</button>
+                    <button  @click ="deleteUser(item.name)" class="btn btn-success" id="followbtn">Delete</button>
                     
                 
                 </li>    
@@ -30,9 +30,19 @@ export default {
         //getting all the users 
         axios.get('http://localhost:5000/users/user')
             .then(res=>{
-                this.allusers = res.data.docs;
+               if(res.data.success){
+                    this.allusers = res.data.docs;
+               }
             })
             .catch(err=> alert(err));
+    },
+    methods: {
+        //deleting the user
+        deleteUser(username){
+            alert(username)
+            //further code yaha aaucha 
+            
+        }
     }
 }
 </script>

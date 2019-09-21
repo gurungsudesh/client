@@ -45,7 +45,7 @@ import NavBar from '../components/UserHome/NavBar';
 import HotTopics from '../components/UserHome/HotTopics';
 import Singlepost from '../components/UserHome/Singlepost';
 
-//import FollowRecom from '../components/UserHome/FollowRecom';
+import FollowRecom from '../components/UserHome/FollowRecom';
 import jwtDecode from 'jwt-decode';
 
 
@@ -70,7 +70,7 @@ export default {
     HotTopics,
     Singlepost,
    
-    //FollowRecom
+    FollowRecom
   },
   methods:{
     /*openleftslide(){

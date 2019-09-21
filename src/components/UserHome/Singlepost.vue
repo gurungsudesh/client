@@ -241,8 +241,9 @@ export default {
                 .then(res=>{
                     if(res.data.msg){
                         
-                        alert("posted")
+                        //alert("posted")
                         //sending notification
+                        //alert(postOwner)
                         axios.post(`http://localhost:5000/users/notifications/${postID}`,{name: uname, notify: this.notification, pOwner: postOwner})
                             .then(res=>{
                                 alert("Notification sent")
@@ -252,7 +253,8 @@ export default {
                                     axios.get(`http://localhost:5000/users/post/comment/${pId}`)
                                         .then(res=>{
                                             if(res.data.msg){
-                                                this.comments = res.data.docs;
+                                                
+                                                this.allComment = res.data.docs;
                                             }
                                             
                                         })
