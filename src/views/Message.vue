@@ -41,8 +41,8 @@ export default {
 }
 .mainbody{
     position:absolute;
-    left: 10%;
-    width: 80%;
+    left: 5%;
+    width: 90%;
     height: 91%;
     border-right: 2px solid green;  
     border-left: 2px solid green;

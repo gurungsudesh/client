@@ -10,10 +10,10 @@
                                 <div id="dpdn" class="btn-group">
                                     <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     </button>
-                                    <div  class="dropdown-menu dropdown-menu-right">
+                                    <div  class="dropdown-menu dropdown-menu-right" >
                                         <router-link class="dropdown-item" to="/" >Profile</router-link>
                                         <router-link class="dropdown-item" to="/" >Settings</router-link>
-                                        <button v-on:click="logout()"><router-link class="dropdown-item" to="/">Log Out</router-link></button>
+                                        <div v-on:click="logout()"><router-link class="dropdown-item" to="/">Log Out</router-link></div>
                                     </div>
                                     </div>
                                 </form>

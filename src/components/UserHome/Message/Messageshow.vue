@@ -2,58 +2,53 @@
     <div>
         <div class="leftbody">
             <div class="topleft">
-                <div class="form-inline" id="fromsearch">
-                        <input class="form-control" id="inputtext" type="text" placeholder="Search" aria-label="Search">
-                        <button id="sbtn"  type="submit"><i class="fas fa-search" ></i></button>
-                </div>
+                <p id="compose">Compose Message</p>     
             </div>
             <div class="bottomleft" >
-                <div  @click="sendData(item.sender)" class="messagingpeople" v-for="(item,index) in userData " :key="index"   style="width:100%">
-                    <img src="../../../../images/ProfilePic.jpg"><span style="font-size: 20px"><b>
-                        {{item.sender}}
-                    </b></span>
-                    <!-- yesma click garyo vane getmessage with sender=this.name and receiver=conversation.with an tyo chai side ma dekhaucha--> 
+                <div  id="fromsearch">
+                        <span style="margin-left:10px ;color:gray; font-size:20px;"><b>To</b></span>  <input class="form-control" id="inputtext" type="text" v-model="receivingUser" aria-label="Search">
                 </div>
+                <div id="fromsearch">
+                    <span style="margin-left:10px; color:gray; font-size:20px;"><b>Message Content</b></span>
+                    <form @submit="sendMessage(replyMessage)"  id="formmessage">
+                            <textarea class="form-control"  id="sendm" rows="17" placeholder="Send the reply message" v-model="replyMessage"></textarea>
+                            <button style="float:right;" type="submit" id="mbtn" class="btn btn-success" >Send</button>
+                    </form>
+                </div>
+                
                 
             </div>
     </div>
     <!-- -------  -->
     <div class="rightbody">
         <div class="topright">
-                        <table v-for="(item,index) in userConversation" :key="index"   style="width:100%">
-                        
-                            <tr v-if="(whosend(item.sender))">
-                                <td style="width: 10%">
-                                        <img src="../../../../images/ProfilePic.jpg">
-                                </td>
-                                <td style="width: 80%; text-align: left">
-                                    <div ><label class="status">{{item.message}}</label></div>
-                                </td>
-                                <td style="width: 10%">
+                        <!-- <div  @click="sendData(item.sender)" class="messagingpeople" v-for="(item,index) in userData " :key="index"   style="width:100%">
+                    <img src="../../../../images/ProfilePic.jpg"><span style="font-size: 20px"><b>
+                        {{item.sender}}
+                    </b></span>
+                </div> -->
+                <table id="tableinbox" class="table table-hover">
+                    <thead>
+                        <tr>
+                        <th style="width:20%" scope="col">Sent by</th>
+                        <th style="width:70%" scope="col">Content</th>
+                        <th style="width:10%" scope="col">Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- <tr v-for="item in item"> -->
+                        <tr v-for="item in allMessages" :key="item">
+                            
+                            <td ><b>{{item.sender}}</b> </td>
+                            <td >{{item.message}}</td>
+                            <td ><b>{{item.date}}</b> </td>
+                        </tr>
+                       
+                    </tbody>
+                    
+                </table>
+            </div>
 
-                                </td>
-                            </tr>
-                            <tr v-else>
-                                <td>
-                                        
-                                </td>
-                                <td style="width: 80%; text-align: right">
-                                        <div ><label class="status" style="margin-left:50px;">{{item.message}}</label></div>
-                                </td>
-                                <td style="width: 10%">
-                                        <img src="../../../../images/ProfilePic.jpg">
-                                </td>
-                            </tr>
-                        
-                        </table>
-                        
-                    </div>
-                    <div class="bottomright">
-                            <form @submit="sendMessage()"  class="form-inline" id="formmessage">
-                                    <textarea class="form-control"  id="sendm" placeholder="Send the reply message" v-model="replyMessage"></textarea>
-                                    <button type="submit" id="mbtn" class="btn btn-success" >Send</button>
-                            </form>
-                    </div>
             </div>
         </div>
             
@@ -69,83 +64,73 @@ export default {
         const decode = jwtDecode(token)
     return {
         name: decode.name,
-        userData: [],
-        userConversation: [],
-        inConversationWith: '',
         replyMessage: '',
-        // data1 : [{
-        //             "id":0 ,
-        //             "conversation_with":"Prashant Dhoju",
-        //             "conversation_by":"Sudesh",
-        //             "recentdate":"2015/2/3",
-        //             "conversationstartedate":"2015/2/3"
-        //         },
-        //         {   "id":1 ,
-        //              "conversation_with":"Sudesh Dhoju",
-        //             "conversation_by":"Sudesh",
-        //             "recentdate":"2015/2/3",
-        //             "conversationstartedate":"2015/2/3"
-        //         },
-        //         {    "id":2 ,
-        //              "conversation_with":"Shishir Dhoju",
-        //             "conversation_by":"Pokemon",
-        //             "recentdate":"2015/2/3",
-        //             "conversationstartedate":"2015/2/3"
-                    
-        //         }]
+        receivingUser: '',
+        allMessages: []
+        // allMessages:[
+        //     {
+        //         sender: "apple",
+        //         message: "message yo hai",
+        //         date: "2019/20/20"
+        //     }
+        // ]
+
         
     }
   },
   created(){
-      //malai message pathako sabai users aaunu paryo 
-      axios.get(`http://localhost:5000/users/messages/${this.name}`)
+      //getting the messages when im  the receiver
+      axios.get(`http://localhost:5000/users/messagereceived/${this.name}`)
         .then(res=>{
-            if(res.data.msg){
-                this.userData = res.data.docs;
+            if(res.data.success){
+                alert('message get gareko')
+                this.allMessages = res.data.docs;
+                // // getting the messages when im the sender
+                // axios.get(`http://localhost:5000/users/messagesent/${this.name}`)
+                // .then(res=>{
+                //     if(res.data.success){
+                //         this.allMessages.push(res.data.docs);
+                //     }
+                // })
+                // .catch(err => alert(err));
             }
         })
         .catch(err=> alert(err));
+   
+    
+
   },
   methods: {
-      //tyo click gareko user sanga ko conversation nikane aaba
-        sendData(sender){
-           this.inConversationWith = sender;
-            axios.get("http://localhost:5000/users/conversation", {Rname: this.name, Sname: this.inConversationWith , apple: "apple"})
-                .then(res =>{
-                    if(res.data.msg){
-                        this.userConversation = res.data.docs;
-                    }
-                })
-                .catch(err => alert(err));
-
-        },
-        whosend(value){
-          if (value==this.name){
-              return false;
-          }
-          else{
-              return true;
-          }
-      },
-      sendMessage(){
-          axios.post(`http://localhost:5000/users/messages/${this.inConversationWith}`,{sname: this.name, content: this.replyMessage})
+    sendMessage(message){
+        axios.post(`http://localhost:5000/users/sendmessage/${this.receivingUser}`, {sname: this.name, content: message})
             .then(res=>{
                 if(res.data.success){
-                    alert("Message sent");
-                    //getting all the messages
-                    axios.get("http://localhost:5000/users/converstion",{rname: this.name, sname: this.inConversationWith })
+                    alert("message sent")
+                    this.receivingUser = '';
+                    this.replyMessage = '';
+                     axios.get(`http://localhost:5000/users/messagesent/${this.name}`)
                         .then(res=>{
-                            if(res.data.msg){
-                                this.userConversation = res.data.docs;
+                            if(res.data.success){
+                                alert('message get gareko')
+                                this.allMessages = res.data.docs;
+                                // axios.get(`http://localhost:5000/users/messagereceived/${this.name}`)
+                                //     .then(res=>{
+                                //         if(res.data.success){
+                                //             this.allMessages.push(res.data.docs);
+                                //         }
+                                //     })
+                                //     .catch(err => alert(err));
                             }
-                        })
-                        .catch(err => alert(err));
+                         })
+                         .catch(err=> alert(err));
+                    
                 }
-                this.replyMessage = '';
             })
             .catch(err=> alert(err));
-      }
+            
+    }
   }
+
     
 }
 </script>
@@ -161,14 +146,13 @@ export default {
             top: 0px;
             width: 100%;
             height:10%;
-            border-bottom: 1px solid green;
+            border-bottom: 2px solid green;
             
         }
-        #fromsearch{
-            position: absolute;
+        #fromsearch{      
             margin-top:15px;
             margin-left: 5%;
-            width: 80%;
+            width: 90%;
         }
         .bottomleft{
             position: absolute;
@@ -199,7 +183,7 @@ export default {
         position: absolute;
         top:0px;
         width: 100%;
-        height:88%;
+        height:100%;
         background-color: white;
         overflow:auto;
         padding: 10px;
@@ -230,16 +214,19 @@ export default {
             border: 5px solid rgb(161, 230, 161);
         }
     #mbtn{
-        margin-left:10px;
-        padding: 10px;
+        
+        border-radius: 20px;
+        font-size: 18px;     
+        margin-top:10px;
+        padding:5px;
+        padding-left: 20px;
+        padding-right: 20px;
+        
     }
     #sendm{
-        width: 80%;
+        width: 100%;
     }
-    #formmessage{
-        margin: 10px;
-     
-    }
+    
     .status{
         background-color: lightgreen;
         padding: 10px;
@@ -267,6 +254,7 @@ export default {
         border-radius: 10px;
         padding: 5px;
         overflow: hidden;
+        border:2px solid lightgray;
     }
     .leftbody{
     position: absolute;
@@ -285,12 +273,28 @@ export default {
     width:70%;
 }
 #inputtext{
-    margin:auto;
-    
     outline: none;
     border: 2px solid lightgray;
     border-radius: 10px;
     width:100%;
-    padding-right:40px;
+    
+}
+#compose{
+    font-size:38px;
+     height:100%;
+     color:white;
+    -webkit-text-stroke-width: 1.2px;
+  -webkit-text-stroke-color: green;
+   text-align:center;
+    font-weight:bold;
+   background-color:lightgreen;
+}
+#tableinbox{
+    width:100%;
+    background-color: rgb(245, 255, 245);
+}
+#tableinbox td{
+    
+    padding: 10px;
 }
 </style>
