@@ -48,11 +48,11 @@ export default {
      color: white;
  }
 .cropmain{
-    top:10%;
+    top:5%;
     left:15%;
     position: absolute;
     width: 70%;
-    height:80%;
+    height:90%;
     z-index: 2;
     border-radius: 20px;
     box-shadow: 5px 10px 5px rgb(131, 143, 131) ;  
@@ -80,7 +80,7 @@ export default {
     position: relative  ;
     color: rgb(115, 206, 115);
     text-align: center;
-    margin-top: 10%;
+    margin-top: 5%;
 }
 .regsform{
     position: absolute;

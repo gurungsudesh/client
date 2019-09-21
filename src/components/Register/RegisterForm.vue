@@ -31,6 +31,29 @@
                     <!--  Yo chai error aaune registration aauda -->
                     <p style="color:red ; font-weight:none; font-size: 15px; left:10%; bottom:15%; z-index: +1; position: absolute;" class="err" v-if="error"> {{error}}</p>
                
+                    <li class="list-group-item">
+                        <select  class="custom-select" style="color:darkgray; border:none; border-bottom:1px solid lightgray;">
+                        <option  value="" disabled selected >Choose your Security Question</option>
+                            <option  value="1">Option 1</option>
+                            <option  value="2">Option 2</option>
+                            <option  value="3">Option 3</option>
+                        </select>
+                    </li>
+                    <li class="list-group-item">
+                        <input type="text" class="form-control"  id="inputPassword3" placeholder="Answer 1" required>
+                    </li>
+
+                    <li class="list-group-item">
+                        <select class="custom-select" style="color:darkgray; border:none; border-bottom:1px solid lightgray;">
+                        <option value="" disabled selected style="color:lightgray">Choose your next Security Question</option>
+                            <option value="1">Option 1</option>
+                            <option value="2">Option 2</option>
+                            <option value="3">Option 3</option>
+                        </select>
+                    </li>
+                    <li class="list-group-item">
+                        <input type="text" class="form-control"  id="inputPassword3"  placeholder="Answer 2" required>
+                    </li>    
 
                  <li class="list-group-item" > 
                 <button type="submit" class="btn btn-success">Sign Up</button> 
@@ -44,25 +67,7 @@
         
             </form>
         </div>
-       <!-- <div class="secondmain">
-            <form @submit="onSubmit" autocomplete="off">
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item" > 
-                    <input type="text" class="form-control"  placeholder="First Name" required>
-                    </li>
-                    <li class="list-group-item">
-                    <input type="text" class="form-control"  placeholder="Last Name" required>
-                    </li>
-                    <li class="list-group-item">
-                        Write something about you
-                    <textarea class="form-control" style="font-size:15px; width:100%; vertical-align:middle; margin_left:20px;"  rows="4" ></textarea>
-                    </li> 
-                 <li class="list-group-item" > 
-                <button type="submit" class="btn btn-success" >Sign Up</button> 
-                </li>
-                </ul>
-            </form>
-        </div>-->
+       
     </div>
 </template>
 
@@ -162,10 +167,10 @@ export default {
 <style scoped>
 .formmain{
     position: relative;
-    top: 0%;
-    margin-bottom: 5%;
-    transform: scale(0.9, 0.9);
-    
+    margin-left: 10%;
+    width: 100%;
+    transform: scale(0.8, 0.8);
+    transform-origin: 0 0;
  
 }
 .secondmain{
@@ -175,8 +180,6 @@ export default {
     right: 0%;
     width: 0%;
     
-    margin-bottom: 5%;
-    transform: scale(0.9, 0.9);
     height:100%;   
  
 }
