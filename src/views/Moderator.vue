@@ -83,7 +83,7 @@ export default {
     right: 0px;
     width:50%;
     height: auto;
-    border:1px solid black;
+    border:1px solid lightgray;
     
 }
 </style>

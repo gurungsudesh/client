@@ -12,7 +12,7 @@
         </ul>
         <p class="error" v-if="error">{{error}}</p>
     </form>      
-    <span style="float:right; margin-right:70px; color:lightgreen;" ><router-link to="/forgotpassword"> forgot password?</router-link></span>       
+    <span  ><router-link style="font-size:12px; float:right; margin-right:90px; margin-top:-10px; color:green; font-weight:600;" to="/forgotpassword"> forgot password?</router-link></span>       
 </div>
                
         
