@@ -143,6 +143,9 @@ export default {
             })
     },
     methods: {
+        deletepost(){
+          alert('click');  
+        },
         gotoProfile(){
             alert("Click garyo");
         },

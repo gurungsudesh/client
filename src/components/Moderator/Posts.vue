@@ -15,8 +15,7 @@
                                 <td style="font-size: 20px; color:forestgreen; font-weight:bold" >
                                     <router-link :to="{ name: 'moderatorotherprofile' ,params:{name: item.name}}"> {{item.name}} </router-link>
                                 </td>
-                                <td style="width:20px"><button @click="deletepost" class="btn btn-success" style="float:right; color:green; background-color:white; border:none;"><i class="fas fa-trash-alt"></i></button></td>
-                            </tr>
+                                </tr>
                             <tr>
                                 
                                 <td style="font-size:12px; color: grey;">Posted at {{`${dateformat(item.date)}`}}</td>
