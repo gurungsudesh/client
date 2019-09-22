@@ -13,7 +13,7 @@
                                 <tr>
                                     <td rowspan="2" style="width:40px"><img src="../../../images/ProfilePic.jpg"  id="posticon"></td>     
                                     <td style="font-size: 20px; color:forestgreen; font-weight:bold" >{{item.name}}</td>
-                                    <td style="width:20px"><button @click="deletepost" class="btn btn-success" style="float:right; color:green; background-color:white; border:none;"><i class="fas fa-trash-alt"></i></button></td>
+                                    <td style="width:20px"><button @click="deletepost(item._id)" class="btn btn-success" style="float:right; color:green; background-color:white; border:none;"><i class="fas fa-trash-alt"></i></button></td>
                                 </tr>
                                 <tr>
                                     <td style="font-size:12px; color: grey;">Posted at {{`${dateformat(item.date)}`}}</td>
@@ -143,8 +143,42 @@ export default {
             })
     },
     methods: {
-        deletepost(){
-          alert('click');  
+        deletepost(id){
+            // post delete afule
+            axios.delete(`http://localhost:5000/users/post/${id}`)
+                .then(res => {
+                    if(res.data.deleted){
+                        alert('post is deleted')
+                         const uname = this.name;
+                        axios.get(`http://localhost:5000/users/profile/post/${uname}`)
+        
+                            .then(res=>{
+                            if(res.data.msg){
+
+                                this.posts = res.data.docs;
+                                axios.get("http://localhost:5000/users/post/likes")
+                                    .then(res=>{
+                                        if(res.data.msg){
+                                            this.likes = res.data.docs;
+                                        }
+                                    })
+                                    .catch(err => alert(err));
+
+                                //getting all the comments
+                                axios.get("http://localhost:5000/users/post/comment")
+                                    .then(res=>{
+                                        if(res.data.msg){
+                                            this.allComment = res.data.docs;
+                                        }
+                                    })
+                                    .catch(err => alert(err));
+
+                            }
+                    })
+                    .catch(err =>alert(err)); 
+                    }
+                })
+                .catch(err => alert(err));
         },
         gotoProfile(){
             alert("Click garyo");

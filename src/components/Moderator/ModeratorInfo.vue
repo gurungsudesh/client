@@ -11,7 +11,6 @@
                             
                             {{ufollowersNum}} followers<br>
                             {{ufollowingNum}} following<br>
-                            
                         </p>
                          <button id="btn"  class="btn btn-success" >Delete</button>
                 </div>
@@ -44,7 +43,8 @@ export default {
         .then(res =>{
             if(res.data.msg){
                  this.ufollowers = res.data.docs;
-                this.ufollowersNum = this.ufollowers.length;
+                //this.ufollowersNum = this.ufollowers.length;
+                
             }
             
         })

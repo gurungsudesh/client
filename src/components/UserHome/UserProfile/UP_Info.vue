@@ -34,7 +34,12 @@ export default {
             name : decode.name,
             followersNum: '',
             followingNum: '',
+<<<<<<< HEAD
             data: []
+=======
+            data: [],
+            madeat: ''
+>>>>>>> 11fb0c7387b2324a432e15bcbde13c693e8212b2
         }
     },
     created(){
@@ -67,8 +72,13 @@ export default {
             .then(res =>{
                 if(res.data.docs){
                     this.data = res.data.docs;
+<<<<<<< HEAD
                 }
                 
+=======
+                    
+                }
+>>>>>>> 11fb0c7387b2324a432e15bcbde13c693e8212b2
             })
             .catch(err => alert(err))
 

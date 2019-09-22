@@ -186,25 +186,36 @@ export default {
         },
         //delete comment 
         deleteComment(id){
-            axios.delete(`http://localhost:5000/users/coomentdelete/${id}`)
+            axios.delete(`http://localhost:5000/users/post/deletecomment/${id}`)
                 .then(res=>{
-                    if(res.data.success){
-                        alert('comment deleted')
-                        // get comment 
-                        // axios.get(`http://localhost:5000/users/post/comment/${pId}`)
-                        //     .then(res=>{
-                        //         if(res.data.msg){
-                                    
-                        //             this.comments = res.data.docs;
-                        //             this.num = this.comments.length;
-                        //         }
-                                
-                        //     })
-                        //     .catch(err=> alert(err))
-                        
-                    }
-                })
-                .catch(err => alert(err));
+                    if(res.data.msg){
+                        alert('comment deleted');
+                        axios.get("http://localhost:5000/moderator/post")
+                            .then(res=>{
+                                if(res.data.msg){
+                                    this.posts = res.data.docs;
+                                }
+                            })
+                            .catch(err => alert(err))
+                        axios.get("http://localhost:5000/users/post/likes")
+                            .then(res=>{
+                                if(res.data.msg){
+                                    this.likes = res.data.docs;
+                                }
+                            })
+                            .catch(err => alert(err));
+
+                            //getting all the comments
+                            axios.get("http://localhost:5000/users/post/comment")
+                                .then(res=>{
+                                    if(res.data.msg){
+                                        this.allComment = res.data.docs;
+                                    }
+                                })
+                                .catch(err => alert(err));
+                                    }
+                                })
+                                .catch(err => alert(err));
         }
     }
 }
