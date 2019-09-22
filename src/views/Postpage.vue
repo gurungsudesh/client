@@ -29,7 +29,7 @@
       </div>-->
      <div class="middlebody">
        
-        <Singlepost :id="pID"/>
+        <Singlepost :id="pID" :key="pID"/>
      </div>
       <div class="rightbody">
         <FollowRecom/>
@@ -111,7 +111,12 @@ export default {
   created(){
     this.pID = this.$route.params.postID;
     
-  }
+  },
+  watch: {
+        '$route' () {
+        this.pID = this.$route.params.postID;
+        }
+    },
 }
 </script>
 <style scoped>
