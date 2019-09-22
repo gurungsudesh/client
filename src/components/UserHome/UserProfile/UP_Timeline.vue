@@ -26,7 +26,7 @@
                                        
                                             
                                             <div class="toppost">
-                                                <table id="posttable" >
+                                                <table id="posttable" style="width:96%" >
                                                         <tr>
                                                         <td rowspan="2" style="width:40px"><img src="../../../../images/ProfilePic.jpg"  id="posticon"></td>     
                                                         <td style="font-size: 20px; color:forestgreen; font-weight:bold" >{{item.name}}</td>
@@ -224,7 +224,7 @@ export default {
         
     },
     methods: {
-        deletepost(id){
+       deletepost(id){
             // post delete afule
             axios.delete(`http://localhost:5000/users/post/${id}`)
                 .then(res => {
