@@ -55,6 +55,7 @@
                                                         {{comment.comment}}
                                                     </span>
                                                     <span style="color:grey; font-size:10px; margin-left:10px;">{{`${commentdateformat(comment.date)}`}}</span>
+                                                    <button @click="deleteComment(comment._id)" class="btn btn-success" style="float:right; color:green; background-color:white; border:none;"><i class="fas fa-trash-alt"></i></button>
                                                 </td>
                                             </tr>
                                         </table>
@@ -176,6 +177,41 @@ export default {
                             }
                     })
                     .catch(err =>alert(err)); 
+                    }
+                })
+                .catch(err => alert(err));
+        },
+        //delete comment 
+        deleteComment(id){
+            axios.delete(`http://localhost:5000/users/post/deletecomment/${id}`)
+                .then(res=>{
+                    if(res.data.msg){
+                        alert('comment deleted');
+                        const uname = this.name;
+        
+        axios.get(`http://localhost:5000/users/profile/post/${uname}`)
+        
+        .then(res=>{
+          if(res.data.msg){
+
+            this.posts = res.data.docs;axios.get("http://localhost:5000/users/post/likes")
+                .then(res=>{
+                    if(res.data.msg){
+                        this.likes = res.data.docs;
+                        //getting all the comments
+                        axios.get("http://localhost:5000/users/post/comment")
+                            .then(res=>{
+                                if(res.data.msg){
+                                    this.allComment = res.data.docs;
+                                }
+                            })
+                            .catch(err => alert(err));
+                    }
+                })
+                .catch(err => alert(err));
+          }
+        })
+        .catch(err =>alert(err)); 
                     }
                 })
                 .catch(err => alert(err));
