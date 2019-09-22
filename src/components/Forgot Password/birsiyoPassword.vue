@@ -130,32 +130,47 @@ export default {
               
         },
         onSubmit2(ansone,anstwo){
-            alert(this.ans1)
-            alert(this.ans2)
+            // alert(this.ans1)
+            // alert(this.ans2)
             //ckecking the answer
-            if(ansone == this.data.ans1 && anstwo == this.data.ans2){
-                var vm = this;
+            axios.post(`http://localhost:5000/users/forgotpassword/answer/${this.username}`,{ansone: ansone, anstwo: anstwo})
+                // alert(this.username)
+                .then(res => {
+                    if(res.data.success){
+                        //alert('bhayo')
+                        var vm = this;
                         
-                vm.$refs.middleid.style.opacity = '0';
-                vm.$refs.middleid.style.left = '5%';
-                vm.$refs.nextid.style.visibility= 'visible';
-                vm.$refs.nextid.style.opacity = '100';   
-            }  
-            else{
-                alert("Answers donot match")
-            }
+                        vm.$refs.middleid.style.opacity = '0';
+                        vm.$refs.middleid.style.left = '5%';
+                        vm.$refs.nextid.style.visibility= 'visible';
+                        vm.$refs.nextid.style.opacity = '100'; 
+                    }
+                    else{
+                        alert('Answer donot match');
+                    }
+                })
+                .catch(err => alert(err));
+            
   
         },
         onSubmit3(naya, confnaya){
             if(naya == confnaya){
-                alert(naya)
-                this.message = "Your password is changed. Now click on the link to "
-                
+                // this.message = "Your password is changed. Now click on the link to "
+                axios.put(`http://localhost:5000/users/forgotpassword/updatePassword/${this.username}`,{newPassword: naya})
+                    .then(res => {
+                        if(res.data.success){
+                           
+                             this.message = "Your password is changed. Now click on the link to "
+                        }
+                        else{
+                            alert('Something in wrong')
+                        }
+                    })
+
             }
             else{
                 alert("two password donot match");
             }
-            alert('done');
         }
     }
 }
