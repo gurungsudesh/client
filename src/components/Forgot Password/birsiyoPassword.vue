@@ -62,17 +62,17 @@
 
                                 <li class="list-group-item">
                                     <span style="font-size:18px; font-weight:bold; color:green; padding:10px;">New Password:</span>
-                                    <input type="text" class="form-control"  id="inputPassword3" v-model="newPass" required>
+                                    <input type="password" class="form-control"  id="inputPassword3" v-model="newPass" required>
                                 </li>
                                 <li class="list-group-item">
                                     <span style="font-size:18px; font-weight:bold; color:green; padding:10px;">Confirm Password:</span>
-                                    <input type="text" class="form-control"  id="inputPassword3"  v-model="confPass" required>
+                                    <input type="password" class="form-control"  id="inputPassword3"  v-model="confPass" required>
                                 </li>
                                 <li class="list-group-item" > 
                                     <button style="margin-left:35%; margin-top:20px;" type="submit" class="btn btn-success">Confirm</button> 
                                 </li>
                                 <li class="list-group-item" > 
-                                    <p>{{message}} <router-link to="/">Login</router-link></p> 
+                                    <p v-if="(condition==true)">{{message}} <router-link to="/">Login</router-link></p> 
                                 </li>
                         </ul>
                     </form>
@@ -96,8 +96,8 @@ export default {
             newPass: '',
             confPass: '',
             data: [],
-            message: ''
-
+            message: '',
+            condition: false
         }
     },
     methods: {
@@ -159,8 +159,10 @@ export default {
                 axios.put(`http://localhost:5000/users/forgotpassword/updatePassword/${this.username}`,{newPassword: naya})
                     .then(res => {
                         if(res.data.success){
-                           
+                            this.condition = true;
                              this.message = "Your password is changed. Now click on the link to "
+                             this.newPass = '';
+                             this.confPass = ''
                         }
                         else{
                             alert('Something in wrong')
