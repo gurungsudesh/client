@@ -12,7 +12,7 @@
                                             <i class="fas fa-user-check"></i>
                                             Verified  <br>                                              
                                                <br>
-                                            <button id="btn" class="btn btn-success"  >Edit Profile</button>
+                                           
                                         </div>
                                     </div>
                             </div>    
@@ -40,7 +40,7 @@ export default {
 <style scoped>
 .m_topl{
     margin-left: 15%;
-    margin-top: 10%; 
+    margin-top: 60%; 
 }
 .m_topl img{
     width: 200px;

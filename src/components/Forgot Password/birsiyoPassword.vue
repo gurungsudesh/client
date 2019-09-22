@@ -7,14 +7,14 @@
             </div>
             <div class="middle" >
                  <div class="formmain">
-                    <form @submit="onSubmit1(username)" autocomplete="off">
+                    <form  autocomplete="off">
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item">
                                 <label style="font-size:18px; font-weight:bold; color:green; padding:5px; ">Enter your username:</label>
                                 <input type="text" class="form-control"  id="inputPassword3" v-model="username"  required>
                             </li>
                              <li class="list-group-item" > 
-                                    <button style="margin-left:35%; margin-top:10px;" type="submit" class="btn btn-success">Next</button> 
+                                    <button style="margin-left:35%; margin-top:10px;" @click="onSubmit1(username)" type="submit" class="btn btn-success">Next</button> 
                                 </li>
                         </ul>
                     </form>
