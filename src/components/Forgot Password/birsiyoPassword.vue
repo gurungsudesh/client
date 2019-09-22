@@ -72,7 +72,7 @@
                                     <button style="margin-left:35%; margin-top:20px;" type="submit" class="btn btn-success">Confirm</button> 
                                 </li>
                                 <li class="list-group-item" > 
-                                    <p>{{message}} <router-link to="/">Login</router-link></p> 
+                                    <p v-if="(condition==true)">{{message}} <router-link to="/">Login</router-link></p> 
                                 </li>
                         </ul>
                     </form>
@@ -96,7 +96,8 @@ export default {
             newPass: '',
             confPass: '',
             data: [],
-            message: ''
+            message: '',
+            condition: false
 
         }
     },
@@ -159,8 +160,8 @@ export default {
                 axios.put(`http://localhost:5000/users/forgotpassword/updatePassword/${this.username}`,{newPassword: naya})
                     .then(res => {
                         if(res.data.success){
-                           
-                             this.message = "Your password is changed. Now click on the link to "
+                           this.condition = false;
+                            this.message = "Your password is changed. Now click on the link to "
                         }
                         else{
                             alert('Something in wrong')
