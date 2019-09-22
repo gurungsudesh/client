@@ -7,14 +7,14 @@
                 <div class="UPmainbody">  
                             <div class="UPleft">
                                 <div class="UPltop">
-                                    <ModeratorInfo :msg="name" :msgid ="id"/>
+                                    <ModeratorInfo :msg="name" :msgid ="id" :key="name"/>
                                 </div>
                                 <div class="UPlbottom">
-                                    <OPBio :msg="name" />
+                                    <OPBio :msg="name" :key="name"/>
                                 </div>
                             </div>
                             <div class="UPright">
-                                <ModeratorTimeline :msg="name"/>
+                                <ModeratorTimeline :msg="name" :key="name"/>
                             </div>
                         </div>
                    </div>
@@ -23,12 +23,7 @@
 </template>
 
 <script>    
-<<<<<<< HEAD
 import Search from '../components/Moderator/Search'
-=======
-//import Search from '../components/Moderator/Search'
-//import UserInfo from '../components/Moderator/UserInfo'
->>>>>>> 11fb0c7387b2324a432e15bcbde13c693e8212b2
 import OPBio from '../components/UserHome/OtherProfile/OP_Bio';
 import ModeratorInfo from '../components/Moderator/ModeratorInfo';
 import ModeratorTimeline from  '../components/Moderator/ModeratorTimeline';
@@ -36,13 +31,8 @@ import ModeratorTimeline from  '../components/Moderator/ModeratorTimeline';
 export default {
     name: "moderatorotherprofile",
     components: {
-<<<<<<< HEAD
         
         Search,
-=======
-        //UserInfo,
-        //Search,
->>>>>>> 11fb0c7387b2324a432e15bcbde13c693e8212b2
         OPBio,
         ModeratorInfo,
         ModeratorTimeline
@@ -57,6 +47,12 @@ export default {
       this.name = this.$route.params.name;
         this.id=this.$route.params.id;
   },
+  watch: {
+        '$route' () {
+        this.name = this.$route.params.name;
+        this.id=this.$route.params.id;
+        }
+    },
 }
 </script>
 
