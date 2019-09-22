@@ -10,7 +10,9 @@
                   <li class="list-group-item " id="hotkura"  v-for="(item,index) in hot.slice(0,3)" :key="index">
                     
                     <router-link  :to="{name:'postpage', params: {postID: item.id }}" >
-                    <div style="text-align:left; color:black; font-weight:bold">  {{item.content}}
+                    <div style="font-size:15px; border-bottom:2px solid lightgray; text-align:left; color:green; font-weight:bold">  {{item.name}}
+                    </div>
+                    <div style="text-align:left; color:gray; font-weight:600">  {{item.content}}
                     </div>
                     </router-link>
                     <!-- esko satta ma content hunxa--></li>
@@ -93,7 +95,7 @@ export default {
             var likecount;
             for (var i = 0; i<pok.length;i++){
                 likecount=this.likes.filter(function(post) {return post.postId == pok[i]._id;});
-                this.hot.push({ id:pok[i]._id,content:pok[i].content,likes:likecount.length});
+                this.hot.push({ id:pok[i]._id,content:pok[i].content,likes:likecount.length,name:pok[i].name});
                 
             }
             

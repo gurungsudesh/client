@@ -1,6 +1,10 @@
 <template>
     <div>
-        <div class="UPmainbody">  
+        <div class="UPmainpage">
+            <div class="UPtop">
+                <Search/>
+            </div>
+                <div class="UPmainbody">  
                             <div class="UPleft">
                                 <div class="UPltop">
                                     <ModeratorInfo :msg="name" :msgid ="id"/>
@@ -14,13 +18,12 @@
                             </div>
                         </div>
                    </div>
-                
+    </div>
            
 </template>
 
 <script>    
 import Search from '../components/Moderator/Search'
-import UserInfo from '../components/Moderator/UserInfo'
 import OPBio from '../components/UserHome/OtherProfile/OP_Bio';
 import ModeratorInfo from '../components/Moderator/ModeratorInfo';
 import ModeratorTimeline from  '../components/Moderator/ModeratorTimeline';
@@ -28,7 +31,7 @@ import ModeratorTimeline from  '../components/Moderator/ModeratorTimeline';
 export default {
     name: "moderatorotherprofile",
     components: {
-        UserInfo,
+        
         Search,
         OPBio,
         ModeratorInfo,
@@ -80,14 +83,26 @@ export default {
 .UPmainbody{
     position: absolute;
     left: 0%;
-    margin-top:0%;
+    top:9%;
     width: 100%;
     height: 91%;
     background-color: greenyellow;
 }
 
+.UPmainpage{
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  
+}
+
+
 .UPtop{
-  border-bottom: 2px solid green;
+    position: absolute;
+    
+    height:9%;
+    width: 100%;
+    border-bottom: 2px solid lightgray;
 }
 .UPltop{
     margin-top: 20px;

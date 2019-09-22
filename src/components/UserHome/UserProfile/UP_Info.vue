@@ -8,7 +8,7 @@
                 <div class="col-md-auto">
                     <h3>{{name}}</h3>
                         <p class="text-left" style="color: gray; font-size: 12px" > 
-                            Made at s{{date}}
+                            Made at {{data[0].date}}
                             <br>
                             <!-- Yaha 99 bhako thau ma chai aauna paryo -->
                             {{followersNum}} followers<br>
@@ -34,7 +34,7 @@ export default {
             name : decode.name,
             followersNum: '',
             followingNum: '',
-            date: ''
+            data: []
         }
     },
     created(){
@@ -65,8 +65,10 @@ export default {
         //date laune 
         axios.get(`http://localhost:5000/users/user/${this.name}`)
             .then(res =>{
-            
-                this.date = res.data.docs;
+                if(res.data.docs){
+                    this.data = res.data.docs;
+                }
+                
             })
             .catch(err => alert(err))
 

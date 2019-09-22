@@ -7,15 +7,7 @@
                                 <form id="searchbtn" class="form-inline ">
                                 <input class="form-control mr-sm-2" type="search"  placeholder="Search" aria-label="Search">
                                 <button class="btn btn-success" type="submit">Search</button>
-                                <div id="dpdn" class="btn-group">
-                                    <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    </button>
-                                    <div  class="dropdown-menu dropdown-menu-right" >
-                                        <router-link class="dropdown-item" to="/" >Profile</router-link>
-                                        <router-link class="dropdown-item" to="/" >Settings</router-link>
-                                        <div v-on:click="logout()"><router-link class="dropdown-item" to="/">Log Out</router-link></div>
-                                    </div>
-                                    </div>
+                                <button v-on:click="logout()" style="margin-left:5px;" class="btn btn-success" type="button"><i class="fas fa-sign-out-alt" ></i></button>
                                 </form>
                             
                           </div>
@@ -34,6 +26,7 @@ export default {
     methods: {
         logout(){
         localStorage.removeItem('moderatorToken')
+        this.$router.push("/");
       }
     }
 }
@@ -41,13 +34,16 @@ export default {
  <style scoped>
  #topsearch{
      position: absolute;
+     right:10px;
      text-align: right;
+     width: 100%;
+     margin-top:10px;
      
       }
       #searchbtn{
           position: absolute;
           right: 10px;
-          margin-top: 2%;
+          
       }
 
 
@@ -60,18 +56,8 @@ export default {
      border-radius: 20px;
      width:150px;
 }
-#dpdn{
-    margin-left: 10px;
-}
- #dpdn a{
-   font-size: 14px;
-    margin-left: 0px;
-    
-}
-#dpdn a:active{
-  background-color: green;
-    
-}
+
+
 </style>
 
 

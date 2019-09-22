@@ -59,13 +59,16 @@ export default {
 }
 </script>
 <style scoped>
-
+a{
+    color: green;
+    font-weight: 600;
+}
 #followbtn{
     background-color: white;
     color: green;
     border-radius: 20px;
     font-weight: bold;
-    border: 2px solid green;
+    border: 1px solid green;
     float: right;
     width: 100px;
 }
