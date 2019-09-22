@@ -30,16 +30,16 @@
             </div>
             <div class="middle" >
                  <div class="formmain">
-                    <form @submit="onSubmit2" autocomplete="off">
+                    <form @submit="onSubmit2(ans1,ans2)" autocomplete="off">
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item">
                                     <input type="text" ref="inputtext1" id="inputtext1" :readonly="true" v-model="ques1">
-                                    <input type="text" class="form-control"  id="inputPassword3" placeholder="Answer 1" required>
+                                    <input type="text" class="form-control"  id="inputPassword3" placeholder="Answer 1" v-model="ans1" required>
                                 </li>
 
                                 <li class="list-group-item">
                                      <input type="text" ref="inputtext1" id="inputtext1" :readonly="true" v-model="ques2">
-                                    <input type="text" class="form-control"  id="inputPassword3"  placeholder="Answer 2" required>
+                                    <input type="text" class="form-control"  id="inputPassword3"  placeholder="Answer 2" v-model="ans2" required>
                                 </li>
                                 <li class="list-group-item" > 
                                     <button style="margin-left:35%; margin-top:20px;" type="submit" class="btn btn-success">Next</button> 
@@ -57,19 +57,22 @@
             </div>
             <div class="middle">
                  <div class="formmain">
-                    <form @submit="onSubmit3" autocomplete="off">
+                    <form @submit="onSubmit3(newPass,confPass)" autocomplete="off">
                         <ul class="list-group list-group-flush">
 
                                 <li class="list-group-item">
                                     <span style="font-size:18px; font-weight:bold; color:green; padding:10px;">New Password:</span>
-                                    <input type="text" class="form-control"  id="inputPassword3"  required>
+                                    <input type="text" class="form-control"  id="inputPassword3" v-model="newPass" required>
                                 </li>
                                 <li class="list-group-item">
                                     <span style="font-size:18px; font-weight:bold; color:green; padding:10px;">Confirm Password:</span>
-                                    <input type="text" class="form-control"  id="inputPassword3"  required>
+                                    <input type="text" class="form-control"  id="inputPassword3"  v-model="confPass" required>
                                 </li>
                                 <li class="list-group-item" > 
                                     <button style="margin-left:35%; margin-top:20px;" type="submit" class="btn btn-success">Confirm</button> 
+                                </li>
+                                <li class="list-group-item" > 
+                                    <p>{{message}} <router-link to="/">Login</router-link></p> 
                                 </li>
                         </ul>
                     </form>
@@ -92,6 +95,8 @@ export default {
             ans2: '',
             newPass: '',
             confPass: '',
+            data: [],
+            message: ''
 
         }
     },
@@ -105,6 +110,9 @@ export default {
                     if(res.data.docs){
                         alert("username found")
                         //question tane maile
+                        this.data = res.data.docs;
+                        this.ques1 = this.data.ques1;
+                        this.ques2 = this.data.ques2;
                         var vm = this;          
         
                         vm.$refs.userid.style.opacity = '0';
@@ -121,18 +129,32 @@ export default {
             
               
         },
-        onSubmit2(){
-            
-            
-          var vm = this;
-                    
-            vm.$refs.middleid.style.opacity = '0';
-            vm.$refs.middleid.style.left = '5%';
-            vm.$refs.nextid.style.visibility= 'visible';
-            vm.$refs.nextid.style.opacity = '100';     
+        onSubmit2(ansone,anstwo){
+            alert(this.ans1)
+            alert(this.ans2)
+            //ckecking the answer
+            if(ansone == this.data.ans1 && anstwo == this.data.ans2){
+                var vm = this;
+                        
+                vm.$refs.middleid.style.opacity = '0';
+                vm.$refs.middleid.style.left = '5%';
+                vm.$refs.nextid.style.visibility= 'visible';
+                vm.$refs.nextid.style.opacity = '100';   
+            }  
+            else{
+                alert("Answers donot match")
+            }
   
         },
-        onSubmit3(){
+        onSubmit3(naya, confnaya){
+            if(naya == confnaya){
+                alert(naya)
+                this.message = "Your password is changed. Now click on the link to "
+                
+            }
+            else{
+                alert("two password donot match");
+            }
             alert('done');
         }
     }
