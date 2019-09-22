@@ -268,11 +268,13 @@ export default {
         //deactivate garesi remove all the information of the user
         axios.delete(`http://localhost:5000/users/delete/${this.username}`,{data: { pass : password }})
             .then(res=>{
-                if(res.data.success){
+                if(res.data.docs != ''){
                     alert("Your account have been deleted permanently from the iPost")
                     localStorage.removeItem('usertoken')
                     this.$router.push("/");
-
+                }
+                else if(res.data.docs == ''){
+                    alert("password is incorrect")
                 }
             })
             .catch(err=> alert(err));
