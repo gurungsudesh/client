@@ -19,8 +19,8 @@
 </template>
 
 <script>    
-import Search from '../components/Moderator/Search'
-import UserInfo from '../components/Moderator/UserInfo'
+//import Search from '../components/Moderator/Search'
+//import UserInfo from '../components/Moderator/UserInfo'
 import OPBio from '../components/UserHome/OtherProfile/OP_Bio';
 import ModeratorInfo from '../components/Moderator/ModeratorInfo';
 import ModeratorTimeline from  '../components/Moderator/ModeratorTimeline';
@@ -28,8 +28,8 @@ import ModeratorTimeline from  '../components/Moderator/ModeratorTimeline';
 export default {
     name: "moderatorotherprofile",
     components: {
-        UserInfo,
-        Search,
+        //UserInfo,
+        //Search,
         OPBio,
         ModeratorInfo,
         ModeratorTimeline
