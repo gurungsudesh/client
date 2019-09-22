@@ -26,7 +26,7 @@
                                        
                                             
                                             <div class="toppost">
-                                                <table id="posttable" >
+                                                <table id="posttable" style="width:96%" >
                                                         <tr>
                                                         <td rowspan="2" style="width:40px"><img src="../../../../images/ProfilePic.jpg"  id="posticon"></td>     
                                                         <td style="font-size: 20px; color:forestgreen; font-weight:bold" >{{item.name}}</td>
@@ -224,6 +224,9 @@ export default {
         
     },
     methods: {
+        deletepost(){
+            alert('click')
+        },
         utafollow(value){
             for(var i=0; i < this.following.length; i++){
                 if( this.following[i].username == value){
