@@ -39,9 +39,21 @@ export default {
     methods: {
         //deleting the user
         deleteUser(username){
-            alert(username)
-            //further code yaha aaucha 
-            
+            axios.delete(`http://localhost:5000/moderator/deletebymoderator/${username}`)
+                .then(res => {
+                    if(res.data.success){
+                        alert("successfully deleted");
+                        axios.get('http://localhost:5000/users/user')
+                            .then(res=>{
+                            if(res.data.success){
+                                    this.allusers = res.data.docs;
+                            }
+                            })
+                            .catch(err=> alert(err));
+
+                    }
+                })
+                .catch(err=> alert(err));
         }
     }
 }

@@ -92,6 +92,7 @@
                  <div class="changep" >
                         <h5 @click="showpassword()" ><i class="fas fa-cog" style="margin-right: 10px;"></i>Change Password</h5>   
                         <div class="changepassword" ref="passwordid" id="passwordid">
+                        
                         <form @submit.prevent="handleSubmit">
                         <table style="border-top:1px solid black;">
                          <tr>
@@ -115,7 +116,7 @@
                         </tr>
                          <tr>
                             <td style="font-weight: 600">Confirm Password:</td>
-                            <td><input type="password" class="form-control" v-model="confirmPass" :class="{ 'is-invalid': submitted && $v.confirmPass.$error }" >
+                            <td><input type="password" class="form-control" v-model="confirmPass" :class="{ 'is-invalid': submitted && $v.confirmPass.$error } "  >
                                 <div v-if="submitted && !$v.confirmPass.required" class="invalid-feedback">
                                     <span v-if="!$v.confirmPass.required">Confirm Password is required</span>
                                     <span v-else-if="!$v.confirmPass.sameAsPassword">Passwords must match</span>
@@ -126,7 +127,7 @@
                          <tr>
                              <td></td>
                              
-                             <td style="text-align: right;"><button @click="changePassword(prevPass,newPass)" class="btn btn-success"> Change Password</button></td>
+                             <td style="text-align: right;"><button @click="changePassword(prevPass,newPass,confirmPass)" class="btn btn-success"> Change Password</button></td>
                          </tr>
                     </table>
                 </form>
@@ -222,15 +223,7 @@ export default {
         
   },
   methods:{
-      handleSubmit() {
-                this.submitted = true;
-
-                // stop here if form is invalid
-                this.$v.$touch();
-                if (this.$v.$invalid) {
-                    return;
-                }
-        },
+     
       
 
       confirmBio(Name,Contact,Userbio,Address){
@@ -243,13 +236,13 @@ export default {
             })
             .catch(err=> alert(err));
       },
-      changePassword(prevPass,newPass){
-        //   if(confirmPass !== newPass){  
-        //       //yo validation CCr and dhoju styling le garcha ramrari 
-        //     //alert(" duita Password Milena or the password are incorrect ")
+      changePassword(prevPass,newPass, confirmPass){
+          if(confirmPass !== newPass){  
+              //yo validation CCr and dhoju styling le garcha ramrari 
+            //alert(" duita Password Milena or the password are incorrect ")
 
-        //   }
-        //   else{
+          }
+          else{
               axios.put(`http://localhost:5000/users/changepassword/${this.username}`,{password: prevPass , newPassword: newPass})
                 .then(res=> {
                     if(res.data.success){
@@ -263,7 +256,7 @@ export default {
                     }
                 })
                 .catch(err=> alert(err));
-          //}
+          }
           
       },
       deactivate(password) {
@@ -398,8 +391,16 @@ export default {
               },
               textareaResize:function() {
                   this.$refs.textarea1.style.height=this.$refs.textarea1.scrollHeight+'px';
-                }
+                },
+                 handleSubmit() {
+                this.submitted = true;
 
+                // stop here if form is invalid
+                this.$v.$touch();
+                if (this.$v.$invalid) {
+                    return;
+                }
+        }
                 
               
   }
