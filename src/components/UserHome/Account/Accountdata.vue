@@ -119,7 +119,7 @@
                             <td><input type="password" class="form-control" v-model="confirmPass" :class="{ 'is-invalid': submitted && $v.confirmPass.$error } "  >
                                 <div v-if="submitted && !$v.confirmPass.required" class="invalid-feedback">
                                     <span v-if="!$v.confirmPass.required">Confirm Password is required</span>
-                                    <span v-else-if="!$v.confirmPass.sameAsPassword">Passwords must match</span>
+                                    <span v-else-if="!$v.confirmPass.sameAsPassword.required">Passwords must match</span>
                                 </div>
                             </td>
                             
@@ -150,7 +150,7 @@
                                 </tr>
                                 <tr>
                                     <td></td>
-                                    <td style="text-align: right;"><button @click="deactivate(password)" class="btn btn-success">Deactivate</button></td>
+                                    <td style="text-align: right;"><button :disabled='isDisabled' @click="deactivate(password)" class="btn btn-success">Deactivate</button></td>
                                 </tr>
                             </table>
                         </form>
@@ -197,6 +197,11 @@ export default {
         prevPass: {required},
         newPass: {required, minLength: minLength(6)},
         confirmPass: {required, sameAsPassword: sameAs('newPass')}
+    },
+    computed:{
+        isDisabled(){
+        return this.password === ''
+      }
     },
   
   created(){
