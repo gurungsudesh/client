@@ -31,7 +31,8 @@
                     <thead>
                         <tr>
                         <th style="width:20%" scope="col">Sent by</th>
-                        <th style="width:70%" scope="col">Content</th>
+                        <th style="width:20%" scope="col"> Received by</th>
+                        <th style="width:50%" scope="col">Content</th>
                         <th style="width:10%" scope="col">Date</th>
                         </tr>
                     </thead>
@@ -40,6 +41,7 @@
                         <tr v-for="item in allMessages" :key="item">
                             
                             <td ><b>{{item.sender}}</b> </td>
+                            <td >{{item.receiver}}</td>
                             <td >{{item.message}}</td>
                             <td ><b>{{item.date}}</b> </td>
                         </tr>
@@ -84,6 +86,9 @@ export default {
             if(res.data.success){
                 //alert('message get gareko')
                 this.allMessages = res.data.docs;
+                 this.allMessages.sort(function(a,b){
+                                return new Date(b.date) - new Date(a.date);
+                            });
                 // getting the messages when im the sender
             axios.get(`http://localhost:5000/users/messagesent/${this.name}`)
                 .then(res=>{
