@@ -7,7 +7,7 @@
                 <li class="list-group-item">
                 
                     <img src="../../../images/ProfilePic.jpg" id="otherprofileicon" >
-                    {{item.name}}                                        
+                    <router-link :to="{ name: 'moderatorotherprofile' ,params:{name: item.name}}"> {{item.name}} </router-link>                                        
                     
                     <button  @click ="deleteUser(item.name)" class="btn btn-success" id="followbtn">Delete</button>
                     

@@ -3,7 +3,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-auto">
-                    <img src="../../../../images/ProfilePic.jpg" >
+                    <img src="../../../images/ProfilePic.jpg" >
                 </div>
                 <div class="col-md-auto">
                     <h3>{{msg}}</h3>

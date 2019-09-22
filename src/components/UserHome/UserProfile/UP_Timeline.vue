@@ -30,6 +30,7 @@
                                                         <tr>
                                                         <td rowspan="2" style="width:40px"><img src="../../../../images/ProfilePic.jpg"  id="posticon"></td>     
                                                         <td style="font-size: 20px; color:forestgreen; font-weight:bold" >{{item.name}}</td>
+                                                        <td style="width:20px"><button @click="deletepost" class="btn btn-success" style="float:right; color:green; background-color:white; border:none;"><i class="fas fa-trash-alt"></i></button></td>
                                                     </tr>
                                                     <tr>
                                                         

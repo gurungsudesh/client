@@ -9,12 +9,13 @@
                 
                     
                     <div class="toppost">
-                        <table id="posttable">
+                        <table id="posttable" style="width:90%">
                                 <tr>
                                 <td rowspan="2"  style="width:80px"><img src="../../../images/ProfilePic.jpg" id="posticon"></td>     
                                 <td style="font-size: 20px; color:forestgreen; font-weight:bold" >
-                                    <router-link :to="{ name: 'otherprofile' ,params:{name: item.name}}"> {{item.name}} </router-link>
+                                    <router-link :to="{ name: 'moderatorotherprofile' ,params:{name: item.name}}"> {{item.name}} </router-link>
                                 </td>
+                                <td style="width:20px"><button @click="deletepost" class="btn btn-success" style="float:right; color:green; background-color:white; border:none;"><i class="fas fa-trash-alt"></i></button></td>
                             </tr>
                             <tr>
                                 

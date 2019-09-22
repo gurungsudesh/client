@@ -9,13 +9,13 @@
                     
                         
                         <div class="toppost">
-                            <table id="posttable" >
-                                    <tr>
-                                    <td rowspan="2" style="width:40px"><img src="../../../../images/ProfilePic.jpg"  id="posticon"></td>     
+                            <table id="posttable" style="width:96%;">
+                                <tr>
+                                    <td rowspan="2" style="width:40px"><img src="../../../images/ProfilePic.jpg"  id="posticon"></td>     
                                     <td style="font-size: 20px; color:forestgreen; font-weight:bold" >{{item.name}}</td>
+                                    <td style="width:20px"><button @click="deletepost" class="btn btn-success" style="float:right; color:green; background-color:white; border:none;"><i class="fas fa-trash-alt"></i></button></td>
                                 </tr>
                                 <tr>
-                                    
                                     <td style="font-size:12px; color: grey;">Posted at {{`${dateformat(item.date)}`}}</td>
                                 </tr>
                             </table>
@@ -48,7 +48,7 @@
                                     <div v-for="(comment,commentSequence) in comments" :key="commentSequence" >
                                         <table v-if="(comment.postId == item._id && item.commentdisplay== true )" id="tables3"  >
                                             <tr>
-                                                <td width=1px><img src="../../../../images/ProfilePic.jpg" align="left" id="otherprofileicon"></td>
+                                                <td width=1px><img src="../../../images/ProfilePic.jpg" align="left" id="otherprofileicon"></td>
                                                 <td>
                                                     <span class="postcontent" >
                                                         <b style="color:darkgreen; font-size:15px;">{{comment.name}}</b>

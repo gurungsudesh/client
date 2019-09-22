@@ -1,15 +1,6 @@
 <template>
     <div>
-        <div class="mainbody">
-                <div class="m_leftside" >
-                    <UserInfo/>
-                </div>
-                <div class="m_rightside">
-                   <div class="topright" style="border-bottom: 1px solid lightgrey">
-                    <Search/>
-                   </div>
-                   <div class="bottomright">
-                       <div class="UPmainbody">  
+        <div class="UPmainbody">  
                             <div class="UPleft">
                                 <div class="UPltop">
                                     <ModeratorInfo :msg="name" :msgid ="id"/>
@@ -24,9 +15,7 @@
                         </div>
                    </div>
                 
-            </div>
-        </div>
-    </div>
+           
 </template>
 
 <script>    
@@ -37,14 +26,24 @@ import ModeratorInfo from '../components/Moderator/ModeratorInfo';
 import ModeratorTimeline from  '../components/Moderator/ModeratorTimeline';
 
 export default {
-    name: "moderator",
+    name: "moderatorotherprofile",
     components: {
         UserInfo,
         Search,
         OPBio,
         ModeratorInfo,
         ModeratorTimeline
-    }
+    },
+    data(){
+      return{
+          name: '',
+          id:'',
+      }
+  },
+  created(){
+      this.name = this.$route.params.name;
+        this.id=this.$route.params.id;
+  },
 }
 </script>
 
