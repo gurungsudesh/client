@@ -146,7 +146,11 @@ export default {
             
             
           })
-          .catch(err=> alert(err));
+          .catch(err=> {if(err){ 
+                  this.user = [];
+                  this.showNotification1(true);
+          }
+          });
           
       },
       logout(){

@@ -8,11 +8,11 @@
                 <div class="col-md-auto">
                     <h3>{{msg}}</h3>
                         <p class="text-left" style="color: gray; font-size: 12px" >
-                            <br>
+                            
                             {{ufollowersNum}} followers<br>
                             {{ufollowingNum}} following<br>
                         </p>
-                        
+                         <button id="btn"  class="btn btn-success" >Delete</button>
                 </div>
             </div> 
         </div>
@@ -20,16 +20,12 @@
 </template>
 <script>
 import axios from 'axios'
-import jwtDecode from 'jwt-decode'
 export default {
     name: "Moderatorinfo",
     props: ['msg','msgid'],
     data(){
-        const token = localStorage.usertoken
-        const decode = jwtDecode(token)
         return{
-            name: decode.name,
-            id: decode._id,
+           
             uname: this.msg,
             unameId:this.msgid,
            following:[],

@@ -59,12 +59,12 @@ export default {
 .topright{
     position: absolute;
     top:0%;
-    height:11%;
+    height:9%;
     width: 100%;
 }
 .bottomright{
     position: absolute;
-    top:11%;
+    top:9%;
 
     width: 100%;
     background-color: rgb(235, 235, 235);   
@@ -72,7 +72,7 @@ export default {
 .firsthalf{
     position:absolute;
     left: 0px;
-    width:50%;
+    width:70%;
     height:auto;
     border: 1px solid lightgrey;
     
@@ -81,7 +81,7 @@ export default {
 .secondhalf{
     position: absolute;
     right: 0px;
-    width:50%;
+    width:30%;
     height: auto;
     border:1px solid lightgray;
     

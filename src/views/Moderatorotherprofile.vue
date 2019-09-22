@@ -1,26 +1,29 @@
 <template>
     <div>
-        <div class="UPmainbody">  
+        <div class="UPmainpage">
+            <div class="UPtop">
+                <Search/>
+            </div>
+                <div class="UPmainbody">  
                             <div class="UPleft">
                                 <div class="UPltop">
-                                    <ModeratorInfo :msg="name" :msgid ="id"/>
+                                    <ModeratorInfo :msg="name" :msgid ="id" :key="name"/>
                                 </div>
                                 <div class="UPlbottom">
-                                    <OPBio :msg="name" />
+                                    <OPBio :msg="name" :key="name"/>
                                 </div>
                             </div>
                             <div class="UPright">
-                                <ModeratorTimeline :msg="name"/>
+                                <ModeratorTimeline :msg="name" :key="name"/>
                             </div>
                         </div>
                    </div>
-                
+    </div>
            
 </template>
 
 <script>    
-//import Search from '../components/Moderator/Search'
-//import UserInfo from '../components/Moderator/UserInfo'
+import Search from '../components/Moderator/Search'
 import OPBio from '../components/UserHome/OtherProfile/OP_Bio';
 import ModeratorInfo from '../components/Moderator/ModeratorInfo';
 import ModeratorTimeline from  '../components/Moderator/ModeratorTimeline';
@@ -28,8 +31,8 @@ import ModeratorTimeline from  '../components/Moderator/ModeratorTimeline';
 export default {
     name: "moderatorotherprofile",
     components: {
-        //UserInfo,
-        //Search,
+        
+        Search,
         OPBio,
         ModeratorInfo,
         ModeratorTimeline
@@ -44,6 +47,12 @@ export default {
       this.name = this.$route.params.name;
         this.id=this.$route.params.id;
   },
+  watch: {
+        '$route' () {
+        this.name = this.$route.params.name;
+        this.id=this.$route.params.id;
+        }
+    },
 }
 </script>
 
@@ -80,14 +89,26 @@ export default {
 .UPmainbody{
     position: absolute;
     left: 0%;
-    margin-top:0%;
+    top:9%;
     width: 100%;
     height: 91%;
     background-color: greenyellow;
 }
 
+.UPmainpage{
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  
+}
+
+
 .UPtop{
-  border-bottom: 2px solid green;
+    position: absolute;
+    
+    height:9%;
+    width: 100%;
+    border-bottom: 2px solid lightgray;
 }
 .UPltop{
     margin-top: 20px;
