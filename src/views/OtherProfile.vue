@@ -7,14 +7,14 @@
             <div class="UPmainbody">  
                 <div class="UPleft">
                     <div class="UPltop">
-                        <OPInfo :msg="name" :msgid ="id"/>
+                        <OPInfo :msg="name" :msgid ="id" :key="name"/>
                     </div>
                     <div class="UPlbottom">
-                        <OPBio :msg="name" />
+                        <OPBio :msg="name" :key="name"/>
                     </div>
                 </div>
                 <div class="UPright">
-                    <OPTimeline :msg="name"/>
+                    <OPTimeline :msg="name" :key="name"/>
                 </div>
             </div>
         </div>
@@ -42,7 +42,13 @@ export default {
   created(){
       this.name = this.$route.params.name;
         this.id=this.$route.params.id;
-  }
+  },
+  watch: {
+        '$route' () {
+        this.name = this.$route.params.name;
+        this.id=this.$route.params.id;
+        }
+    },
   
 }
 

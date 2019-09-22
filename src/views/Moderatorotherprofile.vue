@@ -37,7 +37,7 @@ import ModeratorInfo from '../components/Moderator/ModeratorInfo';
 import ModeratorTimeline from  '../components/Moderator/ModeratorTimeline';
 
 export default {
-    name: "Moderator",
+    name: "moderator",
     components: {
         UserInfo,
         Search,

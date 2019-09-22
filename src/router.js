@@ -10,6 +10,7 @@ import account from './views/Account.vue';
 import messages from './views/Message.vue'
 import postpage from './views/Postpage.vue';
 import forgotpassword from './views/ForgotPassword.vue'
+import moderator from './views/Moderatorotherprofile.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -68,6 +69,11 @@ export default new Router({
             path: '/postpage/:postID',
             name: 'postpage',
             component: postpage
+        },
+        {
+            path: '/moderator/profile',
+            name: 'moderator',
+            component: moderator
         }
     ]
 })

@@ -45,7 +45,7 @@
             <ul style="text-align:left; border-top: 1px solid grey">
               <label style="margin-top:20px; margin-bottom:20px;" v-if="(user.length==0)" >Nothing to show</label>
               <div v-for="(item,index) in user" :key="index">
-                <router-link :to="{name:'otherprofile', params: {name: item.name }}"><li ><img src="../../../images/ProfilePic.jpg"  id="posticon"> <span style=" font-size:17px; ">
+                <router-link :to="{name:'otherprofile', params: {name: item.name }}"  ><li ><img src="../../../images/ProfilePic.jpg"  id="posticon"> <span style=" font-size:17px; ">
                   {{item.name}}</span> </li> </router-link>
               </div>
             </ul>
