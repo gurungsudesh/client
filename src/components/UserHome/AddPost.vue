@@ -289,10 +289,10 @@ export default {
                             .then(res=>{
                                 
                                 if(res.data.success){
-                                    const pId = postID;  
+                                    const pid = postID;  
                                     alert("Notification sent") 
                                     //alert(pId)
-                                    axios.get(`http://localhost:5000/users/post/comment/${pId}`)
+                                    axios.get(`http://localhost:5000/users/post/comment/${pid}`)
                                         .then(res=>{
                                             if(res.data.msg){
                                                 
