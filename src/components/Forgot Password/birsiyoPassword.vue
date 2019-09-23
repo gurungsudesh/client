@@ -11,10 +11,10 @@
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item">
                                 <label style="font-size:18px; font-weight:bold; color:green; padding:5px; ">Enter your username:</label>
-                                <input type="text" class="form-control"  id="inputPassword3" v-model="username"  required>
+                                <input type="text" class="form-control"  id="inputPassword3" v-model="username" required>
                             </li>
                              <li class="list-group-item" > 
-                                    <button style="margin-left:35%; margin-top:10px;" @click="onSubmit1(username)" type="submit" class="btn btn-success">Next</button> 
+                                    <p v-if="(stat==true)">{{err}}</p><button style="margin-left:35%; margin-top:10px;" @click="onSubmit1(username)" type="submit" class="btn btn-success">Next</button> 
                                 </li>
                         </ul>
                     </form>
@@ -42,8 +42,9 @@
                                     <input type="text" class="form-control"  id="inputPassword3"  placeholder="Answer 2" v-model="ans2" required>
                                 </li>
                                 <li class="list-group-item" > 
-                                    <button style="margin-left:35%; margin-top:20px;" type="submit" class="btn btn-success">Next</button> 
+                                    <p v-if="(status==true)">{{error}}</p> <button style="margin-left:35%; margin-top:20px;" type="submit" class="btn btn-success">Next</button>
                                 </li>
+                                
                         </ul>
                     </form>
                  </div>    
@@ -72,6 +73,7 @@
                                     <button style="margin-left:35%; margin-top:20px;" type="submit" class="btn btn-success">Confirm</button> 
                                 </li>
                                 <li class="list-group-item" > 
+                                    <p v-if="(stat1==true)">{{err1}}</p>
                                     <p v-if="(condition==true)">{{message}} <router-link to="/">Login</router-link></p> 
                                 </li>
                         </ul>
@@ -97,7 +99,13 @@ export default {
             confPass: '',
             data: [],
             message: '',
-            condition: false
+            error: '',
+            err: '',
+            err1: '',
+            condition: false,
+            status: false,
+            stat: false,
+            stat1: ''
         }
     },
     methods: {
@@ -108,7 +116,7 @@ export default {
             axios.post(`http://localhost:5000/users/forgotpassword/${uname}`)
                 .then(res=>{
                     if(res.data.docs){
-                        alert("username found")
+                        //alert("username found")
                         //question tane maile
                         this.data = res.data.docs;
                         this.ques1 = this.data.ques1;
@@ -121,7 +129,8 @@ export default {
                         vm.$refs.middleid.style.opacity = '100';
                     }
                     else{
-                        alert("username milena")
+                        this.stat = true;
+                        this.err = "Users not found"
                     }
                 })
                 .catch(err=> alert(err));
@@ -146,7 +155,8 @@ export default {
                         vm.$refs.nextid.style.opacity = '100'; 
                     }
                     else{
-                        alert('Answer donot match');
+                        this.status = true;
+                        this.error = "Your answer donot match"
                     }
                 })
                 .catch(err => alert(err));
@@ -160,6 +170,8 @@ export default {
                     .then(res => {
                         if(res.data.success){
                             this.condition = true;
+                            this.stat1 = false;
+                            this.err1 = '';
                              this.message = "Your password is changed. Now click on the link to "
                              this.newPass = '';
                              this.confPass = ''
@@ -171,7 +183,8 @@ export default {
 
             }
             else{
-                alert("two password donot match");
+                this.stat1 = true;
+                this.err1 = "Your password donot match"
             }
         }
     }
