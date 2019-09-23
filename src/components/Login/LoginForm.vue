@@ -7,12 +7,15 @@
         <ul style="font-size:13px">
         <li><input type="text"  v-model="username" id="username" placeholder="Username" required></li>
         <li><input type="password"  v-model="password" id="password" placeholder="Password" required></li>
+        
         <!--<input type="submit" name="submit" value="Sign Up!">-->
         <li><button type="submit" class="btn btn-success">Login</button></li>
         </ul>
-        <p class="error" v-if="error">{{error}}</p>
+        <span class="error" style="position:absolute;font-size:12px; border-radius:10px; left:10%; bottom:-8%;  font-weight:bold; z-index:2; color:red; padding:5px; " v-if="error">{{error}}</span>
+
     </form>      
     <span  ><router-link style="font-size:12px; float:right; margin-right:90px; margin-top:-10px; color:green; font-weight:600;" to="/forgotpassword"> forgot password?</router-link></span>       
+    
 </div>
                
         
@@ -67,6 +70,8 @@ export default {
                         }
                         else{
                             this.error = res.data.msg;
+                            
+
                         }
 
                 
@@ -119,4 +124,19 @@ text-decoration:none;
 input:focus{
     outline: none;
 }
+.error{
+    -webkit-animation: cssAnimation 2s forwards; 
+    animation: cssAnimation 2s forwards;
+}
+@keyframes cssAnimation {
+    0%   {opacity: 1;}
+    90%  {opacity: 1;}
+    100% {opacity: 0;}
+}
+@-webkit-keyframes cssAnimation {
+    0%   {opacity: 1;}
+    90%  {opacity: 1;}
+    100% {opacity: 0;}
+}
+
 </style>
