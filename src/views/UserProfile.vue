@@ -32,7 +32,17 @@ export default {
     NavBar,
     UPInfo,
     UPTimeline
-  }
+  },
+  data(){
+      return{
+           t: localStorage.usertoken
+      }
+  },
+    created(){
+        if(!this.t){
+        this.$router.push("/");
+        }
+    }
 }
 
 </script>

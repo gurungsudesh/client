@@ -43,7 +43,7 @@ export default {
         .then(res =>{
             if(res.data.msg){
                  this.ufollowers = res.data.docs;
-                //this.ufollowersNum = this.ufollowers.length;
+                this.ufollowersNum = this.ufollowers.length;
                 
             }
             
@@ -59,21 +59,22 @@ export default {
             })
             .catch(err=> alert(err));
             //mero followings
-             axios.get(`http://localhost:5000/users/follow/${this.name}`)
-            .then(res =>{
-                if(res.data.msg){
-                     this.following = res.data.docs;
-                }
-            })
-            .catch(err=> alert(err));
+            //  axios.get(`http://localhost:5000/users/follow/${this.name}`)
+            // .then(res =>{
+            //     if(res.data.msg){
+            //          this.following = res.data.docs;
+            //     }
+            // })
+            // .catch(err=> alert(err));
 
-             axios.get(`http://localhost:5000/users/follower/${this.uname}`)
-                .then(res =>{
-                    if(res.data.msg){
-                        this.followers = res.data.docs;
-                    }
-                })
-                .catch(err=> alert(err))
+            //  axios.get(`http://localhost:5000/users/follower/${this.uname}`)
+            //     .then(res =>{
+            //         if(res.data.msg){
+            //             this.followers = res.data.docs;
+                        
+            //         }
+            //     })
+            //     .catch(err=> alert(err))
 
                     
     },

@@ -20,12 +20,23 @@
 <script>
 import NavBar from '../components/UserHome/NavBar';
 import Messageshow from '../components/UserHome/Message/Messageshow';
+
 export default {
     name: "message",
     components: {
         NavBar,
         Messageshow
-  }
+  },
+  data(){
+      return{
+           t: localStorage.usertoken
+      }
+  },
+    created(){
+        if(!this.t){
+        this.$router.push("/");
+        }
+    }
   
 }
 </script>

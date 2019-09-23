@@ -41,9 +41,13 @@ export default {
       return{
           name: '',
           id:'',
+          t: localStorage.moderatorToken
       }
   },
   created(){
+      if(!this.t){
+          this.$router.push("/");
+      }
       this.name = this.$route.params.name;
         this.id=this.$route.params.id;
   },

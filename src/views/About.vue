@@ -71,7 +71,12 @@ export default {
       
       name: decoded.name,
       email: decoded.email,
-     
+      t: localStorage.usertoken
+    }
+  },
+  created(){
+    if(!this.t){
+      this.$router.push("/");
     }
   },
   components: {

@@ -37,10 +37,14 @@ export default {
       return{
           name: '',
           id:'',
+          t: localStorage.usertoken
       }
   },
   created(){
-      this.name = this.$route.params.name;
+      if(!this.t){
+          this.$router.push("/")
+      }
+        this.name = this.$route.params.name;
         this.id=this.$route.params.id;
   },
   watch: {
