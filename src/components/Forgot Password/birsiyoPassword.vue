@@ -33,12 +33,12 @@
                     <form @submit="onSubmit2(ans1,ans2)" autocomplete="off">
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item">
-                                    <input type="text" ref="inputtext1" id="inputtext1" :readonly="true" v-model="ques1">
+                                    <textarea ref="inputtext1" id="inputtext1" :readonly="true" v-model="ques1"></textarea>
                                     <input type="text" class="form-control"  id="inputPassword3" placeholder="Answer 1" v-model="ans1" required>
                                 </li>
 
                                 <li class="list-group-item">
-                                     <input type="text" ref="inputtext1" id="inputtext1" :readonly="true" v-model="ques2">
+                                     <textarea ref="inputtext1" id="inputtext1" :readonly="true" v-model="ques2"></textarea>
                                     <input type="text" class="form-control"  id="inputPassword3"  placeholder="Answer 2" v-model="ans2" required>
                                 </li>
                                 <li class="list-group-item" > 
@@ -235,16 +235,18 @@ export default {
     }
     .middle{
         margin-top:20px;
-        padding: 10px;
+        padding: 10px;  
     }
     #inputtext,  #inputtext1, #inputtext3{
         color: black;
-        width: 400px;
+        width: 300px;
         outline: none;
+        resize: none;
         background: none;
         border: none;
         padding: 5px;
         border-radius: 10px;
         font-weight: bold;
+        word-wrap: break-word;
     }
 </style>
