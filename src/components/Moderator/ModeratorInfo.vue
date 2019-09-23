@@ -12,7 +12,7 @@
                             {{ufollowersNum}} followers<br>
                             {{ufollowingNum}} following<br>
                         </p>
-                         <button id="btn"  class="btn btn-success" >Delete</button>
+                         <button @click="deleteuser(msg)" id="btn" class="btn btn-success" >Delete</button>
                 </div>
             </div> 
         </div>
@@ -77,6 +77,19 @@ export default {
 
                     
     },
+    methods:{
+        deleteuser(username){
+            axios.delete(`http://localhost:5000/moderator/deletebymoderator/${username}`)
+                .then(res => {
+                    if(res.data.success){
+                        alert("successfully deleted");
+                        this.$router.push('/moderator')
+
+                    }
+                })
+                .catch(err=> alert(err));
+        }
+    }
     
 }
 </script>

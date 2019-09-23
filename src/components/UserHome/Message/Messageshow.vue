@@ -87,9 +87,9 @@ export default {
             if(res.data.success){
                 //alert('message get gareko')
                 this.allMessages = res.data.docs;
-                 this.allMessages.sort(function(a,b){
-                                return new Date(b.date) - new Date(a.date);
-                            });
+                //  this.allMessages.sort(function(a,b){
+                //                 return new Date(b.date) - new Date(a.date);
+                //             });
                 // getting the messages when im the sender
             axios.get(`http://localhost:5000/users/messagesent/${this.name}`)
                 .then(res=>{
@@ -97,7 +97,7 @@ export default {
                        this.allMessages = this.allMessages.concat(res.data.docs);
                        this.allMessages.sort(function(a,b){
                                 return new Date(b.date) - new Date(a.date);
-                            });
+                        });
                     }
                 })
                 .catch(err => alert(err));
