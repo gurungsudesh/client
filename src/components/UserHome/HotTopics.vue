@@ -7,12 +7,12 @@
                  
                   <li class="list-group-item"> <h4><b> Hot topics </b></h4></li>
                 
-                  <li class="list-group-item " id="hotkura"  v-for="(item,index) in hot.slice(0,3)" :key="index">
+                  <li class="list-group-item "  v-for="(item,index) in hot.slice(0,3)" :key="index">
                     
                     <router-link  :to="{name:'postpage', params: {postID: item.id }}" >
-                    <div style="font-size:15px; border-bottom:2px solid lightgray; text-align:left; color:green; font-weight:bold">  {{item.name}}
+                    <div style="font-size:15px; margin-left:10px;  text-align:left; color:green; font-weight:bold">  {{item.name}}
                     </div>
-                    <div style="text-align:left; color:gray; font-weight:600">  {{item.content}}
+                    <div id="hotkura"  style="text-align:left; color:gray; font-weight:600;  " >  {{item.content}}
                     </div>
                     </router-link>
                     <!-- esko satta ma content hunxa--></li>
@@ -132,17 +132,18 @@ export default {
       font-family: Arial, Helvetica, sans-serif;
     text-align: center;
     font-size:15px;
-    padding:5%;
+    padding:2%;
   
    color: black;
     
   }
   #hotkura{
-    margin-top:10px;
     word-wrap: break-word;
+    max-height: 110px;
     text-align: left;
     font-size: 13px;
     color:black;
+    overflow: hidden;
     background-color: rgb(218, 255, 218);
     padding: 10px;
     border-radius: 20px;
