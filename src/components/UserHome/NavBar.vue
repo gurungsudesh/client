@@ -15,8 +15,8 @@
         <div class="dpdownbody" id="notificationid" ref="notificationid">
             <h1 style="text-align:center;  color:green;  padding-bottom:10px;"><i class="fas fa-bell"></i></h1>
             <ul style="text-align:left; border-top: 1px solid grey">
-              <div v-for="(item,index) in notifications.slice(0, 7) " :key="index" style="padding-right:1px;">
-                <div v-if="(checkname(item.sender) && (item.type==1 || item.type==2))">
+              <div  v-for="(item,index) in notifications.slice(0, 7) " :key="index" style="padding-right:1px;">
+                <div  v-if="(checkname(item.sender) && (item.type==1 || item.type==2))">
                   <!--route rakha yaha post-->
                   
                   <router-link :to="{name:'postpage', params: {postID: item.postId }}"><li><b style="color:green; font-size:17px;">{{item.sender}}</b> {{`${switching(item.type)}`}}</li></router-link>
@@ -40,12 +40,12 @@
     <form class="form-inline my-2 my-lg-0" >
       <input class="form-control mr-sm-2" type="search" @input="search" placeholder="Search for the username" aria-label="Search" v-model="searchContent">
       <button id="sbtn" class="btn btn-success" @click="showNotification1(false)"><i class="fas fa-search" ></i></button>
-      <div class="dpdownbody1" id="notificationid1" ref="notificationid1">
+      <div v-if="(searchContent!='')" class="dpdownbody1" id="notificationid1" ref="notificationid1">
             <span style="font-size:30px; color:green;" >Search result</span>
             <ul style="text-align:left; border-top: 1px solid grey">
               <label style="margin-top:20px; margin-bottom:20px;" v-if="(user.length==0)" >Nothing to show</label>
               <div v-for="(item,index) in user" :key="index">
-                <router-link :to="{name:'otherprofile', params: {name: item.name }}"  ><li ><img src="../../../images/ProfilePic.jpg"  id="posticon"> <span style=" font-size:17px; ">
+                <router-link :to="{name:'otherprofile', params: {name: item.name }}" id="searchresult"   ><li  ><img src="../../../images/ProfilePic.jpg"  id="posticon"> <span style=" font-size:17px; ">
                   {{item.name}}</span> </li> </router-link>
               </div>
             </ul>
@@ -126,6 +126,7 @@ export default {
         }
       },
       search(){
+        
         axios.post(`http://localhost:5000/users/find/${this.searchContent}`)
           .then(res=>{
             if(res.data.found){
@@ -137,7 +138,7 @@ export default {
               }else{
                 //alert('uers chahi payena')
                   this.user = [];
-                  this.showNotification1(true);
+                  this.showNotification1(false);
               }
               
             }else{
@@ -320,6 +321,7 @@ a{
   position: relative;
   width: 99.9%;
   bottom: 0%;
+  margin-bottom:1px; 
   padding: 5px;
   border-top: 1px solid green;
 }
@@ -361,6 +363,11 @@ a{
   #dpdn button{
     transform: scale(0.8)
   }
+}
+
+#searchresult{
+  margin:0%;
+   padding:0%;
 }
 
 </style>

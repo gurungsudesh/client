@@ -40,10 +40,10 @@
                         <!-- <tr v-for="item in item"> -->
                         <tr v-for="item in allMessages" :key="item">
                             
-                            <td ><b>{{item.sender}}</b> </td>
-                            <td >{{item.receiver}}</td>
-                            <td >{{item.message}}</td>
-                            <td ><b>{{item.date}}</b> </td>
+                            <td ><b style="color:green;" >{{item.sender}}</b> </td>
+                            <td ><b style="color:green;">{{item.receiver}}</b></td>
+                            <td style="word-wrap:break-word;">{{item.message}}</td>
+                            <td ><b style="color:gray;  font-size:12px;">{{`${dateformat(item.date)}`}}</b> </td>
                         </tr>
                        
                     </tbody>
@@ -59,6 +59,7 @@
 <script>
 import axios from 'axios'
 import jwtDecode from 'jwt-decode'
+import moment from 'moment' 
 export default {
     name: "Messageshow",
     data(){
@@ -139,7 +140,12 @@ export default {
             })
             .catch(err=> alert(err));
             
-    }
+    },
+    dateformat(value){
+            if (value) {
+                return moment(String(value)).format('YYYY/MM/DD hh:mm')
+            }
+        }
   }
 
     
@@ -158,6 +164,7 @@ export default {
             width: 100%;
             height:10%;
             border-bottom: 2px solid green;
+
             
         }
         #fromsearch{      
@@ -293,12 +300,10 @@ export default {
 #compose{
     font-size:38px;
      height:100%;
-     color:white;
-    -webkit-text-stroke-width: 1.2px;
-  -webkit-text-stroke-color: green;
+     color:rgb(1, 143, 48);
    text-align:center;
-    font-weight:bold;
-   background-color:lightgreen;
+    font-weight:600;
+   background-color:rgb(198, 250, 198);
 }
 #tableinbox{
     width:100%;

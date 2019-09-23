@@ -59,13 +59,14 @@ export default {
 .UPltop{
     margin-top: 20px;
     padding-left: 10px;
-    border-bottom: 1px solid lightgray;
-    height: 30%;
+    height: auto;
+    padding-bottom: 20px;
     
+    border-bottom: 1px solid lightgray;   
 }
 .UPlbottom{
     position: absolute;
-    top:40%;
+    margin-top:10%;
     width: 80%;
     height: 55%;
     margin-left: 10%;

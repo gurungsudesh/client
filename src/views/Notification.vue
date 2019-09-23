@@ -22,13 +22,18 @@ export default {
 </script>
 
 <style scoped>
+.mainbody{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
 .home-header{
   border-bottom: 1px solid green;
 }
 .homebody{
-    background-color: rgb(166, 224, 145);
+    background-color: rgb(217, 245, 207);
     position: absolute;
-    height:90%;
+    height:91%;
     width: 100%;
 }
 </style>

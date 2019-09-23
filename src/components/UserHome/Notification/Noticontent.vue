@@ -3,7 +3,7 @@
         <div class="noti_body">
             <div class ="noti_title">
                 <div id="noti_title1">
-                    Notifications
+                  <i class="fas fa-bell"></i>  Notifications
                 </div>
             </div>
             <div class="noti_noti">
@@ -14,15 +14,15 @@
                                   <td rowspan="2" style="padding-left:10px; width:40px; height:50px;" ><img src="../../../../images/ProfilePic.jpg" align="left" id="otherprofileicon"></td>
                                   <td style="width:100%; font-size: 15px; ">
                                     <div v-if="(checkname(item.sender) && (item.type==1 || item.type==2))">
-                                      <router-link :to="{name:'postpage', params: {postID: item.postId }}"><b><!--route profile-->{{item.sender}}</b><!--route post--> {{`${switching(item.type)}`}}</router-link>
+                                      <router-link :to="{name:'postpage', params: {postID: item.postId }}"><b  style="color:green"><!--route profile-->{{item.sender}}</b><!--route post--> {{`${switching(item.type)}`}}</router-link>
                                       </div> 
                                     <div v-if="(checkname(item.sender) && (item.type==3 || item.type==4))">
-                                      <router-link :to="{name:'otherprofile', params: {name: item.sender }}"><b>{{item.sender}}</b> {{`${switching(item.type)}`}}</router-link>
+                                      <router-link :to="{name:'otherprofile', params: {name: item.sender }}"><b style="color:green">{{item.sender}}</b> {{`${switching(item.type)}`}}</router-link>
                                       </div> 
                                     </td>  
                                 </tr>
                                 <tr>
-                                  <td style="color:grey; font-size: 12px;">{{item.date}}</td>
+                                  <td style="color:grey; font-size: 12px;">{{`${dateformat(item.date)}`}}</td>
                                 </tr>
                         </table>
                   </div>
@@ -37,6 +37,7 @@
 <script>
 import jwtDecode from 'jwt-decode'
 import axios from 'axios'
+import moment from 'moment'
 export default {
     name:'noticontent',
     data(){
@@ -80,31 +81,45 @@ export default {
              return("has unfollowed you.");
             
         }
-      }
+      },
+      dateformat(value){
+            if (value) {
+                return moment(String(value)).format('YYYY/MM/DD hh:mm')
+            }
+        },
     }
 }
 </script>
 
 <style scoped>
+a{
+  color: black;
+}
+a:hover{
+  text-decoration: none;
+}
 .noti_body{
      background-color: white;
-    width:70% ; 
+    width:80% ; 
+    height: 100%;
     padding: 10px; 
     position: absolute;
     left:10%;
-    margin-top:2%;
-    border: 1px solid green;
+    
+    border-right: 1px solid green;
+    border-left: 1px solid green;
+    border-bottom: 1px solid green;
     
  }
  .noti_title
  {
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid lightgray;
  } 
  #noti_title1{
      margin-left: 2%;
      margin-bottom: 10px;
      text-align: left;
-     font-size: 25px;
+     font-size: 30px;
      font-weight: bold;
      color: green ;
  }
@@ -121,8 +136,12 @@ export default {
 }
 #tables3{
   margin-top:5px;
-   background-color: rgb(235, 235, 235);
+   background-color: rgb(234, 255, 234);
+   border-radius: 20px;
   
+}
+#noti_noti1{
+  margin-top:20px;
 }
   
 </style>

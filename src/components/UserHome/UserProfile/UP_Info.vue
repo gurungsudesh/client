@@ -8,7 +8,7 @@
                 <div class="col-md-auto">
                     <h3>{{name}}</h3>
                         <p class="text-left" style="color: gray; font-size: 12px" > 
-                            Made at {{data[0].date}}
+                            Made at {{`${dateformat(data[0].date)}`}}
                             <br>
                             <!-- Yaha 99 bhako thau ma chai aauna paryo -->
                             {{followersNum}} followers<br>
@@ -23,6 +23,7 @@
 </template>
 <script>
 import axios from 'axios';
+import moment from 'moment';
 import jwtDecode from 'jwt-decode'
 export default {
     name: "UPInfo",
@@ -77,7 +78,12 @@ export default {
     methods: {
         gotoAccount(){
             this.$router.push("/account");
-        }
+        },
+        dateformat(value){
+            if (value) {
+                return moment(String(value)).format('YYYY/MM/DD')
+            }
+        },
     }
 }
 </script>
