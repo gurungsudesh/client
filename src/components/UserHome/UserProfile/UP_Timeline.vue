@@ -358,7 +358,7 @@ export default {
 
                         //send follow notification
                         const notificationType = '4';
-                        axios.post("http://localhost:5000/users/notifications", {name, fname ,notificationType })
+                        axios.post("http://localhost:5000/users/notifications", {name, followName:fname ,notificationType })
                         .then(res=>{
                             if(res.data.success){
                                 alert("Unfollow notification sent")

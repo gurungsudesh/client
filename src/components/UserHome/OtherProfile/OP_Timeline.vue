@@ -285,6 +285,7 @@ export default {
             return likecount.length;
        },
        countcmd(postkoId){
+           
             var commentcount=this.allComment.filter(function(post) {return post.postId == postkoId;});
             return commentcount.length;
        },
@@ -296,6 +297,7 @@ export default {
                         
                         this.comments = res.data.docs;
                         this.num = this.comments.length;
+                        
                     }
                     
                 })
@@ -322,6 +324,8 @@ export default {
                                                 alert('posted sadfasf asdf')
                                                 this.comments = res.data.docs;
                                                 this.num = this.comments.length;
+                                                
+                                               
                                             }
                                             
                                         })

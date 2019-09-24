@@ -3,7 +3,7 @@
         
                     <div class="followtext">
                         <div id="followtext1">
-                           <h4><b>Who To Follow</b></h4> 
+                           <h4><b>whom to follow?</b></h4> 
                            <ul class="list-group list-group-flush" v-for="(item,index) in users.slice(0, maxshowfollow) " :key="index">
                   
                             <li class="list-group-item" style="padding-left:20%; text-align:left;"><img src="../../../images/ProfilePic.jpg" id="otherprofileicon" >
