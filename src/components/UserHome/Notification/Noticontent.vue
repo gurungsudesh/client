@@ -101,7 +101,7 @@ a:hover{
 .noti_body{
      background-color: white;
     width:80% ; 
-    height: 100%;
+    height: auto;
     padding: 10px; 
     position: absolute;
     left:10%;

@@ -5,8 +5,8 @@
 <div id="Signin">
     <form @submit="login">
         <ul style="font-size:13px">
-        <li><input type="text"  v-model="username" id="username" placeholder="Username" required></li>
-        <li><input type="password"  v-model="password" id="password" placeholder="Password" required></li>
+        <li><input type="text" @input="error=''" v-model="username" id="username" placeholder="Username" required></li>
+        <li><input type="password" @input="error=''" v-model="password" id="password" placeholder="Password" required></li>
         
         <!--<input type="submit" name="submit" value="Sign Up!">-->
         <li><button type="submit" class="btn btn-success">Login</button></li>

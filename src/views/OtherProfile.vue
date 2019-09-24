@@ -97,7 +97,7 @@ export default {
     width: 30%;
     height: 100%;
     border-right: 1px solid lightgrey;
-
+    transition: 0.5s;
 }
 .UPright{
     position: absolute;
@@ -105,7 +105,17 @@ export default {
     width: 70%;
     height: 100%;
     background-color: white;
+    transition: 0.5s;
 }
 
+@media only screen and (min-width : 0px) and (max-width: 800px) {
+    .UPleft{
+        opacity: 0;
+    }
+    .UPright{
+        width: 100%;
+    }
+    
+}
     
 </style>

@@ -4,10 +4,10 @@
     <div class="writepost" >
          <div id="writepost1">
                                 
-            <form @submit="addPost" id="form1" >
+            <form @submit="addPost" id="form1" class="form-inline" >
                     
                         <img src="../../../images/ProfilePic.jpg" id="profileicon">   
-                        <textarea style="font-size:15px; width:75%; vertical-align:middle; margin:10px;"  rows="3" v-model="postdata" placeholder="Please enter the post" required></textarea>
+                        <textarea style="font-size:15px; vertical-align:middle; "  rows="3" v-model="postdata" placeholder="Please enter the post" required></textarea>
                         <button :disabled ='isDisabled' type="submit" style="margin-top:10px; width:50px" id="btn"> Post</button>
                  
                  
@@ -357,7 +357,10 @@ export default {
 
 <style scoped>
 textarea{
-    resize: none
+    resize: none;
+    margin:10px;
+    width:75%;
+    transition: 0.5s;
 }
 
 a:hover{
@@ -487,6 +490,7 @@ a:hover{
      width:150px;
      background-color: white; 
      color: green;
+     transition: 0.5s;
 }
 #likestats{
     
@@ -494,6 +498,7 @@ a:hover{
      width:150px;
      background-color: white; 
      color: green;
+     transition: 0.5s;
 }
 
 .changestat{
@@ -539,11 +544,27 @@ a:hover{
     color: rgb(75, 75, 75);
     cursor: pointer;
 }
+@media only screen and (max-width: 800px) {
+    .writepost{
+        padding-left:10px;
+    }
+    
+    #likestats, #commentstats{
+        width: 70px;
+
+    }
+    #statstable td{
+    padding-left:20px;
+}
 @media only screen and (max-width: 1200px) {
     textarea{
-        width: 70%;
+        width: 60%;
+        margin-left:5px;
     }
-}  
+}
+
+}
+
 
 
 

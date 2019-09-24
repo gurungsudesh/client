@@ -83,7 +83,7 @@
                                                             
                                                         </div>
                                                         <form @submit=" addComment(name,item._id, item.commentContent,item.name); item.commentContent='' ; " style="margin:10px;" v-if="(item.commentdisplay)">
-                                                        <input type="text" style="width: 80%; padding:5px; border:1px solid grey; border-radius:10px;"  v-model="item.commentContent">
+                                                        <input type="text"   v-model="item.commentContent">
                                                         <button id="btn" type="submit" >Comment </button> 
                                                     </form>
                                                 </div>
@@ -601,6 +601,7 @@ export default {
      width:150px;
      background-color: white; 
      color: green;
+     transition: 0.5s;
 }
 #likestats{
     
@@ -608,6 +609,7 @@ export default {
      width:150px;
      background-color: white; 
      color: green;
+     transition: 0.5s;
 }
 .changestat{
     padding-top:10px;
@@ -690,6 +692,27 @@ export default {
     background-color: green;
     color: white;
 }
+input[type=text]{
+    width: 80%;
+ padding:5px;
+ border:1px solid grey;
+ border-radius:10px;
+}
+ @media only screen and (max-width: 800px) {
+    .writepost{
+        padding-left:10px;
+    }
+    
+    #likestats, #commentstats{
+        width: 70px;
 
-  
+    }
+    #statstable td{
+    padding-left:20px;
+    
+    }
+    input[type=text]{
+    width: 70%;
+    }
+ } 
 </style>

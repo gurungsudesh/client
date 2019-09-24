@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div style="background-color: rgb(215, 255, 215)">
         <div class="fullbody">
             <div class="home-header"> 
                 <NavBar/>
@@ -37,7 +37,7 @@ export default {
     position: absolute;
     height: 100%;
     width: 100%;
-    background-color: rgb(215, 255, 215);
+    background-color: rgb(242, 255, 242);
 }
 .mainbody{
     position:absolute;

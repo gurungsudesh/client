@@ -1,8 +1,10 @@
 <template>
 <div class="homemain">
   <div class="home">
-    <div class="Rightside">
-   <LoginRightside/>
+    <div  class="Rightside">
+      <div ref="rightside" id="rightside">
+        <LoginRightside/>
+      </div>
     <div class="leftside">
     <LoginForm />
     <SignUp />
@@ -71,6 +73,7 @@ export default {
     height: 100%;
     right: 0%;
     border-radius: 0px 20px 20px 0px;
+    transition: 0.5s;
 }
 .footer{
     position: absolute;
@@ -85,6 +88,23 @@ export default {
 #bcont{
   font-size: 10px;
     font-weight: bold;
-    padding-left: 25%;
+    text-align: center;
+    width: 100%;
+}
+@media only screen and (max-width: 1000px) {
+  #rightside{
+    display: none;
+  }
+  .footer{
+    display: none;
+  }
+  .leftside{
+    position: absolute;
+    background-color: white;
+    width: 100%;
+    height: 100%;
+    right: 0%;
+    border-radius: 20px 20px 20px 20px;
+}
 }
 </style>
