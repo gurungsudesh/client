@@ -55,7 +55,7 @@
                                                 <td>
                                                     <span class="postcontent" >
                                                         <b style="color:darkgreen; font-size:15px;">{{comment.name}}</b>
-                                                        {{comment.comment}}/
+                                                        {{comment.comment}}
                                                     </span>
                                                     <span style="color:grey; font-size:10px; margin-left:10px;">{{`${commentdateformat(comment.date)}`}}</span>
                                                 </td>
