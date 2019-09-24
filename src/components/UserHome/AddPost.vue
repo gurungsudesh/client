@@ -93,7 +93,7 @@
                         </div>
                         <form @submit=" addComment(name,item._id, item.commentContent,item.name); item.commentContent='' ; " style="margin:10px;" v-if="(item.commentdisplay)">
                         <input type="text" style="width: 80%; padding:5px; border:1px solid grey; border-radius:10px;"  v-model="item.commentContent" required>
-                        <button id="btn" type="submit" >Comment </button> 
+                        <button  :disabled ='isDisabledComment' id="btn" type="submit" >Comment </button> 
                     </form>
                 </div>
                 
@@ -143,6 +143,9 @@ export default {
       isDisabled(){
         return this.postdata === ''
       }
+    //   isDisabledComment(){
+    //       return this.commentContent === ''
+    // }
   },
   
     created(){
@@ -331,6 +334,7 @@ export default {
                 .then(res=>{
                     if(res.data.msg){
                         alert("Posted")
+                        this.postdata = ''
                         
                     //gettin all the post including the new one
                         axios.get(`http://localhost:5000/users/postOfN/${this.name}`)
