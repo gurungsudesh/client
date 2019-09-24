@@ -70,17 +70,22 @@
                         <input type="text" class="form-control"  id="inputPassword3"  placeholder="Answer 2" v-model= "ans2" :class="{ 'is-invalid': submitted && $v.ans2.$error }">
                         <div v-if="submitted && !$v.ans2.required" class="invalid-feedback">Answer is required</div>
                     </li>    
-
+                    <div v-if="(error==cerror1)" class="alert  alert-warning  fade show" role="alert">
+                        <strong>{{error}}</strong> 
+                    </div>
+                    
                  <li class="list-group-item" > 
                 <button  type="submit" class="btn btn-success">Sign Up</button> 
                 </li>
-                
-                <li class="list-group-item"> 
-                    <router-link style="color:green ; font-weight:none; font-size: 14px;" to="/">You have an account?</router-link>
-                </li>
-                <div  v-if="error" class="alert  alert-success  fade show" role="alert">
-                        <strong>{{error}}</strong> You should been registered.
+                <div v-if="(error==cerror2)" class="alert  alert-success  fade show" role="alert" >
+                        <strong style="margin-right:10px;">Register Sucessful</strong> Click the link below 
                     </div>
+                <li class="list-group-item"> 
+                    <router-link style="color:green ; font-weight:none; font-size: 14px; " to="/">You have an account?</router-link>
+                </li>
+                
+                    
+                   
                 </ul>
                 
 
@@ -113,7 +118,10 @@ export default {
             ques2: '',
             ans1: '',
             ans2: '',
-            submitted: false
+            submitted: false,
+            cerror1:'User already exists',
+            cerror2:' registered',
+
         }
 
     },
