@@ -55,7 +55,7 @@
                                                 <td>
                                                     <span class="postcontent" >
                                                         <b style="color:darkgreen; font-size:15px;">{{comment.name}}</b>
-                                                        {{comment.comment}}
+                                                        {{comment.comment}}/
                                                     </span>
                                                     <span style="color:grey; font-size:10px; margin-left:10px;">{{`${commentdateformat(comment.date)}`}}</span>
                                                 </td>
@@ -63,7 +63,7 @@
                                         </table>
                                         
                                     </div>
-                                    <form @submit=" addComment(name,item._id, item.commentContent,item.name); item.commentContent='' ; " style="margin:10px;" v-if="(item.commentdisplay)">
+                                    <form @submit=" addComment(profilename,item._id, item.commentContent,item.name); item.commentContent='' ; " style="margin:10px;" v-if="(item.commentdisplay)">
                                     <input type="text" style="width: 80%; padding:5px; border:1px solid grey; border-radius:10px;"  v-model="item.commentContent">
                                     <button id="btn" type="submit" >Comment </button> 
                                 </form>
@@ -79,12 +79,16 @@
 <script>
 import axios from 'axios';
 import moment from 'moment';
+import jwtDecode from 'jwt-decode'
 export default {
     name: "OPTimeline",
     props: ['msg'],
+    
     data(){
+        const token = localStorage.usertoken
+        const decode = jwtDecode(token)
         return{
-            
+            profilename: decode.name,
             posts :[],
             followers: [],
             following: [],
@@ -307,7 +311,7 @@ export default {
                     if(res.data.msg){
                         alert("posted")
                         //sending notification
-                        axios.post(`http://localhost:5000/users/notifications/${postID}`,{name: uname, notify: this.notification, pOwner: postOwner})
+                        axios.post(`http://localhost:5000/users/notifications/${postID}`,{name: uname, notify: this.notification, receiver: postOwner})
                             .then(res=>{
                                 alert("Notification sent")
                                 if(res.data.success){
@@ -315,8 +319,9 @@ export default {
                                     axios.get(`http://localhost:5000/users/post/comment/${pId}`)
                                         .then(res=>{
                                             if(res.data.msg){
-                                                
+                                                alert('posted sadfasf asdf')
                                                 this.comments = res.data.docs;
+                                                this.num = this.comments.length;
                                             }
                                             
                                         })

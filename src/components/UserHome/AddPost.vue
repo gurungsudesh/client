@@ -297,6 +297,8 @@ export default {
                                             if(res.data.msg){
                                                 
                                                 this.comments = res.data.docs;
+                                                // comment count huni huna paryo
+                                                //this.num = this.comments.length;
                                             }
                                             
                                         })

@@ -19,6 +19,16 @@ export default {
     Accountdata,
     NavBar,
   },
+  data(){
+      return{
+           t: localStorage.usertoken
+      }
+  },
+    created(){
+        if(!this.t){
+        this.$router.push("/");
+        }
+    }
   }
 </script>
 <style scoped>

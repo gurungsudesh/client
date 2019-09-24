@@ -34,6 +34,16 @@ export default {
         Search,
         Posts,
         UsersList
+    },
+    data(){
+      return{
+           t: localStorage.moderatorToken
+      }
+  },
+    created(){
+        if(!this.t){
+        this.$router.push("/");
+        }
     }
 }
 </script>
