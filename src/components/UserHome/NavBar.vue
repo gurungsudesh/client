@@ -1,7 +1,7 @@
 <template>
-    <div id="menu">
+    <div id="menu" >
       
-        <nav class="navbar sticky-top navbar-expand navbar-light" style="font-weight:bold; background-color: white">
+        <nav class="navbar  fixed-top  navbar-expand navbar-light" style=" font-weight:bold; background-color: white">
             <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
             
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0"  >
@@ -10,24 +10,25 @@
             </li>
       <li class="nav-item" >
         <div  @click="showNotification">
-        <router-link class="nav-link" to="#" ><i class="far fa-bell"></i><span id="badge1" ref="badge1" class="badge" >{{notifications.length}}</span><label style="margin-left:5px;" >Notifications</label></router-link>
+        <router-link class="nav-link" to="#" ><i class="far fa-bell"></i><span id="badge1" ref="badge1" class="badge" ></span><label style="margin-left:5px;" >Notifications</label></router-link>
         </div>
         <div class="dpdownbody" id="notificationid" ref="notificationid">
             <h1 style="text-align:center;  color:green;  padding-bottom:10px;"><i class="fas fa-bell"></i></h1>
             <ul style="text-align:left; border-top: 1px solid grey">
-              <div  v-for="(item,index) in notifications.slice(0, 7) " :key="index" style="padding-right:1px;">
+              <label style="margin-top:10px; margin-bottom:10px; margin-left:20px;"  v-if="(notifications.length==0)" >Nothing to show</label>
+              <div  v-for="(item,index) in notifications.slice(0, 7) " :key="index" style="padding-right:1px; ">
                 <div  v-if="(checkname(item.sender) && (item.type==1 || item.type==2))">
                   <!--route rakha yaha post-->
                   
-                  <router-link :to="{name:'postpage', params: {postID: item.postId }}"><li><b style="color:green; font-size:17px;">{{item.sender}}</b> {{`${switching(item.type)}`}}</li></router-link>
+                  <router-link style="font-size:14px;" :to="{name:'postpage', params: {postID: item.postId }}"><li><span style="color:green; font-size:15px;">{{item.sender}}</span> {{`${switching(item.type)}`}}</li></router-link>
                 </div>
                 <div v-if="(checkname(item.sender) && (item.type==3 || item.type==4))">
                   <!--route rakha yaha follow-->
-                  <router-link :to="{name:'otherprofile', params: {name: item.sender }}"><li><b style="color:green; font-size:17px;">{{item.sender}}</b> {{`${switching(item.type)}`}}</li></router-link>
+                  <router-link style="font-size:14px;" :to="{name:'otherprofile', params: {name: item.sender }}"><li><span style="color:green; font-size:15px;">{{item.sender}}</span> {{`${switching(item.type)}`}}</li></router-link>
                 </div>
               </div>
             </ul>
-            <div class="seemore">
+            <div class="seemore" v-if="(notifications.length!=0)">
               <router-link  class="nav-link" to="/notification"><b style="color:green"> See More</b></router-link>
             </div>            
         </div>
@@ -43,7 +44,7 @@
       <div v-if="(searchContent!='')" class="dpdownbody1" id="notificationid1" ref="notificationid1">
             <span style="font-size:30px; color:green;" >Search result</span>
             <ul style="text-align:left; border-top: 1px solid grey">
-              <label style="margin-top:20px; margin-bottom:20px;" v-if="(user.length==0)" >Nothing to show</label>
+              <label style="margin-top:20px; margin-bottom:20px; margin-left:25px;" v-if="(user.length==0)" >Nothing to show</label>
               <div v-for="(item,index) in user" :key="index">
                 <router-link :to="{name:'otherprofile', params: {name: item.name }}" id="searchresult"   ><li  ><img src="../../../images/ProfilePic.jpg"  id="posticon"> <span style=" font-size:17px; ">
                   {{item.name}}</span> </li> </router-link>
@@ -209,11 +210,17 @@ export default {
 }
 </script>
 <style scoped>
+nav{
+  border-bottom: 1px solid green;
+}
+#menu{
+  margin-top:60px; 
+}
 #dpdn{
   margin-left: 10px;
 }
  #dpdn a{
-   font-size: 14px;
+   font-size: 15px;
     margin-left: 0px;
     
 }
@@ -250,10 +257,11 @@ a{
   z-index: 1;
   position: absolute;
   height:0px;
-  width:400px;
+  width:300px;
   background-color: white;
   border: 1px solid green;
   opacity: 0;
+  
   border-radius: 20px;
   text-align:center;
   transition: 0.2s;
@@ -284,13 +292,14 @@ a{
   z-index: 1;
   position: absolute;
   top:60px;
-  right: 50px;
+  right: 100px;
   height:0px;
-  width:300px;
-  background-color: white;
+  width:250px;
+  background-color: rgb(251, 255, 251);
   border: 1px solid green;
   opacity: 0;
   text-align:center;
+  border-radius: 20px;
   
 }
 .dpdownbody1 ul{
@@ -331,7 +340,16 @@ a{
   border-radius: 0px 0px 20px 20px;
 
 }
-
+.dpdownbody1 label, .dpdownbody label{
+  background-color: rgb(226, 226, 226);
+  color:rgb(117, 117, 117);
+  font-weight: 600;
+  width:80% ;
+  padding:10px; 
+  border-radius:40px;  
+   font-size:15px;
+   text-align: center;
+}
 @media only screen and (max-width: 900px) {
   nav li:nth-child(1) label {
     display: none;

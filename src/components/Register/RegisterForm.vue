@@ -3,6 +3,7 @@
         <div class="formmain"  >
             <form @submit="onSubmit" autocomplete="off">
                 <ul class="list-group list-group-flush">
+                    
                     <li class="list-group-item" > 
                     <input type="text" class="form-control"  v-model="username" id="inputEmail3" placeholder="Username" required>
                     <span id="errorshow" style="color:red; font-size:12px;" v-if='msg.username'>{{msg.username}}</span>
@@ -29,7 +30,8 @@
                      <span id="errorshow" style="color:red; font-size:12px;" v-if='msg.confpass'>{{msg.confpass}}</span>
                     </li> 
                     <!--  Yo chai error aaune registration aauda -->
-                    <p style="color:red ; font-weight:none; font-size: 15px; left:10%; bottom:15%; z-index: +1; position: absolute;" class="err" v-if="error"> {{error}}</p>
+                   
+                    
                
                     <li class="list-group-item">
                         <select  class="custom-select" @change="onChange1($event)" v-model="key1" style="color:darkgray; border:none; border-bottom:1px solid lightgray;">
@@ -62,9 +64,13 @@
                  <li class="list-group-item" > 
                 <button type="submit" class="btn btn-success">Sign Up</button> 
                 </li>
+                
                 <li class="list-group-item"> 
                     <router-link style="color:green ; font-weight:none; font-size: 14px;" to="/">You have an account?</router-link>
                 </li>
+                <div  v-if="error" class="alert  alert-success  fade show" role="alert">
+                        <strong>{{error}}</strong> You should been registered.
+                    </div>
                 </ul>
                 
 
@@ -195,10 +201,9 @@ export default {
     transform: scale(0.7, 0.7);
     transform-origin: 0 0;
     height: auto;
-    overflow: auto;
     
- 
 }
+
 .secondmain{
     background-color: white;
     position: fixed;
@@ -233,6 +238,17 @@ a{
   border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
+}
+label{
+    border: 1px solid green;
+    background-color: lightgreen;
+    color:red ;
+    font-weight:none; 
+    font-size: 30px; 
+    left:45%;
+    bottom:10%;
+    z-index: +1; 
+    position: absolute;
 }
 @media only screen and (max-width: 800px) {
     

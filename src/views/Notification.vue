@@ -25,6 +25,7 @@ export default {
 .mainbody{
     height: 100%;
     width: 100%;
+    
 }
 .home-header{
   border-bottom: 1px solid green;
@@ -34,5 +35,6 @@ export default {
     position: absolute;
     height:91%;
     width: 100%;
+    background-color: rgb(209, 255, 209);
 }
 </style>

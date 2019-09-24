@@ -11,25 +11,32 @@
           <HotTopics/>
         </div>
       </div>
-      <!--<div ref="mobleftid" id="mobleftid" class="mobleftbody">
-            <div  ref="mtlsidenav"  id="mtlsidenav" class="mobleftcontent">
-            <button style="margin-left:90%" @click="closeleftslide">+</button>
-            <div class="animationslideleft">
-            <UserInfo/>
-            <HotTopics/>
-            </div>
-            </div>
-            
-              <div @click="openleftslide" id="leftslider" ref="leftslider" class="leftnav">
-              <div id="leftsliderarrow">
-                <i class="fas fa-arrow-right"></i>
-              </div>
-            </div>
-                        
-      </div>-->
+      <div id="leftbtn">
+        <button @click="openrlb" ><i class="fas fa-arrow-right" style="color:seagreen;"></i></button>
+      </div>
+      <div class="resleftbody" ref="rlb" id="rlb">
+        <div id="rightbtn">
+        <button @click="closerlb" style="float:right; "><i class="fas fa-arrow-right" style="color:seagreen; transform: rotate(180deg);"></i></button>
+      </div>
+          <UserInfo/>
+        <div class="hotposition">
+          <HotTopics/>
+        </div>
+      </div>
+
      <div class="middlebody">
         <AddPost />
      </div>
+     
+     <div id="rightbtn"  style="width:5%; height:90%;">
+        <button @click="openrrb" style="float:right; "><i class="fas fa-arrow-right" style="color:seagreen; transform: rotate(180deg);"></i></button>
+      </div>
+      <div class="resrightbody" ref="rrb" id="rrb">
+        <div id="leftbtn" style="height:100% ; width:6%;" >
+        <button @click="closerrb" ><i class="fas fa-arrow-right" style="color:seagreen;"></i></button>
+      </div>
+        <FollowRecom style="transform:scale(0.9);"/>
+      </div>
       <div class="rightbody">
         <FollowRecom/>
       </div>
@@ -88,6 +95,25 @@ export default {
     FollowRecom
   },
   methods:{
+    openrlb(){
+      var vm=this;
+      vm.$refs.rrb.style.marginRight = '-100%';
+      vm.$refs.rlb.style.marginLeft = '0%';
+    },
+    closerlb(){
+      var vm=this;
+     
+      vm.$refs.rlb.style.marginLeft = '-100%';
+    },
+    openrrb(){
+      var vm=this;
+     vm.$refs.rrb.style.marginRight = '0%';
+     vm.$refs.rlb.style.marginLeft = '-100%';
+    },
+    closerrb(){
+      var vm=this;
+      vm.$refs.rrb.style.marginRight = '-100%';
+    }
     /*openleftslide(){
       var vm = this;
       vm.$refs.mtlsidenav.style.display = 'block';
@@ -127,6 +153,57 @@ export default {
 </script>
 <style scoped>
 
+#leftbtn{
+    opacity: 0;
+    position: fixed; 
+    transition: 0.2s;
+    width: 5%;
+    height: 90%;
+    transition:0.5s;
+    font-size: 3vw;
+}
+#leftbtn button{
+  width: 100%;
+  height: 100%;
+  background-color: rgb(245, 255, 245);
+  border: none;
+  border-right:1px solid green;
+}
+#rightbtn{
+    opacity:0;
+    position: fixed; 
+    transition: 0.5s;
+    width: 6%;
+    height: 100%;
+    right: 0px;
+    font-size: 3vw;
+    z-index: 5;
+}
+#rightbtn button{
+  width: 100%;
+  height: 100%;
+  background-color: rgb(245, 255, 245);
+  border: none;
+  border-left:1px solid green;
+
+}
+
+.resleftbody{
+  
+  background-color: rgb(222, 253, 222);
+  border: 2px solid green;
+  position: fixed;
+    left: 0%;
+    top: 70px;
+    height: 98.5%;
+    width: 400px;
+    transition: 1s;
+    z-index: 6;
+    transform: scale(0.9);
+    transform-origin: 0 0;
+    margin-left: -100%;
+    
+}
 .mainbody{
   position: absolute;
   height: 100%;
@@ -140,9 +217,12 @@ export default {
     transition: 0.2s;
     
     
+    
 }
 .home-header{
+  
   border-bottom: 1px solid green;
+  
 }
 .postclass{
   background-color: lightgray;
@@ -177,6 +257,22 @@ export default {
     width: 25%;
     transition: 0.2s;
 }
+.resrightbody{
+  
+  background-color: rgb(222, 253, 222);
+  border: 2px solid green;
+  position: fixed;
+    right: -80px;
+    top: 70px;
+    height: 98.5%;
+    width:450px;
+    transition: 1s;
+    z-index: 6;
+    transform: scale(0.9);
+    transform-origin: 0 0;
+    margin-right: -100%;
+    
+}
 .homebody{
   margin-top: 0%;
   background-color: white;
@@ -196,7 +292,9 @@ export default {
 .hotposition{
   margin-top:20%;
 }
+
 @media only screen and (max-width: 1100px) {
+    
     .leftbody{
       opacity: 0;
     }
@@ -212,87 +310,12 @@ export default {
       
       width: 100%;
     }
-    #mobleftid{
-      z-index: 0;
-      display: block;
-      position: absolute;
-      left: 0%;
-      height: 100%;
-      width: 5%;
-      
+    #leftbtn{
+    opacity: 100;
     }
-    #mtlsidenav{
-      display: none;
-      position: absolute;
-      width:100%;
-      height: 100%;
-      left: 0px;
-      
-      background-color: rgb(159, 226, 146);
-      
+    #rightbtn{
+      opacity: 100;
     }
-    #leftslider{
-      position: absolute;
-      left: 0%;
-      top:45%;
-      height: 10%;
-      width: 100%;
-      
-      margin-left: 0px;
-       
-     
-    }
-    #leftsliderarrow{
-      position: absolute;
-      background-color: rgb(44, 160, 44);
-      font-size: 3vw;
-      padding-top:30px;
-      padding-bottom: 30px;
-      padding-left: 10%;
-      padding-right: 10%;
-      color: white;
-    }
-    #mobrightid{
-      z-index: 0;
-      display: block;
-      position: absolute;
-      right: 0%;
-      height: 100%;
-      width: 5%;
-    }
-    #mtrsidenav{
-      display: none;
-      position: absolute;
-      width:100%;
-      height: 100%;
-      right: 0px;
-      
-      background-color: rgb(159, 226, 146);
-      
-    }
-    #rightslider{
-      
-      position: absolute;
-      right: 0%;
-      top:45%;
-      height: 10%;
-      width: 100%;
-      
-       
-     
-    }
-    #rightsliderarrow{
-      transform: rotate(180deg);
-      position: absolute;
-      background-color: rgb(44, 160, 44);
-      font-size: 3vw;
-      padding-top:30px;
-      padding-bottom: 30px;
-      padding-left: 10%;
-      padding-right: 10%;
-      color: white;
-    }
-
     
   
 }

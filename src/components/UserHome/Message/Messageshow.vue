@@ -1,5 +1,33 @@
 <template>
     <div>
+        <div id="leftbtn">
+        <button @click="openrlb" ><i class="fas fa-arrow-right" style="color:seagreen;"></i></button>
+      </div>
+      <div class="resleftbody" ref="rlb" id="rlb">
+        <div id="rightbtn">
+        <button @click="closerlb" style="float:right; "><i class="fas fa-arrow-right" style="color:seagreen; transform: rotate(180deg);"></i></button>
+      </div>
+            <div class="leftbodyi">
+                    <div class="topleft">
+                        <label id="compose">Compose Message</label>     
+                    </div>
+                    <div class="bottomleft" style="padding-right:10px;" >
+                        <div  id="fromsearch">
+                                <span style="margin-left:10px ;color:gray; font-size:20px;"><b>To</b></span>  <input class="form-control" id="inputtext" type="text" v-model="receivingUser" aria-label="Search" >
+                        </div>
+                        <div id="fromsearch">
+                            <span style="margin-left:10px; color:gray; font-size:20px;"><b>Message Content</b></span>
+                            <form @submit="sendMessage(replyMessage)"  id="formmessage">
+                                    <textarea class="form-control"  id="sendm"  placeholder="Send the reply message" v-model="replyMessage"></textarea>
+                                    <button :disabled='isDisabled' style="float:right;" type="submit" id="mbtn" class="btn btn-success" >Send</button>
+                            </form>
+                        </div>
+                        
+                        
+                    </div>
+            </div>
+
+      </div>
         <div class="leftbody">
             <div class="topleft">
                 <label id="compose">Compose Message</label>     
@@ -109,6 +137,15 @@ export default {
 
   },
   methods: {
+      openrlb(){
+      var vm=this;
+      vm.$refs.rlb.style.marginLeft = '0%';
+    },
+    closerlb(){
+      var vm=this;
+     
+      vm.$refs.rlb.style.marginLeft = '-100%';
+    },
     sendMessage(message){
         axios.post(`http://localhost:5000/users/sendmessage/${this.receivingUser}`, {sname: this.name, content: message})
             .then(res=>{
@@ -279,6 +316,16 @@ export default {
         border:2px solid lightgray;
         height: 400px;
     }
+    .leftbodyi{
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    height: 100%;
+    width:100%;
+    background-color: white;
+    border-right: 1px solid green;
+    transition: 0.5s;
+}
     .leftbody{
     position: absolute;
     left: 0px;
@@ -322,6 +369,59 @@ export default {
     
     padding: 10px;
 }
+#leftbtn{
+    opacity: 0;
+    position: fixed; 
+    transition: 0.2s;
+    width: 5.3%;
+    height: 90%;
+    transition:0.5s;
+    font-size: 3vw;
+    left: 0%;
+}
+#leftbtn button{
+  width: 100%;
+  height: 100%;
+  background-color: rgb(245, 255, 245);
+  border: none;
+  border-right:1px solid green;
+}
+#rightbtn{
+    opacity:0;
+    position: fixed; 
+    transition: 0.5s;
+    width: 6%;
+    height: 100%;
+    right: 0px;
+    font-size: 3vw;
+    z-index: 5;
+}
+#rightbtn button{
+  width: 100%;
+  height: 100%;
+  background-color: rgb(245, 255, 245);
+  border: none;
+  border-left:1px solid green;
+
+}
+
+.resleftbody{
+  
+  background-color: rgb(222, 253, 222);
+  border: 2px solid green;
+  position: fixed;
+  
+    left: 0%;
+    top: 70px;
+    height: 98.5%;
+    width: 400px;
+    transition: 1s;
+    z-index: 8;
+    transform: scale(0.9);
+    transform-origin: 0 0;
+    margin-left: -100%;
+    
+}
 
 
 
@@ -329,7 +429,12 @@ export default {
     .topleft{
         top:0;
     }
-    
+    #leftbtn{
+    opacity: 100;
+    }
+    #rightbtn{
+      opacity: 100;
+    }
     
     .leftbody{
         opacity: 0;
