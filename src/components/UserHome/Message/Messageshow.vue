@@ -30,10 +30,10 @@
                 <table id="tableinbox" class="table table-hover">
                     <thead>
                         <tr>
-                        <th style="width:20%" scope="col">Sent by</th>
-                        <th style="width:20%" scope="col"> Received by</th>
+                        <th style="width:15%" scope="col">Sent by</th>
+                        <th style="width:15%" scope="col"> Received by</th>
                         <th style="width:50%" scope="col">Content</th>
-                        <th style="width:10%" scope="col">Date</th>
+                        <th style="width:20%" scope="col">Date</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -126,7 +126,11 @@ export default {
                                 axios.get(`http://localhost:5000/users/messagesent/${this.name}`)
                                     .then(res=>{
                                         if(res.data.success){
-                                        this.allMessages = this.allMessages.concat(res.data.docs);
+                                            this.allMessages = this.allMessages.concat(res.data.docs);
+                                            this.allMessages.sort(function(a,b){
+                                                return new Date(b.date) - new Date(a.date);
+                                            });
+
                                         }
 
                                     })
