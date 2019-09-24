@@ -2,7 +2,7 @@
     <div>
         <div class="leftbody">
             <div class="topleft">
-                <p id="compose">Compose Message</p>     
+                <label id="compose">Compose Message</label>     
             </div>
             <div class="bottomleft" >
                 <div  id="fromsearch">
@@ -11,7 +11,7 @@
                 <div id="fromsearch">
                     <span style="margin-left:10px; color:gray; font-size:20px;"><b>Message Content</b></span>
                     <form @submit="sendMessage(replyMessage)"  id="formmessage">
-                            <textarea class="form-control"  id="sendm" rows="17" placeholder="Send the reply message" v-model="replyMessage"></textarea>
+                            <textarea class="form-control"  id="sendm"  placeholder="Send the reply message" v-model="replyMessage"></textarea>
                             <button :disabled='isDisabled' style="float:right;" type="submit" id="mbtn" class="btn btn-success" >Send</button>
                     </form>
                 </div>
@@ -159,11 +159,11 @@ export default {
             margin-right: 10px;
         }
         .topleft{
-            position:absolute;
-            top: 0px;
+            position: relative;
+            
             width: 100%;
-            height:10%;
-            border-bottom: 2px solid green;
+            height:auto;
+            
 
             
         }
@@ -173,9 +173,9 @@ export default {
             width: 90%;
         }
         .bottomleft{
-            position: absolute;
+            position: relative;
             bottom:0px;
-            height:90%;
+            height:auto;
             width:100%;
             padding: 5px;
            
@@ -273,6 +273,7 @@ export default {
         padding: 5px;
         overflow: hidden;
         border:2px solid lightgray;
+        height: 400px;
     }
     .leftbody{
     position: absolute;
@@ -282,6 +283,7 @@ export default {
     width:30%;
     background-color: white;
     border-right: 1px solid green;
+    transition: 0.5s;
 }
 .rightbody{
     position: absolute;
@@ -289,6 +291,7 @@ export default {
     top: 0px;
     height: 100%;
     width:70%;
+    transition: 0.5s;
 }
 #inputtext{
     outline: none;
@@ -301,9 +304,11 @@ export default {
     font-size:38px;
      height:100%;
      color:rgb(1, 143, 48);
-   text-align:center;
+    text-align:center;
     font-weight:600;
+    width: 100%;
    background-color:rgb(198, 250, 198);
+   border-bottom: 2px solid green;
 }
 #tableinbox{
     width:100%;
@@ -313,4 +318,54 @@ export default {
     
     padding: 10px;
 }
+
+
+
+@media only screen and  (min-width : 200px) and (max-width: 1000px) {
+    .topleft{
+        top:0;
+    }
+    
+    
+    .leftbody{
+        opacity: 0;
+    }
+    .rightbody{
+        width: 100%;
+    }
+}
+@media only screen and (min-height : 650px) and (max-height: 750px) {
+    textarea{
+        height: 300px;
+    }
+}
+@media only screen and (min-height : 550px) and (max-height: 650px) {
+    textarea{
+        height: 200px;
+    }
+}
+@media only screen and (min-height : 450px) and (max-height: 550px) {
+    textarea{
+        height: 100px;
+    }
+}
+@media only screen and (min-height : 400px) and (max-height: 450px) {
+    #compose{
+        display: none;
+    }
+    
+    textarea{
+        height: 200px;
+    }
+}
+@media only screen and (min-height : 0px) and (max-height: 400px) {
+    #compose{
+        display: none;
+    }
+    
+    textarea{
+        height: 100px;
+    }
+}
+
 </style>

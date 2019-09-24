@@ -195,8 +195,8 @@ export default {
     position: absolute;
     top:10%;
     left:38%;
-    width:25%;
-    height:70%;
+    width:auto;
+    height:auto;
     border: 1px solid lightgreen;
     background-color: white;
     border-radius: 20px;
@@ -211,8 +211,8 @@ export default {
     position: absolute;
     top:10%;
     left:38%;
-    width:25%;
-    height:70%;
+    width:auto;
+    height:auto;
     border: 1px solid lightgreen;
     background-color: white;
     border-radius: 20px;
@@ -227,8 +227,8 @@ export default {
     position: absolute;
     top:10%;
     left:38%;
-    width:25%;
-    height:40%;
+    width:auto;
+    height:auto;
     border: 1px solid lightgreen;
     background-color: white;
     border-radius: 20px;
@@ -253,6 +253,7 @@ export default {
     #inputtext,  #inputtext1, #inputtext3{
         color: black;
         width: 300px;
+        overflow:auto;
         outline: none;
         resize: none;
         background: none;
@@ -261,5 +262,11 @@ export default {
         border-radius: 10px;
         font-weight: bold;
         word-wrap: break-word;
+    }
+    @media only screen and (min-width : 0px) and (max-width: 800px) {
+        .nextmain,.usermain,.middlemain{
+            left: 15%;
+        }
+
     }
 </style>

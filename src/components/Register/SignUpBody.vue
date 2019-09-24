@@ -1,13 +1,12 @@
 <template>
     
         <div class="cropmain"> 
-            <div class="rightside">
-                <div id ="content">
+            <div class="rightsidei">
+                <div id ="contenti">
                     
                     <i class="fa fa-home" style="font-size:60px; position: relative; top:10% "></i>
                      <h1> Get Started </h1>
                      <h2> With Ipost</h2>
-                    
                      <br>
                      <br>
                      
@@ -40,24 +39,23 @@ export default {
 </script>
 
  <style scoped>
- #content{
+ #contenti{
      position: relative;
      text-align: center;
-     bottom:10%;
-     
+     top:40%;
      color: white;
  }
 .cropmain{
+    position: absolute;
     top:5%;
     left:15%;
-    position: absolute;
-    width: 70%;
+    width:70%;
     height:90%;
-    z-index: 2;
     border-radius: 20px;
     box-shadow: 5px 10px 5px rgb(131, 143, 131) ;  
+    background-color:  rgb(96, 235, 96);
 }
-.rightside{
+.rightsidei{
     position: absolute;
     left: 0%;
      width: 50%;
@@ -73,18 +71,34 @@ export default {
     height: 100%;
     background-color: white;
     border-radius: 0px 20px 20px 0px;
+    transition: 0.5s;
     
     
 }
 #leftcontent{
-    position: relative  ;
+    position: absolute;
     color: rgb(115, 206, 115);
     text-align: center;
     margin-top: 5%;
+    height: 80%;
+    width: 100%;
+   
 }
 .regsform{
     position: absolute;
     width: 100%;
-    height: auto;
+    height: 90%;
+    overflow: auto;
+    
+}
+@media only screen and (max-width: 800px) {
+    .rightsidei{
+        display: none;
+    }
+    .leftside{
+        width: 100%;
+        border-radius: 20px 20px 20px 20px;
+       
+    }
 }
 </style>

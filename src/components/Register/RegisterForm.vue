@@ -190,11 +190,14 @@ export default {
 
 <style scoped>
 .formmain{
-    position: relative;
-    margin-left: 10%;
+    position: absolute;
+    margin-left: 15%;
     width: 100%;
-    transform: scale(0.8, 0.8);
+    transform: scale(0.7, 0.7);
     transform-origin: 0 0;
+    height: auto;
+    overflow: auto;
+    
  
 }
 .secondmain{
@@ -231,5 +234,9 @@ a{
   border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
+}
+@media only screen and (max-width: 800px) {
+    
+    
 }
 </style>

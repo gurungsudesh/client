@@ -21,7 +21,7 @@ export default {
     position: absolute;
     width: 100%;
     height: 100%;
-  background-image: linear-gradient(to bottom, rgb(177, 255, 181), rgb(255, 255, 255));
+    background-image: linear-gradient(to bottom, rgb(177, 255, 181), rgb(255, 255, 255));
 }
 
 

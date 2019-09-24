@@ -23,7 +23,6 @@ export default {
 
 <style scoped>
 .mainbody{
-    position: absolute;
     height: 100%;
     width: 100%;
 }
@@ -31,7 +30,7 @@ export default {
   border-bottom: 1px solid green;
 }
 .homebody{
-    background-color: rgb(217, 245, 207);
+    
     position: absolute;
     height:91%;
     width: 100%;

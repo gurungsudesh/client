@@ -60,7 +60,7 @@ export default {
     margin-top:0%;
     width: 100%;
     height: 91%;
-    background-color: greenyellow;
+    background-color: white;
 }
 
 .UPtop{
@@ -78,7 +78,6 @@ export default {
     position: absolute;
     margin-top:10%;
     width: 80%;
-    height: 55%;
     margin-left: 10%;
     background-color:rgb(228, 253, 228);
     border: 1px solid rgb(189, 218, 189);
@@ -91,15 +90,24 @@ export default {
     width: 30%;
     height: 100%;
     border-right: 1px solid lightgrey;
+    transition: 0.5s;
 
 }
 .UPright{
     position: absolute;
-    left: 30%;
+    right: 0%;
     width: 70%;
     height: 100%;
     background-color: white;
+    transition: 0.5s;
 }
-
+@media only screen and (min-width : 0px) and (max-width: 800px) {
+    .UPleft{
+        opacity: 0;
+    }
+    .UPright{
+        width: 100%;
+    }
     
+}
 </style>

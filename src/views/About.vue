@@ -137,6 +137,7 @@ export default {
     left: 0%;
     height: 100%;
     width: 25%;
+    transition: 0.2s;
     
     
 }
@@ -157,6 +158,7 @@ export default {
     border-bottom: 1px solid green;  
     border-right: 1px solid green;
      border-left: 1px solid green;
+     transition: 0.5s;
 }
 .middlebody::-webkit-scrollbar {
     width: 10px;
@@ -173,6 +175,7 @@ export default {
     left: 75%;
     height: 100%;
     width: 25%;
+    transition: 0.2s;
 }
 .homebody{
   margin-top: 0%;
@@ -193,12 +196,12 @@ export default {
 .hotposition{
   margin-top:20%;
 }
-@media only screen and (max-width: 1000px) {
+@media only screen and (max-width: 1100px) {
     .leftbody{
-      display: none;
+      opacity: 0;
     }
     .rightbody{
-      display: none;
+      opacity: 0;
     }
     .middlebody{
       position: absolute;

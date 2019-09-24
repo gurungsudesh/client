@@ -345,9 +345,7 @@ a{
   nav li i{
     font-size: 20px;
   }
-  nav form label{
-    display: none;
-  }
+  
   nav form input[type=search]{
     width: 70% ;
    

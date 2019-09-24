@@ -2,11 +2,12 @@
      
                 <div class="down">
                         <div id="downside">
+                            <div id="blah">
                                     <h1>Want to share<br>
                                      your views</h1>
                                     <h2>to the world?</h2>   
                                     <h5>Join iPost Now.</h5>
-                         
+                            </div>
                             <br>
                                     <button @click="gotoRegistration"  class="btn btn-success" id="submit1">Sign Up</button><br><br>                                      
                             
@@ -65,5 +66,18 @@ button[type="submit"] {
 #submit1{
     width: 300px;
 }
+#blah{
+    opacity: 100;
+    transition: 0.5s;
+}
+@media only screen and (max-height: 500px) {
+    img{
+        margin-top:2%;
+    }
+    #blah{
+        opacity: 0;
+        
 
+    }
+}
 </style>
