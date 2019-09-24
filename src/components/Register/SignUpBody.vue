@@ -91,6 +91,9 @@ export default {
     overflow: auto;
     
 }
+.regsform::-webkit-scrollbar { 
+                display: none; 
+            }
 @media only screen and (max-width: 800px) {
     .rightsidei{
         display: none;

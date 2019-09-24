@@ -12,7 +12,7 @@
                     <router-link  :to="{name:'postpage', params: {postID: item.id }}" >
                     <div style="font-size:15px; margin-left:10px;  text-align:left; color:green; font-weight:bold">  {{item.name}}
                     </div>
-                    <div id="hotkura"  style="text-align:left; color:gray; font-weight:600;  " >  {{item.content}}
+                    <div id="hotkura"  style="text-align:left;  font-weight:600;  " >  {{item.content}}
                     </div>
                     </router-link>
                     <!-- esko satta ma content hunxa--></li>
@@ -142,9 +142,9 @@ export default {
     max-height: 110px;
     text-align: left;
     font-size: 13px;
-    color:black;
+    color:rgb(83, 83, 83);
     overflow: hidden;
-    background-color: rgb(218, 255, 218);
+    background-color: rgb(177, 238, 177);
     padding: 10px;
     border-radius: 20px;
   }
