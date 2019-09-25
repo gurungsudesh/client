@@ -154,7 +154,7 @@ export default {
     },
     methods: {
         gotoProfile(){
-            alert("Click garyo");
+            //alert("Click garyo");
         },
          follow(name,id, followerName, followerId ){
             alert(followerName)
@@ -168,7 +168,7 @@ export default {
                 axios.post("http://localhost:5000/users/notifications", {name, followerName ,notificationType })
                   .then(res=>{
                     if(res.data.success){
-                      alert(" Followed and Follow notification sent")
+                      //alert(" Followed and Follow notification sent")
                       //getting the followers
                        axios.get(`http://localhost:5000/users/follower/${this.name}`)
                             .then(res =>{
@@ -211,7 +211,7 @@ export default {
                         axios.post("http://localhost:5000/users/notifications", {name, fname ,notificationType })
                         .then(res=>{
                             if(res.data.success){
-                                alert("Unfollow notification sent")
+                                //alert("Unfollow notification sent")
                                 axios.get(`http://localhost:5000/users/follow/${this.name}`)
                                     .then(res =>{
                                         if(res.data.msg){
@@ -311,7 +311,7 @@ export default {
             
                 .then(res=>{
                     if(res.data.msg){
-                        alert("posted")
+                        //alert("posted")
                         //sending notification
                         axios.post(`http://localhost:5000/users/notifications/${postID}`,{name: uname, notify: this.notification, receiver: postOwner})
                             .then(res=>{
@@ -321,7 +321,7 @@ export default {
                                     axios.get(`http://localhost:5000/users/post/comment/${pId}`)
                                         .then(res=>{
                                             if(res.data.msg){
-                                                alert('posted sadfasf asdf')
+                                               // alert('posted sadfasf asdf')
                                                 this.comments = res.data.docs;
                                                 this.num = this.comments.length;
                                                 

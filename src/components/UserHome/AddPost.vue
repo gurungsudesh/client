@@ -196,7 +196,7 @@ export default {
                             
                             .then(res=>{
                                 if(res.data.success){
-                                    alert(' Like Notification sent')
+                                    //alert(' Like Notification sent')
                                     //getting all the likes again 
                                     axios.get("http://localhost:5000/users/post/likes")
                                         .then(res=>{
@@ -289,14 +289,14 @@ export default {
                 .then(res=>{
                     if(res.data.msg){
                         
-                        alert("posted")
+                        //alert("posted")
                         //sending notification
                         axios.post(`http://localhost:5000/users/notifications/${postID}`,{name: uname, notify: this.notification, receiver: postOwner})
                             .then(res=>{
                                 
                                 if(res.data.success){
                                     const pid = postID;  
-                                    alert("Notification sent") 
+                                    //alert("Notification sent") 
                                     //alert(pId)
                                     axios.get(`http://localhost:5000/users/post/comment/${pid}`)
                                         .then(res=>{
@@ -337,7 +337,7 @@ export default {
                 
                 .then(res=>{
                     if(res.data.msg){
-                        alert("Posted")
+                        //alert("Posted")
                         this.postdata = ''
                         
                     //gettin all the post including the new one

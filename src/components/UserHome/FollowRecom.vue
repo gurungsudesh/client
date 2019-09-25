@@ -72,7 +72,7 @@ export default {
                 axios.post("http://localhost:5000/users/notifications", {name, followName ,notificationType })
                   .then(res=>{
                     if(res.data.success){
-                      alert("Follow notification sent")
+                      //alert("Follow notification sent")
 
                       // followed garpepachi hatnu paryo ni recommended bata 
                       axios.get(`http://localhost:5000/users/followrecommendation/${this.name}`)

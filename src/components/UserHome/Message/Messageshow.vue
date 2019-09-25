@@ -150,7 +150,7 @@ export default {
         axios.post(`http://localhost:5000/users/sendmessage/${this.receivingUser}`, {sname: this.name, content: message})
             .then(res=>{
                 if(res.data.success){
-                    alert("message sent")
+                    //alert("message sent")
                     this.receivingUser = '';
                     this.replyMessage = '';
                       //getting the messages when im  the receiver

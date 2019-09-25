@@ -137,7 +137,7 @@ export default {
         onChange1(event) {
             //alert(event.target.value);
             this.ques1 = event.target.value;
-            alert(this.ques1);
+            //alert(this.ques1);
 
 
         },

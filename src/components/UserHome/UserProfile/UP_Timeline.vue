@@ -230,7 +230,7 @@ export default {
             axios.delete(`http://localhost:5000/users/post/${id}`)
                 .then(res => {
                     if(res.data.deleted){
-                        alert('post is deleted')
+                        //alert('post is deleted')
                          const uname = this.name;
                         axios.get(`http://localhost:5000/users/profile/post/${uname}`)
         
@@ -267,7 +267,7 @@ export default {
             axios.delete(`http://localhost:5000/users/post/deletecomment/${id}`)
                 .then(res=>{
                     if(res.data.msg){
-                        alert('comment deleted');
+                        //alert('comment deleted');
                         const uname = this.name;
         
         axios.get(`http://localhost:5000/users/profile/post/${uname}`)
@@ -311,14 +311,14 @@ export default {
             axios.post("http://localhost:5000/users/follow", {name:name, userID: id, followName:followerName, followId:followerId})
             .then(res =>{
               if(res.data.docs){
-                alert(followerName)
+                //alert(followerName)
 
                 //send follow notification
                 const notificationType = '3';
                 axios.post("http://localhost:5000/users/notifications", {name, followName:followerName ,notificationType })
                   .then(res=>{
                     if(res.data.success){
-                      alert(" Followed and Follow notification sent")
+                      //alert(" Followed and Follow notification sent")
                       //getting the followers
                        axios.get(`http://localhost:5000/users/follower/${this.name}`)
                             .then(res =>{
@@ -361,7 +361,7 @@ export default {
                         axios.post("http://localhost:5000/users/notifications", {name, followName:fname ,notificationType })
                         .then(res=>{
                             if(res.data.success){
-                                alert("Unfollow notification sent")
+                                //alert("Unfollow notification sent")
                                 axios.get(`http://localhost:5000/users/follow/${this.name}`)
                                     .then(res =>{
                                         if(res.data.msg){
@@ -459,7 +459,7 @@ export default {
             
                 .then(res=>{
                     if(res.data.msg){
-                        alert("posted")
+                        //alert("posted")
                         //sending notification
                         axios.post(`http://localhost:5000/users/notifications/${postID}`,{name: uname, notify: this.notification, pOwner: postOwner})
                             .then(res=>{

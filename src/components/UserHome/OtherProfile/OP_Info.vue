@@ -106,7 +106,7 @@ export default {
                 axios.post("http://localhost:5000/users/notifications", {name, followName:followerName ,notificationType })
                   .then(res=>{
                     if(res.data.success){
-                      alert(" Followed and Follow notification sent")
+                      //alert(" Followed and Follow notification sent")
                       //getting the followers
                        axios.get(`http://localhost:5000/users/follower/${this.name}`)
                             .then(res =>{
@@ -150,7 +150,7 @@ export default {
                         axios.post("http://localhost:5000/users/notifications", {name, followName:fname ,notificationType })
                         .then(res=>{
                             if(res.data.success){
-                                alert("Unfollow notification sent")
+                                //alert("Unfollow notification sent")
                                 axios.get(`http://localhost:5000/users/follow/${this.name}`)
                                     .then(res =>{
                                         if(res.data.msg){
