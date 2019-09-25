@@ -42,7 +42,7 @@ export default {
  #contenti{
      position: relative;
      text-align: center;
-     top:40%;
+     top:50%;
      color: white;
  }
 .cropmain{
@@ -53,14 +53,18 @@ export default {
     height:90%;
     border-radius: 20px;
     box-shadow: 5px 10px 5px rgb(131, 143, 131) ;  
-    background-color:  rgb(96, 235, 96);
+    background-image: url("../../../images/back.jpg");
+    background-position:left;
+    background-size: cover; 
 }
 .rightsidei{
     position: absolute;
     left: 0%;
      width: 50%;
      height: 100%;
-    background-color: rgb(96, 235, 96);
+    background-image: url("../../../images/back.jpg");
+    background-position:right;
+    background-size: cover; 
     border-radius: 20px 0px 0px 20px;
      
 }
@@ -103,5 +107,23 @@ export default {
         border-radius: 20px 20px 20px 20px;
        
     }
+}
+@media only screen and (min-height: 450px) and (max-height: 550px){
+    .regsform{
+    height: 80%;
+    
+}
+}
+@media only screen and (min-height: 350px) and (max-height: 450px){
+    .regsform{
+    height: 70%;
+    
+}
+}
+@media only screen and (min-height: 50px) and (max-height: 350px){
+    .regsform{
+    height: 60%;
+    
+}
 }
 </style>

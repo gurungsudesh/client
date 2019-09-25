@@ -9,8 +9,8 @@
             <div class="noti_noti">
                 <div id="noti_noti1">
                   <div style="margin-top:20px; margin-bottom:20px; width:100%; "  v-if="(notifications.length==0)" >
-                    <div style="text-align:center; width:100%; padding:10px; border-radius:10px;">
-                      <label style=" width:80% ;padding:20px; border-radius:40px;   font-size:15px;">Nothing to show</label>
+                    <div style=" width:100%; padding:10px; border-radius:10px;">
+                      <label style=" ">Nothing to show</label>
                     </div>
                   </div>
                   <div v-for="(item,index) in notifications " :key="index">
@@ -102,6 +102,11 @@ label{
   background-color: rgb(226, 226, 226);
   color:rgb(117, 117, 117);
   font-weight: 600;
+  width:80% ;
+  padding:20px; 
+  border-radius:40px;  
+   font-size:15px;
+   text-align: center;
 }
 a{
   color: black;

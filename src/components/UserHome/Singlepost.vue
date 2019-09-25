@@ -404,6 +404,7 @@ a:hover{
      width:150px;
      background-color: white; 
      color: green;
+     transition: 0.5s;
 }
 #likestats{
     
@@ -411,6 +412,7 @@ a:hover{
      width:150px;
      background-color: white; 
      color: green;
+     transition: 0.5s;
 }
 
 .changestat{
@@ -456,5 +458,17 @@ a:hover{
     color: rgb(75, 75, 75);
     cursor: pointer;
 }
+@media only screen and (max-width: 800px) {
+    .writepost{
+        padding-left:10px;
+    }
+    
+    #likestats, #commentstats{
+        width: 70px;
 
+    }
+    #statstable td{
+    padding-left:20px;
+}
+}
 </style>

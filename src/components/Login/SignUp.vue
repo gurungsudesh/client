@@ -46,16 +46,20 @@ export default {
     text-align: left;
     
 }
-button[type="submit"] {
+button {
     
     padding: 5px;
     padding-right: 10px;
     padding-left: 10px;
-    border-radius: 10px;
-    color:white;
-    border: none;
-    margin-left: 10px;
+    font-size: 15px;
     font-weight: bold;
+    width: 15%;
+    background-color: white;
+    color: green;
+
+    border-radius: 20px;
+    
+    border: 1px solid green;
 }
 #routsubmit{
      color:white;

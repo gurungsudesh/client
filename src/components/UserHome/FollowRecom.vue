@@ -17,8 +17,8 @@
                             <form @submit="follow(name,id, item.name, item._id )"><button type="submit" class="btn btn-success" id="followbtn">Follow</button></form></li>
                             
                             </ul>
-                            <label >No more suggestions</label>
-                            <div v-if="maxshowfollow<=users.length" @click="showmore()" class="showmore">
+                            <label v-if="users.length==0" >No more suggestions</label>
+                            <div v-if="maxshowfollow<users.length" @click="showmore()" class="showmore">
                             Show more
                             </div>
                     </div>
@@ -57,7 +57,7 @@ export default {
     },
     methods: {
       showmore(){
-        this.maxshowfollow =this.maxshowfollow + 4 ;
+        this.maxshowfollow =this.maxshowfollow + 3 ;
         //console.log(this.maxshowfollow);
       },
       follow(name, userID, followName, followId){ 

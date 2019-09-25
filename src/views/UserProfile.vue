@@ -4,7 +4,23 @@
             <div class="UPtop">
                 <NavBar/>
             </div>
-            <div class="UPmainbody">  
+            <div class="UPmainbody">
+                <div id="leftbtn">
+                    <button @click="openrlb" ><i class="fas fa-arrow-right" style="color:seagreen;"></i></button>
+                </div>
+                <div class="resleftbody" ref="rlb" id="rlb">
+                    <div id="rightbtn">
+                    <button @click="closerlb" style="float:right; "><i class="fas fa-arrow-right" style="color:seagreen; transform: rotate(180deg);"></i></button>
+                    </div>
+                    <div class="UPlefti">
+                        <div class="UPltop">
+                            <UPInfo/>
+                        </div>
+                        <div class="UPlbottom">
+                            <UPBio/>
+                        </div>
+                    </div>
+                </div>  
                 <div class="UPleft">
                     <div class="UPltop">
                         <UPInfo/>
@@ -42,6 +58,18 @@ export default {
         if(!this.t){
         this.$router.push("/");
         }
+    },
+    methods:{
+        openrlb(){
+      var vm=this;
+      
+      vm.$refs.rlb.style.marginLeft = '0%';
+    },
+    closerlb(){
+      var vm=this;
+     
+      vm.$refs.rlb.style.marginLeft = '-100%';
+    },
     }
 }
 
@@ -93,6 +121,16 @@ export default {
     transition: 0.5s;
 
 }
+.UPlefti{
+    position: absolute;
+    left: 0%;
+    background-color: white;    
+    width: 100%;
+    height: 100%;
+    border-right: 1px solid lightgrey;
+    transition: 0.5s;
+
+}
 .UPright{
     position: absolute;
     right: 0%;
@@ -101,13 +139,72 @@ export default {
     background-color: white;
     transition: 0.5s;
 }
-@media only screen and (min-width : 0px) and (max-width: 800px) {
+#leftbtn{
+    opacity: 0;
+    position: fixed; 
+    transition: 0.2s;
+    width: 5%;
+    height: 90%;
+    transition:0.5s;
+    font-size: 3vw;
+}
+#leftbtn button{
+  width: 100%;
+  height: 100%;
+  background-color: rgb(245, 255, 245);
+  border: none;
+  z-index: 6;
+  border-right:1px solid green;
+}
+#rightbtn{
+    
+    position: fixed; 
+    transition: 0.5s;
+    width: 6%;
+    height: 100%;
+    right: 0px;
+    font-size: 20px;
+    z-index: 5;
+}
+#rightbtn button{
+  width: 100%;
+  height: 100%;
+  background-color: rgb(245, 255, 245);
+  border: none;
+  border-left:1px solid green;
+
+}
+
+.resleftbody{
+  
+  background-color: rgb(222, 253, 222);
+  border: 2px solid green;
+  position: fixed;
+    left: 0%;
+    top: 70px;
+    height: 98.5%;
+    width: 400px;
+    transition: 1s;
+    z-index: 6;
+    transform: scale(0.9);
+    transform-origin: 0 0;
+    margin-left: -200%;
+    
+}
+@media only screen and (min-width : 0px) and (max-width: 900px) {
     .UPleft{
         opacity: 0;
+        z-index: 0;
+        visibility: hidden;
     }
     .UPright{
-        width: 100%;
+        width: 95%;
     }
-    
+    #leftbtn{
+        opacity: 100;
+    }
+    #rightbtn{
+      opacity: 100;
+    }
 }
 </style>

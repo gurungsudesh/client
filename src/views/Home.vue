@@ -57,7 +57,9 @@ export default {
    
 }
 .Rightside{
-   background-color: rgb(96, 235, 96);
+   background-image: url("../../images/back.jpg");
+    background-position:left;
+    background-size: cover; 
     width: 100%;
   height: 100%;
   position: absolute;

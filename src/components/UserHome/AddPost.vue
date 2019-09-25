@@ -262,7 +262,10 @@ export default {
        },
        countcmd(postkoId){
             var commentcount=this.allComment.filter(function(post) {return post.postId == postkoId;});
-            return commentcount.length;
+            var count= commentcount.length;
+            
+            
+            return count;
        },
         getComment(postKoId){
             const pId = postKoId;   
@@ -306,6 +309,7 @@ export default {
                                             
                                         })
                                         .catch(err=> alert(err));
+                                        
                                 }
                             })
                             .catch( err=>alert(err));

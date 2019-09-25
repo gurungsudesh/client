@@ -52,10 +52,11 @@ export default {
     .m_rightside{
     
         position: absolute;
-        left: 20%;
+       right: 0%;
         width: 80%;
         height: 100%;
         background-color: white;
+        transition: 0.5s;
 }
     .m_leftside{
         position: absolute;
@@ -64,6 +65,7 @@ export default {
         width: 20%;
         height: 100%;
         border-right: 1px solid lightgrey;
+        transition: 0.5s;
     
 }
 .topright{
@@ -71,10 +73,12 @@ export default {
     top:0%;
     height:9%;
     width: 100%;
+    
 }
 .bottomright{
+    
     position: absolute;
-    top:9%;
+    top:60px;
 
     width: 100%;
     background-color: rgb(235, 235, 235);   
@@ -95,5 +99,14 @@ export default {
     height: auto;
     border:1px solid lightgray;
     
+}
+@media only screen and (max-width: 1100px) {
+    .m_leftside{
+        opacity: 0;
+        visibility: hidden;
+    }
+    .m_rightside{
+        width: 95%;
+    }
 }
 </style>

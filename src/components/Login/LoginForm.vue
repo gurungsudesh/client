@@ -107,13 +107,14 @@ li{
 
 button[type="submit"] {
     position: absolute;
-    font-size: 16px;
-    font-weight: bold;
+    font-size: 14px;
+    font-weight: 400;
     width: 15%;
     
+
     border-radius: 20px;
     
-    border: none;
+    border: 1px solid green;
     
    
 }

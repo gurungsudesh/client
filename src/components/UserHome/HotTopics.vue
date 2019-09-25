@@ -144,7 +144,7 @@ export default {
     font-size: 13px;
     color:rgb(83, 83, 83);
     overflow: hidden;
-    background-color: rgb(177, 238, 177);
+    background-color: rgb(233, 233, 233);
     padding: 10px;
     border-radius: 20px;
   }

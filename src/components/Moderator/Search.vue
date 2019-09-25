@@ -1,13 +1,13 @@
 <template>
     <div>
-        <div class="container" id="topsearch">
+        <div id="topsearch">
                       
-                      <nav style="font-weight:bold; background-color: green">
+                      <nav class="navbar fixed-top navbar-expand navbar-light" style="font-weight:bold; background-color:white;">
                             <div >
-                                <form id="searchbtn" class="form-inline ">
+                                <form id="searchbtn" class="form-inline my-2 my-lg-0">
                                 <input class="form-control mr-sm-2" type="search"  placeholder="Search" aria-label="Search" @input="search"  v-model="searchContent">
                                 <button id="sbtn" class="btn btn-success" @click="showNotification1(false)"><i class="fas fa-search" ></i></button>
-                                    <div class="dpdownbody1" id="notificationid1" ref="notificationid1">
+                                    <div v-if="(searchContent!='')"  class="dpdownbody1" id="notificationid1" ref="notificationid1">
                                             <span style="font-size:30px; color:green;" >Search result</span>
                                             <ul style="text-align:left; border-top: 1px solid grey">
                                             <label style="margin-top:20px; margin-bottom:20px;" v-if="(user.length==0)" >Nothing to show</label>
@@ -77,7 +77,7 @@ export default {
               }else{
                   //alert('uers chahi payena')
                   this.user = [];
-                  this.showNotification1(true);
+                  this.showNotification1(false);
               }
               
             }else{
@@ -97,17 +97,25 @@ export default {
 }
 </script>
  <style scoped>
+ 
+ nav{
+  height: 60px;
+  border-bottom: 1px solid green;
+}
  #topsearch{
      position: absolute;
      right:10px;
      text-align: right;
+     
      width: 100%;
-     margin-top:10px;
+     
      
       }
       #searchbtn{
           position: absolute;
+          top:10px;
           right: 10px;
+          transition: 0.5s;
           
       }
 
@@ -158,7 +166,11 @@ export default {
 a:hover{
   text-decoration: none;
 }
-
+@media only screen and (max-width: 1100px) {
+    input[type=search]{
+      width: 65%;
+    }
+}
 </style>
 
 

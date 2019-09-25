@@ -8,7 +8,7 @@
                 <div class="col-md-auto">
                     <h3>{{msg}}</h3>
                         <p class="text-left" style="color: gray; font-size: 12px" >
-                            <br>
+                            
                             {{ufollowersNum}} followers<br>
                             {{ufollowingNum}} following<br>
                             

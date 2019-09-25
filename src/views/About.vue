@@ -16,7 +16,7 @@
       </div>
       <div class="resleftbody" ref="rlb" id="rlb">
         <div id="rightbtn">
-        <button @click="closerlb" style="float:right; "><i class="fas fa-arrow-right" style="color:seagreen; transform: rotate(180deg);"></i></button>
+        <button @click="closerlb" style="float:right; "><i class="fas fa-arrow-right" style="font-size:20px;color:seagreen; transform: rotate(180deg);"></i></button>
       </div>
           <UserInfo/>
         <div class="hotposition">
@@ -33,9 +33,11 @@
       </div>
       <div class="resrightbody" ref="rrb" id="rrb">
         <div id="leftbtn" style="height:100% ; width:6%;" >
-        <button @click="closerrb" ><i class="fas fa-arrow-right" style="color:seagreen;"></i></button>
+        <button @click="closerrb" ><i class="fas fa-arrow-right" style="color:seagreen; font-size:20px"></i></button>
       </div>
+      <div style="height:600px; overflow:scroll;">
         <FollowRecom style="transform:scale(0.9);"/>
+      </div>
       </div>
       <div class="rightbody">
         <FollowRecom/>
@@ -154,6 +156,7 @@ export default {
 <style scoped>
 
 #leftbtn{
+  visibility: hidden;
     opacity: 0;
     position: fixed; 
     transition: 0.2s;
@@ -170,6 +173,7 @@ export default {
   border-right:1px solid green;
 }
 #rightbtn{
+  visibility: hidden;
     opacity:0;
     position: fixed; 
     transition: 0.5s;
@@ -214,7 +218,7 @@ export default {
     left: 0%;
     height: 100%;
     width: 25%;
-    transition: 0.2s;
+    transition: 0.5s;
     
     
     
@@ -255,7 +259,7 @@ export default {
     left: 75%;
     height: 100%;
     width: 25%;
-    transition: 0.2s;
+    transition: 0.5s;
 }
 .resrightbody{
   
@@ -270,7 +274,9 @@ export default {
     z-index: 6;
     transform: scale(0.9);
     transform-origin: 0 0;
+    
     margin-right: -100%;
+    
     
 }
 .homebody{
@@ -312,9 +318,11 @@ export default {
     }
     #leftbtn{
     opacity: 100;
+    visibility: visible;
     }
     #rightbtn{
       opacity: 100;
+      visibility: visible;
     }
     
   

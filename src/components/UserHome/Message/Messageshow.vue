@@ -378,6 +378,7 @@ export default {
     transition:0.5s;
     font-size: 3vw;
     left: 0%;
+    visibility: hidden;
 }
 #leftbtn button{
   width: 100%;
@@ -431,6 +432,7 @@ export default {
     }
     #leftbtn{
     opacity: 100;
+    visibility: visible;
     }
     #rightbtn{
       opacity: 100;
