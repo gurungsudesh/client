@@ -1,13 +1,14 @@
 <template>
     <div>
         <div class="mainbody">
+            <div class="topright" style="border-bottom: 1px solid lightgrey">
+                    <Search/>
+                   </div>
                 <div class="m_leftside" >
                     <UserInfo/>
                 </div>
                 <div class="m_rightside">
-                   <div class="topright" style="border-bottom: 1px solid lightgrey">
-                    <Search/>
-                   </div>
+                   
                    <div class="bottomright">
                        <div class="firsthalf">
                         <Posts/>
@@ -100,13 +101,13 @@ export default {
     border:1px solid lightgray;
     
 }
-@media only screen and (max-width: 1100px) {
+@media only screen and (max-width: 1200px) {
     .m_leftside{
         opacity: 0;
         visibility: hidden;
     }
     .m_rightside{
-        width: 95%;
+        width: 100%;
     }
 }
 </style>

@@ -14,7 +14,7 @@
                                 <input type="text" class="form-control"  id="inputPassword3" v-model="username" required>
                             </li>
                              <li class="list-group-item" > 
-                                    <p v-if="(stat==true)">{{err}}</p><button style="margin-left:35%; margin-top:10px;" @click="onSubmit1(username)" type="submit" class="btn btn-success">Next</button> 
+                                    <p style="color:red; text-align:center; border: 1px solid pink; background-color:pink; padding:10px; border-radius:20px" v-if="(stat==true)">{{err}}</p><button style="margin-left:35%; margin-top:10px;" @click="onSubmit1(username)" type="submit" class="btn btn-success">Next</button> 
                                 </li>
                         </ul>
                     </form>
@@ -42,7 +42,7 @@
                                     <input type="text" class="form-control"  id="inputPassword3"  placeholder="Answer 2" v-model="ans2" required>
                                 </li>
                                 <li class="list-group-item" > 
-                                    <p v-if="(status==true)">{{error}}</p> <button style="margin-left:35%; margin-top:20px;" type="submit" class="btn btn-success">Next</button>
+                                    <p  style="color:red; text-align:center; border: 1px solid pink; background-color:pink; padding:10px; border-radius:20px" v-if="(status==true)">{{error}}</p> <button style="margin-left:35%; margin-top:20px;" type="submit" class="btn btn-success">Next</button>
                                 </li>
                                 
                         </ul>
@@ -73,8 +73,8 @@
                                     <button style="margin-left:35%; margin-top:20px;" type="submit" class="btn btn-success">Confirm</button> 
                                 </li>
                                 <li class="list-group-item" > 
-                                    <p v-if="(stat1==true)">{{err1}}</p>
-                                    <p v-if="(condition==true)">{{message}} <router-link to="/">Login</router-link></p> 
+                                    <p  style="color:red; text-align:center; border: 1px solid pink; background-color:pink; padding:10px; border-radius:20px" v-if="(stat1==true)">{{err1}}</p>
+                                    <p  style="color:green; text-align:center; border: 1px solid pink; background-color:lightgreen; padding:10px; border-radius:20px" v-if="(condition==true)">{{message}} <router-link to="/" style="color:green"><b>Login</b> </router-link></p> 
                                 </li>
                         </ul>
                     </form>
@@ -197,6 +197,8 @@ export default {
     left:38%;
     width:auto;
     height:auto;
+    
+    margin-right:20px;
     border: 1px solid lightgreen;
     background-color: white;
     border-radius: 20px;
@@ -211,6 +213,7 @@ export default {
     position: absolute;
     top:10%;
     left:38%;
+    margin-right:20px;
     width:auto;
     height:auto;
     border: 1px solid lightgreen;
@@ -225,6 +228,8 @@ export default {
     }
     .usermain{
     position: absolute;
+    
+    margin-right:20px;
     top:10%;
     left:38%;
     width:auto;

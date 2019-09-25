@@ -84,7 +84,7 @@ export default {
     color: rgb(115, 206, 115);
     text-align: center;
     margin-top: 5%;
-    height: 80%;
+    height: 100%;
     width: 100%;
    
 }
@@ -108,21 +108,27 @@ export default {
        
     }
 }
-@media only screen and (min-height: 450px) and (max-height: 550px){
+@media only screen and (min-height: 575px) and (max-height: 650px){
     .regsform{
-    height: 80%;
+    height: 75%;
     
 }
 }
-@media only screen and (min-height: 350px) and (max-height: 450px){
+@media only screen and (min-height: 475px) and (max-height: 575px){
     .regsform{
     height: 70%;
     
 }
 }
-@media only screen and (min-height: 50px) and (max-height: 350px){
+@media only screen and (min-height: 350px) and (max-height: 475px){
     .regsform{
     height: 60%;
+    
+}
+}
+@media only screen and (min-height: 50px) and (max-height: 350px){
+    .regsform{
+    height: 50%;
     
 }
 }

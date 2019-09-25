@@ -51,7 +51,9 @@
         <div id="leftbtn" style="height:100% ; width:6%;" >
         <button @click="closerrb" ><i class="fas fa-arrow-right" style="color:seagreen; font-size:20px"></i></button>
       </div>
+      <div style="height:600px; overflow:scroll;">
         <FollowRecom style="transform:scale(0.9);"/>
+      </div>
       </div>
       <div class="rightbody">
         <FollowRecom/>
