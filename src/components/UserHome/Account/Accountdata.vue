@@ -117,9 +117,9 @@
                          <tr>
                             <td style="font-weight: 600">Confirm Password:</td>
                             <td><input type="password" class="form-control" v-model="confirmPass" :class="{ 'is-invalid': submitted && $v.confirmPass.$error } "  >
-                                <div v-if="submitted && !$v.confirmPass.required" class="invalid-feedback">
+                                <div v-if="submitted && $v.confirmPass.$error" class="invalid-feedback">
                                     <span v-if="!$v.confirmPass.required">Confirm Password is required</span>
-                                    <span v-else-if="!$v.confirmPass.sameAsPassword.required">Passwords must match</span>
+                                    <span v-else-if="!$v.confirmPass.sameAsPassword">Passwords must match</span>
                                 </div>
                             </td>
                             

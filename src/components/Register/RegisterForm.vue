@@ -1,33 +1,41 @@
 <template>
     <div>
         <div class="formmain"  >
-            <form @submit="onSubmit" autocomplete="off">
+            <form @submit.prevent="onSubmit" autocomplete="off">
                 <ul class="list-group list-group-flush">
                     
                     <li class="list-group-item" > 
-                    <input type="text" class="form-control"  v-model="username" id="inputEmail3" placeholder="Username" required>
-                    <span id="errorshow" style="color:red; font-size:12px;" v-if='msg.username'>{{msg.username}}</span>
+                    <input type="text" class="form-control"  v-model="username" id="inputEmail3" placeholder="Username" :class="{ 'is-invalid': submitted && $v.username.$error }">
+                    <div v-if="submitted && !$v.username.required" class="invalid-feedback">Name is required</div>
                     </li>
                     
 
                 
                     <li class="list-group-item">
-                    <input type="text" class="form-control" v-model="email" id="inputEmail3" placeholder="Email" required>
-                    <span id="errorshow" style="color:red; font-size:12px;" v-if='msg.email'>{{msg.email}}</span>
+                    <input type="email" class="form-control" v-model="email" id="inputEmail3" placeholder="Email" :class="{ 'is-invalid': submitted && $v.email.$error }">
+                    <div v-if="submitted && $v.email.$error" class="invalid-feedback">
+                                    <span v-if="!$v.email.required">Email is required</span>
+                                    <span v-if="!$v.email.email">Email is invalid</span>
+                                </div>
                     </li>
                     
                 
 
                 
                     <li class="list-group-item">
-                        <input type="password" class="form-control" v-model="password" id="inputPassword3" placeholder="Password" required>
-                        <span  id="errorshow" style="color:red; font-size:12px;" v-if='msg.password'>{{msg.password}}</span>
-                    </li>
+                        <input type="password" class="form-control" v-model="password" id="inputPassword3" placeholder="Password" :class="{ 'is-invalid': submitted && $v.password.$error }">
+                         <div v-if="submitted && $v.password.$error" class="invalid-feedback">
+                                    <span v-if="!$v.password.required">Password is required</span>
+                                    <span v-if="!$v.password.minLength">Password must be at least 6 characters</span>
+                            </div>
 
                 
                     <li class="list-group-item">
-                    <input type="password" class="form-control" v-model="confpass" id="inputPassword3" placeholder="Confirm Password" required>
-                     <span id="errorshow" style="color:red; font-size:12px;" v-if='msg.confpass'>{{msg.confpass}}</span>
+                    <input type="password" class="form-control" v-model="confpass" id="inputPassword3" placeholder="Confirm Password" :class="{ 'is-invalid': submitted && $v.confpass.$error }">
+                      <div v-if="submitted && $v.confpass.$error" class="invalid-feedback">
+                                    <span v-if="!$v.confpass.required">Confirm Password is required</span>
+                                    <span v-else-if="!$v.confpass.sameAsPassword">Passwords must match</span>
+                         </div>
                     </li> 
                     <!--  Yo chai error aaune registration aauda -->
                    
@@ -44,7 +52,8 @@
                         </select>
                     </li>
                     <li class="list-group-item">
-                        <input type="text" class="form-control"  id="inputPassword3" placeholder="Answer 1" v-model= "ans1" required>
+                        <input type="text" class="form-control"  id="inputPassword3" placeholder="Answer 1" v-model= "ans1" :class="{ 'is-invalid': submitted && $v.ans1.$error }" >
+                        <div v-if="submitted && !$v.ans1.required" class="invalid-feedback">Answer is required</div>
                     </li>
 
                     <li class="list-group-item">
@@ -58,14 +67,15 @@
                         </select>
                     </li>
                     <li class="list-group-item">
-                        <input type="text" class="form-control"  id="inputPassword3"  placeholder="Answer 2" v-model= "ans2" required>
+                        <input type="text" class="form-control"  id="inputPassword3"  placeholder="Answer 2" v-model= "ans2" :class="{ 'is-invalid': submitted && $v.ans2.$error }">
+                        <div v-if="submitted && !$v.ans2.required" class="invalid-feedback">Answer is required</div>
                     </li>    
                     <div v-if="(error==cerror1)" class="alert  alert-warning  fade show" role="alert">
                         <strong>{{error}}</strong> 
                     </div>
                     
                  <li class="list-group-item" > 
-                <button type="submit" class="btn btn-success">Sign Up</button> 
+                <button  type="submit" class="btn btn-success">Sign Up</button> 
                 </li>
                 <div v-if="(error==cerror2)" class="alert  alert-success  fade show" role="alert" >
                         <strong style="margin-right:10px;">Register Sucessful</strong> Click the link below 
@@ -88,6 +98,8 @@
 
 <script>
 import axios from 'axios'
+import { required, email, minLength, sameAs } from "vuelidate/lib/validators";
+
 export default {
     name: "RegisterForm",
 
@@ -106,28 +118,20 @@ export default {
             ques2: '',
             ans1: '',
             ans2: '',
+            submitted: false,
             cerror1:'User already exists',
             cerror2:' registered',
 
         }
+
     },
-    watch:{
-        username(value){
-            this.username = value,
-            this.check_username(value)
-        },
-        email(value){
-            this.email = value,
-            this.check_email(value);
-        },
-        password(value){
-            this.password = value,
-            this.checkPassword(value);
-        },
-        confpass(value){
-            this.confpass = value,
-            this.checkConfirmPassword(value);
-        }
+    validations: {
+                username: { required },
+                email: { required, email },
+                password: { required, minLength: minLength(6) },
+                confpass: { required, sameAsPassword: sameAs('password') },
+                ans1: { required },
+                ans2: { required },
     },
     methods: {
         onChange1(event) {
@@ -140,48 +144,15 @@ export default {
         onChange2(event) {
             //alert(event.target.value);
             this.ques2 = event.target.value;
-        },
-        check_username(value){
-            if(value.length<6){
-                this.msg['username'] = 'Username must be atleast contain 6 characters'
-            }
-            else{
-                this.msg['username'] = ''
-            }
-        },
-        check_email(value){
-            if (/^\w+([-]?\w+)*@\w+([-]?\w+)*(\.\w{2,3})+$/.test(value))
-                {
-                      this.msg['email'] = '';
-                }
-                else{
-                    this.msg['email'] = 'Please type correct email'
-                }
-        },
-        checkPassword(value){
-            if(value.length<6){
-                this.msg['password'] = 'Password must contain atleast  6 characters'
-            }else{
-                this.msg['password'] = ''
-            }
-        },
-        checkConfirmPassword(value){
-            if(value == this.password){
-                this.msg['confpass'] = ''
-            }else{
-                this.msg['confpass'] = 'Password and confirm password do not match'
-            }
-        },
-        // onSubmit(username,email,password){
-        //     if(this.username =='' || this.email =='' || this.password =='' || this.confpass ==''){
-        //         if(this.username ==''){
-        //             this.errmsg['username'] = 'Username field is required'
-        //         }
-        //     }
-        // },
-        onSubmit(e){
-            e.preventDefault();
+        },      
+        onSubmit(){
+             this.submitted = true;
 
+                // stop here if form is invalid
+                this.$v.$touch();
+                if (this.$v.$invalid) {
+                    return;
+                }
             axios.post('http://localhost:5000/users/register', { username: this.username, email: this.email, password: this.password, quesone:this.ques1, ansone: this.ans1, questwo: this.ques2, anstwo: this.ans2})
                 .then(res => {
                     
