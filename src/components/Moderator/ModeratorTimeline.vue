@@ -423,5 +423,13 @@ export default {
     color: rgb(75, 75, 75);
     cursor: pointer;
 }
-  
+@media only screen and (min-width:0px) and (max-width: 900px){
+    #commentstats{
+        width: 50px;
+
+    }
+    #statstable td{
+    padding-left:20px;
+}
+} 
 </style>

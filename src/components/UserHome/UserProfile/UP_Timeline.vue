@@ -307,15 +307,15 @@ export default {
             
         },
         follow(name,id, followerName, followerId ){
-            alert(followerName)
+            
             axios.post("http://localhost:5000/users/follow", {name:name, userID: id, followName:followerName, followId:followerId})
             .then(res =>{
-              if(res.data.docs.friend){
-                
+              if(res.data.docs){
+                alert(followerName)
 
                 //send follow notification
                 const notificationType = '3';
-                axios.post("http://localhost:5000/users/notifications", {name, followerName ,notificationType })
+                axios.post("http://localhost:5000/users/notifications", {name, followName:followerName ,notificationType })
                   .then(res=>{
                     if(res.data.success){
                       alert(" Followed and Follow notification sent")

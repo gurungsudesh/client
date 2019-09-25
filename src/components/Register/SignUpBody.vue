@@ -91,7 +91,7 @@ export default {
 .regsform{
     position: absolute;
     width: 100%;
-    height: 90%;
+    height: 70%;
     overflow: auto;
     
 }
@@ -110,7 +110,7 @@ export default {
 }
 @media only screen and (min-height: 575px) and (max-height: 650px){
     .regsform{
-    height: 75%;
+    height: 70%;
     
 }
 }

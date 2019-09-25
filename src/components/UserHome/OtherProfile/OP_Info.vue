@@ -98,12 +98,12 @@ export default {
             alert(followerName)
             axios.post("http://localhost:5000/users/follow", {name:name, userID: id, followName:followerName, followId:followerId})
             .then(res =>{
-              if(res.data.docs.friend){
+              if(res.data.docs){
                 
 
                 //send follow notification
                 const notificationType = '3';
-                axios.post("http://localhost:5000/users/notifications", {name, followerName ,notificationType })
+                axios.post("http://localhost:5000/users/notifications", {name, followName:followerName ,notificationType })
                   .then(res=>{
                     if(res.data.success){
                       alert(" Followed and Follow notification sent")
@@ -147,7 +147,7 @@ export default {
 
                         //send follow notification
                         const notificationType = '4';
-                        axios.post("http://localhost:5000/users/notifications", {name, fname ,notificationType })
+                        axios.post("http://localhost:5000/users/notifications", {name, followName:fname ,notificationType })
                         .then(res=>{
                             if(res.data.success){
                                 alert("Unfollow notification sent")

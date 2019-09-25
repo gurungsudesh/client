@@ -319,6 +319,7 @@ export default {
      width:150px;
      background-color: white; 
      color: green;
+     transition:0.5s;
 }
 .statscount{
     margin-left: 20px;
@@ -357,5 +358,17 @@ export default {
 a:hover{
     text-decoration: none;
 }
+@media only screen and (min-width:0px) and (max-width: 900px){
+    #commentstats{
+        width: 50px;
+
+    }
+    #statstable td{
+    padding-left:20px;
+    }
+    #dbtn{
+        width:100px;
+    }
+} 
 </style>
 
