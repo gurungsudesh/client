@@ -91,7 +91,7 @@ export default {
 .regsform{
     position: absolute;
     width: 100%;
-    height: 70%;
+    height: 75%;
     overflow: auto;
     
 }

@@ -67,6 +67,10 @@
                         </select>
                     </li>
                     <li class="list-group-item">
+                        <input type="file" @change="onFileSelected">
+                        <button @click="onUpload">Upload</button>
+                    </li>    
+                    <li class="list-group-item">
                         <input type="text" class="form-control"  id="inputPassword3"  placeholder="Answer 2" v-model= "ans2" :class="{ 'is-invalid': submitted && $v.ans2.$error }">
                         <div v-if="submitted && !$v.ans2.required" class="invalid-feedback">Answer is required</div>
                     </li>    
@@ -121,6 +125,7 @@ export default {
             submitted: false,
             cerror1:'User already exists',
             cerror2:' registered',
+            selectedFile:'null'
 
         }
 
@@ -153,7 +158,7 @@ export default {
                 if (this.$v.$invalid) {
                     return;
                 }
-            axios.post('http://localhost:5000/users/register', { username: this.username, email: this.email, password: this.password, quesone:this.ques1, ansone: this.ans1, questwo: this.ques2, anstwo: this.ans2})
+            axios.post('http://localhost:5000/users/register', { username: this.username, email: this.email, password: this.password, quesone:this.ques1, ansone: this.ans1, questwo: this.ques2, anstwo: this.ans2, profilepic:this.selectedFile})
                 .then(res => {
                     
                         if (res.data.success) {
@@ -166,6 +171,13 @@ export default {
                     }
                 )
                 .catch(err => this.error = err);
+        },
+        onFileSelected(event){
+            this.selectedFile=event.target.files[0];
+            
+        },
+        onUpload(){
+
         }
     }
 }
