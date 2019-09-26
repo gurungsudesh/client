@@ -8,7 +8,9 @@
                     <input type="text" class="form-control"  v-model="username" id="inputEmail3" placeholder="Username" :class="{ 'is-invalid': submitted && $v.username.$error }">
                     <div v-if="submitted && !$v.username.required" class="invalid-feedback">Name is required</div>
                     </li>
-                    
+                    <li class="list-group-item" > 
+                    <img :src="selectedFile" style="width:50px; height:50px"> 
+                    </li>
 
                 
                     <li class="list-group-item">
@@ -67,8 +69,8 @@
                         </select>
                     </li>
                     <li class="list-group-item">
-                        <input type="file" @change="onFileSelected">
-                        <button @click="onUpload">Upload</button>
+                        <input type="file" @change="onFileSelected($event)">
+                        
                     </li>    
                     <li class="list-group-item">
                         <input type="text" class="form-control"  id="inputPassword3"  placeholder="Answer 2" v-model= "ans2" :class="{ 'is-invalid': submitted && $v.ans2.$error }">
@@ -125,7 +127,8 @@ export default {
             submitted: false,
             cerror1:'User already exists',
             cerror2:' registered',
-            selectedFile:'null'
+            image:null,
+            selectedFile:''
 
         }
 
@@ -173,12 +176,17 @@ export default {
                 .catch(err => this.error = err);
         },
         onFileSelected(event){
-            this.selectedFile=event.target.files[0];
-            
-        },
-        onUpload(){
-
-        }
+            const files=event.target.files;
+            let filename=files[0].name;
+            const fileReader=new FileReader();
+            fileReader.addEventListener('load',()=>{
+                this.selectedFile=fileReader.result;
+            })
+            fileReader.readAsDataURL(files[0])
+            this.image=files[0];
+            alert(this.selectedFile);
+            alert(this.image);
+            }
     }
 }
 </script>
