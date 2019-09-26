@@ -95,7 +95,7 @@ export default {
             
         },
         follow(name,id, followerName, followerId ){
-            alert(followerName)
+            //alert(followerName)
             axios.post("http://localhost:5000/users/follow", {name:name, userID: id, followName:followerName, followId:followerId})
             .then(res =>{
               if(res.data.docs){
@@ -138,7 +138,7 @@ export default {
         },
         
         unFollow(name,fname){
-            alert(fname)
+            //alert(fname)
             axios.delete("http://localhost:5000/users/follow", {data: { name,theName:fname }})
     
                 .then(res =>{

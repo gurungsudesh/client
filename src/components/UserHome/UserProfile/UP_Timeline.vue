@@ -349,7 +349,7 @@ export default {
          
         },
         unFollow(name,fname){
-            alert(fname)
+            //alert(fname)
             axios.delete("http://localhost:5000/users/follow", {data: { name,theName:fname }})
     
                 .then(res =>{

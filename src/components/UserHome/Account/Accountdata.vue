@@ -235,7 +235,8 @@ export default {
         axios.put(`http://localhost:5000/users/info/${this.username}`,{fullname: Name, contact: Contact, bio: Userbio, add: Address})
             .then(res=> {
                 if(res.data.success){
-                    //alert("Changes saved to the database");
+
+                    alert("Changes saved to the database");
                     //yo bhayo bhane pheri get garne sabai data
                 }
             })

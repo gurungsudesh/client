@@ -31,10 +31,13 @@ export default {
   border-bottom: 1px solid green;
 }
 .homebody{
-    
+    overflow: scroll;
     position: absolute;
     height:91%;
     width: 100%;
     background-color: rgb(209, 255, 209);
+}
+.homebody::-webkit-scrollbar{
+    display: none;
 }
 </style>
