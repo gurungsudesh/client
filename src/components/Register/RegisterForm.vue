@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="formmain"  >
-            <form @submit.prevent="onSubmit" autocomplete="off">
+            <form @submit.prevent="onSubmit" autocomplete="off" enctype="multipart/form-data">
                 <ul class="list-group list-group-flush">
                     
                     <li class="list-group-item" > 
@@ -66,10 +66,7 @@
                             <option value="What is the first name of the boy or girl that you first kissed?">What is the first name of the boy or girl that you first kissed?</option>
                         </select>
                     </li>
-                    <li class="list-group-item">
-                        <input type="file" @change="onFileSelected">
-                        <button @click="onUpload">Upload</button>
-                    </li>    
+                       
                     <li class="list-group-item">
                         <input type="text" class="form-control"  id="inputPassword3"  placeholder="Answer 2" v-model= "ans2" :class="{ 'is-invalid': submitted && $v.ans2.$error }">
                         <div v-if="submitted && !$v.ans2.required" class="invalid-feedback">Answer is required</div>
@@ -95,6 +92,16 @@
 
         
             </form>
+             <li class="list-group-item">
+                        <input name="myImage" type="file" @change="onFileSelected" >
+                        <button @click="onUpload">Upload</button>
+                       
+                    </li> 
+                    <p>  {{message}}</p>
+<!-- yo tag ma bhako image dekhau hai -->
+                <img :src= "getpath" alt="pic"/>
+                    
+           
         </div>
        
     </div>
@@ -125,7 +132,10 @@ export default {
             submitted: false,
             cerror1:'User already exists',
             cerror2:' registered',
-            selectedFile:'null'
+            selectedFile:'null',
+            pic:'',
+            message: '',
+            path:''
 
         }
 
@@ -149,7 +159,12 @@ export default {
         onChange2(event) {
             //alert(event.target.value);
             this.ques2 = event.target.value;
-        },      
+        },   
+        getpath(){
+            // /Users/sudeshgurung/Desktop/iPost-app/server/uploads/2df4ca4b253d6ddfbad3667940867007
+            //yesto huncah path tara milechaina k ??
+            return "/Users/sudeshgurung/Desktop/iPost-app/server/"+this.path;
+        },  
         onSubmit(){
              this.submitted = true;
 
@@ -158,7 +173,9 @@ export default {
                 if (this.$v.$invalid) {
                     return;
                 }
-            axios.post('http://localhost:5000/users/register', { username: this.username, email: this.email, password: this.password, quesone:this.ques1, ansone: this.ans1, questwo: this.ques2, anstwo: this.ans2, profilepic:this.selectedFile})
+                // const fd = new FormData();
+                // fd.append('file', this.selectedFile, this.selectedFile.name);
+            axios.post('http://localhost:5000/users/register', { username: this.username, email: this.email, password: this.password, quesone:this.ques1, ansone: this.ans1, questwo: this.ques2, anstwo: this.ans2})
                 .then(res => {
                     
                         if (res.data.success) {
@@ -173,12 +190,53 @@ export default {
                 .catch(err => this.error = err);
         },
         onFileSelected(event){
-            this.selectedFile=event.target.files[0];
+            
+            const files = event.target.files[0];
+            this.selectedFile = files;
+            //alert(files.type)
+
+            
             
         },
         onUpload(){
+            const fd = new FormData();
+            fd.append('file', this.selectedFile);
 
+            alert(this.selectedFile.type)
+            const allowedTypes = ["image/jpeg","image/jpg", "image/png"];
+            if(this.selectedFile.size > 500000){
+                this.messsage = "File size too large, must be 500KB!!"
+            }
+            for(var i=0; i< allowedTypes.length; i++){
+                if(this.selectedFile.type !== allowedTypes[i] || this.selectedFile.type === " "){
+                    this.messsage = "Only images are required!!";
+                }
+                else{
+                    //server ma clsole log cha file ko array ma hune details hera tya hai
+                    axios.post("http://localhost:5000/users/upload", fd)
+                        .then(res=>{
+                            if(res.data.success){
+                                alert("uploded")
+                                this.path = res.data.path;
+                            }
+                            else{
+                                alert("not uploaded")
+                            }
+                        })
+                        .catch(err=> alert(err));
+                }
+            }
+            // if(allowedTypes.includes(this.selectedFile.type)){
+            //     this.messsage = "Only images are required!!";
+            // }
+            
+            
+                
+            
+            
+            
         }
+        
     }
 }
 </script>
