@@ -8,7 +8,9 @@
                     <input type="text" class="form-control"  v-model="username" id="inputEmail3" placeholder="Username" :class="{ 'is-invalid': submitted && $v.username.$error }">
                     <div v-if="submitted && !$v.username.required" class="invalid-feedback">Name is required</div>
                     </li>
-                    
+                    <li class="list-group-item" > 
+                    <img :src="selectedFile" style="width:50px; height:50px"> 
+                    </li>
 
                 
                     <li class="list-group-item">
