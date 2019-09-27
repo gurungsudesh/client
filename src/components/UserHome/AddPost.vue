@@ -21,7 +21,7 @@
             
        <div id ="postmain" >
            
-            <div class="postfeed" v-for="(item,index) in posts " :key="index">
+            <div class="postfeed" v-for="(item,index) in posts " :key="index"  >
                
                 
                 <!-- Yo chai post ko content-->

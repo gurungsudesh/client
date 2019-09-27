@@ -1,6 +1,13 @@
 <template>
     <div>
         <div class="formmain"  >
+            <!-- <div >
+            applwe
+            <img :src="require('../../../../server/public/'+images.name)" height="100"> 
+            {{images.name}}[{{images.path}}]
+
+            
+            </div> -->
             <form @submit.prevent="onSubmit" autocomplete="off" enctype="multipart/form-data">
                 <ul class="list-group list-group-flush">
                     
@@ -8,9 +15,11 @@
                     <input type="text" class="form-control"  v-model="username" id="inputEmail3" placeholder="Username" :class="{ 'is-invalid': submitted && $v.username.$error }">
                     <div v-if="submitted && !$v.username.required" class="invalid-feedback">Name is required</div>
                     </li>
-                    <li class="list-group-item" > 
+
+
+                    <!-- <li class="list-group-item" > 
                     <img :src="selectedFile" style="width:50px; height:50px"> 
-                    </li>
+                    </li> -->
 
                 
                     <li class="list-group-item">
@@ -76,6 +85,7 @@
                     <div v-if="(error==cerror1)" class="alert  alert-warning  fade show" role="alert">
                         <strong>{{error}}</strong> 
                     </div>
+                   
                     
                  <li class="list-group-item" > 
                 <button  type="submit" class="btn btn-success">Sign Up</button> 
@@ -86,7 +96,7 @@
                 <li class="list-group-item"> 
                     <router-link style="color:green ; font-weight:none; font-size: 14px; " to="/">You have an account?</router-link>
                 </li>
-                
+                 
                     
                    
                 </ul>
@@ -94,17 +104,20 @@
 
         
             </form>
-             <li class="list-group-item">
+            <li class="list-group-item">
                         <input name="myImage" type="file" @change="onFileSelected" >
                         <button @click="onUpload">Upload</button>
                        
                     </li> 
-                    <p>  {{message}}</p>
+             
+                    
 <!-- yo tag ma bhako image dekhau hai -->
-                <img :src= "getpath" alt="pic"/>
+
+            
                     
            
         </div>
+        
        
     </div>
 </template>
@@ -137,7 +150,10 @@ export default {
             selectedFile:'null',
             pic:'',
             message: '',
-            path:''
+            path:'',
+            aayo: false,
+            filename: '',
+            images: []
 
         }
 
@@ -162,10 +178,14 @@ export default {
             //alert(event.target.value);
             this.ques2 = event.target.value;
         },   
-        getpath(){
+        getpic(){
             // /Users/sudeshgurung/Desktop/iPost-app/server/uploads/2df4ca4b253d6ddfbad3667940867007
             //yesto huncah path tara milechaina k ??
-            return "/Users/sudeshgurung/Desktop/iPost-app/server/"+this.path;
+
+            //server/uploads/0e1ce6ff1cc9fa74c5a488b4068f6124
+            alert("pasyo yaha")
+            this.aayo = true;
+            return "../../../../server/public/"+this.path;
         },  
         onSubmit(){
              this.submitted = true;
@@ -175,21 +195,32 @@ export default {
                 if (this.$v.$invalid) {
                     return;
                 }
-                // const fd = new FormData();
-                // fd.append('file', this.selectedFile, this.selectedFile.name);
-            axios.post('http://localhost:5000/users/register', { username: this.username, email: this.email, password: this.password, quesone:this.ques1, ansone: this.ans1, questwo: this.ques2, anstwo: this.ans2})
-                .then(res => {
-                    
-                        if (res.data.success) {
-                            this.error = res.data.msg;
+
+
+             
+
+                 //server ma clsole log cha file ko array ma hune details hera tya hai
+                    axios.post('http://localhost:5000/users/register',{ username: this.username, email: this.email, password: this.password, quesone:this.ques1, ansone: this.ans1, questwo: this.ques2, anstwo: this.ans2})
+                        .then(res => {
                             
-                        } else {
-                            // Login Failed
-                            this.error = res.data.msg;
-                        }
-                    }
-                )
-                .catch(err => this.error = err);
+                                if (res.data.success) {
+                                    this.error = res.data.msg;
+                                    //this.filename = '../../../../server/public/'+res.data.name;
+                                    //alert(this.filename)
+                                    alert("Uploaded");
+                                    
+                                    
+                                } else {
+                                    // Login Failed
+                                    this.error = res.data.msg;
+                                    alert("file not uploaded")
+                                }
+                            }
+                        )
+                        .catch(err => this.error = err);             
+               
+            
+            
         },
         onFileSelected(event){
             
@@ -204,30 +235,19 @@ export default {
             const fd = new FormData();
             fd.append('file', this.selectedFile);
 
-            alert(this.selectedFile.type)
-            const allowedTypes = ["image/jpeg","image/jpg", "image/png"];
-            if(this.selectedFile.size > 500000){
-                this.messsage = "File size too large, must be 500KB!!"
-            }
-            for(var i=0; i< allowedTypes.length; i++){
-                if(this.selectedFile.type !== allowedTypes[i] || this.selectedFile.type === " "){
-                    this.messsage = "Only images are required!!";
-                }
-                else{
-                    //server ma clsole log cha file ko array ma hune details hera tya hai
-                    axios.post("http://localhost:5000/users/upload", fd)
-                        .then(res=>{
-                            if(res.data.success){
-                                alert("uploded")
-                                this.path = res.data.path;
-                            }
-                            else{
-                                alert("not uploaded")
-                            }
-                        })
-                        .catch(err=> alert(err));
-                }
-            }
+            axios.post("http://localhost:5000/users/upload",fd)
+                .then(res=>{
+                    if(res.data.msg){
+                        alert("Pic uploaded")
+                        //alert(res.data.msg)
+                        this.images = res.data.docs;
+                    }
+                    else{
+                        alert("not uploaded")
+                    }
+                })
+                .catch(err=>alert(err));
+        }
             // if(allowedTypes.includes(this.selectedFile.type)){
             //     this.messsage = "Only images are required!!";
             // }
@@ -237,7 +257,7 @@ export default {
             
             
             
-        }
+        
         
     }
 }
