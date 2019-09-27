@@ -7,7 +7,9 @@
                         <div id="profilename1">
                         <!-- <img v-if="(info[0].imagePath =='')" src="../../../images/ProfilePic.jpg" id="profileicon" > -->
                          <!-- <img  :src="require('../../../../server/public/'+info[0].imagePath)" id="profileicon" >  -->
+                        <img src="../../../../server/public/file-1569567401780.png" height="100">
                         <img :src="require(path)" id="profileicon">
+
                         <router-link to="/profile" id="uname">{{name}}</router-link>
                     </div>
                     </div>              
@@ -35,6 +37,7 @@ export default {
                 if(res.data.success){
                     this.info = res.data.docs;
                     this.path= '../../../../server/public/'+this.info[0].imagePath;
+                    alert(this.path);
                 }
             })
             .catch(err => alert(err));
