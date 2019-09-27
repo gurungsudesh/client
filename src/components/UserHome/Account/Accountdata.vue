@@ -158,6 +158,20 @@
                  
                  </div>
                 </li>
+                
+                <li ref="editprofileli" id="editprofileli">
+                 <div class="editprofile">
+                        <h5 @click="showeditprofile()" ><i class="fas fa-cog" style="margin-right: 10px;"></i>Edit Profile Picture</h5>   
+                        <div class="editprofile" ref="editprofileid" id="editprofileid">
+                            <form>
+                                <img src="../../../../images/ProfilePic.jpg" height="100"
+                                
+                                <input type="file"><button>Upload</button>
+                            </form>
+                        </div>
+                 
+                 </div>
+                </li>
                 </ul>
             </div>
         </div>
@@ -395,6 +409,17 @@ export default {
                   else{
                      vm.$refs.deactivateid.style.display = 'block';
                     vm.$refs.deactivateli.style.backgroundColor = 'rgb(223, 255, 225)';
+                  }
+              },
+              showeditprofile:function(){
+                  var vm = this;
+                  if(vm.$refs.editprofileid.style.display == 'block'){
+                   vm.$refs.editprofileid.style.display = 'none'
+                    vm.$refs.editprofileli.style.backgroundColor = 'white';
+                  }
+                  else{
+                    vm.$refs.editprofileid.style.display = 'block';
+                    vm.$refs.editprofileli.style.backgroundColor = 'rgb(223, 255, 225)';
                   }
               },
               textareaResize:function() {
