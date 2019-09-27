@@ -5,11 +5,17 @@
                     
                     <div class="profilename">
                         <div id="profilename1">
+<<<<<<< HEAD
                         <!-- <img v-if="(info[0].imagePath =='')" src="../../../images/ProfilePic.jpg" id="profileicon" > -->
                          <!-- <img  :src="require('../../../../server/public/'+info[0].imagePath)" id="profileicon" >  -->
                         <img src="../../../../server/public/file-1569567401780.png" height="100">
                         <img :src="require(path)" id="profileicon">
 
+=======
+                        <img v-if="(info[0].imagePath =='')" src="../../../images/ProfilePic.jpg" id="profileicon" >
+                        <img  v-else :src="require('../../../../server/public/'+info[0].imagePath)" id="profileicon" /> 
+                       
+>>>>>>> 50c702c11dab1a122b87391d23e90f60846a7382
                         <router-link to="/profile" id="uname">{{name}}</router-link>
                     </div>
                     </div>              
@@ -36,6 +42,7 @@ export default {
             .then(res=>{
                 if(res.data.success){
                     this.info = res.data.docs;
+                
                     this.path= '../../../../server/public/'+this.info[0].imagePath;
                     alert(this.path);
                 }
