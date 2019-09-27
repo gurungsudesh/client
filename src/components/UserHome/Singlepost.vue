@@ -6,7 +6,7 @@
                     <div class="toppost">
                         <table id="posttable">
                                 <tr>
-                                <td rowspan="2" style="width:80px"><img src="../../../images/ProfilePic.jpg"  id="posticon"></td>     
+                                <td rowspan="2" style="width:80px"><img :src="require('../../../../server/public/'+item.imagePath)"  id="posticon"></td>     
                                 <td  >
 
                                     <!-- yo chai username ma click garyo bhaye jane thau--> 
@@ -55,7 +55,7 @@
                         <div v-for="(comment,commentSequence) in comments" :key="commentSequence" >
                             <table v-if="(comment.postId == item._id && item.commentdisplay== true )" id="tables3"  >
                                 <tr>
-                                    <td width=1px><img src="../../../images/ProfilePic.jpg" align="left" id="otherprofileicon"></td>
+                                    <td width=1px><img :src="require('../../../../server/public/'+comment.imagePath)" align="left" id="otherprofileicon"></td>
                                     <td>
                                         <span class="postcontent" >
                                             <b style="color:darkgreen; font-size:15px;">{{comment.name}}</b>
@@ -67,7 +67,7 @@
                             </table>
                             
                         </div>
-                        <form @submit=" addComment(name,item._id, item.commentContent,item.name); item.commentContent='' ; " style="margin:10px;" v-if="(item.commentdisplay)">
+                        <form @submit=" addComment(name,item._id, item.commentContent,item.name,info[0].imagePath); item.commentContent='' ; " style="margin:10px;" v-if="(item.commentdisplay)">
                         <input type="text" style="width: 80%; padding:5px; border:1px solid grey; border-radius:10px;"  v-model="item.commentContent">
                         <button id="btn" type="submit" >Comment </button> 
                     </form>
@@ -103,11 +103,21 @@ export default {
             notification: '',
             postID: this.id,
             post: [],
-            temp: ''
+            temp: '',
+            info: []
 
         }
     },
     created(){
+         //profile pic ko lagi
+            axios.get(`http://localhost:5000/users/user/${this.name}`)
+                .then(res=>{
+                    if(res.data.success){
+                        this.info = res.data.docs;  
+                    }
+                })
+                .catch(err => alert(err));
+
         //getting the clicked post
         
         axios.get(`http://localhost:5000/users/hotpost/${this.postID}`)
@@ -234,19 +244,19 @@ export default {
                 
             
         },
-        addComment(uname, postID, data, postOwner){
+        addComment(uname, postID, data, postOwner, hanekoPic){
             this.notification = "2";
-            axios.post(`http://localhost:5000/users/post/comment/${postID}`,{name: uname, content: data})
+            axios.post(`http://localhost:5000/users/post/comment/${postID}`,{name: uname, content: data, img:hanekoPic})
             
                 .then(res=>{
                     if(res.data.msg){
                         
-                        //alert("posted")
+                        alert("posted")
                         //sending notification
                         //alert(postOwner)
-                        axios.post(`http://localhost:5000/users/notifications/${postID}`,{name: uname, notify: this.notification, pOwner: postOwner})
+                        axios.post(`http://localhost:5000/users/notifications/${postID}`,{name: uname, notify: this.notification, receiver: postOwner})
                             .then(res=>{
-                                //alert("Notification sent")
+                                alert("Notification sent")
                                 if(res.data.success){
                                     const pId = postID;   
                                     alert(pId)

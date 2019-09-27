@@ -17,7 +17,7 @@
                     
                         <table  id="tables3"  v-if="(checkname(item.sender))" >
                                 <tr>
-                                  <td rowspan="2" style="padding-left:10px; width:40px; height:50px;" ><img src="../../../../images/ProfilePic.jpg" align="left" id="otherprofileicon"></td>
+                                  <td rowspan="2" style="padding-left:10px; width:40px; height:50px;" ><img src="../../../../images/4ewS.gif" align="left" id="otherprofileicon"></td>
                                   <td style="width:100%; font-size: 15px; ">
                                     <div v-if="(checkname(item.sender) && (item.type==1 || item.type==2))">
                                       <router-link :to="{name:'postpage', params: {postID: item.postId }}"><b  style="color:green"><!--route profile-->{{item.sender}}</b><!--route post--> {{`${switching(item.type)}`}}</router-link>

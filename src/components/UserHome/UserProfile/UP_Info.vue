@@ -3,8 +3,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-auto">
-                    <img v-if="(info[0].imagePath =='')" src="../../../../images/ProfilePic.jpg"  >
-                    <img  v-else :src="require('../../../../../server/public/'+info[0].imagePath)"  /> 
+                    <img :src="require('../../../../../server/public/'+info[0].imagePath)" /> 
                 </div>
                 <div class="col-md-auto">
                     <h3>{{name}}</h3>
@@ -37,55 +36,57 @@ export default {
             followersNum: '',
             followingNum: '',
             data: [],
-            madeat: ''
+            madeat: '',
+            info: []
         }
     },
     created(){
 
-        //profile pic ko lagi
-        axios.get(`http://localhost:5000/users/user/${this.name}`)
-            .then(res=>{
-                if(res.data.success){
-                    this.info = res.data.docs;
-                     //followers ko lagi 
-                    axios.get(`http://localhost:5000/users/follower/${this.name}`)
+    
+
+            //followers ko lagi 
+        axios.get(`http://localhost:5000/users/follower/${this.name}`)
+            .then(res =>{
+                if(res.data.msg){
+                    const followers = res.data.docs;
+                    this.followersNum = followers.length;
+
+                        // yaha chai followers ra follow haru aaune gar hai 
+
+
+                    //following ko lagi 
+                    axios.get(`http://localhost:5000/users/follow/${this.name}`)
                         .then(res =>{
                             if(res.data.msg){
-                                const followers = res.data.docs;
-                                this.followersNum = followers.length;
+                                const following = res.data.docs;
+                                this.followingNum = following.length;
 
-                                 // yaha chai followers ra follow haru aaune gar hai 
-
-      
-                                //following ko lagi 
-                                axios.get(`http://localhost:5000/users/follow/${this.name}`)
+                                    //date laune 
+                                axios.get(`http://localhost:5000/users/user/${this.name}`)
                                     .then(res =>{
-                                        if(res.data.msg){
-                                            const following = res.data.docs;
-                                            this.followingNum = following.length;
-
-                                             //date laune 
-                                            axios.get(`http://localhost:5000/users/user/${this.name}`)
-                                                .then(res =>{
-                                                    if(res.data.docs){
-                                                        this.data = res.data.docs;
-                                                        
-                                                    }
-                                                })
-                                                .catch(err => alert(err))
-
+                                        if(res.data.docs){
+                                            this.data = res.data.docs;
+                                            
                                         }
                                     })
-                                    .catch(err=> alert(err));
+                                    .catch(err => alert(err))
 
                             }
-                            
                         })
                         .catch(err=> alert(err));
-                    
+
                 }
+                
             })
-            .catch(err => alert(err));
+            .catch(err=> alert(err));
+            //profile pic ko lagi
+            axios.get(`http://localhost:5000/users/user/${this.name}`)
+                .then(res=>{
+                    if(res.data.success){
+                        this.info = res.data.docs;  
+                    }
+                })
+                .catch(err => alert(err));
 
        
 

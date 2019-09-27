@@ -28,7 +28,7 @@
                                             <div class="toppost">
                                                 <table id="posttable" style="width:96%" >
                                                         <tr>
-                                                        <td rowspan="2" style="width:40px"><img src="../../../../images/ProfilePic.jpg"  id="posticon"></td>     
+                                                        <td rowspan="2" style="width:40px"><img :src="require('../../../../../server/public/'+item.imagePath)"  id="posticon"></td>     
                                                         <td style="font-size: 20px; color:forestgreen; font-weight:bold" >{{item.name}}</td>
                                                         <td style="width:20px"><button @click="deletepost(item._id)" class="btn btn-success" style="float:right; color:green; background-color:white; border:none;"><i class="fas fa-trash-alt"></i></button></td>
                                                     </tr>
@@ -69,7 +69,7 @@
                                                         <div v-for="(comment,commentSequence) in comments" :key="commentSequence" >
                                                             <table v-if="(comment.postId == item._id && item.commentdisplay== true )" id="tables3"  >
                                                                 <tr>
-                                                                    <td width=1px><img src="../../../../images/ProfilePic.jpg" align="left" id="otherprofileicon"></td>
+                                                                    <td width=1px><img :src="require('../../../../../server/public/'+comment.imagePath)" align="left" id="otherprofileicon"></td>
                                                                     <td>
                                                                         <span class="postcontent" >
                                                                             <b style="color:darkgreen; font-size:15px;">{{comment.name}}</b>
@@ -82,7 +82,7 @@
                                                             </table>
                                                             
                                                         </div>
-                                                        <form @submit=" addComment(name,item._id, item.commentContent,item.name); item.commentContent='' ; " style="margin:10px;" v-if="(item.commentdisplay)">
+                                                        <form @submit=" addComment(name,item._id, item.commentContent,item.name,info[0].imagePath); item.commentContent='' ; " style="margin:10px;" v-if="(item.commentdisplay)">
                                                         <input type="text"   v-model="item.commentContent">
                                                         <button id="btn" type="submit" >Comment </button> 
                                                     </form>
@@ -103,7 +103,7 @@
                   
                             <li class="list-group-item">
                                
-                                <img src="../../../../images/ProfilePic.jpg" id="otherprofileicon" >
+                                <img :src="require('../../../../../server/public/'+item.followedByPhoto)" id="otherprofileicon" >
                                 <router-link :to="{name: 'otherprofile',params:{name: item.followedBy}}" >{{item.followedBy}}</router-link>
                                 
                                 <button @click="follow(name,id, item.followedBy, item.followedById )" class="btn btn-success" id="followbtn" v-if="(utafollow(item.followedBy))">Follow</button>
@@ -129,7 +129,7 @@
                         
                                     <li class="list-group-item" >
                                      
-                                         <img src="../../../../images/ProfilePic.jpg" id="otherprofileicon" >
+                                         <img :src="require('../../../../../server/public/'+item.userPhoto)" id="otherprofileicon" >
                                          <router-link :to="{ name: 'otherprofile',params:{name: item.username, id: item._id}}" >{{item.username}}</router-link>
                                          
                                         <button @click="unFollow(name,item.username)"  class="btn btn-success" id="followingbtn"><span>Following</span></button>
@@ -170,11 +170,23 @@ export default {
             likes: [],
             num: ' ',
             allComment: [],
-            notification: ''
+            notification: '',
+            info:[]
         
         }
     },
     created(){
+
+         //profile pic ko lagi
+            axios.get(`http://localhost:5000/users/user/${this.name}`)
+                .then(res=>{
+                    if(res.data.success){
+                        this.info = res.data.docs;  
+                    }
+                })
+                .catch(err => alert(err));
+
+
         const uname = this.name;
         
         axios.get(`http://localhost:5000/users/profile/post/${uname}`)
@@ -453,15 +465,15 @@ export default {
                 
             
         },
-        addComment(uname, postID, data, postOwner){
+        addComment(uname, postID, data, postOwner,myPic){
             this.notification = "2";
-            axios.post(`http://localhost:5000/users/post/comment/${postID}`,{name: uname, content: data})
+            axios.post(`http://localhost:5000/users/post/comment/${postID}`,{name: uname, content: data, img: myPic})
             
                 .then(res=>{
                     if(res.data.msg){
                         //alert("posted")
                         //sending notification
-                        axios.post(`http://localhost:5000/users/notifications/${postID}`,{name: uname, notify: this.notification, pOwner: postOwner})
+                        axios.post(`http://localhost:5000/users/notifications/${postID}`,{name: uname, notify: this.notification, receiver: postOwner})
                             .then(res=>{
                                 alert("Notification sent")
                                 if(res.data.success){

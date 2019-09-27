@@ -3,7 +3,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-auto">
-                    <img src="../../../../images/ProfilePic.jpg" >
+                    <img :src="require('../../../../../server/public/'+info[0].imagePath)" >
                 </div>
                 <div class="col-md-auto">
                     <h3>{{msg}}</h3>
@@ -13,7 +13,7 @@
                             {{ufollowingNum}} following<br>
                             
                         </p>
-                        <button @click="follow(name,id, uname, unameId )" class="btn btn-success" id="followbtn" v-if="(utafollow(uname))">Follow</button>
+                        <button @click="follow(name,id, myinfo[0].imagePath,uname, unameId,info[0].imagePath )" class="btn btn-success" id="followbtn" v-if="(utafollow(uname))">Follow</button>
                         <button @click ="unFollow(name,uname)" class="btn btn-success" id="followingbtn" v-else ><span>Following</span></button>
                           
                 </div>
@@ -41,10 +41,27 @@ export default {
            ufollowers:[],
             ufollowersNum: '',
             ufollowingNum: '',
-            date: ''
+            date: '',
+            myinfo:[],
+            info:[]
         }
     },
     created(){
+         //profile pic ko lagi
+            axios.get(`http://localhost:5000/users/user/${this.uname}`)
+                .then(res=>{
+                    if(res.data.success){
+                        this.info = res.data.docs;  
+                    }
+                })
+                .catch(err => alert(err));
+            axios.get(`http://localhost:5000/users/user/${this.name}`)
+                .then(res=>{
+                    if(res.data.success){
+                        this.myinfo = res.data.docs;  
+                    }
+                })
+                .catch(err => alert(err));
         //followers ko lagi 
        axios.get(`http://localhost:5000/users/follower/${this.uname}`)
         .then(res =>{
@@ -94,9 +111,9 @@ export default {
             return true;
             
         },
-        follow(name,id, followerName, followerId ){
+        follow(name,id,mphoto, followerName, followerId, fphoto){
             //alert(followerName)
-            axios.post("http://localhost:5000/users/follow", {name:name, userID: id, followName:followerName, followId:followerId})
+            axios.post("http://localhost:5000/users/follow", {name:name, userID: id,userPic:mphoto, followName:followerName, followId:followerId, fPic:fphoto})
             .then(res =>{
               if(res.data.docs){
                 

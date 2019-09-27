@@ -35,7 +35,7 @@ export default {
                     this.info = res.data.docs;
                 
                     this.path= '../../../../server/public/'+this.info[0].imagePath;
-                    alert(this.path);
+                    //alert(this.path);
                 }
             })
             .catch(err => alert(err));

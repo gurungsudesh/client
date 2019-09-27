@@ -11,7 +11,7 @@
                         <div class="toppost">
                             <table id="posttable" >
                                     <tr>
-                                    <td rowspan="2" style="width:40px"><img src="../../../../images/ProfilePic.jpg"  id="posticon"></td>     
+                                    <td rowspan="2" style="width:40px"><img :src="require('../../../../../server/public/'+item.imagePath)"  id="posticon"></td>     
                                     <td style="font-size: 20px; color:forestgreen; font-weight:bold" >{{item.name}}</td>
                                 </tr>
                                 <tr>
@@ -51,7 +51,7 @@
                                     <div v-for="(comment,commentSequence) in comments" :key="commentSequence" >
                                         <table v-if="(comment.postId == item._id && item.commentdisplay== true )" id="tables3"  >
                                             <tr>
-                                                <td width=1px><img src="../../../../images/ProfilePic.jpg" align="left" id="otherprofileicon"></td>
+                                                <td width=1px><img :src="require('../../../../../server/public/'+comment.imagePath)" align="left" id="otherprofileicon"></td>
                                                 <td>
                                                     <span class="postcontent" >
                                                         <b style="color:darkgreen; font-size:15px;">{{comment.name}}</b>
@@ -63,7 +63,7 @@
                                         </table>
                                         
                                     </div>
-                                    <form @submit=" addComment(profilename,item._id, item.commentContent,item.name); item.commentContent='' ; " style="margin:10px;" v-if="(item.commentdisplay)">
+                                    <form @submit=" addComment(profilename,item._id, item.commentContent,item.name, info[0].imagePath); item.commentContent='' ; " style="margin:10px;" v-if="(item.commentdisplay)">
                                     <input type="text" style="width: 80%; padding:5px; border:1px solid grey; border-radius:10px;"  v-model="item.commentContent">
                                     <button id="btn" type="submit" required>Comment </button> 
                                 </form>
@@ -101,10 +101,23 @@ export default {
             likes: [],
             num: ' ',
             allComment: [],
-            notification: ''
+            notification: '',
+            info: []
         }
     },
     created(){
+        //profile pic jasko profile ho tesko
+        //profile pic ko lagi
+            axios.get(`http://localhost:5000/users/user/${this.profilename}`)
+                .then(res=>{
+                    if(res.data.success){
+                        this.info = res.data.docs;  
+                    }
+                })
+                .catch(err => alert(err));
+
+
+
         const uname = this.name;
         
         axios.get(`http://localhost:5000/users/profile/post/${uname}`)
@@ -305,13 +318,14 @@ export default {
                 
             
         },
-        addComment(uname, postID, data, postOwner){
+        addComment(uname, postID, data, postOwner, myPic){
+            alert("gayo")
             this.notification = "2";
-            axios.post(`http://localhost:5000/users/post/comment/${postID}`,{name: uname, content: data})
+            axios.post(`http://localhost:5000/users/post/comment/${postID}`,{name: uname, content: data, img: myPic})
             
                 .then(res=>{
                     if(res.data.msg){
-                        //alert("posted")
+                        alert("posted")
                         //sending notification
                         axios.post(`http://localhost:5000/users/notifications/${postID}`,{name: uname, notify: this.notification, receiver: postOwner})
                             .then(res=>{

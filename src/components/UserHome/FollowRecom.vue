@@ -6,7 +6,7 @@
                            <h4><b>Whom to follow?</b></h4> 
                            <ul class="list-group list-group-flush" v-for="(item,index) in users.slice(0, maxshowfollow) " :key="index">
                   
-                            <li class="list-group-item" style="padding-left:20%; text-align:left;"><img src="../../../images/ProfilePic.jpg" id="otherprofileicon" >
+                            <li class="list-group-item" style="padding-left:20%; text-align:left;"><img :src="require('../../../../server/public/'+item.imagePath)" id="otherprofileicon" >
                               <!-- yo chai username ma click garyo bhaye jane thau--> 
                                     <router-link :to="{ name: 'otherprofile' ,params:{name: item.name}}" style="font-size: 15px; color:forestgreen; font-weight:bold" >{{item.name}} </router-link>
                                     <!-- yedi username bhayo bhane userprofile ma janu paryo -->
@@ -14,7 +14,7 @@
 
                               
                             <br>
-                            <form @submit="follow(name,id, item.name, item._id )"><button type="submit" class="btn btn-success" id="followbtn">Follow</button></form></li>
+                            <form @submit="follow(name,id,info[0].imagePath, item.name, item._id, item.imagePath)"><button type="submit" class="btn btn-success" id="followbtn">Follow</button></form></li>
                             
                             </ul>
                             <label v-if="users.length==0" >No more suggestions</label>
@@ -44,9 +44,21 @@ export default {
         name: decode.name,
         id: decode._id,
         
+        
       }
     },
     created(){
+      //profile pic
+       axios.get(`http://localhost:5000/users/user/${this.name}`)
+            .then(res=>{
+                if(res.data.success){
+                    this.info = res.data.docs;
+                
+                    //this.path= '../../../../server/public/'+this.info[0].imagePath;
+                }
+            })
+            .catch(err => alert(err));
+        
       axios.get(`http://localhost:5000/users/followrecommendation/${this.name}`)
       
         .then(res =>{
@@ -60,11 +72,11 @@ export default {
         this.maxshowfollow =this.maxshowfollow + 3 ;
         //console.log(this.maxshowfollow);
       },
-      follow(name, userID, followName, followId){ 
-        
-          axios.post("http://localhost:5000/users/follow", {name, userID, followName, followId})
+      follow(name, userID,userPic ,followName, followId , fPic){ 
+        //alert(userPic+"["+fPic+"]");
+          axios.post("http://localhost:5000/users/follow", {name, userID, userPic, followName, followId, fPic})
             .then(res =>{
-              if(res.data.docs.friend){
+              if(res.data.docs){
                 
 
                 //send follow notification
