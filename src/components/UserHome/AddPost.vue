@@ -5,8 +5,9 @@
          <div id="writepost1">
                                 
             <form @submit="addPost" id="form1" class="form-inline" >
-                    
-                        <img src="../../../images/ProfilePic.jpg" id="profileicon">   
+                        <img v-if="(info[0].imagePath =='')" src="../../../images/ProfilePic.jpg" id="profileicon" >
+                        <img  v-else :src="require('../../../../server/public/'+info[0].imagePath)" id="profileicon" /> 
+                           
                         <textarea style="font-size:15px; vertical-align:middle; "  rows="3" v-model="postdata" placeholder="Please enter the post" required></textarea>
                         <button :disabled ='isDisabled' type="submit" style="margin-top:10px; width:50px" id="btn"> Post</button>
                  
@@ -136,7 +137,8 @@ export default {
             num: ' ',
             allComment: [],
             notification: '',
-            hot:[]
+            hot:[],
+            info:''
         }
     },
     computed:{
@@ -149,6 +151,16 @@ export default {
   },
   
     created(){
+        //profile pic ko lagi
+        axios.get(`http://localhost:5000/users/user/${this.name}`)
+            .then(res=>{
+                if(res.data.success){
+                    this.info = res.data.docs;
+                
+                    //this.path= '../../../../server/public/'+this.info[0].imagePath;
+                }
+            })
+            .catch(err => alert(err));
         
 
         axios.get(`http://localhost:5000/users/postOfN/${this.name}`)
