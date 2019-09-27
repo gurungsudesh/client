@@ -164,9 +164,9 @@
                         <h5 @click="showeditprofile()" ><i class="fas fa-cog" style="margin-right: 10px;"></i>Edit Profile Picture</h5>   
                         <div class="editprofile" ref="editprofileid" id="editprofileid">
                             <form>
-                                <img src="../../../../images/ProfilePic.jpg" height="100"
                                 
-                                <input type="file"><button>Upload</button>
+                                <input name="myImage" type="file" @change="onFileSelected" >
+                                <button @click="onUpload">Upload</button>
                             </form>
                         </div>
                  
@@ -433,6 +433,44 @@ export default {
                 if (this.$v.$invalid) {
                     return;
                 }
+        },
+        onFileSelected(event){
+            
+            const files = event.target.files[0];
+            this.selectedFile = files;
+            //alert(files.type)
+
+            
+            
+        },
+        onUpload(){
+            const fd = new FormData();
+            fd.append('file', this.selectedFile);
+
+            alert(this.selectedFile.type)
+            const allowedTypes = ["image/jpeg","image/jpg", "image/png"];
+            if(this.selectedFile.size > 500000){
+                this.messsage = "File size too large, must be 500KB!!"
+            }
+            for(var i=0; i< allowedTypes.length; i++){
+                if(this.selectedFile.type !== allowedTypes[i] || this.selectedFile.type === " "){
+                    this.messsage = "Only images are required!!";
+                }
+                else{
+                    //server ma clsole log cha file ko array ma hune details hera tya hai
+                    axios.post("http://localhost:5000/users/upload", fd)
+                        .then(res=>{
+                            if(res.data.success){
+                                alert("uploded")
+                                this.path = res.data.path;
+                            }
+                            else{
+                                alert("not uploaded")
+                            }
+                        })
+                        .catch(err=> alert(err));
+                }
+            }
         }
                 
               
