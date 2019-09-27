@@ -5,7 +5,9 @@
                     
                     <div class="profilename">
                         <div id="profilename1">
-                        <img src="../../../images/ProfilePic.jpg" id="profileicon" >
+                        <!-- <img v-if="(info[0].imagePath =='')" src="../../../images/ProfilePic.jpg" id="profileicon" > -->
+                         <!-- <img  :src="require('../../../../server/public/'+info[0].imagePath)" id="profileicon" >  -->
+                        <img :src="require(path)" id="profileicon">
                         <router-link to="/profile" id="uname">{{name}}</router-link>
                     </div>
                     </div>              
@@ -15,14 +17,27 @@
 
 <script>
 import jwtDecode from 'jwt-decode'
+import axios from 'axios'
 export default {
     name : "UserInfo",
     data(){
         const token = localStorage.usertoken
         const decode = jwtDecode(token)
         return{
-            name : decode.name
+            name : decode.name,
+            info: [],
+            path: ''
         }
+    },
+    created(){
+        axios.get(`http://localhost:5000/users/user/${this.name}`)
+            .then(res=>{
+                if(res.data.success){
+                    this.info = res.data.docs;
+                    this.path= '../../../../server/public/'+this.info[0].imagePath;
+                }
+            })
+            .catch(err => alert(err));
     }
 }
 </script>
