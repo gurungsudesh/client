@@ -166,7 +166,7 @@
                             <form>
                                 
                                 <input name="myImage" type="file" @change="onFileSelected" >
-                                <button @click="onUpload">Upload</button>
+                                <button class="btn btn-success" @click="onUpload">Upload</button>
                             </form>
                         </div>
                  
@@ -559,6 +559,11 @@ table{
         font-size: 13px;
     }
     #deactivateid{
+        display: none;
+        margin-left: 20px;
+        
+    }
+    #editprofileid{
         display: none;
         margin-left: 20px;
         
