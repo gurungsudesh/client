@@ -104,11 +104,7 @@
 
         
             </form>
-            <li class="list-group-item">
-                        <input name="myImage" type="file" @change="onFileSelected" >
-                        <button @click="onUpload">Upload</button>
-                       
-                    </li> 
+            
              
                     
 <!-- yo tag ma bhako image dekhau hai -->
@@ -222,32 +218,6 @@ export default {
             
             
         },
-        onFileSelected(event){
-            
-            const files = event.target.files[0];
-            this.selectedFile = files;
-            //alert(files.type)
-
-            
-            
-        },
-        onUpload(){
-            const fd = new FormData();
-            fd.append('file', this.selectedFile);
-
-            axios.post("http://localhost:5000/users/upload",fd)
-                .then(res=>{
-                    if(res.data.msg){
-                        alert("Pic uploaded")
-                        //alert(res.data.msg)
-                        this.images = res.data.docs;
-                    }
-                    else{
-                        alert("not uploaded")
-                    }
-                })
-                .catch(err=>alert(err));
-        }
             // if(allowedTypes.includes(this.selectedFile.type)){
             //     this.messsage = "Only images are required!!";
             // }
